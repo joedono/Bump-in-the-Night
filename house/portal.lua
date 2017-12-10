@@ -1,6 +1,3 @@
-PORTAL_WIDTH = 16;
-PORTAL_HEIGHT = 16;
-
 Portal = Class {
 	init = function(self, x, y, dest, destX, destY, destFacing)
 		self.x = x;
@@ -13,7 +10,7 @@ Portal = Class {
 			y = tonumber(destY),
 			facing = -1
 		};
-		
+
 		if(destFacing == "right") then
 			self.dest.facing = 0;
 		elseif(destFacing == "down") then
@@ -23,7 +20,7 @@ Portal = Class {
 		elseif(destFacing == "up") then
 			self.dest.facing = math.pi * 3/2;
 		end
-		
+
 		self.bType = "portal";
 	end
 };

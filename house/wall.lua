@@ -1,7 +1,3 @@
-WALL_IMAGE = love.graphics.newImage("asset/image/wall.png");
-WALL_WIDTH = 16;
-WALL_HEIGHT = 16;
-
 Wall = Class {
 	init = function(self, x, y)
 		self.x = x;
