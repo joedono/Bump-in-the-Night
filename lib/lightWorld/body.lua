@@ -27,6 +27,10 @@ local function new(id, type, ...)
 	obj.tileX = 0
 	obj.tileY = 0
   obj.zheight = 1
+
+  obj.rotation = 0
+  obj.scalex = 1
+  obj.scaley = 1
  
   obj.castsNoShadow = false
   obj.visible = true
@@ -40,7 +44,7 @@ local function new(id, type, ...)
     util.drawto(circle_canvas, 0, 0, 1, function()
       love.graphics.circle('fill', args[3], args[3], args[3]) 
     end)
-    obj.img = love.graphics.newImage(circle_canvas:getImageData()) 
+    obj.img = love.graphics.newImage(circle_canvas:newImageData()) 
     obj.imgWidth = obj.img:getWidth()
     obj.imgHeight = obj.img:getHeight()
     obj.ix = obj.imgWidth * 0.5
@@ -49,21 +53,19 @@ local function new(id, type, ...)
 
     obj:setShadowType('circle', args[3], args[4], args[5])
 	elseif obj.type == "rectangle" then
-		obj.x = args[1] or 0
-		obj.y = args[2] or 0
+		local x = args[1] or 0
+		local y = args[2] or 0
+    local width = args[3] or 64
+    local height = args[4] or 64
+    local ox = args[5] or width * 0.5
+    local oy = args[6] or height * 0.5
 
-    local rectangle_canvas = love.graphics.newCanvas(args[3], args[4])
-    util.drawto(rectangle_canvas, 0, 0, 1, function()
-      love.graphics.rectangle('fill', 0, 0, args[3], args[4]) 
-    end)
-    obj.img = love.graphics.newImage(rectangle_canvas:getImageData()) 
-    obj.imgWidth = obj.img:getWidth()
-    obj.imgHeight = obj.img:getHeight()
-    obj.ix = obj.imgWidth * 0.5
-    obj.iy = obj.imgHeight * 0.5
-    obj:generateNormalMapFlat("top")
-
-    obj:setShadowType('rectangle', args[3], args[4])
+    obj:setPoints(
+      x - ox, y - oy,
+      x - ox + width, y - oy,
+      x - ox + width, y - oy + height,
+      x - ox,  y - oy + height
+    )
 	elseif obj.type == "polygon" then
     obj:setPoints(...)
 	elseif obj.type == "image" then
@@ -106,27 +108,51 @@ local function new(id, type, ...)
     obj.oy = obj.height * 0.5
     obj.reflection = true
 	end
-  obj.old_x, obj.old_y = obj.x, obj.y
+
+  obj:commit_changes()
 
   return obj
 end
 
 -- refresh
 function body:refresh()
-  if self.shadowType == "rectangle" then
-    self.data = {
-      self.x - self.ox, self.y - self.oy,
-      self.x - self.ox + self.width, self.y - self.oy,
-      self.x - self.ox + self.width, self.y - self.oy + self.height,
-      self.x - self.ox, self.y - self.oy + self.height
-    }
-  elseif self.shadowType == 'polygon' and (self.old_x ~= self.x or self.old_y ~= self.y) then
-    local dx, dy = self.x - self.old_x, self.y - self.old_y
+  if self.shadowType == 'polygon' and self:has_changed() then
+    self.data = {unpack(self.unit_data)}
+    local center = vector(self.x, self.y)
     for i = 1, #self.data, 2 do
-      self.data[i], self.data[i+1] = self.data[i] + dx, self.data[i+1] + dy
+      local point = vector(self.data[i], self.data[i+1])
+      point = point:rotate(self.rotation)
+      point = point:scale(self.scalex, self.scaley)
+      self.data[i], self.data[i+1] = (point + center):unpack()
     end
-    self.old_x, self.old_y = self.x, self.y
+    self:commit_changes()
   end
+end
+
+function body:has_changed()
+  return self:position_changed() or 
+          self:rotation_changed() or 
+          self:scale_changed()
+end
+
+function body:position_changed()
+  return self.old_x ~= self.x or 
+         self.old_y ~= self.y
+end
+
+function body:rotation_changed()
+  return self.old_rotation ~= self.rotation
+end
+
+function body:scale_changed()
+  return self.old_scalex ~= self.scalex or
+         self.old_scaley ~= self.scaley
+end
+
+function body:commit_changes()
+  self.old_x, self.old_y = self.x, self.y
+  self.old_rotation = self.rotation
+  self.old_scalex, self.old_scaley = self.scalex, self.scaley
 end
 
 function body:newGrid(frameWidth, frameHeight, imageWidth, imageHeight, left, top, border)
@@ -162,6 +188,7 @@ function body:pauseAtEnd() self.animation:pauseAtEnd() end
 function body:pauseAtStart() self.animation:pauseAtStart() end
 
 function body:update(dt)
+  self:refresh()
   if self.type == "animation" and self.animation then
     local frame = self.animation.frames[self.animation.position]
     _,_,self.width, self.height = frame:getViewport()
@@ -173,12 +200,29 @@ function body:update(dt)
   end
 end
 
+function body:rotate(angle)
+  self:setRotation(self.rotation + angle)
+end
+
+function body:setRotation(angle)
+  self.rotation = angle
+end
+
+function body:scale(sx, sy)
+  self.scalex = self.scalex + sx
+  self.scaley = self.scaley + (sy or sx)
+end
+
+function body:setScale(sx, sy)
+  self.scalex = sx
+  self.scaley = sy or sx
+end
+
 -- set position
 function body:setPosition(x, y)
   if x ~= self.x or y ~= self.y then
     self.x = x
     self.y = y
-    self:refresh()
   end
 end
 
@@ -190,7 +234,6 @@ function body:move(x, y)
   if y then
     self.y = self.y + y
   end
-  self:refresh()
 end
 
 -- get x position
@@ -218,19 +261,11 @@ function body:getImageHeight()
   return self.imgHeight
 end
 
--- set dimension
-function body:setDimension(width, height)
-  self.width = width
-  self.height = height
-  self:refresh()
-end
-
 -- set offset
 function body:setOffset(ox, oy)
   if ox ~= self.ox or oy ~= self.oy then
     self.ox = ox
     self.oy = oy
-    self:refresh()
   end
 end
 
@@ -268,7 +303,7 @@ end
 
 -- get radius
 function body:getRadius()
-  return self.radius
+  return self.radius * self.scalex
 end
 
 -- set radius
@@ -280,39 +315,50 @@ end
 
 -- set polygon data
 function body:setPoints(...)
-  local points = {...}
-  self.x, self.y, self.width, self.height = points[1], points[2], 0, 0
-  for i = 1, #points, 2 do
-    local px, py = points[i], points[i+1]
+  self.unit_data = {...}
+
+  --calculate l,r,t,b
+  self.x, self.y, self.width, self.height = self.unit_data[1], self.unit_data[2], 0, 0
+  for i = 1, #self.unit_data, 2 do
+    local px, py = self.unit_data[i], self.unit_data[i+1]
     if px < self.x then self.x = px end
     if py < self.y then self.y = py end
     if px > self.width then self.width = px end
     if py > self.height then self.height = py end
   end
+
   -- normalize width and height
   self.width = self.width - self.x
   self.height = self.height - self.y
-  for i = 1, #points, 2 do
-    points[i], points[i+1] = points[i] - self.x, points[i+1] - self.y
+  for i = 1, #self.unit_data, 2 do
+    self.unit_data[i], self.unit_data[i+1] = self.unit_data[i] - self.x, self.unit_data[i+1] - self.y
   end
   self.x = self.x + (self.width * 0.5)
   self.y = self.y + (self.height * 0.5)
 
   local poly_canvas = love.graphics.newCanvas(self.width, self.height)
   util.drawto(poly_canvas, 0, 0, 1, function()
-    love.graphics.polygon('fill', points) 
+    love.graphics.polygon('fill', self.unit_data) 
   end)
-  self.img = love.graphics.newImage(poly_canvas:getImageData()) 
-  self.imgWidth = self.img:getWidth()
-  self.imgHeight = self.img:getHeight()
-  self.ix = self.imgWidth * 0.5
-  self.iy = self.imgHeight * 0.5
-  self:generateNormalMapFlat("top")
+
+  --normalize points to be around the center x y
+  for i = 1, #self.unit_data, 2 do
+    self.unit_data[i], self.unit_data[i+1] = self.unit_data[i] - self.width * 0.5, self.unit_data[i+1] - self.height * 0.5
+  end
+
+  if not self.img then
+    self.img = love.graphics.newImage(poly_canvas:newImageData()) 
+    self.imgWidth = self.img:getWidth()
+    self.imgHeight = self.img:getHeight()
+    self.ix = self.imgWidth * 0.5
+    self.iy = self.imgHeight * 0.5
+    self:generateNormalMapFlat("top")
+  end
   --wrapping with polygon normals causes edges to show 
   --also we do not need wrapping for this default normal map
   self.normal:setWrap("clamp", "clamp")
-
-  self:setShadowType('polygon', ...)
+  self.shadowType = "polygon"
+  self:refresh()
 end
 
 -- get polygon data
@@ -388,7 +434,8 @@ function body:setNormalMap(normal, width, height, nx, ny)
       {self.normalWidth, self.normalHeight, self.normalWidth / self.normal:getWidth(), self.normalHeight / self.normal:getHeight()},
       {0.0, self.normalHeight, 0.0, self.normalHeight / self.normal:getHeight()}
     }
-    self.normalMesh = love.graphics.newMesh(self.normalVert, self.normal, "fan")
+    self.normalMesh = love.graphics.newMesh(self.normalVert, "fan")
+    self.normalMesh:setTexture(self.normal)
   else
     self.normalMesh = nil
   end
@@ -453,13 +500,20 @@ function body:setShadowType(type, ...)
     self.ox = args[2] or 0
     self.oy = args[3] or 0
   elseif self.shadowType == "rectangle" then
-    self.width = args[1] or 64
-    self.height = args[2] or 64
-    self.ox = args[3] or self.width * 0.5
-    self.oy = args[4] or self.height * 0.5
-    self:refresh()
+    self.shadowType = "polygon"
+    local width = args[1] or 64
+    local height = args[2] or 64
+    self.ox = args[3] or width * 0.5
+    self.oy = args[4] or height * 0.5
+
+    self:setPoints(
+      self.x - self.ox,  self.y - self.oy,
+      self.x - self.ox + width, self.y - self.oy,
+      self.x - self.ox + width, self.y - self.oy + height,
+      self.x - self.ox,  self.y - self.oy + height
+    )
   elseif self.shadowType == "polygon" then
-    self.data = args or {0, 0, 0, 0, 0, 0}
+    self:setPoints(args)
   elseif self.shadowType == "image" then
     if self.img then
       self.width = self.imgWidth
@@ -471,8 +525,9 @@ function body:setShadowType(type, ...)
         {0.0, self.height, 0.0, 1.0}
       }
       if not self.shadowMesh then
-        self.shadowMesh = love.graphics.newMesh(self.shadowVert, self.img, "fan")
-        self.shadowMesh:setVertexColors(true)
+        self.shadowMesh = love.graphics.newMesh(self.shadowVert)
+        self.shadowMesh:setTexture(self.img)
+        self.shadowMesh:setAttributeEnabled("VertexColor", true)
       end
     else
       self.width = 64
@@ -496,9 +551,11 @@ end
 function body:inRange(l, t, w, h, s)
   local radius
   if self.type == 'circle' then
-    radius = self.radius
+    radius = self.radius * self.scalex
   else
-    radius = (self.width > self.height and self.width or self.height)
+    local sw = (self.width * self.scalex)
+    local sh = (self.height * self.scaley)
+    radius = (sw > sh and sw or sh)
   end
     
   local bx, by, bw, bh = self.x - radius, self.y - radius, radius * 2, radius * 2
@@ -507,16 +564,16 @@ function body:inRange(l, t, w, h, s)
 end
 
 function body:drawAnimation()
-  self.animation:draw(self.img, self.x - self.ix, self.y - self.iy)
+  self.animation:draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
 end
 
 function body:drawNormal()
   if not self.refraction and not self.reflection and self.normalMesh then
     love.graphics.setColor(255, 255, 255)
     if self.type == 'animation' then
-      self.animation:draw(self.normal, self.x - self.nx, self.y - self.ny)
+      self.animation:draw(self.normal, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
     else
-      love.graphics.draw(self.normalMesh, self.x - self.nx, self.y - self.ny)
+      love.graphics.draw(self.normalMesh, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
     end
   end
 end
@@ -525,9 +582,7 @@ function body:drawGlow()
   love.graphics.setColor(self.glowRed * self.glowStrength, self.glowGreen * self.glowStrength, self.glowBlue * self.glowStrength)
 
   if self.type == "circle" then
-    love.graphics.circle("fill", self.x, self.y, self.radius)
-  elseif self.type == "rectangle" then
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    love.graphics.circle("fill", self.x, self.y, self.radius * self.scalex)
   elseif self.type == "polygon" then
     love.graphics.polygon("fill", unpack(self.data))
   elseif (self.type == "image" or self.type == "animation") and self.img then
@@ -541,9 +596,9 @@ function body:drawGlow()
     end
 
     if self.type == "animation" then
-      self.animation:draw(self.img, self.x - self.ix, self.y - self.iy)
+      self.animation:draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     else
-      love.graphics.draw(self.img, self.x - self.ix, self.y - self.iy)
+      love.graphics.draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     end
 
     love.graphics.setShader()
@@ -554,10 +609,10 @@ function body:drawRefraction()
   if self.refraction and self.normal then
     love.graphics.setColor(255, 255, 255)
     if self.tileX == 0.0 and self.tileY == 0.0 then
-      love.graphics.draw(self.normal, self.x - self.nx, self.y - self.ny)
+      love.graphics.draw(self.normal, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
     else
       self.normalMesh:setVertices(self.normalVert)
-      love.graphics.draw(self.normalMesh, self.x - self.nx, self.y - self.ny)
+      love.graphics.draw(self.normalMesh, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
     end
   end
 
@@ -565,15 +620,13 @@ function body:drawRefraction()
 
   if not self.refractive then
     if self.type == "circle" then
-      love.graphics.circle("fill", self.x, self.y, self.radius)
-    elseif self.type == "rectangle" then
-      love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+      love.graphics.circle("fill", self.x, self.y, self.radius * self.scalex)
     elseif self.type == "polygon" then
       love.graphics.polygon("fill", unpack(self.data))
     elseif self.type == "image" and self.img then
-      love.graphics.draw(self.img, self.x - self.ix, self.y - self.iy)
+      love.graphics.draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     elseif self.type == 'animation' then
-      self.animation:draw(self.img, self.x - self.ix, self.y - self.iy)
+      self.animation:draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     end
   end
 end
@@ -582,21 +635,21 @@ function body:drawReflection()
   if self.reflection and self.normal then
     love.graphics.setColor(255, 0, 0)
     self.normalMesh:setVertices(self.normalVert)
-    love.graphics.draw(self.normalMesh, self.x - self.nx, self.y - self.ny)
+    love.graphics.draw(self.normalMesh, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
   end
   if self.reflective and self.img then
     love.graphics.setColor(0, 255, 0)
     if self.type == 'animation' then
-      self.animation:draw(self.img, self.x - self.ix, self.y - self.iy)
+      self.animation:draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     else
-      love.graphics.draw(self.img, self.x - self.ix, self.y - self.iy)
+      love.graphics.draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     end
   elseif not self.reflection and self.img then
     love.graphics.setColor(0, 0, 0)
     if self.type == 'animation' then
-      self.animation:draw(self.img, self.x - self.ix, self.y - self.iy)
+      self.animation:draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     else
-      love.graphics.draw(self.img, self.x - self.ix, self.y - self.iy)
+      love.graphics.draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
     end
   end
 end
@@ -607,9 +660,9 @@ function body:drawMaterial()
     love.graphics.setColor(255, 255, 255)
     self.materialShader:send("material", self.material)
     if self.type == 'animation' then
-      self.animation:draw(self.normal, self.x - self.nx, self.y - self.ny)
+      self.animation:draw(self.normal, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
     else
-      love.graphics.draw(self.normal, self.x - self.nx, self.y - self.ny)
+      love.graphics.draw(self.normal, self.x, self.y, self.rotation, self.scalex, self.scaley, self.nx, self.ny)
     end
     love.graphics.setShader()
   end
@@ -617,7 +670,7 @@ end
 
 function body:drawStencil()
   if not self.refraction and not self.reflection and not self.castsNoShadow then
-    love.graphics.draw(self.img, self.x - self.ix, self.y - self.iy)
+    love.graphics.draw(self.img, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ix, self.iy)
   end
 end
 
@@ -627,7 +680,7 @@ function body:drawShadow(light)
   end
    
   love.graphics.setColor(self.red, self.green, self.blue, self.alpha)
-  if self.shadowType == "rectangle" or self.shadowType == "polygon" then
+  if self.shadowType == "polygon" then
     self:drawPolyShadow(light)
   elseif self.shadowType == "circle" then
     self:drawCircleShadow(light)
@@ -668,23 +721,24 @@ function body:drawCircleShadow(light)
   local lightPosition = vector(light.x, light.y)
   local lh = lightPosition * self.zheight
   local height_diff = (self.zheight - light.z) 
+  local radius = self.radius * self.scalex
   if height_diff == 0 then -- prevent inf
     height_diff = -0.001
   end
 
   local angle = math.atan2(light.x - selfPos.x, selfPos.y - light.y) + math.pi / 2
-  local point1 = vector(selfPos.x + math.sin(angle) * self.radius,
-                        selfPos.y - math.cos(angle) * self.radius)
-  local point2 = vector(selfPos.x - math.sin(angle) * self.radius,
-                        selfPos.y + math.cos(angle) * self.radius)
+  local point1 = vector(selfPos.x + math.sin(angle) * radius,
+                        selfPos.y - math.cos(angle) * radius)
+  local point2 = vector(selfPos.x - math.sin(angle) * radius,
+                        selfPos.y + math.cos(angle) * radius)
   local point3 = (lh - (point1 * light.z))/height_diff
   local point4 = (lh - (point2 * light.z))/height_diff
   
-  local radius = point3:dist(point4)/2
+  local shadow_radius = point3:dist(point4)/2
   local circleCenter = (point3 + point4)/2
 
-  if lightPosition:dist(selfPos) <= self.radius then
-    love.graphics.circle("fill", circleCenter.x, circleCenter.y, radius)
+  if lightPosition:dist(selfPos) <= radius then
+    love.graphics.circle("fill", circleCenter.x, circleCenter.y, shadow_radius)
   else
     love.graphics.polygon("fill", point1.x, point1.y, 
                                   point2.x, point2.y, 
@@ -694,9 +748,9 @@ function body:drawCircleShadow(light)
       local angle1 = math.atan2(point3.y - circleCenter.y, point3.x - circleCenter.x)
       local angle2 = math.atan2(point4.y - circleCenter.y, point4.x - circleCenter.x)
       if angle1 < angle2 then
-        love.graphics.arc("fill", circleCenter.x, circleCenter.y, radius, angle1, angle2)
+        love.graphics.arc("fill", circleCenter.x, circleCenter.y, shadow_radius, angle1, angle2)
       else
-        love.graphics.arc("fill", circleCenter.x, circleCenter.y, radius, angle1 - math.pi, angle2 - math.pi)
+        love.graphics.arc("fill", circleCenter.x, circleCenter.y, shadow_radius, angle1 - math.pi, angle2 - math.pi)
       end
     end
   end
@@ -721,7 +775,7 @@ function body:drawImageShadow(light)
     {0, shadowStartY, 0, 1, self.red, self.green, self.blue, self.alpha}
   })
 
-  love.graphics.draw(self.shadowMesh, self.x - self.ox, self.y - self.oy, 0, s, s)
+  love.graphics.draw(self.shadowMesh, self.x, self.y, self.rotation, self.scalex, self.scaley, self.ox, self.oy)
 end
 
 return setmetatable({new = new}, {__call = function(_, ...) return new(...) end})

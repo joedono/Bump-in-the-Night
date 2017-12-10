@@ -78,6 +78,26 @@ local function len(x,y)
 	return sqrt(x*x + y*y)
 end
 
+local function fromPolar(angle, radius)
+	radius = radius or 1
+	return cos(angle)*radius, sin(angle)*radius
+end
+
+local function randomDirection(len_min, len_max)
+	len_min = len_min or 1
+	len_max = len_max or len_min
+
+	assert(len_max > 0, "len_max must be greater than zero")
+	assert(len_max >= len_min, "len_max must be greater than or equal to len_min")
+
+	return fromPolar(math.random()*2*math.pi,
+	                 math.random() * (len_max-len_min) + len_min)
+end
+
+local function toPolar(x, y)
+	return atan2(y,x), len(x,y)
+end
+
 local function dist2(x1,y1, x2,y2)
 	return len2(x1-x2, y1-y2)
 end
@@ -130,6 +150,10 @@ end
 -- the module
 return {
 	str = str,
+
+	fromPolar       = fromPolar,
+	toPolar         = toPolar,
+	randomDirection = randomDirection,
 
 	-- arithmetic
 	mul    = mul,

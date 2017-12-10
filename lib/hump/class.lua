@@ -36,7 +36,7 @@ local function include_helper(to, from, seen)
 	seen[from] = to
 	for k,v in pairs(from) do
 		k = include_helper({}, k, seen) -- keys might also be tables
-		if not to[k] then
+		if to[k] == nil then
 			to[k] = include_helper({}, v, seen)
 		end
 	end
@@ -56,10 +56,14 @@ end
 
 local function new(class)
 	-- mixins
+	class = class or {}  -- class can be nil
 	local inc = class.__includes or {}
 	if getmetatable(inc) then inc = {inc} end
 
 	for _, other in ipairs(inc) do
+		if type(other) == "string" then
+			other = _G[other]
+		end
 		include(class, other)
 	end
 
