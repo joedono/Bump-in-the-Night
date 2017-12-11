@@ -88,4 +88,6 @@
   <object id="32" type="wall" x="864" y="464" width="32" height="16"/>
   <object id="33" type="wall" x="944" y="464" width="160" height="16"/>
  </objectgroup>
+ <objectgroup name="Door H"/>
+ <objectgroup name="Door V"/>
 </map>

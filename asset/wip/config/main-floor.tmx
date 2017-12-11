@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="16" tileheight="16" nextobjectid="109">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="16" tileheight="16" nextobjectid="142">
  <tileset firstgid="1" source="attic.tsx"/>
  <tileset firstgid="5" source="main-floor.tsx"/>
- <layer name="Floor" width="70" height="48">
+ <layer name="Floor" width="70" height="48" visible="0">
   <data encoding="csv">
 5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,
 7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,
@@ -62,7 +62,7 @@
   <object id="40" type="wall" x="16" y="80" width="96" height="16"/>
   <object id="41" type="wall" x="192" y="16" width="16" height="144"/>
   <object id="42" type="wall" x="16" y="144" width="128" height="16"/>
-  <object id="43" type="wall" x="48" y="208" width="16" height="512"/>
+  <object id="43" type="wall" x="48" y="208" width="16" height="496"/>
   <object id="44" type="wall" x="112" y="160" width="16" height="64"/>
   <object id="45" type="wall" x="128" y="208" width="16" height="16"/>
   <object id="46" type="wall" x="256" y="16" width="16" height="96"/>
@@ -87,7 +87,7 @@
   <object id="65" type="wall" x="624" y="288" width="32" height="16"/>
   <object id="66" type="wall" x="704" y="288" width="64" height="16"/>
   <object id="67" type="wall" x="752" y="176" width="16" height="112"/>
-  <object id="68" type="wall" x="768" y="224" width="176" height="16"/>
+  <object id="68" type="wall" x="768" y="224" width="96" height="16"/>
   <object id="69" type="wall" x="912" y="336" width="32" height="16"/>
   <object id="70" type="wall" x="832" y="336" width="32" height="16"/>
   <object id="71" type="wall" x="832" y="352" width="16" height="96"/>
@@ -126,5 +126,42 @@
   <object id="106" type="wall" x="624" y="576" width="64" height="16"/>
   <object id="107" type="wall" x="448" y="592" width="16" height="64"/>
   <object id="108" type="wall" x="624" y="592" width="16" height="64"/>
+  <object id="124" x="912" y="224" width="32" height="16"/>
+  <object id="127" x="1024" y="96" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="Door H">
+  <object id="109" x="144" y="144" width="48" height="16"/>
+  <object id="110" x="144" y="208" width="48" height="16"/>
+  <object id="112" x="64" y="208" width="48" height="16"/>
+  <object id="113" x="144" y="448" width="48" height="16"/>
+  <object id="114" x="144" y="528" width="48" height="16"/>
+  <object id="115" x="112" y="624" width="48" height="16"/>
+  <object id="116" x="768" y="528" width="48" height="16"/>
+  <object id="117" x="752" y="688" width="48" height="16"/>
+  <object id="118" x="976" y="688" width="48" height="16"/>
+  <object id="119" x="1008" y="592" width="48" height="16"/>
+  <object id="120" x="880" y="528" width="48" height="16"/>
+  <object id="121" x="1056" y="448" width="48" height="16"/>
+  <object id="122" x="976" y="448" width="48" height="16"/>
+  <object id="123" x="864" y="336" width="48" height="16"/>
+  <object id="125" x="864" y="224" width="48" height="16"/>
+  <object id="126" x="976" y="96" width="48" height="16"/>
+  <object id="128" x="1200" y="128"/>
+  <object id="132" x="496" y="96" width="48" height="16"/>
+  <object id="133" x="288" y="96" width="48" height="16"/>
+  <object id="134" x="304" y="448" width="48" height="16"/>
+  <object id="135" x="352" y="208" width="48" height="16"/>
+  <object id="138" x="656" y="288" width="48" height="16"/>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="Door V">
+  <object id="111" x="192" y="160" width="16" height="48"/>
+  <object id="129" x="1040" y="16" width="16" height="48"/>
+  <object id="130" x="944" y="32" width="16" height="48"/>
+  <object id="131" x="752" y="32" width="16" height="48"/>
+  <object id="136" x="448" y="272" width="16" height="48"/>
+  <object id="137" x="608" y="352" width="16" height="48"/>
+  <object id="139" x="944" y="640" width="16" height="48"/>
+  <object id="140" x="336" y="640" width="16" height="48"/>
+  <object id="141" x="48" y="704" width="16" height="48"/>
  </objectgroup>
 </map>
