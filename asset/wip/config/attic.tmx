@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="16" tileheight="16" nextobjectid="35">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="16" tileheight="16" nextobjectid="37">
  <tileset firstgid="1" source="attic.tsx"/>
- <layer name="Floor" width="70" height="48">
+ <layer name="Floor" width="70" height="48" visible="0">
   <data encoding="csv">
 1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,
 3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,
@@ -90,4 +90,8 @@
  </objectgroup>
  <objectgroup name="Door H"/>
  <objectgroup name="Door V"/>
+ <objectgroup color="#ff0000" name="Stairs">
+  <object id="35" x="128" y="144" width="16" height="80"/>
+  <object id="36" x="1168" y="176"/>
+ </objectgroup>
 </map>
