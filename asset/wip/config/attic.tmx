@@ -92,6 +92,5 @@
  <objectgroup name="Door V"/>
  <objectgroup color="#ff0000" name="Stairs">
   <object id="35" x="128" y="144" width="16" height="80"/>
-  <object id="36" x="1168" y="176"/>
  </objectgroup>
 </map>
