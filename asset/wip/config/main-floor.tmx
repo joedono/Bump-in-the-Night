@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="16" tileheight="16" nextobjectid="147">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="16" tileheight="16" nextobjectid="149">
  <tileset firstgid="1" source="attic.tsx"/>
  <tileset firstgid="5" source="main-floor.tsx"/>
- <layer name="Floor" width="70" height="48" visible="0">
+ <layer name="Floor" width="70" height="48">
   <data encoding="csv">
 5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,
 7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,7,8,
@@ -128,6 +128,7 @@
   <object id="108" type="wall" x="624" y="592" width="16" height="64"/>
   <object id="124" x="912" y="224" width="32" height="16"/>
   <object id="127" x="1024" y="96" width="16" height="16"/>
+  <object id="147" x="1056" y="704" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#00ff00" name="Door H">
   <object id="109" x="144" y="144" width="48" height="16"/>
@@ -153,7 +154,6 @@
   <object id="138" x="656" y="288" width="48" height="16"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="Door V">
-  <object id="111" x="192" y="160" width="16" height="48"/>
   <object id="129" x="1040" y="16" width="16" height="48"/>
   <object id="130" x="944" y="32" width="16" height="48"/>
   <object id="131" x="752" y="32" width="16" height="48"/>
@@ -168,5 +168,8 @@
   <object id="144" x="656" y="528" width="16" height="48"/>
   <object id="145" x="960" y="160" width="80" height="16"/>
   <object id="146" x="16" y="16" width="16" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" name="Shute">
+  <object id="148" x="272" y="160" width="48" height="48"/>
  </objectgroup>
 </map>
