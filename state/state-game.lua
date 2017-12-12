@@ -4,14 +4,17 @@ State_Game = {};
 
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
-
-	self.player = Player();
-
-	self.active = true;
 end
 
 function State_Game:enter()
+	local items = BumpWorld:getItems();
+  for index, item in pairs(items) do
+    BumpWorld:remove(item);
+  end
+	
+	self.player = Player();
 
+	self.active = true;
 end
 
 function State_Game:focus(focused)
@@ -85,7 +88,7 @@ end
 function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
-		
+
     self.player:draw();
   end);
 
