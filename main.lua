@@ -4,6 +4,7 @@ Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 require "lib/general";
 
+require "config/collisions";
 require "config/constants";
 
 require "state/state-game";
@@ -14,7 +15,7 @@ function love.load()
 end
 
 function love.keypressed(key, unicode)
-	if(key == "escape") then
+	if key == KEY_QUIT then
 		love.event.quit();
 	end
 end
