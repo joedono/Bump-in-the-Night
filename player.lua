@@ -80,6 +80,15 @@ function Player:updatePosition(dt)
 
   local actualX, actualY, cols, len = BumpWorld:move(self, dx, dy, playerCollision);
 
+  for i = 1, len do
+    local col = cols[i];
+    if col.other.type == "door" then
+      if not col.other.isOpen then
+        col.other:open();
+      end
+    end
+  end
+
   self.box.x = actualX;
   self.box.y = actualY;
 end

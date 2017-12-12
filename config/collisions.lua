@@ -3,5 +3,13 @@ playerCollision = function(player, other)
     return "slide";
   end
 
+  if other.type == "door" then
+		if other.isOpen then
+			return nil;
+		else
+			return "touch";
+		end
+  end
+
   return nil;
 end

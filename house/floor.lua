@@ -1,3 +1,5 @@
+require "house/door";
+
 Floor = Class {
   init = function (self, layoutFile)
     self.source = love.filesystem.load(layoutFile)();
@@ -5,15 +7,18 @@ Floor = Class {
     local imageFilename = string.gsub(self.source.tilesets[1].image, "%.%./%.%.", "asset");
     self.tilesetImage = love.graphics.newImage(imageFilename);
 
+    self.walls = {};
+    self.doors = {};
+
     for index, layer in pairs(self.source.layers) do
       if layer.name == "Floor" then
         self:loadTiles(layer);
       elseif layer.name == "Wall" then
         self:loadWalls(layer);
       elseif layer.name == "Door H" then
-        self:loadDoorsHorizontal(layer);
+        self:addDoors(layer, "horizontal");
       elseif layer.name == "Door V" then
-        self:loadDoorsVertical(layer);
+        self:addDoors(layer, "vertical");
       elseif layer.name == "Stairs" or layer.name == "Dumbwaiter" or layer.name == "Shute" then
         self:addPortals(layer);
       end
@@ -33,19 +38,27 @@ function Floor:loadWalls(layer)
   end
 end
 
-function Floor:loadDoorsHorizontal(layer)
-
-end
-
-function Floor:loadDoorsVertical(layer)
-
+function Floor:addDoors(layer, direction)
+  for index, door in pairs(layer.objects) do
+    table.insert(self.doors, Door(door.x, door.y, direction));
+  end
 end
 
 function Floor:addPortals(layer)
 
 end
 
+function Floor:update(dt)
+  for index, door in pairs(self.doors) do
+    door:update(dt);
+  end
+end
+
 function Floor:draw()
+  for index, door in pairs(self.doors) do
+    door:draw();
+  end
+
   if DRAW_BOXES then
     love.graphics.setColor(255, 255, 255);
     for index, wall in pairs(self.walls) do

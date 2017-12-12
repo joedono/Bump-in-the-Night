@@ -96,6 +96,10 @@ function State_Game:update(dt)
     return;
   end
 
+	for index, floor in pairs(self.floors) do
+		floor:update(dt);
+	end
+
 	self.player:update(dt);
 end
 
