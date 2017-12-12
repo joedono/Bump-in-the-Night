@@ -1,5 +1,7 @@
 require "player";
 
+require "house/floor";
+
 State_Game = {};
 
 function State_Game:init()
@@ -11,10 +13,22 @@ function State_Game:enter()
   for index, item in pairs(items) do
     BumpWorld:remove(item);
   end
-	
+
 	self.player = Player();
+	self.floors = self:loadFloors();
 
 	self.active = true;
+end
+
+function State_Game:loadFloors()
+	local floors = {};
+
+	table.insert(floors, Floor("asset/config/floor-layout/basement.lua"));
+	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua"));
+	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua"));
+	table.insert(floors, Floor("asset/config/floor-layout/attic.lua"));
+
+	return floors;
 end
 
 function State_Game:focus(focused)
