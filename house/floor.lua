@@ -27,7 +27,7 @@ Floor = Class {
 }
 
 function Floor:loadTiles(layer)
-
+  -- TODO Load Tiles
 end
 
 function Floor:loadWalls(layer)
@@ -45,7 +45,7 @@ function Floor:addDoors(layer, direction)
 end
 
 function Floor:addPortals(layer)
-
+  -- TODO Load Portals
 end
 
 function Floor:update(dt)
@@ -55,6 +55,8 @@ function Floor:update(dt)
 end
 
 function Floor:draw()
+  -- TODO Draw tiles
+
   for index, door in pairs(self.doors) do
     door:draw();
   end
@@ -64,5 +66,7 @@ function Floor:draw()
     for index, wall in pairs(self.walls) do
       love.graphics.rectangle("line", wall.x, wall.y, wall.width, wall.height);
     end
+
+    -- TODO Draw portals
   end
 end
