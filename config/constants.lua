@@ -25,3 +25,6 @@ PLAYER_INITIAL_DIMENSIONS = {
   w = PLAYER_WIDTH,
   h = PLAYER_HEIGHT
 };
+
+-- Debug Variables
+DRAW_BOXES = true;

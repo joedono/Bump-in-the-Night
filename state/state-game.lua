@@ -23,10 +23,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("asset/config/floor-layout/basement.lua"));
+	-- table.insert(floors, Floor("asset/config/floor-layout/basement.lua"));
 	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua"));
-	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua"));
-	table.insert(floors, Floor("asset/config/floor-layout/attic.lua"));
+	-- table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua"));
+	-- table.insert(floors, Floor("asset/config/floor-layout/attic.lua"));
 
 	return floors;
 end
@@ -102,6 +102,10 @@ end
 function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
+
+		for index, floor in pairs(self.floors) do
+			floor:draw();
+		end
 
     self.player:draw();
   end);

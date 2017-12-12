@@ -1,6 +1,6 @@
 playerCollision = function(player, other)
-  if not other.active then
-    return nil;
+  if other.type == "wall" then
+    return "slide";
   end
 
   return nil;
