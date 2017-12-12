@@ -87,7 +87,7 @@ end
 function Player:draw()
   love.graphics.setColor(255, 255, 255);
 
-  local facing = math.angle(0, 0, self.facing.x, self.facing.y);
+  local facing = math.angle(0, 0, self.facing.y, self.facing.x);
   if(facing < 0) then
     facing = facing + math.pi * 2;
   end
