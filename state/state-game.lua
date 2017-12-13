@@ -17,6 +17,9 @@ function State_Game:enter()
 	self.player = Player();
 	self.floors = self:loadFloors();
 
+	self.camera = Camera(0, 0);
+	self:updateCamera(self.player.box.x, self.player.box.y);
+
 	self.active = true;
 end
 
@@ -101,17 +104,72 @@ function State_Game:update(dt)
 	end
 
 	self.player:update(dt);
+
+	self:updateCamera(self.player.box.x, self.player.box.y);
+end
+
+function State_Game:updateCamera(x, y)
+	local cameraFocusX, cameraFocusY = self.camera:cameraCoords(x, y);
+	local cameraX, cameraY = self.camera:position();
+
+	cameraX = cameraX - SCREEN_WIDTH / 2;
+	cameraY = cameraY - SCREEN_HEIGHT / 2;
+	local moveCamera = false;
+
+	if(cameraFocusX < CAMERA_LEFT_BOUND) then
+		cameraX = x - CAMERA_LEFT_BOUND;
+		moveCamera = true;
+	end
+
+	if(cameraFocusX > CAMERA_RIGHT_BOUND) then
+		cameraX = x - CAMERA_RIGHT_BOUND;
+		moveCamera = true;
+	end
+
+	if(cameraFocusY < CAMERA_TOP_BOUND) then
+		cameraY = y - CAMERA_TOP_BOUND;
+		moveCamera = true;
+	end
+
+	if(cameraFocusY > CAMERA_BOTTOM_BOUND) then
+		cameraY = y - CAMERA_BOTTOM_BOUND;
+		moveCamera = true;
+	end
+
+	local curFloor = self:getPlayerFloor();
+	cameraX = math.clamp(cameraX, curFloor.origin.x, curFloor.origin.x + FLOOR_WIDTH - SCREEN_WIDTH);
+	cameraY = math.clamp(cameraY, curFloor.origin.y, curFloor.origin.y + FLOOR_HEIGHT - SCREEN_HEIGHT);
+
+	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
+end
+
+function State_Game:getPlayerFloor()
+	local px = self.player.box.x;
+	local py = self.player.box.y;
+
+	if px > FLOOR_WIDTH + FLOOR_GAP and py > FLOOR_HEIGHT + FLOOR_GAP then
+		return self.floors[4]; -- Player is in the attic
+	elseif py > FLOOR_HEIGHT + FLOOR_GAP then
+		return self.floors[3]; -- Player is in the basement
+	elseif px > FLOOR_WIDTH + FLOOR_GAP then
+		return self.floors[2] -- Player is on the second floor
+	elseif px > 0 and py > 0 then
+		return self.floors[1]; -- Player is on the main floor
+	end
 end
 
 function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
+		self.camera:attach();
 
 		for index, floor in pairs(self.floors) do
 			floor:draw();
 		end
 
     self.player:draw();
+
+		self.camera:detach();
   end);
 
   love.graphics.setColor(255, 255, 255);

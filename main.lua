@@ -1,5 +1,6 @@
-GameState = require "lib/hump/gamestate";
+Camera = require "lib/hump/camera";
 Class = require "lib/hump/class";
+GameState = require "lib/hump/gamestate";
 Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 require "lib/general";
