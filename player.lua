@@ -105,8 +105,10 @@ function Player:draw()
 		self.image,
 		self.box.x + self.box.w / 2,
 		self.box.y + self.box.h / 2,
-		facing, 1, 1,
-		self.box.w / 2,
-		self.box.h / 2
+		facing,
+    PLAYER_SCALE,
+    PLAYER_SCALE,
+		PLAYER_IMAGE_WIDTH / 2,
+		PLAYER_IMAGE_HEIGHT / 2
 	);
 end
