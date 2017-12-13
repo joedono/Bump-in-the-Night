@@ -6,12 +6,12 @@ Door = Class {
 		self.h = 0;
 
 		if direction == "vertical" then
-			self.x = self.x + 7;
+			self.x = self.x + DOOR_OFFSET;
 
 			self.w = DOOR_THICKNESS;
 			self.h = DOOR_LENGTH;
 		elseif direction == "horizontal" then
-			self.y = self.y + 7;
+			self.y = self.y + DOOR_OFFSET;
 
 			self.w = DOOR_LENGTH;
 			self.h = DOOR_THICKNESS;
