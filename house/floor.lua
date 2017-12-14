@@ -73,7 +73,7 @@ function Floor:draw(camera)
   end
 
   if DRAW_BOXES then
-    love.graphics.setColor(150, 150, 150);
+    love.graphics.setColor(0, 0, 0);
     for index, wall in pairs(self.walls) do
       love.graphics.rectangle("fill", wall.x + self.origin.x, wall.y + self.origin.y, wall.width, wall.height);
     end
@@ -110,9 +110,9 @@ function Floor:drawTile(tile, camera)
 				qy = 1;
 				tileIndex = tile.data[curIndex];
 
-				if(tileIndex ~= 0) then
+				if tileIndex ~= 0 then
 					qx = tileIndex;
-					while(qx > numHorizTiles) do
+					while qx > numHorizTiles do
 						qx = qx - numHorizTiles;
 						qy = qy + 1;
 					end
@@ -132,8 +132,7 @@ function Floor:drawTile(tile, camera)
 					love.graphics.draw(
 						self.tilesetImage,
 						quad,
-						dx + self.origin.x,
-						dy + self.origin.x
+						dx, dy
 					);
 				end
 			end
