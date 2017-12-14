@@ -27,7 +27,7 @@ Floor = Class {
         self:addDoors(layer, "horizontal");
       elseif layer.name == "Door V" then
         self:addDoors(layer, "vertical");
-      elseif layer.name == "Stairs" or layer.name == "Dumbwaiter" or layer.name == "Shute" then
+      elseif layer.name == "Portals" then
         self:addPortals(layer);
       end
     end
