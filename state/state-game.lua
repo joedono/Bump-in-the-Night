@@ -17,7 +17,7 @@ function State_Game:enter()
 	self.player = Player(self);
 	self.floors = self:loadFloors();
 
-	self.camera = Camera(0, 0);
+	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
 
 	self.active = true;
