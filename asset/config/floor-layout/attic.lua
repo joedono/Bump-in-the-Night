@@ -581,7 +581,7 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Stairs",
+      name = "Portals",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -591,8 +591,8 @@ return {
       objects = {
         {
           id = 35,
-          name = "",
-          type = "",
+          name = "Stairs Down",
+          type = "portal",
           shape = "rectangle",
           x = 256,
           y = 288,
@@ -600,7 +600,11 @@ return {
           height = 160,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 250,
+            ["dy"] = 345,
+            ["room"] = 2
+          }
         }
       }
     }

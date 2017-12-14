@@ -1115,7 +1115,7 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Stairs",
+      name = "Portals",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -1125,8 +1125,8 @@ return {
       objects = {
         {
           id = 105,
-          name = "",
-          type = "",
+          name = "Stairs Up",
+          type = "portal",
           shape = "rectangle",
           x = 128,
           y = 32,
@@ -1134,12 +1134,16 @@ return {
           height = 128,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 120,
+            ["dy"] = 75,
+            ["room"] = 1
+          }
         },
         {
           id = 107,
-          name = "",
-          type = "",
+          name = "Stairs Up",
+          type = "portal",
           shape = "rectangle",
           x = 2048,
           y = 448,
@@ -1147,23 +1151,15 @@ return {
           height = 32,
           rotation = 0,
           visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      name = "Shute",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      draworder = "topdown",
-      properties = {},
-      objects = {
+          properties = {
+            ["dx"] = 1980,
+            ["dy"] = 390,
+            ["room"] = 1
+          }
+        },
         {
           id = 110,
-          name = "",
+          name = "Shute Exit",
           type = "",
           shape = "rectangle",
           x = 544,
@@ -1172,24 +1168,16 @@ return {
           height = 96,
           rotation = 0,
           visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      name = "Dumbwaiter",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      draworder = "topdown",
-      properties = {},
-      objects = {
+          properties = {
+            ["dx"] = 0,
+            ["dy"] = 0,
+            ["room"] = 0
+          }
+        },
         {
           id = 119,
-          name = "",
-          type = "",
+          name = "Dumbwaiter",
+          type = "portal",
           shape = "rectangle",
           x = 2112,
           y = 1408,
@@ -1197,7 +1185,11 @@ return {
           height = 96,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 2030,
+            ["dy"] = 1435,
+            ["room"] = 2
+          }
         }
       }
     }

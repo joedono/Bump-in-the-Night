@@ -1504,7 +1504,7 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Stairs",
+      name = "Portals",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -1514,8 +1514,8 @@ return {
       objects = {
         {
           id = 143,
-          name = "",
-          type = "",
+          name = "Stairs Up",
+          type = "portal",
           shape = "rectangle",
           x = 832,
           y = 1056,
@@ -1523,12 +1523,16 @@ return {
           height = 96,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 1030,
+            ["dy"] = 1080,
+            ["room"] = 2
+          }
         },
         {
           id = 144,
-          name = "",
-          type = "",
+          name = "Stairs Up",
+          type = "portal",
           shape = "rectangle",
           x = 1312,
           y = 1056,
@@ -1536,12 +1540,16 @@ return {
           height = 96,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 1030,
+            ["dy"] = 1080,
+            ["room"] = 2
+          }
         },
         {
           id = 145,
-          name = "",
-          type = "",
+          name = "Stairs Down",
+          type = "portal",
           shape = "rectangle",
           x = 1920,
           y = 320,
@@ -1549,12 +1557,16 @@ return {
           height = 32,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 2100,
+            ["dy"] = 350,
+            ["room"] = 3
+          }
         },
         {
           id = 146,
-          name = "",
-          type = "",
+          name = "Stairs Down",
+          type = "portal",
           shape = "rectangle",
           x = 32,
           y = 32,
@@ -1562,24 +1574,16 @@ return {
           height = 128,
           rotation = 0,
           visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      name = "Shute",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      draworder = "topdown",
-      properties = {},
-      objects = {
+          properties = {
+            ["dx"] = 50,
+            ["dy"] = 70,
+            ["room"] = 3
+          }
+        },
         {
           id = 148,
-          name = "",
-          type = "",
+          name = "Shute",
+          type = "portal",
           shape = "rectangle",
           x = 544,
           y = 320,
@@ -1587,7 +1591,11 @@ return {
           height = 96,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["dx"] = 680,
+            ["dy"] = 360,
+            ["room"] = 3
+          }
         }
       }
     }
