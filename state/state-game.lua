@@ -164,7 +164,7 @@ function State_Game:draw()
 		self.camera:attach();
 
 		for index, floor in pairs(self.floors) do
-			floor:draw();
+			floor:draw(self.camera);
 		end
 
     self.player:draw();

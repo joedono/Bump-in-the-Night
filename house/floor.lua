@@ -11,7 +11,9 @@ Floor = Class {
 
     local imageFilename = string.gsub(self.source.tilesets[1].image, "%.%./%.%.", "asset");
     self.tilesetImage = love.graphics.newImage(imageFilename);
+    self.tilesetData = self.source.tilesets[1];
 
+    self.tiles = {};
     self.walls = {};
     self.doors = {};
 
@@ -32,7 +34,7 @@ Floor = Class {
 }
 
 function Floor:loadTiles(layer)
-  -- TODO Load Tiles
+  table.insert(self.tiles, layer);
 end
 
 function Floor:loadWalls(layer)
@@ -59,8 +61,12 @@ function Floor:update(dt)
   end
 end
 
-function Floor:draw()
-  -- TODO Draw tiles
+function Floor:draw(camera)
+  love.graphics.setColor(255, 255, 255);
+
+  for index, tile in pairs(self.tiles) do
+    self:drawTile(tile, camera);
+  end
 
   for index, door in pairs(self.doors) do
     door:draw();
@@ -74,4 +80,65 @@ function Floor:draw()
 
     -- TODO Draw portals
   end
+end
+
+function Floor:drawTile(tile, camera)
+  if not tile.visible then
+		return;
+	end
+
+	local curIndex = 1;
+	local tileIndex = 0;
+	local numHorizTiles = self.tilesetData.imagewidth / self.tilesetData.tilewidth;
+	local quad = {};
+	local cx, cy = camera:position();
+	local qx, qy;
+	local dx, dy;
+
+	for y = 1, tile.height do
+		for x = 1, tile.width do
+			dx = (x - 1) * (self.tilesetData.tilewidth) + self.origin.x;
+			dy = (y - 1) * (self.tilesetData.tileheight) + self.origin.y;
+
+			-- Only draw if inside the camera frame
+			if dx > cx - SCREEN_WIDTH / 2 - 100
+				and dx < cx + SCREEN_WIDTH / 2 + 100
+				and dy > cy - SCREEN_HEIGHT / 2 - 100
+				and dy < cy + SCREEN_HEIGHT / 2 + 100
+			then
+				qx = 1;
+				qy = 1;
+				tileIndex = tile.data[curIndex];
+
+				if(tileIndex ~= 0) then
+					qx = tileIndex;
+					while(qx > numHorizTiles) do
+						qx = qx - numHorizTiles;
+						qy = qy + 1;
+					end
+
+					qx = (qx - 1) * self.tilesetData.tilewidth;
+					qy = (qy - 1) * self.tilesetData.tileheight;
+
+					quad = love.graphics.newQuad(
+						qx,
+						qy,
+						self.tilesetData.tilewidth,
+						self.tilesetData.tileheight,
+						self.tilesetData.imagewidth,
+						self.tilesetData.imageheight
+					);
+
+					love.graphics.draw(
+						self.tilesetImage,
+						quad,
+						dx + self.origin.x,
+						dy + self.origin.x
+					);
+				end
+			end
+
+			curIndex = curIndex + 1;
+		end
+	end
 end
