@@ -134,14 +134,34 @@
   <object id="109" x="2016" y="160" width="32" height="96"/>
   <object id="111" x="160" y="192" width="32" height="96"/>
  </objectgroup>
- <objectgroup color="#ff0000" name="Stairs">
-  <object id="105" x="128" y="32" width="32" height="128"/>
-  <object id="107" x="2048" y="448" width="160" height="32"/>
- </objectgroup>
- <objectgroup color="#ff00ff" name="Shute">
-  <object id="110" x="544" y="320" width="96" height="96"/>
- </objectgroup>
- <objectgroup color="#ffff00" name="Dumbwaiter">
-  <object id="119" x="2112" y="1408" width="96" height="96"/>
+ <objectgroup color="#ff0000" name="Portals">
+  <object id="105" name="Stairs Up" type="portal" x="128" y="32" width="32" height="128">
+   <properties>
+    <property name="dx" type="int" value="120"/>
+    <property name="dy" type="int" value="75"/>
+    <property name="room" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="107" name="Stairs Up" type="portal" x="2048" y="448" width="160" height="32">
+   <properties>
+    <property name="dx" type="int" value="1980"/>
+    <property name="dy" type="int" value="390"/>
+    <property name="room" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="110" name="Shute Exit" x="544" y="320" width="96" height="96">
+   <properties>
+    <property name="dx" type="int" value="0"/>
+    <property name="dy" type="int" value="0"/>
+    <property name="room" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="119" name="Dumbwaiter" type="portal" x="2112" y="1408" width="96" height="96">
+   <properties>
+    <property name="dx" type="int" value="2030"/>
+    <property name="dy" type="int" value="1435"/>
+    <property name="room" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

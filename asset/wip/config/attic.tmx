@@ -92,7 +92,13 @@
   <object id="38" x="2016" y="928" width="96" height="32"/>
  </objectgroup>
  <objectgroup name="Door V"/>
- <objectgroup color="#ff0000" name="Stairs">
-  <object id="35" x="256" y="288" width="32" height="160"/>
+ <objectgroup color="#ff0000" name="Portals">
+  <object id="35" name="Stairs Down" type="portal" x="256" y="288" width="32" height="160">
+   <properties>
+    <property name="dx" type="int" value="250"/>
+    <property name="dy" type="int" value="345"/>
+    <property name="room" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -163,13 +163,41 @@
   <object id="140" x="672" y="1280" width="32" height="96"/>
   <object id="141" x="96" y="1408" width="32" height="96"/>
  </objectgroup>
- <objectgroup color="#ff0000" name="Stairs">
-  <object id="143" x="832" y="1056" width="32" height="96"/>
-  <object id="144" x="1312" y="1056" width="32" height="96"/>
-  <object id="145" x="1920" y="320" width="160" height="32"/>
-  <object id="146" x="32" y="32" width="32" height="128"/>
- </objectgroup>
- <objectgroup color="#ff00ff" name="Shute">
-  <object id="148" x="544" y="320" width="96" height="96"/>
+ <objectgroup color="#ff0000" name="Portals">
+  <object id="143" name="Stairs Up" type="portal" x="832" y="1056" width="32" height="96">
+   <properties>
+    <property name="dx" type="int" value="1030"/>
+    <property name="dy" type="int" value="1080"/>
+    <property name="room" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="144" name="Stairs Up" type="portal" x="1312" y="1056" width="32" height="96">
+   <properties>
+    <property name="dx" type="int" value="1030"/>
+    <property name="dy" type="int" value="1080"/>
+    <property name="room" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="145" name="Stairs Down" type="portal" x="1920" y="320" width="160" height="32">
+   <properties>
+    <property name="dx" type="int" value="2100"/>
+    <property name="dy" type="int" value="350"/>
+    <property name="room" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="146" name="Stairs Down" type="portal" x="32" y="32" width="32" height="128">
+   <properties>
+    <property name="dx" type="int" value="50"/>
+    <property name="dy" type="int" value="70"/>
+    <property name="room" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="148" name="Shute" type="portal" x="544" y="320" width="96" height="96">
+   <properties>
+    <property name="dx" type="int" value="680"/>
+    <property name="dy" type="int" value="360"/>
+    <property name="room" type="int" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
