@@ -11,5 +11,9 @@ playerCollision = function(player, other)
 		end
   end
 
+  if other.type == "portal" then
+    return "touch";
+  end
+
   return nil;
 end

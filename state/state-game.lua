@@ -14,7 +14,7 @@ function State_Game:enter()
     BumpWorld:remove(item);
   end
 
-	self.player = Player();
+	self.player = Player(self);
 	self.floors = self:loadFloors();
 
 	self.camera = Camera(0, 0);

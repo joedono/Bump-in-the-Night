@@ -1,5 +1,6 @@
 Player = Class {
-  init = function (self)
+  init = function (self, parent)
+    self.parent = parent;
     self.image = love.graphics.newImage("asset/image/player.png");
 
     self.box = PLAYER_INITIAL_DIMENSIONS;
@@ -75,6 +76,7 @@ function Player:updateRotation()
 end
 
 function Player:updatePosition(dt)
+  local warped = false;
   local dx = self.box.x + self.velocity.x * dt;
   local dy = self.box.y + self.velocity.y * dt;
 
@@ -87,10 +89,30 @@ function Player:updatePosition(dt)
         col.other:open();
       end
     end
+
+    if col.other.type == "portal" then
+      self:moveThroughPortal(col.other);
+      warped = true;
+    end
   end
 
-  self.box.x = actualX;
-  self.box.y = actualY;
+  if not warped then
+    self.box.x = actualX;
+    self.box.y = actualY;
+  end
+end
+
+function Player:moveThroughPortal(portal)
+  local dx = portal.properties.dx;
+  local dy = portal.properties.dy;
+  local room = self.parent.floors[portal.properties.room]
+
+  dx = dx + room.origin.x;
+  dy = dy + room.origin.y;
+
+  self.box.x = dx;
+  self.box.y = dy;
+  BumpWorld:update(self, dx, dy);
 end
 
 function Player:draw()
