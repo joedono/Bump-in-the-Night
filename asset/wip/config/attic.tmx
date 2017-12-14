@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="41">
  <tileset firstgid="1" source="attic.tsx"/>
- <layer name="Floor" width="70" height="48" visible="0">
+ <layer name="Floor" width="70" height="48">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -58,7 +58,7 @@
   <object id="2" type="wall" x="0" y="1248" width="2240" height="288"/>
   <object id="3" type="wall" x="0" y="288" width="32" height="960"/>
   <object id="4" type="wall" x="2208" y="288" width="32" height="960"/>
-  <object id="5" type="wall" x="128" y="450.166" width="160" height="27.6666"/>
+  <object id="5" type="wall" x="128" y="450.166" width="160" height="29.834"/>
   <object id="6" type="wall" x="288" y="288" width="32" height="192"/>
   <object id="7" type="wall" x="128" y="544" width="192" height="128"/>
   <object id="8" type="wall" x="448" y="384" width="192" height="96"/>

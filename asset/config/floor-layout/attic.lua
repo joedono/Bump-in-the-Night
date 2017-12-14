@@ -45,7 +45,7 @@ return {
       y = 0,
       width = 70,
       height = 48,
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -172,7 +172,7 @@ return {
           x = 128,
           y = 450.166,
           width = 160,
-          height = 27.6666,
+          height = 29.834,
           rotation = 0,
           visible = true,
           properties = {}
