@@ -3,6 +3,8 @@ Class = require "lib/hump/class";
 GameState = require "lib/hump/gamestate";
 Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
+Inspect = require "lib/inspect";
+
 require "lib/general";
 
 require "config/collisions";
