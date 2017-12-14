@@ -16,6 +16,7 @@ Floor = Class {
     self.tiles = {};
     self.walls = {};
     self.doors = {};
+    self.portals = {};
 
     for index, layer in pairs(self.source.layers) do
       if layer.name == "Floor" then
@@ -52,7 +53,10 @@ function Floor:addDoors(layer, direction)
 end
 
 function Floor:addPortals(layer)
-  -- TODO Load Portals
+  for index, portal in pairs(layer.objects) do
+    table.insert(self.portals, portal);
+    BumpWorld:add(portal, portal.x + self.origin.x, portal.y + self.origin.y, portal.width, portal.height);
+  end
 end
 
 function Floor:update(dt)
@@ -78,7 +82,10 @@ function Floor:draw(camera)
       love.graphics.rectangle("fill", wall.x + self.origin.x, wall.y + self.origin.y, wall.width, wall.height);
     end
 
-    -- TODO Draw portals
+    love.graphics.setColor(255, 255, 0);
+    for index, portal in pairs(self.portals) do
+      love.graphics.rectangle("fill", portal.x + self.origin.x, portal.y + self.origin.y, portal.width, portal.height);
+    end
   end
 end
 
