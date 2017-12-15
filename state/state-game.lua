@@ -15,9 +15,12 @@ function State_Game:enter(previous, scenarioId)
     BumpWorld:remove(item);
   end
 
+	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
+	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
+
 	self.player = Player(self);
 	self.floors = self:loadFloors();
-	self.items = self:spawnItems(scenarioId)
+	self.items = self:spawnItems(scenarioId);
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -36,23 +39,30 @@ function State_Game:loadFloors()
 	return floors;
 end
 
-function State_Game:spawnItems(scanarioId)
+function State_Game:spawnItems(scenarioId)
 	local items = {};
 	local scenarioItems = SCENARIO_ITEMS[scenarioId];
 	local takenSpots = {};
 
-	for index, item in pairs(items) do
-		local floorIndex = love.math.random(4)
+	for index, item in pairs(scenarioItems) do
+		local floorIndex = love.math.random(4);
 		local randomFloor = self.floors[floorIndex];
 		local spotIndex = love.math.random(#randomFloor.itemLocations);
+
+		while takenSpots[floorIndex .. "-" .. spotIndex] do
+			floorIndex = love.math.random(4);
+			randomFloor = self.floors[floorIndex];
+			spotIndex = love.math.random(#randomFloor.itemLocations);
+		end
+
 		local randomLocation = randomFloor.itemLocations[spotIndex];
 
-		table.insert(takenSpots, {floor = floorIndex, spot = spotIndex});
+		takenSpots[floorIndex .. "-" .. spotIndex] = true;
 
 		local x = randomLocation.x + randomFloor.origin.x;
 		local y = randomLocation.y + randomFloor.origin.y;
 
-		table.insert(items, Item(x, y, item));
+		table.insert(items, Item(x, y, item, self.itemWorldSpriteSheet, self.itemHeldSpriteSheet));
 	end
 
 	return items;

@@ -96,7 +96,6 @@ function Player:updatePosition(dt)
     end
 
     if col.other.type == "item" then
-      print(col.other.itemType .. " picked up");
       -- TODO pick up item
     end
   end

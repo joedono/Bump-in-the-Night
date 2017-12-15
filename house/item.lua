@@ -16,7 +16,7 @@ Item = Class {
 		local hix = INVENTORY_MAP.held[itemType].x;
 		local hiy = INVENTORY_MAP.held[itemType].y;
 
-		local worldImageData = love.image.newImageData(ITEM_WIDTH, ITEM_HEIGHT);
+		local worldImageData = love.image.newImageData(ITEM_IMAGE_WIDTH, ITEM_IMAGE_HEIGHT);
 		local heldImageData = love.image.newImageData(INVENTORY_ITEM_WIDTH, INVENTORY_ITEM_HEIGHT);
 
 		worldImageData:paste(worldSpritesheet,
@@ -24,8 +24,8 @@ Item = Class {
 			0,
 			wix,
 			wiy,
-			ITEM_WIDTH,
-			ITEM_HEIGHT
+			ITEM_IMAGE_WIDTH,
+			ITEM_IMAGE_HEIGHT
 		);
 
 		heldImageData:paste(heldSpritesheet,
@@ -59,5 +59,5 @@ function Item:draw()
   end
 
   love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(self.worldImage, self.x, self.y, 0, ITEM_WORLD_SCALE, ITEM_WORLD_SCALE);
+  love.graphics.draw(self.worldImage, self.box.x, self.box.y, 0, ITEM_WORLD_SCALE, ITEM_WORLD_SCALE);
 end
