@@ -10,6 +10,7 @@ function State_Game:init()
 end
 
 function State_Game:enter(previous, scenarioId)
+	print("entering");
 	local items = BumpWorld:getItems();
   for index, item in pairs(items) do
     BumpWorld:remove(item);
@@ -26,6 +27,10 @@ function State_Game:enter(previous, scenarioId)
 	self:updateCamera(self.player.box.x, self.player.box.y);
 
 	self.active = true;
+end
+
+function State_Game:resume()
+	self.player:resetKeys();
 end
 
 function State_Game:loadFloors()
@@ -81,6 +86,10 @@ function State_Game:keypressed(key, unicode)
     return;
   end
 
+	if key == KEY_PAUSE then
+		GameState.push(State_Pause);
+	end
+
   if key == KEY_LEFT then
     self.player.leftPressed = true;
   end
@@ -126,6 +135,20 @@ function State_Game:keyreleased(key, unicode)
   if key == KEY_RUN then
     self.player.runPressed = false;
   end
+end
+
+function State_Game:gamepadpressed(joystick, button)
+  if not self.active then
+    return;
+  end
+
+  if button == GAMEPAD_START then
+		GameState.push(State_Pause);
+  end
+end
+
+function State_Game:gamepadaxis(joystick, axis, value)
+	-- TODO Joystick movement
 end
 
 function State_Game:update(dt)

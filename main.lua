@@ -11,6 +11,7 @@ require "config/collisions";
 require "config/constants";
 
 require "state/state-game";
+require "state/state-pause";
 
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
@@ -43,4 +44,10 @@ function love.keypressed(key, unicode)
 	if key == KEY_QUIT then
 		love.event.quit();
 	end
+end
+
+function love.gamepadpressed(joystick, button)
+  if button == GAMEPAD_QUIT then
+    love.event.quit();
+  end
 end
