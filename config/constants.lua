@@ -109,7 +109,16 @@ INVENTORY_MAP = {
 };
 
 SCENARIO_ITEMS = {
-  ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"}
+  ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+  ["bear"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+  ["burgler"] = {"taser", "cellphone_dead", "cellphone_battery"},
+  ["arson"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
+  ["killer"] = {"taser", "cellphone_dead", "cellphone_battery", "fuse"},
+  ["vampire"] = {"book", "stake", "knife", "cross"},
+  ["ghost"] = {"book"},
+  ["alien"] = {"music_box", "battery", "foil"},
+  ["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
+  ["elder_god"] = {"crystal", "scroll"}
 }
 
 -- Debug Variables
