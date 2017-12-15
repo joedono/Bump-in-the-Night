@@ -17,6 +17,7 @@ Floor = Class {
     self.walls = {};
     self.doors = {};
     self.portals = {};
+    self.itemLocations = {};
 
     for index, layer in pairs(self.source.layers) do
       if layer.name == "Floor" then
@@ -29,6 +30,8 @@ Floor = Class {
         self:addDoors(layer, "vertical");
       elseif layer.name == "Portals" then
         self:addPortals(layer);
+      elseif layer.name == "Item" then
+        self:loadItemLocations(layer);
       end
     end
   end
@@ -57,6 +60,10 @@ function Floor:addPortals(layer)
     table.insert(self.portals, portal);
     BumpWorld:add(portal, portal.x + self.origin.x, portal.y + self.origin.y, portal.width, portal.height);
   end
+end
+
+function Floor:loadItemLocations(layer)
+  self.itemLocations = layer.objects;
 end
 
 function Floor:update(dt)
