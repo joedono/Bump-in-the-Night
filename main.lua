@@ -9,7 +9,6 @@ require "lib/general";
 
 require "config/collisions";
 require "config/constants";
-require "config/item-sprite-data";
 
 require "state/state-game";
 
@@ -37,7 +36,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
-	GameState.switch(State_Game);
+	GameState.switch(State_Game, "wolf");
 end
 
 function love.keypressed(key, unicode)

@@ -1,6 +1,7 @@
 require "player";
 
 require "house/floor";
+require "house/item";
 
 State_Game = {};
 
@@ -8,7 +9,7 @@ function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
 end
 
-function State_Game:enter()
+function State_Game:enter(previous, scenarioId)
 	local items = BumpWorld:getItems();
   for index, item in pairs(items) do
     BumpWorld:remove(item);
@@ -16,6 +17,7 @@ function State_Game:enter()
 
 	self.player = Player(self);
 	self.floors = self:loadFloors();
+	self.items = self:spawnItems(scenarioId)
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -32,6 +34,28 @@ function State_Game:loadFloors()
 	table.insert(floors, Floor("asset/config/floor-layout/attic.lua", FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP));
 
 	return floors;
+end
+
+function State_Game:spawnItems(scanarioId)
+	local items = {};
+	local scenarioItems = SCENARIO_ITEMS[scenarioId];
+	local takenSpots = {};
+
+	for index, item in pairs(items) do
+		local floorIndex = love.math.random(4)
+		local randomFloor = self.floors[floorIndex];
+		local spotIndex = love.math.random(#randomFloor.itemLocations);
+		local randomLocation = randomFloor.itemLocations[spotIndex];
+
+		table.insert(takenSpots, {floor = floorIndex, spot = spotIndex});
+
+		local x = randomLocation.x + randomFloor.origin.x;
+		local y = randomLocation.y + randomFloor.origin.y;
+
+		table.insert(items, Item(x, y, item));
+	end
+
+	return items;
 end
 
 function State_Game:focus(focused)
@@ -103,6 +127,10 @@ function State_Game:update(dt)
 		floor:update(dt);
 	end
 
+	for index, item in pairs(self.items) do
+		item:update(dt);
+	end
+
 	self.player:update(dt);
 
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -165,6 +193,10 @@ function State_Game:draw()
 
 		for index, floor in pairs(self.floors) do
 			floor:draw(self.camera);
+		end
+
+		for index, item in pairs(self.items) do
+			item:draw();
 		end
 
     self.player:draw();
