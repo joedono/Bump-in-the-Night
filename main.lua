@@ -9,6 +9,7 @@ require "lib/general";
 
 require "config/collisions";
 require "config/constants";
+require "config/item-sprite-data";
 
 require "state/state-game";
 
