@@ -94,6 +94,11 @@ function Player:updatePosition(dt)
       self:moveThroughPortal(col.other);
       warped = true;
     end
+
+    if col.other.type == "item" then
+      print(col.other.itemType .. " picked up");
+      -- TODO pick up item
+    end
   end
 
   if not warped then
