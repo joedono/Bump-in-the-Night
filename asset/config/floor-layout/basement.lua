@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 122,
+  nextobjectid = 135,
   properties = {},
   tilesets = {
     {
@@ -1190,6 +1190,174 @@ return {
             ["dy"] = 1435,
             ["room"] = 2
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "Item",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 122,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1344,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 123,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 736,
+          y = 704,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 124,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 704,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 125,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 896,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 126,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 127,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1376,
+          y = 1312,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 128,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1024,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 129,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1888,
+          y = 1312,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 131,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1728,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 132,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2144,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 133,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1792,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 134,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     }
