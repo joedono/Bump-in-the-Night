@@ -10,6 +10,7 @@ require "lib/general";
 require "config/collisions";
 require "config/constants";
 
+require "state/state-splash";
 require "state/state-game";
 require "state/state-pause";
 
