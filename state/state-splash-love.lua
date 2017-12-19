@@ -24,6 +24,7 @@ end
 
 function State_Splash_Love:draw()
 	CANVAS:renderTo(function()
+    love.graphics.clear();
 		self.splash:draw();
   end);
 
