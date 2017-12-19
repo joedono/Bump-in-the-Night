@@ -3,7 +3,7 @@ State_Splash_Hive = {};
 function State_Splash_Hive:enter()
   self.hiveImage = love.graphics.newImage("asset/image/splash/hive.png");
   self.imageScale = 0.75;
-  self.font = love.graphics.newFont("asset/font/handy-andy.otf", 30);
+  self.font = love.graphics.newFont("asset/font/RifficFree-bold.ttf", 30);
 
   self.imagePos = {
     x = SCREEN_WIDTH / 2 - self.hiveImage:getWidth() / 2 * self.imageScale,
@@ -19,7 +19,7 @@ function State_Splash_Hive:enter()
 
   self.wordPos = {
     x1 = SCREEN_WIDTH / 2 - 85,
-    x2 = SCREEN_WIDTH / 2 - 130,
+    x2 = SCREEN_WIDTH / 2 - 125,
     y1 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 10,
     y2 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 45
   };
@@ -38,6 +38,8 @@ function State_Splash_Hive:enter()
     wait(2);
     Timer.tween(2, self.alphas, {wordAlpha = 255}, "in-linear");
     wait(5);
+    Timer.tween(1, self.alphas, {imageAlpha = 0, eyeAlpha = 0, wordAlpha = 0}, "in-linear");
+    wait(1);
     self:onDone();
   end);
 end
@@ -51,7 +53,7 @@ function State_Splash_Hive:gamepadpressed(joystick, button)
 end
 
 function State_Splash_Hive:onDone()
-  GameState.switch(State_Game, "wolf");
+  GameState.switch(State_Splash_Love);
 end
 
 function State_Splash_Hive:update(dt)
