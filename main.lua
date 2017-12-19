@@ -1,6 +1,7 @@
 Camera = require "lib/hump/camera";
 Class = require "lib/hump/class";
 GameState = require "lib/hump/gamestate";
+Timer = require "lib/hump/timer";
 Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 Inspect = require "lib/inspect";
@@ -11,6 +12,7 @@ require "config/collisions";
 require "config/constants";
 
 require "state/state-splash-love";
+require "state/state-splash-hive";
 require "state/state-game";
 require "state/state-pause";
 
@@ -38,7 +40,8 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
-	GameState.switch(State_Game, "wolf");
+	-- GameState.switch(State__Game, "wolf");
+	GameState.switch(State_Splash_Hive);
 end
 
 function love.keypressed(key, unicode)
