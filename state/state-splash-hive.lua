@@ -3,6 +3,7 @@ State_Splash_Hive = {};
 function State_Splash_Hive:enter()
   self.hiveImage = love.graphics.newImage("asset/image/splash/hive.png");
   self.imageScale = 0.75;
+  self.font = love.graphics.newFont("asset/font/handy-andy.otf", 30);
 
   self.imagePos = {
     x = SCREEN_WIDTH / 2 - self.hiveImage:getWidth() / 2 * self.imageScale,
@@ -17,8 +18,10 @@ function State_Splash_Hive:enter()
   };
 
   self.wordPos = {
+    x1 = SCREEN_WIDTH / 2 - 85,
+    x2 = SCREEN_WIDTH / 2 - 130,
     y1 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 10,
-    y2 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 32
+    y2 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 45
   };
 
   self.alphas = {
@@ -65,9 +68,10 @@ function State_Splash_Hive:draw()
     love.graphics.circle("fill", self.eyePos.x1, self.eyePos.y, 5);
     love.graphics.circle("fill", self.eyePos.x2, self.eyePos.y, 5);
 
+    love.graphics.setFont(self.font);
     love.graphics.setColor(255, 255, 255, self.alphas.wordAlpha);
-    love.graphics.printf("Developed by", 0, self.wordPos.y1, SCREEN_WIDTH, "center");
-    love.graphics.printf("Little HIVE Studios", 0, self.wordPos.y2, SCREEN_WIDTH / 2, "center", 0, 2, 2);
+    love.graphics.print("Developed by", self.wordPos.x1, self.wordPos.y1);
+    love.graphics.print("Little HIVE Studios", self.wordPos.x2, self.wordPos.y2);
   end);
 
   love.graphics.setColor(255, 255, 255);
