@@ -5,6 +5,8 @@ Player = Class {
 
     self.box = PLAYER_INITIAL_DIMENSIONS;
     self.velocity = { x = 0, y = 0 };
+    self.axisVelocity = { x = 0, y = 0 };
+    self.flashlightFacing = { x = 0, y = 0 };
     self.facing = { x = 0, y = 0 };
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
@@ -22,6 +24,7 @@ function Player:resetKeys()
   self.upPressed = false;
   self.downPressed = false;
   self.runPressed = false;
+  self.axisVelocity = { x = 0, y = 0 };
 end
 
 function Player:update(dt)
@@ -38,20 +41,30 @@ function Player:updateVelocity()
   local vx = 0;
   local vy = 0;
 
-  if self.leftPressed then
-    vx = vx - 1;
-  end
+  if self.leftPressed or self.rightPressed or self.upPressed or self.downPressed then
+    if self.leftPressed then
+      vx = vx - 1;
+    end
 
-  if self.rightPressed then
-    vx = vx + 1;
-  end
+    if self.rightPressed then
+      vx = vx + 1;
+    end
 
-  if self.upPressed then
-    vy = vy - 1;
-  end
+    if self.upPressed then
+      vy = vy - 1;
+    end
 
-  if self.downPressed then
-    vy = vy + 1;
+    if self.downPressed then
+      vy = vy + 1;
+    end
+  else
+    vx = self.axisVelocity.x;
+    vy = self.axisVelocity.y;
+
+    if math.dist(0, 0, vx, vy) < GAMEPAD_DEADZONE then
+      vx = 0;
+      vy = 0;
+    end
   end
 
   if vx ~= 0 or vy ~= 0 then

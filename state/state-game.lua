@@ -10,7 +10,6 @@ function State_Game:init()
 end
 
 function State_Game:enter(previous, scenarioId)
-	print("entering");
 	local items = BumpWorld:getItems();
   for index, item in pairs(items) do
     BumpWorld:remove(item);
@@ -143,13 +142,67 @@ function State_Game:gamepadpressed(joystick, button)
     return;
   end
 
+	if button == GAMEPAD_LEFT then
+    self.player.leftPressed = true;
+  end
+
+  if button == GAMEPAD_RIGHT then
+    self.player.rightPressed = true;
+  end
+
+  if button == GAMEPAD_UP then
+    self.player.upPressed = true;
+  end
+
+  if button == GAMEPAD_DOWN then
+    self.player.downPressed = true;
+  end
+
+  if button == GAMEPAD_RUN then
+    self.player.runPressed = true;
+  end
+
   if button == GAMEPAD_START then
 		GameState.push(State_Pause);
   end
 end
 
+function State_Game:gamepadreleased(joystick, button)
+  if not self.active then
+    return;
+  end
+
+	if button == GAMEPAD_LEFT then
+    self.player.leftPressed = false;
+  end
+
+  if button == GAMEPAD_RIGHT then
+    self.player.rightPressed = false;
+  end
+
+  if button == GAMEPAD_UP then
+    self.player.upPressed = false;
+  end
+
+  if button == GAMEPAD_DOWN then
+    self.player.downPressed = false;
+  end
+
+  if button == GAMEPAD_RUN then
+    self.player.runPressed = false;
+  end
+end
+
 function State_Game:gamepadaxis(joystick, axis, value)
-	-- TODO Joystick movement
+	if axis == "leftx" then -- X Movement
+		self.player.axisVelocity.x = value;
+	elseif axis == "lefty" then -- Y Movement
+		self.player.axisVelocity.y = value;
+	elseif axis == "rightx" then -- X Flashlight
+		self.player.flashlightFacing.x = value;
+	elseif axis == "righty" then -- Y Flashlight
+		self.player.flashlightFacing.y = value;
+	end
 end
 
 function State_Game:update(dt)

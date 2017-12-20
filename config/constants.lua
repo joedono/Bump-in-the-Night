@@ -15,8 +15,15 @@ KEY_LIGHT_DOWN = "down";
 KEY_LIGHT_LEFT = "left";
 KEY_LIGHT_RIGHT = "right";
 
+GAMEPAD_LEFT = "dpleft";
+GAMEPAD_RIGHT = "dpright";
+GAMEPAD_UP = "dpup";
+GAMEPAD_DOWN = "dpdown";
+GAMEPAD_RUN = "rightshoulder";
 GAMEPAD_START = "start";
 GAMEPAD_QUIT = "back";
+
+GAMEPAD_DEADZONE = 0.25;
 
 CAMERA_START_X = 1140;
 CAMERA_START_Y = 1086;
