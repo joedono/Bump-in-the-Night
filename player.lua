@@ -96,7 +96,7 @@ function Player:updatePosition(dt)
     end
 
     if col.other.type == "item" then
-      -- TODO pick up item
+      self.parent:pickupItem(col.other);
     end
   end
 

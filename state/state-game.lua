@@ -220,6 +220,13 @@ function State_Game:getPlayerFloor()
 	end
 end
 
+function State_Game:pickupItem(item)
+	table.insert(self.inventory, item);
+
+	item.active = false;
+	BumpWorld:remove(item);
+end
+
 function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
