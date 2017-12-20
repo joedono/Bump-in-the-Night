@@ -84,7 +84,7 @@ function Floor:draw(camera)
   end
 
   if DRAW_BOXES then
-    love.graphics.setColor(0, 0, 0);
+    love.graphics.setColor(100, 100, 100);
     for index, wall in pairs(self.walls) do
       love.graphics.rectangle("fill", wall.x + self.origin.x, wall.y + self.origin.y, wall.width, wall.height);
     end
