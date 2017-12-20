@@ -106,6 +106,22 @@ function State_Game:keypressed(key, unicode)
     self.player.downPressed = true;
   end
 
+	if key == KEY_LIGHT_LEFT then
+		self.player.flashlightFacing.x = -1;
+	end
+
+	if key == KEY_LIGHT_RIGHT then
+		self.player.flashlightFacing.x = 1;
+	end
+
+	if key == KEY_LIGHT_UP then
+    self.player.flashlightFacing.y = 1;
+  end
+
+	if key == KEY_LIGHT_DOWN then
+    self.player.flashlightFacing.y = -1;
+  end
+
   if key == KEY_RUN then
     self.player.runPressed = true;
   end

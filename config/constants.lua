@@ -10,10 +10,10 @@ KEY_RUN = "lshift";
 KEY_QUIT = "escape";
 KEY_PAUSE = "return";
 
-KEY_LIGHT_UP = "up";
-KEY_LIGHT_DOWN = "down";
 KEY_LIGHT_LEFT = "left";
 KEY_LIGHT_RIGHT = "right";
+KEY_LIGHT_UP = "up";
+KEY_LIGHT_DOWN = "down";
 
 GAMEPAD_LEFT = "dpleft";
 GAMEPAD_RIGHT = "dpright";
