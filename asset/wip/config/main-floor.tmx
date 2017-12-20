@@ -525,17 +525,17 @@
   </object>
   <object id="234" type="path" x="640" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="192,235"/>
    </properties>
   </object>
   <object id="235" type="path" x="736" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="234,236"/>
    </properties>
   </object>
   <object id="236" type="path" x="736" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="235"/>
    </properties>
   </object>
   <object id="237" type="path" x="1984" y="256" width="32" height="32">
@@ -548,7 +548,11 @@
     <property name="connections" value="185,186,187"/>
    </properties>
   </object>
-  <object id="239" x="736" y="960" width="32" height="32"/>
+  <object id="239" type="path" x="736" y="960" width="32" height="32">
+   <properties>
+    <property name="connections" value="192,189,203"/>
+   </properties>
+  </object>
   <object id="240" type="path" x="1408" y="960" width="32" height="32">
    <properties>
     <property name="connections" value=""/>
