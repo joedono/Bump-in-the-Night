@@ -170,7 +170,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#820082" name="Item" visible="0">
+ <objectgroup color="#820082" name="Item">
   <object id="133" x="544" y="64" width="32" height="32"/>
   <object id="134" x="832" y="192" width="32" height="32"/>
   <object id="135" x="736" y="512" width="32" height="32"/>
