@@ -199,7 +199,7 @@ function State_Game:updateCamera(x, y)
 
 	local curFloor = self:getPlayerFloor();
 	cameraX = math.clamp(cameraX, curFloor.origin.x, curFloor.origin.x + FLOOR_WIDTH - SCREEN_WIDTH);
-	cameraY = math.clamp(cameraY, curFloor.origin.y, curFloor.origin.y + FLOOR_HEIGHT - SCREEN_HEIGHT);
+	cameraY = math.clamp(cameraY, curFloor.origin.y, curFloor.origin.y + FLOOR_HEIGHT - SCREEN_HEIGHT + HUD_HEIGHT);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
 end
@@ -233,10 +233,15 @@ function State_Game:draw()
 		end
 
     self.player:draw();
-
 		self.camera:detach();
+		self:drawHUD();
   end);
 
   love.graphics.setColor(255, 255, 255);
   love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+end
+
+function State_Game:drawHUD()
+	love.graphics.setColor(0, 0, 0);
+	love.graphics.rectangle("fill", 0, SCREEN_HEIGHT - HUD_HEIGHT, SCREEN_WIDTH, HUD_HEIGHT);
 end
