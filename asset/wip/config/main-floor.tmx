@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="238">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="242">
  <tileset firstgid="1" source="main-floor.tsx"/>
  <tileset firstgid="2" source="basement.tsx"/>
  <layer name="Floor" width="70" height="48" visible="0">
@@ -243,9 +243,9 @@
     <property name="connections" value="173,176,175,177"/>
    </properties>
   </object>
-  <object id="175" type="path" x="288" y="768" width="32" height="32">
+  <object id="175" type="path" x="320" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="174,176,177,175"/>
    </properties>
   </object>
   <object id="176" type="path" x="160" y="512" width="32" height="32">
@@ -255,7 +255,7 @@
   </object>
   <object id="177" type="path" x="160" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="174,175,176"/>
    </properties>
   </object>
   <object id="178" type="path" x="160" y="352" width="32" height="32">
@@ -270,37 +270,37 @@
   </object>
   <object id="180" type="path" x="64" y="608" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="179,181"/>
    </properties>
   </object>
   <object id="181" type="path" x="64" y="928" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="180,182"/>
    </properties>
   </object>
   <object id="182" type="path" x="64" y="1184" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="181,183"/>
    </properties>
   </object>
   <object id="183" type="path" x="64" y="1408" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="182,184"/>
    </properties>
   </object>
-  <object id="184" type="path" x="256" y="1376" width="32" height="32">
+  <object id="184" type="path" x="256" y="1408" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="183,185"/>
    </properties>
   </object>
   <object id="185" type="path" x="256" y="1152" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="238,184"/>
    </properties>
   </object>
   <object id="186" type="path" x="320" y="960" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="238,175,193"/>
    </properties>
   </object>
   <object id="187" type="path" x="544" y="1152" width="32" height="32">
@@ -313,7 +313,7 @@
     <property name="connections" value=""/>
    </properties>
   </object>
-  <object id="189" type="path" x="800" y="1312" width="32" height="32">
+  <object id="189" type="path" x="736" y="1312" width="32" height="32">
    <properties>
     <property name="connections" value=""/>
    </properties>
@@ -330,12 +330,12 @@
   </object>
   <object id="192" type="path" x="640" y="960" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="193,234,239"/>
    </properties>
   </object>
   <object id="193" type="path" x="448" y="960" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="186,194,192"/>
    </properties>
   </object>
   <object id="194" type="path" x="448" y="352" width="32" height="32">
@@ -523,12 +523,40 @@
     <property name="connections" value="216,219,237"/>
    </properties>
   </object>
-  <object id="234" x="640" y="576" width="32" height="32"/>
-  <object id="235" x="736" y="576" width="32" height="32"/>
-  <object id="236" x="736" y="352" width="32" height="32"/>
+  <object id="234" type="path" x="640" y="576" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="235" type="path" x="736" y="576" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="236" type="path" x="736" y="352" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
   <object id="237" type="path" x="1984" y="256" width="32" height="32">
    <properties>
     <property name="connections" value="233,226"/>
+   </properties>
+  </object>
+  <object id="238" type="path" x="320" y="1152" width="32" height="32">
+   <properties>
+    <property name="connections" value="185,186,187"/>
+   </properties>
+  </object>
+  <object id="239" x="736" y="960" width="32" height="32"/>
+  <object id="240" type="path" x="1408" y="960" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="241" type="path" x="1408" y="1312" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
    </properties>
   </object>
  </objectgroup>
