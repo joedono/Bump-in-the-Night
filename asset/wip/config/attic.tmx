@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="53">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="101">
  <tileset firstgid="1" source="attic.tsx"/>
- <layer name="Floor" width="70" height="48">
+ <layer name="Floor" width="70" height="48" visible="0">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -114,5 +114,247 @@
   <object id="50" x="1792" y="1152" width="32" height="32"/>
   <object id="51" x="1248" y="288" width="32" height="32"/>
   <object id="52" x="288" y="1152" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup color="#550000" name="Paths">
+  <object id="53" type="path" x="192" y="352" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="54" type="path" x="64" y="352" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="55" type="path" x="64" y="480" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="56" type="path" x="352" y="512" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="57" type="path" x="64" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="58" type="path" x="352" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="59" type="path" x="352" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="60" type="path" x="512" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="61" type="path" x="672" y="480" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="62" type="path" x="256" y="704" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="63" type="path" x="256" y="832" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="64" type="path" x="64" y="832" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="65" type="path" x="64" y="1024" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="66" type="path" x="64" y="1184" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="67" type="path" x="320" y="1184" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="68" type="path" x="320" y="1024" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="69" type="path" x="640" y="1024" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="70" type="path" x="640" y="832" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="71" type="path" x="640" y="704" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="72" type="path" x="960" y="704" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="73" type="path" x="960" y="832" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="74" type="path" x="960" y="1024" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="75" type="path" x="960" y="1184" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="76" type="path" x="960" y="480" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="77" type="path" x="960" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="78" type="path" x="1216" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="79" type="path" x="1216" y="640" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="80" type="path" x="1216" y="1184" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="81" type="path" x="1568" y="1184" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="82" type="path" x="1568" y="864" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="83" type="path" x="1408" y="640" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="84" type="path" x="1408" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="85" type="path" x="1536" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="86" type="path" x="1664" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="87" type="path" x="1792" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="88" type="path" x="1920" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="89" type="path" x="2048" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="90" type="path" x="2144" y="320" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="91" type="path" x="2144" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="92" type="path" x="2016" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="93" type="path" x="1888" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="94" type="path" x="1760" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="95" type="path" x="1632" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="96" type="path" x="1504" y="672" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="97" type="path" x="1888" y="832" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="98" type="path" x="2048" y="864" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="99" type="path" x="2048" y="1088" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
+  <object id="100" type="path" x="1824" y="1088" width="32" height="32">
+   <properties>
+    <property name="connections" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
