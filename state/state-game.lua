@@ -22,6 +22,7 @@ function State_Game:enter(previous, scenarioId)
 	self.player = Player(self);
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
+	self.inventory = {};
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -244,4 +245,9 @@ end
 function State_Game:drawHUD()
 	love.graphics.setColor(0, 0, 0);
 	love.graphics.rectangle("fill", 0, SCREEN_HEIGHT - HUD_HEIGHT, SCREEN_WIDTH, HUD_HEIGHT);
+
+	local y = SCREEN_HEIGHT - HUD_HEIGHT + 20;
+	for index, item in pairs(self.inventory) do
+		item:drawInventory((index-1) * 100 + 30, y);
+	end
 end

@@ -61,3 +61,8 @@ function Item:draw()
   love.graphics.setColor(255, 255, 255);
   love.graphics.draw(self.worldImage, self.box.x, self.box.y, 0, ITEM_WORLD_SCALE, ITEM_WORLD_SCALE);
 end
+
+function Item:drawInventory(x, y)
+	love.graphics.setColor(255, 255, 255);
+  love.graphics.draw(self.heldImage, x, y);
+end
