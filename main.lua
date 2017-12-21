@@ -7,6 +7,7 @@ Bump = require "lib/bump";
 Inspect = require "lib/inspect";
 
 require "lib/general";
+require "lib/pathfinding";
 
 require "config/collisions";
 require "config/constants";
