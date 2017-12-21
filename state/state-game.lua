@@ -2,6 +2,7 @@ require "player";
 
 require "house/floor";
 require "house/item";
+require "house/path";
 
 State_Game = {};
 
@@ -75,7 +76,31 @@ function State_Game:spawnItems(scenarioId)
 end
 
 function State_Game:loadPathfinding()
-	-- TODO Construct node map
+	local allPaths = {};
+
+	for index, floor in pairs(self.floors) do
+		local floorPaths = {};
+		for index2, path in pairs(floor.paths) do
+			table.insert(floorPaths, Path(floor, path));
+		end
+
+		for index2, path in pairs(floorPaths) do
+			local connections = path.source.properties["connections"];
+			for id in string.gmatch(connections, "%d+") do
+				for index2, connection in pairs(floorPaths) do
+					if tonumber(id) == connection.source.id then
+						path:addConnection(connection);
+					end
+				end
+			end
+		end
+
+		for index, path in pairs(floorPaths) do
+			table.insert(allPaths, path);
+		end
+	end
+
+	return allPaths;
 end
 
 function State_Game:focus(focused)
@@ -312,6 +337,10 @@ function State_Game:draw()
 
 		for index, item in pairs(self.items) do
 			item:draw();
+		end
+
+		for index, path in pairs(self.paths) do
+			path:draw();
 		end
 
     self.player:draw();
