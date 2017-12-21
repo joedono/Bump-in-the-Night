@@ -2028,7 +2028,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "179,173,176,1777"
+            ["connections"] = "179,173,176,177"
           }
         },
         {

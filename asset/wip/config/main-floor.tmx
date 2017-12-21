@@ -245,7 +245,7 @@
   </object>
   <object id="175" type="path" x="320" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value="174,176,177,175"/>
+    <property name="connections" value="174,176,177,186"/>
    </properties>
   </object>
   <object id="176" type="path" x="160" y="512" width="32" height="32">
@@ -485,7 +485,7 @@
   </object>
   <object id="226" type="path" x="1984" y="96" width="32" height="32">
    <properties>
-    <property name="connections" value="225,237"/>
+    <property name="connections" value="225,237,227"/>
    </properties>
   </object>
   <object id="227" type="path" x="2144" y="64" width="32" height="32">
@@ -530,7 +530,7 @@
   </object>
   <object id="235" type="path" x="736" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value="234,236"/>
+    <property name="connections" value="234,236,201"/>
    </properties>
   </object>
   <object id="236" type="path" x="736" y="352" width="32" height="32">

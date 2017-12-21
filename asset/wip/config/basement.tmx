@@ -396,7 +396,7 @@
   </object>
   <object id="178" type="path" x="1024" y="1280" width="32" height="32">
    <properties>
-    <property name="connections" value="179,173,176,1777"/>
+    <property name="connections" value="179,173,176,177"/>
    </properties>
   </object>
   <object id="179" type="path" x="1024" y="1440" width="32" height="32">

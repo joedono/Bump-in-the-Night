@@ -1903,7 +1903,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "174,176,177,175"
+            ["connections"] = "174,176,177,186"
           }
         },
         {
@@ -2623,7 +2623,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "225,237"
+            ["connections"] = "225,237,227"
           }
         },
         {
@@ -2758,7 +2758,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "234,236"
+            ["connections"] = "234,236,201"
           }
         },
         {
