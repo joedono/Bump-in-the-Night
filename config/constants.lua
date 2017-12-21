@@ -136,3 +136,4 @@ SCENARIO_ITEMS = {
 
 -- Debug Variables
 DRAW_BOXES = true;
+DRAW_PATHS = false;

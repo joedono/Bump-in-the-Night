@@ -21,9 +21,11 @@ Path = Class {
     self.offsetCenter = {
       x = self.center.x + floor.origin.x,
       y = self.center.y + floor.origin.y
-    }
+    };
 
+    BumpWorld:add(self, self.offset.x, self.offset.y, self.origin.w, self.origin.h);
     self.connections = {};
+    self.type = "path";
   end
 }
 

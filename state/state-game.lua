@@ -339,8 +339,10 @@ function State_Game:draw()
 			item:draw();
 		end
 
-		for index, path in pairs(self.paths) do
-			path:draw();
+		if DRAW_PATHS then
+			for index, path in pairs(self.paths) do
+				path:draw();
+			end
 		end
 
     self.player:draw();
