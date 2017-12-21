@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 53,
+  nextobjectid = 101,
   properties = {},
   tilesets = {
     {
@@ -45,7 +45,7 @@ return {
       y = 0,
       width = 70,
       height = 48,
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -773,6 +773,738 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "Paths",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 53,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 192,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "54"
+          }
+        },
+        {
+          id = 54,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 64,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "53,55"
+          }
+        },
+        {
+          id = 55,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 64,
+          y = 480,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "54,56,57"
+          }
+        },
+        {
+          id = 56,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 352,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "55,59,58,61"
+          }
+        },
+        {
+          id = 57,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 64,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "55,62"
+          }
+        },
+        {
+          id = 58,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 352,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "62,56,71"
+          }
+        },
+        {
+          id = 59,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 352,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "56,60"
+          }
+        },
+        {
+          id = 60,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 512,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "59"
+          }
+        },
+        {
+          id = 61,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 672,
+          y = 480,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "56,76"
+          }
+        },
+        {
+          id = 62,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 256,
+          y = 704,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "57,58,63"
+          }
+        },
+        {
+          id = 63,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 256,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "62,64"
+          }
+        },
+        {
+          id = 64,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 64,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "63,65"
+          }
+        },
+        {
+          id = 65,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 64,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "64,66,68"
+          }
+        },
+        {
+          id = 66,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 64,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "65,67"
+          }
+        },
+        {
+          id = 67,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 320,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "66,68,75"
+          }
+        },
+        {
+          id = 68,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 320,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "65,69,67"
+          }
+        },
+        {
+          id = 69,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 640,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "70,68,74"
+          }
+        },
+        {
+          id = 70,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 640,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "71,63,73,69"
+          }
+        },
+        {
+          id = 71,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 640,
+          y = 704,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "58,72,70"
+          }
+        },
+        {
+          id = 72,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 960,
+          y = 704,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "76,71,73"
+          }
+        },
+        {
+          id = 73,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 960,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "72,70,74"
+          }
+        },
+        {
+          id = 74,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 960,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "73,69,75"
+          }
+        },
+        {
+          id = 75,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 960,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "74,67,80"
+          }
+        },
+        {
+          id = 76,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 960,
+          y = 480,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "61,77,72"
+          }
+        },
+        {
+          id = 77,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 960,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "76,78"
+          }
+        },
+        {
+          id = 78,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1216,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "77,79"
+          }
+        },
+        {
+          id = 79,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1216,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "78,80,83"
+          }
+        },
+        {
+          id = 80,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1216,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "75,79,81"
+          }
+        },
+        {
+          id = 81,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1568,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "80,82"
+          }
+        },
+        {
+          id = 82,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1568,
+          y = 864,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "95,96,81,97"
+          }
+        },
+        {
+          id = 83,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1376,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "79,96,84"
+          }
+        },
+        {
+          id = 84,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1408,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "83,85"
+          }
+        },
+        {
+          id = 85,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1536,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "84,86,96"
+          }
+        },
+        {
+          id = 86,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1664,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "85,87,95"
+          }
+        },
+        {
+          id = 87,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1792,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "86,88,94"
+          }
+        },
+        {
+          id = 88,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1920,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "87,89,93"
+          }
+        },
+        {
+          id = 89,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2048,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "88,90,92"
+          }
+        },
+        {
+          id = 90,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2144,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "89,91"
+          }
+        },
+        {
+          id = 91,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2144,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "92,90"
+          }
+        },
+        {
+          id = 92,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2016,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "91,93,89"
+          }
+        },
+        {
+          id = 93,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1888,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "92,94,88,97"
+          }
+        },
+        {
+          id = 94,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1760,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "93,95,87"
+          }
+        },
+        {
+          id = 95,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1632,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "94,86,96,82"
+          }
+        },
+        {
+          id = 96,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1504,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "83,85,95,82"
+          }
+        },
+        {
+          id = 97,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1888,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "82,93,98"
+          }
+        },
+        {
+          id = 98,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2048,
+          y = 864,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "97,99"
+          }
+        },
+        {
+          id = 99,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2048,
+          y = 1088,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "98,100"
+          }
+        },
+        {
+          id = 100,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1824,
+          y = 1088,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "99"
+          }
         }
       }
     }
