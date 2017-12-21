@@ -22,6 +22,7 @@ function State_Game:enter(previous, scenarioId)
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
 	self.inventory = {};
+	self.paths = self:loadPathfinding();
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -71,6 +72,10 @@ function State_Game:spawnItems(scenarioId)
 	end
 
 	return items;
+end
+
+function State_Game:loadPathfinding()
+	-- TODO Construct node map
 end
 
 function State_Game:focus(focused)
