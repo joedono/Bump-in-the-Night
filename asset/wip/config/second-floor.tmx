@@ -1,168 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="224">
- <tileset firstgid="1" source="second-floor.tsx"/>
- <layer name="Floor" width="70" height="48" visible="0">
-  <data encoding="csv">
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-</data>
- </layer>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="140" height="96" tilewidth="32" tileheight="32" nextobjectid="229">
  <objectgroup color="#000000" name="Wall">
-  <object id="35" type="wall" x="0" y="0" width="2240" height="32"/>
-  <object id="36" type="wall" x="0" y="1504" width="2240" height="32"/>
-  <object id="37" type="wall" x="0" y="32" width="32" height="1472"/>
-  <object id="38" type="wall" x="2208" y="32" width="32" height="1472"/>
-  <object id="40" type="wall" x="160" y="256" width="160" height="32"/>
-  <object id="41" type="wall" x="416" y="256" width="128" height="32"/>
-  <object id="42" type="wall" x="480" y="32" width="32" height="224"/>
-  <object id="43" type="wall" x="640" y="256" width="128" height="32"/>
-  <object id="44" type="wall" x="672" y="32" width="32" height="224"/>
-  <object id="45" type="wall" x="864" y="256" width="64" height="32"/>
-  <object id="46" type="wall" x="896" y="128" width="32" height="128"/>
-  <object id="47" type="wall" x="800" y="96" width="320" height="32"/>
-  <object id="48" type="wall" x="1216" y="32" width="32" height="416"/>
-  <object id="49" type="wall" x="1248" y="416" width="192" height="32"/>
-  <object id="50" type="wall" x="1536" y="416" width="32" height="32"/>
-  <object id="51" type="wall" x="1568" y="128" width="32" height="320"/>
-  <object id="52" type="wall" x="1344" y="96" width="768" height="32"/>
-  <object id="53" type="wall" x="1696" y="128" width="32" height="320"/>
-  <object id="54" type="wall" x="1728" y="416" width="32" height="32"/>
-  <object id="55" type="wall" x="1856" y="416" width="352" height="32"/>
-  <object id="56" type="wall" x="1216" y="544" width="32" height="352"/>
-  <object id="57" type="wall" x="1568" y="544" width="32" height="352"/>
-  <object id="58" type="wall" x="1248" y="864" width="320" height="32"/>
-  <object id="59" type="wall" x="1248" y="544" width="192" height="32"/>
-  <object id="60" type="wall" x="1696" y="544" width="32" height="352"/>
-  <object id="61" type="wall" x="2080" y="544" width="32" height="416"/>
-  <object id="62" type="wall" x="1728" y="544" width="32" height="32"/>
-  <object id="63" type="wall" x="1856" y="544" width="224" height="32"/>
-  <object id="64" type="wall" x="2048" y="864" width="32" height="32"/>
-  <object id="65" type="wall" x="1728" y="864" width="224" height="32"/>
-  <object id="66" type="wall" x="2080" y="1056" width="32" height="352"/>
-  <object id="67" type="wall" x="1536" y="544" width="32" height="32"/>
-  <object id="68" type="wall" x="1664" y="1152" width="416" height="32"/>
-  <object id="69" type="wall" x="1696" y="1184" width="32" height="224"/>
-  <object id="70" type="wall" x="1728" y="1312" width="32" height="32"/>
-  <object id="71" type="wall" x="1856" y="1312" width="224" height="32"/>
-  <object id="72" type="wall" x="800" y="1024" width="544" height="32"/>
-  <object id="73" type="wall" x="1216" y="1152" width="128" height="352"/>
-  <object id="74" type="wall" x="1344" y="1152" width="224" height="32"/>
-  <object id="77" type="wall" x="928" y="1280" width="288" height="224"/>
-  <object id="79" type="wall" x="800" y="1152" width="128" height="352"/>
-  <object id="80" type="wall" x="608" y="1472" width="32" height="32"/>
-  <object id="81" type="wall" x="608" y="1152" width="32" height="224"/>
-  <object id="82" type="wall" x="288" y="1152" width="320" height="32"/>
-  <object id="83" type="wall" x="320" y="1184" width="32" height="192"/>
-  <object id="84" type="wall" x="320" y="1472" width="32" height="32"/>
-  <object id="85" type="wall" x="128" y="1152" width="64" height="32"/>
-  <object id="86" type="wall" x="800" y="864" width="128" height="32"/>
-  <object id="87" type="wall" x="896" y="576" width="32" height="288"/>
-  <object id="88" type="wall" x="704" y="448" width="224" height="32"/>
-  <object id="89" type="wall" x="672" y="448" width="32" height="448"/>
-  <object id="90" type="wall" x="480" y="448" width="32" height="448"/>
-  <object id="91" type="wall" x="416" y="864" width="64" height="32"/>
-  <object id="92" type="wall" x="416" y="448" width="64" height="32"/>
-  <object id="93" type="wall" x="160" y="448" width="160" height="32"/>
-  <object id="94" type="wall" x="128" y="864" width="192" height="32"/>
-  <object id="95" type="wall" x="128" y="896" width="32" height="256"/>
-  <object id="129" type="wall" x="128" y="256" width="32" height="224"/>
-  <object id="130" type="wall" x="2112" y="1376" width="96" height="32"/>
+  <object id="35" type="wall" x="0" y="0" width="4480" height="64"/>
+  <object id="36" type="wall" x="0" y="3008" width="4480" height="64"/>
+  <object id="37" type="wall" x="0" y="64" width="64" height="2944"/>
+  <object id="38" type="wall" x="4416" y="64" width="64" height="2944"/>
+  <object id="40" type="wall" x="320" y="512" width="320" height="64"/>
+  <object id="41" type="wall" x="832" y="512" width="256" height="64"/>
+  <object id="42" type="wall" x="960" y="64" width="64" height="448"/>
+  <object id="43" type="wall" x="1280" y="512" width="256" height="64"/>
+  <object id="44" type="wall" x="1344" y="64" width="64" height="448"/>
+  <object id="45" type="wall" x="1728" y="512" width="128" height="64"/>
+  <object id="46" type="wall" x="1792" y="256" width="64" height="256"/>
+  <object id="47" type="wall" x="1600" y="192" width="640" height="64"/>
+  <object id="48" type="wall" x="2432" y="64" width="64" height="832"/>
+  <object id="49" type="wall" x="2496" y="832" width="384" height="64"/>
+  <object id="50" type="wall" x="3072" y="832" width="64" height="64"/>
+  <object id="51" type="wall" x="3136" y="256" width="64" height="640"/>
+  <object id="52" type="wall" x="2688" y="192" width="1536" height="64"/>
+  <object id="53" type="wall" x="3392" y="256" width="64" height="640"/>
+  <object id="54" type="wall" x="3456" y="832" width="64" height="64"/>
+  <object id="55" type="wall" x="3712" y="832" width="704" height="64"/>
+  <object id="56" type="wall" x="2432" y="1088" width="64" height="704"/>
+  <object id="57" type="wall" x="3136" y="1088" width="64" height="704"/>
+  <object id="58" type="wall" x="2496" y="1728" width="640" height="64"/>
+  <object id="59" type="wall" x="2496" y="1088" width="384" height="64"/>
+  <object id="60" type="wall" x="3392" y="1088" width="64" height="704"/>
+  <object id="61" type="wall" x="4160" y="1088" width="64" height="832"/>
+  <object id="62" type="wall" x="3456" y="1088" width="64" height="64"/>
+  <object id="63" type="wall" x="3712" y="1088" width="448" height="64"/>
+  <object id="64" type="wall" x="4096" y="1728" width="64" height="64"/>
+  <object id="65" type="wall" x="3456" y="1728" width="448" height="64"/>
+  <object id="66" type="wall" x="4160" y="2112" width="64" height="704"/>
+  <object id="67" type="wall" x="3072" y="1088" width="64" height="64"/>
+  <object id="68" type="wall" x="3328" y="2304" width="832" height="64"/>
+  <object id="69" type="wall" x="3392" y="2368" width="64" height="448"/>
+  <object id="70" type="wall" x="3456" y="2624" width="64" height="64"/>
+  <object id="71" type="wall" x="3712" y="2624" width="448" height="64"/>
+  <object id="72" type="wall" x="1600" y="2048" width="1088" height="64"/>
+  <object id="73" type="wall" x="2432" y="2304" width="256" height="704"/>
+  <object id="74" type="wall" x="2688" y="2304" width="448" height="64"/>
+  <object id="77" type="wall" x="1856" y="2560" width="576" height="448"/>
+  <object id="79" type="wall" x="1600" y="2304" width="256" height="704"/>
+  <object id="80" type="wall" x="1216" y="2944" width="64" height="64"/>
+  <object id="81" type="wall" x="1216" y="2304" width="64" height="448"/>
+  <object id="82" type="wall" x="576" y="2304" width="640" height="64"/>
+  <object id="83" type="wall" x="640" y="2368" width="64" height="384"/>
+  <object id="84" type="wall" x="640" y="2944" width="64" height="64"/>
+  <object id="85" type="wall" x="256" y="2304" width="128" height="64"/>
+  <object id="86" type="wall" x="1600" y="1728" width="256" height="64"/>
+  <object id="87" type="wall" x="1792" y="1152" width="64" height="576"/>
+  <object id="88" type="wall" x="1408" y="896" width="448" height="64"/>
+  <object id="89" type="wall" x="1344" y="896" width="64" height="896"/>
+  <object id="90" type="wall" x="960" y="896" width="64" height="896"/>
+  <object id="91" type="wall" x="832" y="1728" width="128" height="64"/>
+  <object id="92" type="wall" x="832" y="896" width="128" height="64"/>
+  <object id="93" type="wall" x="320" y="896" width="320" height="64"/>
+  <object id="94" type="wall" x="256" y="1728" width="384" height="64"/>
+  <object id="95" type="wall" x="256" y="1792" width="64" height="512"/>
+  <object id="129" type="wall" x="256" y="512" width="64" height="448"/>
+  <object id="130" type="wall" x="4224" y="2752" width="192" height="64"/>
  </objectgroup>
  <objectgroup color="#00ff00" name="Door H">
-  <object id="96" x="320" y="256" width="96" height="32"/>
-  <object id="97" x="544" y="256" width="96" height="32"/>
-  <object id="98" x="768" y="256" width="96" height="32"/>
-  <object id="99" x="1440" y="416" width="96" height="32"/>
-  <object id="100" x="1440" y="544" width="96" height="32"/>
-  <object id="102" x="1600" y="864" width="96" height="32"/>
-  <object id="103" x="1760" y="416" width="96" height="32"/>
-  <object id="104" x="1760" y="544" width="96" height="32"/>
-  <object id="105" x="1952" y="864" width="96" height="32"/>
-  <object id="106" x="320" y="448" width="96" height="32"/>
-  <object id="107" x="320" y="864" width="96" height="32"/>
-  <object id="108" x="192" y="1152" width="96" height="32"/>
-  <object id="109" x="32" y="864" width="96" height="32"/>
-  <object id="110" x="32" y="1152" width="96" height="32"/>
-  <object id="111" x="1760" y="1312" width="96" height="32"/>
-  <object id="112" x="1568" y="1152" width="96" height="32"/>
-  <object id="114" x="1248" y="96" width="96" height="32"/>
-  <object id="115" x="2112" y="96" width="96" height="32"/>
-  <object id="123" x="704" y="864" width="96" height="32"/>
-  <object id="124" x="704" y="96" width="96" height="32"/>
-  <object id="125" x="1120" y="96" width="96" height="32"/>
-  <object id="132" x="1600" y="224" width="96" height="32"/>
+  <object id="96" x="640" y="512" width="192" height="64"/>
+  <object id="97" x="1088" y="512" width="192" height="64"/>
+  <object id="98" x="1536" y="512" width="192" height="64"/>
+  <object id="99" x="2880" y="832" width="192" height="64"/>
+  <object id="100" x="2880" y="1088" width="192" height="64"/>
+  <object id="102" x="3200" y="1728" width="192" height="64"/>
+  <object id="103" x="3520" y="832" width="192" height="64"/>
+  <object id="104" x="3520" y="1088" width="192" height="64"/>
+  <object id="105" x="3904" y="1728" width="192" height="64"/>
+  <object id="106" x="640" y="896" width="192" height="64"/>
+  <object id="107" x="640" y="1728" width="192" height="64"/>
+  <object id="108" x="384" y="2304" width="192" height="64"/>
+  <object id="109" x="64" y="1728" width="192" height="64"/>
+  <object id="110" x="64" y="2304" width="192" height="64"/>
+  <object id="111" x="3520" y="2624" width="192" height="64"/>
+  <object id="112" x="3136" y="2304" width="192" height="64"/>
+  <object id="114" x="2496" y="192" width="192" height="64"/>
+  <object id="115" x="4224" y="192" width="192" height="64"/>
+  <object id="123" x="1408" y="1728" width="192" height="64"/>
+  <object id="124" x="1408" y="192" width="192" height="64"/>
+  <object id="125" x="2240" y="192" width="192" height="64"/>
+  <object id="132" x="3200" y="448" width="192" height="64"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="Door V">
-  <object id="116" x="1216" y="448" width="32" height="96"/>
-  <object id="117" x="2080" y="448" width="32" height="96"/>
-  <object id="118" x="2080" y="960" width="32" height="96"/>
-  <object id="119" x="1696" y="1408" width="32" height="96"/>
-  <object id="120" x="608" y="1376" width="32" height="96"/>
-  <object id="121" x="320" y="1376" width="32" height="96"/>
-  <object id="122" x="896" y="480" width="32" height="96"/>
+  <object id="116" x="2432" y="896" width="64" height="192"/>
+  <object id="117" x="4160" y="896" width="64" height="192"/>
+  <object id="118" x="4160" y="1920" width="64" height="192"/>
+  <object id="119" x="3392" y="2816" width="64" height="192"/>
+  <object id="120" x="1216" y="2752" width="64" height="192"/>
+  <object id="121" x="640" y="2752" width="64" height="192"/>
+  <object id="122" x="1792" y="960" width="64" height="192"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="Portals">
-  <object id="126" name="Stairs Up" type="portal" x="160" y="288" width="32" height="160">
+  <object id="126" name="Stairs Up" type="portal" x="320" y="576" width="64" height="320">
    <properties>
     <property name="dx" type="int" value="145"/>
     <property name="dy" type="int" value="340"/>
     <property name="room" type="int" value="4"/>
    </properties>
   </object>
-  <object id="127" name="Stairs Down" type="portal" x="928" y="1248" width="288" height="32">
+  <object id="127" name="Stairs Down" type="portal" x="1856" y="2496" width="576" height="64">
    <properties>
     <property name="dx" type="int" value="1045"/>
     <property name="dy" type="int" value="1095"/>
     <property name="room" type="int" value="1"/>
    </properties>
   </object>
-  <object id="131" name="Dumbwaiter" type="portal" x="2112" y="1408" width="96" height="96">
+  <object id="131" name="Dumbwaiter" type="portal" x="4224" y="2816" width="192" height="192">
    <properties>
     <property name="dx" type="int" value="2130"/>
     <property name="dy" type="int" value="1300"/>
@@ -171,350 +118,350 @@
   </object>
  </objectgroup>
  <objectgroup color="#820082" name="Item">
-  <object id="133" x="544" y="64" width="32" height="32"/>
-  <object id="134" x="832" y="192" width="32" height="32"/>
-  <object id="135" x="736" y="512" width="32" height="32"/>
-  <object id="136" x="832" y="800" width="32" height="32"/>
-  <object id="137" x="352" y="544" width="32" height="32"/>
-  <object id="138" x="128" y="704" width="32" height="32"/>
-  <object id="139" x="384" y="64" width="32" height="32"/>
-  <object id="140" x="96" y="1408" width="32" height="32"/>
-  <object id="141" x="448" y="1216" width="32" height="32"/>
-  <object id="142" x="1408" y="1408" width="32" height="32"/>
-  <object id="143" x="2016" y="608" width="32" height="32"/>
-  <object id="144" x="1312" y="768" width="32" height="32"/>
-  <object id="145" x="1312" y="256" width="32" height="32"/>
-  <object id="146" x="1792" y="192" width="32" height="32"/>
-  <object id="147" x="2048" y="288" width="32" height="32"/>
-  <object id="149" x="2016" y="1216" width="32" height="32"/>
+  <object id="133" x="1088" y="128" width="64" height="64"/>
+  <object id="134" x="1664" y="384" width="64" height="64"/>
+  <object id="135" x="1472" y="1024" width="64" height="64"/>
+  <object id="136" x="1664" y="1600" width="64" height="64"/>
+  <object id="137" x="704" y="1088" width="64" height="64"/>
+  <object id="138" x="256" y="1408" width="64" height="64"/>
+  <object id="139" x="768" y="128" width="64" height="64"/>
+  <object id="140" x="192" y="2816" width="64" height="64"/>
+  <object id="141" x="896" y="2432" width="64" height="64"/>
+  <object id="142" x="2816" y="2816" width="64" height="64"/>
+  <object id="143" x="4032" y="1216" width="64" height="64"/>
+  <object id="144" x="2624" y="1536" width="64" height="64"/>
+  <object id="145" x="2624" y="512" width="64" height="64"/>
+  <object id="146" x="3584" y="384" width="64" height="64"/>
+  <object id="147" x="4096" y="576" width="64" height="64"/>
+  <object id="149" x="4032" y="2432" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#550000" name="Paths">
-  <object id="150" type="path" x="576" y="96" width="32" height="32">
+  <object id="150" type="path" x="1152" y="192" width="64" height="64">
    <properties>
     <property name="connections" value="151"/>
    </properties>
   </object>
-  <object id="151" type="path" x="576" y="352" width="32" height="32">
+  <object id="151" type="path" x="1152" y="704" width="64" height="64">
    <properties>
     <property name="connections" value="150,152,167,176"/>
    </properties>
   </object>
-  <object id="152" type="path" x="352" y="352" width="32" height="32">
+  <object id="152" type="path" x="704" y="704" width="64" height="64">
    <properties>
     <property name="connections" value="153,151,154,158"/>
    </properties>
   </object>
-  <object id="153" type="path" x="224" y="352" width="32" height="32">
+  <object id="153" type="path" x="448" y="704" width="64" height="64">
    <properties>
     <property name="connections" value="152"/>
    </properties>
   </object>
-  <object id="154" type="path" x="352" y="128" width="32" height="32">
+  <object id="154" type="path" x="704" y="256" width="64" height="64">
    <properties>
     <property name="connections" value="152,155"/>
    </properties>
   </object>
-  <object id="155" type="path" x="64" y="128" width="32" height="32">
+  <object id="155" type="path" x="128" y="256" width="64" height="64">
    <properties>
     <property name="connections" value="154,156"/>
    </properties>
   </object>
-  <object id="156" type="path" x="64" y="544" width="32" height="32">
+  <object id="156" type="path" x="128" y="1088" width="64" height="64">
    <properties>
     <property name="connections" value="155,157,158,159"/>
    </properties>
   </object>
-  <object id="157" type="path" x="64" y="736" width="32" height="32">
+  <object id="157" type="path" x="128" y="1472" width="64" height="64">
    <properties>
     <property name="connections" value="156,158,159,160"/>
    </properties>
   </object>
-  <object id="158" type="path" x="352" y="544" width="32" height="32">
+  <object id="158" type="path" x="704" y="1088" width="64" height="64">
    <properties>
     <property name="connections" value="156,157,159,152"/>
    </properties>
   </object>
-  <object id="159" type="path" x="352" y="736" width="32" height="32">
+  <object id="159" type="path" x="704" y="1472" width="64" height="64">
    <properties>
     <property name="connections" value="156,157,158,168"/>
    </properties>
   </object>
-  <object id="160" type="path" x="64" y="992" width="32" height="32">
+  <object id="160" type="path" x="128" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="157,161"/>
    </properties>
   </object>
-  <object id="161" type="path" x="64" y="1312" width="32" height="32">
+  <object id="161" type="path" x="128" y="2624" width="64" height="64">
    <properties>
     <property name="connections" value="160,162,163"/>
    </properties>
   </object>
-  <object id="162" type="path" x="224" y="1312" width="32" height="32">
+  <object id="162" type="path" x="448" y="2624" width="64" height="64">
    <properties>
     <property name="connections" value="161,163,166"/>
    </properties>
   </object>
-  <object id="163" type="path" x="224" y="1408" width="32" height="32">
+  <object id="163" type="path" x="448" y="2816" width="64" height="64">
    <properties>
     <property name="connections" value="161,162,164"/>
    </properties>
   </object>
-  <object id="164" type="path" x="480" y="1408" width="32" height="32">
+  <object id="164" type="path" x="960" y="2816" width="64" height="64">
    <properties>
     <property name="connections" value="163,165"/>
    </properties>
   </object>
-  <object id="165" type="path" x="704" y="1408" width="32" height="32">
+  <object id="165" type="path" x="1408" y="2816" width="64" height="64">
    <properties>
     <property name="connections" value="164,215"/>
    </properties>
   </object>
-  <object id="166" type="path" x="224" y="992" width="32" height="32">
+  <object id="166" type="path" x="448" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="162,168"/>
    </properties>
   </object>
-  <object id="167" type="path" x="576" y="992" width="32" height="32">
+  <object id="167" type="path" x="1152" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="168,151,169"/>
    </properties>
   </object>
-  <object id="168" type="path" x="352" y="992" width="32" height="32">
+  <object id="168" type="path" x="704" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="159,166,167"/>
    </properties>
   </object>
-  <object id="169" type="path" x="704" y="992" width="32" height="32">
+  <object id="169" type="path" x="1408" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="167,170,215"/>
    </properties>
   </object>
-  <object id="170" type="path" x="736" y="928" width="32" height="32">
+  <object id="170" type="path" x="1472" y="1856" width="64" height="64">
    <properties>
     <property name="connections" value="169,171,202"/>
    </properties>
   </object>
-  <object id="171" type="path" x="736" y="736" width="32" height="32">
+  <object id="171" type="path" x="1472" y="1472" width="64" height="64">
    <properties>
     <property name="connections" value="170,172"/>
    </properties>
   </object>
-  <object id="172" type="path" x="768" y="512" width="32" height="32">
+  <object id="172" type="path" x="1536" y="1024" width="64" height="64">
    <properties>
     <property name="connections" value="171,175"/>
    </properties>
   </object>
-  <object id="175" type="path" x="1056" y="512" width="32" height="32">
+  <object id="175" type="path" x="2112" y="1024" width="64" height="64">
    <properties>
     <property name="connections" value="211,172,202"/>
    </properties>
   </object>
-  <object id="176" type="path" x="800" y="352" width="32" height="32">
+  <object id="176" type="path" x="1600" y="704" width="64" height="64">
    <properties>
     <property name="connections" value="151,177,210"/>
    </properties>
   </object>
-  <object id="177" type="path" x="800" y="160" width="32" height="32">
+  <object id="177" type="path" x="1600" y="320" width="64" height="64">
    <properties>
     <property name="connections" value="176,178"/>
    </properties>
   </object>
-  <object id="178" type="path" x="736" y="160" width="32" height="32">
+  <object id="178" type="path" x="1472" y="320" width="64" height="64">
    <properties>
     <property name="connections" value="181,177"/>
    </properties>
   </object>
-  <object id="181" type="path" x="736" y="64" width="32" height="32">
+  <object id="181" type="path" x="1472" y="128" width="64" height="64">
    <properties>
     <property name="connections" value="178,182"/>
    </properties>
   </object>
-  <object id="182" type="path" x="1152" y="64" width="32" height="32">
+  <object id="182" type="path" x="2304" y="128" width="64" height="64">
    <properties>
     <property name="connections" value="181,183"/>
    </properties>
   </object>
-  <object id="183" type="path" x="1152" y="224" width="32" height="32">
+  <object id="183" type="path" x="2304" y="448" width="64" height="64">
    <properties>
     <property name="connections" value="182,210"/>
    </properties>
   </object>
-  <object id="184" type="path" x="1472" y="480" width="32" height="32">
+  <object id="184" type="path" x="2944" y="960" width="64" height="64">
    <properties>
     <property name="connections" value="211,187,198,185"/>
    </properties>
   </object>
-  <object id="185" type="path" x="1632" y="480" width="32" height="32">
+  <object id="185" type="path" x="3264" y="960" width="64" height="64">
    <properties>
     <property name="connections" value="184,194,196,219"/>
    </properties>
   </object>
-  <object id="186" type="path" x="1632" y="160" width="32" height="32">
+  <object id="186" type="path" x="3264" y="320" width="64" height="64">
    <properties>
     <property name="connections" value="219"/>
    </properties>
   </object>
-  <object id="187" type="path" x="1472" y="256" width="32" height="32">
+  <object id="187" type="path" x="2944" y="512" width="64" height="64">
    <properties>
     <property name="connections" value="188,184"/>
    </properties>
   </object>
-  <object id="188" type="path" x="1280" y="256" width="32" height="32">
+  <object id="188" type="path" x="2560" y="512" width="64" height="64">
    <properties>
     <property name="connections" value="187,189"/>
    </properties>
   </object>
-  <object id="189" type="path" x="1280" y="64" width="32" height="32">
+  <object id="189" type="path" x="2560" y="128" width="64" height="64">
    <properties>
     <property name="connections" value="188,190"/>
    </properties>
   </object>
-  <object id="190" type="path" x="1632" y="64" width="32" height="32">
+  <object id="190" type="path" x="3264" y="128" width="64" height="64">
    <properties>
     <property name="connections" value="189,191"/>
    </properties>
   </object>
-  <object id="191" type="path" x="2144" y="64" width="32" height="32">
+  <object id="191" type="path" x="4288" y="128" width="64" height="64">
    <properties>
     <property name="connections" value="190,192"/>
    </properties>
   </object>
-  <object id="192" type="path" x="2144" y="224" width="32" height="32">
+  <object id="192" type="path" x="4288" y="448" width="64" height="64">
    <properties>
     <property name="connections" value="191,193"/>
    </properties>
   </object>
-  <object id="193" type="path" x="1792" y="224" width="32" height="32">
+  <object id="193" type="path" x="3584" y="448" width="64" height="64">
    <properties>
     <property name="connections" value="192,194"/>
    </properties>
   </object>
-  <object id="194" type="path" x="1792" y="480" width="32" height="32">
+  <object id="194" type="path" x="3584" y="960" width="64" height="64">
    <properties>
     <property name="connections" value="185,193,195,221"/>
    </properties>
   </object>
-  <object id="195" type="path" x="1792" y="704" width="32" height="32">
+  <object id="195" type="path" x="3584" y="1408" width="64" height="64">
    <properties>
     <property name="connections" value="194,214"/>
    </properties>
   </object>
-  <object id="196" type="path" x="1632" y="800" width="32" height="32">
+  <object id="196" type="path" x="3264" y="1600" width="64" height="64">
    <properties>
     <property name="connections" value="185,197"/>
    </properties>
   </object>
-  <object id="197" type="path" x="1632" y="928" width="32" height="32">
+  <object id="197" type="path" x="3264" y="1856" width="64" height="64">
    <properties>
     <property name="connections" value="204,217,218,196,213"/>
    </properties>
   </object>
-  <object id="198" type="path" x="1472" y="704" width="32" height="32">
+  <object id="198" type="path" x="2944" y="1408" width="64" height="64">
    <properties>
     <property name="connections" value="184"/>
    </properties>
   </object>
-  <object id="199" type="path" x="2144" y="480" width="32" height="32">
+  <object id="199" type="path" x="4288" y="960" width="64" height="64">
    <properties>
     <property name="connections" value="221,200"/>
    </properties>
   </object>
-  <object id="200" type="path" x="2144" y="992" width="32" height="32">
+  <object id="200" type="path" x="4288" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="199,201,213"/>
    </properties>
   </object>
-  <object id="201" type="path" x="2144" y="1312" width="32" height="32">
+  <object id="201" type="path" x="4288" y="2624" width="64" height="64">
    <properties>
     <property name="connections" value="200"/>
    </properties>
   </object>
-  <object id="202" type="path" x="1056" y="928" width="32" height="32">
+  <object id="202" type="path" x="2112" y="1856" width="64" height="64">
    <properties>
     <property name="connections" value="175,170,217"/>
    </properties>
   </object>
-  <object id="204" type="path" x="1600" y="1088" width="32" height="32">
+  <object id="204" type="path" x="3200" y="2176" width="64" height="64">
    <properties>
     <property name="connections" value="217,218,197,213,205"/>
    </properties>
   </object>
-  <object id="205" type="path" x="1600" y="1248" width="32" height="32">
+  <object id="205" type="path" x="3200" y="2496" width="64" height="64">
    <properties>
     <property name="connections" value="206,207,204"/>
    </properties>
   </object>
-  <object id="206" type="path" x="1440" y="1344" width="32" height="32">
+  <object id="206" type="path" x="2880" y="2688" width="64" height="64">
    <properties>
     <property name="connections" value="205,207"/>
    </properties>
   </object>
-  <object id="207" type="path" x="1600" y="1440" width="32" height="32">
+  <object id="207" type="path" x="3200" y="2880" width="64" height="64">
    <properties>
     <property name="connections" value="205,206,208"/>
    </properties>
   </object>
-  <object id="208" type="path" x="1792" y="1440" width="32" height="32">
+  <object id="208" type="path" x="3584" y="2880" width="64" height="64">
    <properties>
     <property name="connections" value="207,209,222"/>
    </properties>
   </object>
-  <object id="209" type="path" x="1792" y="1216" width="32" height="32">
+  <object id="209" type="path" x="3584" y="2432" width="64" height="64">
    <properties>
     <property name="connections" value="208"/>
    </properties>
   </object>
-  <object id="210" type="path" x="1056" y="352" width="32" height="32">
+  <object id="210" type="path" x="2112" y="704" width="64" height="64">
    <properties>
     <property name="connections" value="176,183,211"/>
    </properties>
   </object>
-  <object id="211" type="path" x="1056" y="480" width="32" height="32">
+  <object id="211" type="path" x="2112" y="960" width="64" height="64">
    <properties>
     <property name="connections" value="210,184,175"/>
    </properties>
   </object>
-  <object id="213" type="path" x="1984" y="992" width="32" height="32">
+  <object id="213" type="path" x="3968" y="1984" width="64" height="64">
    <properties>
     <property name="connections" value="197,204,214,200"/>
    </properties>
   </object>
-  <object id="214" type="path" x="1984" y="704" width="32" height="32">
+  <object id="214" type="path" x="3968" y="1408" width="64" height="64">
    <properties>
     <property name="connections" value="195,213"/>
    </properties>
   </object>
-  <object id="215" type="path" x="704" y="1088" width="32" height="32">
+  <object id="215" type="path" x="1408" y="2176" width="64" height="64">
    <properties>
     <property name="connections" value="169,165,216"/>
    </properties>
   </object>
-  <object id="216" type="path" x="1056" y="1088" width="32" height="32">
+  <object id="216" type="path" x="2112" y="2176" width="64" height="64">
    <properties>
     <property name="connections" value="215,218"/>
    </properties>
   </object>
-  <object id="217" type="path" x="1376" y="928" width="32" height="32">
+  <object id="217" type="path" x="2752" y="1856" width="64" height="64">
    <properties>
     <property name="connections" value="202,218,197,204"/>
    </properties>
   </object>
-  <object id="218" type="path" x="1376" y="1088" width="32" height="32">
+  <object id="218" type="path" x="2752" y="2176" width="64" height="64">
    <properties>
     <property name="connections" value="216,217,204,197"/>
    </properties>
   </object>
-  <object id="219" type="path" x="1632" y="288" width="32" height="32">
+  <object id="219" type="path" x="3264" y="576" width="64" height="64">
    <properties>
     <property name="connections" value="185,186"/>
    </properties>
   </object>
-  <object id="221" type="path" x="2016" y="480" width="32" height="32">
+  <object id="221" type="path" x="4032" y="960" width="64" height="64">
    <properties>
     <property name="connections" value="194,199"/>
    </properties>
   </object>
-  <object id="222" type="path" x="2048" y="1440" width="32" height="32">
+  <object id="222" type="path" x="4096" y="2880" width="64" height="64">
    <properties>
     <property name="connections" value="208"/>
    </properties>
