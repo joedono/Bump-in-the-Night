@@ -43,8 +43,10 @@ Floor = Class {
 function Floor:loadWalls(layer)
   self.walls = layer.objects;
 
-  for index, wall in pairs(layer.objects) do
-    BumpWorld:add(wall, wall.x + self.origin.x, wall.y + self.origin.y, wall.width, wall.height);
+  for index, wall in pairs(self.walls) do
+    wall.x = wall.x + self.origin.x;
+    wall.y = wall.y + self.origin.y;
+    BumpWorld:add(wall, wall.x, wall.y, wall.width, wall.height);
   end
 end
 
