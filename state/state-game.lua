@@ -81,7 +81,7 @@ function State_Game:loadPathfinding()
 	for index, floor in pairs(self.floors) do
 		local floorPaths = {};
 		for index2, path in pairs(floor.paths) do
-			table.insert(floorPaths, Path(floor, path));
+			table.insert(floorPaths, Path(index, floor, path));
 		end
 
 		for index2, path in pairs(floorPaths) do
