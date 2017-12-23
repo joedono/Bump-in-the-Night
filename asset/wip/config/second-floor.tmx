@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="327">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="329">
  <tileset firstgid="1" source="main-floor.tsx"/>
  <layer name="Floor" width="70" height="48">
   <data encoding="csv">
@@ -149,13 +149,13 @@
   </object>
   <object id="131" name="Dumbwaiter" type="portal" x="2080" y="1376" width="96" height="96">
    <properties>
-    <property name="dx" type="int" value="4260"/>
-    <property name="dy" type="int" value="2600"/>
+    <property name="dx" type="int" value="2112"/>
+    <property name="dy" type="int" value="1280"/>
     <property name="room" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#820082" name="Item">
+ <objectgroup color="#820082" name="Item" visible="0">
   <object id="133" x="608" y="96" width="32" height="32"/>
   <object id="134" x="864" y="224" width="32" height="32"/>
   <object id="135" x="800" y="544" width="32" height="32"/>
@@ -247,7 +247,7 @@
   </object>
   <object id="164" type="path" x="480" y="1408" width="32" height="32">
    <properties>
-    <property name="connections" value="163,165"/>
+    <property name="connections" value="163,165,327"/>
    </properties>
   </object>
   <object id="165" type="path" x="704" y="1408" width="32" height="32">
@@ -442,7 +442,7 @@
   </object>
   <object id="209" type="path" x="1856" y="1152" width="32" height="32">
    <properties>
-    <property name="connections" value="208"/>
+    <property name="connections" value="208,328"/>
    </properties>
   </object>
   <object id="210" type="path" x="1184" y="352" width="32" height="32">
@@ -498,6 +498,16 @@
   <object id="222" type="path" x="1984" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="208"/>
+   </properties>
+  </object>
+  <object id="327" type="path" x="480" y="1184" width="32" height="32">
+   <properties>
+    <property name="connections" value="164"/>
+   </properties>
+  </object>
+  <object id="328" type="path" x="2016" y="1152" width="32" height="32">
+   <properties>
+    <property name="connections" value="209"/>
    </properties>
   </object>
  </objectgroup>

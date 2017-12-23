@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 269,
+  nextobjectid = 270,
   properties = {},
   tilesets = {
     {
@@ -1079,8 +1079,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["dx"] = 4200,
-            ["dy"] = 700,
+            ["dx"] = 2112,
+            ["dy"] = 384,
             ["room"] = 3
           }
         },
@@ -1096,8 +1096,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["dx"] = 240,
-            ["dy"] = 280,
+            ["dx"] = 96,
+            ["dy"] = 96,
             ["room"] = 3
           }
         },
@@ -1113,8 +1113,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["dx"] = 2680,
-            ["dy"] = 1400,
+            ["dx"] = 800,
+            ["dy"] = 544,
             ["room"] = 3
           }
         }
@@ -1797,7 +1797,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "205,231,230"
+            ["connections"] = "205,230,231"
           }
         },
         {
@@ -2151,13 +2151,13 @@ return {
           type = "path",
           shape = "rectangle",
           x = 1952,
-          y = 576,
+          y = 800,
           width = 32,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "204"
+            ["connections"] = "204,269"
           }
         },
         {
@@ -2323,6 +2323,21 @@ return {
           visible = true,
           properties = {
             ["connections"] = "205,211,212"
+          }
+        },
+        {
+          id = 269,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 1952,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "231"
           }
         }
       }

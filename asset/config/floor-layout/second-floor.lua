@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 327,
+  nextobjectid = 329,
   properties = {},
   tilesets = {
     {
@@ -1144,8 +1144,8 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["dx"] = 4260,
-            ["dy"] = 2600,
+            ["dx"] = 2112,
+            ["dy"] = 1280,
             ["room"] = 3
           }
         }
@@ -1154,7 +1154,7 @@ return {
     {
       type = "objectgroup",
       name = "Item",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1616,7 +1616,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "163,165"
+            ["connections"] = "163,165,327"
           }
         },
         {
@@ -2201,7 +2201,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "208"
+            ["connections"] = "208,328"
           }
         },
         {
@@ -2367,6 +2367,36 @@ return {
           visible = true,
           properties = {
             ["connections"] = "208"
+          }
+        },
+        {
+          id = 327,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 480,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "164"
+          }
+        },
+        {
+          id = 328,
+          name = "",
+          type = "path",
+          shape = "rectangle",
+          x = 2016,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "209"
           }
         }
       }
