@@ -130,15 +130,15 @@
  <objectgroup color="#ff0000" name="Portals">
   <object id="143" name="Stairs Up" type="portal" x="928" y="1120" width="32" height="96">
    <properties>
-    <property name="dx" type="int" value="2060"/>
-    <property name="dy" type="int" value="2160"/>
+    <property name="dx" type="int" value="1088"/>
+    <property name="dy" type="int" value="1152"/>
     <property name="room" type="int" value="2"/>
    </properties>
   </object>
   <object id="144" name="Stairs Up" type="portal" x="1280" y="1120" width="32" height="96">
    <properties>
-    <property name="dx" type="int" value="2060"/>
-    <property name="dy" type="int" value="2160"/>
+    <property name="dx" type="int" value="1088"/>
+    <property name="dy" type="int" value="1152"/>
     <property name="room" type="int" value="2"/>
    </properties>
   </object>
@@ -273,12 +273,12 @@
     <property name="connections" value="188,172,239"/>
    </properties>
   </object>
-  <object id="190" type="path" x="1248" y="1152" width="32" height="32">
+  <object id="190" type="path" x="1216" y="1152" width="32" height="32">
    <properties>
     <property name="connections" value="203"/>
    </properties>
   </object>
-  <object id="191" type="path" x="960" y="1152" width="32" height="32">
+  <object id="191" type="path" x="992" y="1152" width="32" height="32">
    <properties>
     <property name="connections" value="203"/>
    </properties>
@@ -373,7 +373,7 @@
     <property name="connections" value="201,218,214"/>
    </properties>
   </object>
-  <object id="214" type="path" x="1568" y="768" width="32" height="32">
+  <object id="214" type="path" x="1632" y="768" width="32" height="32">
    <properties>
     <property name="connections" value="213,217"/>
    </properties>

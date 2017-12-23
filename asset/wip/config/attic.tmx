@@ -93,8 +93,8 @@
  <objectgroup color="#ff0000" name="Portals">
   <object id="35" name="Stairs Down" type="portal" x="256" y="288" width="32" height="96">
    <properties>
-    <property name="dx" type="int" value="500"/>
-    <property name="dy" type="int" value="690"/>
+    <property name="dx" type="int" value="288"/>
+    <property name="dy" type="int" value="352"/>
     <property name="room" type="int" value="2"/>
    </properties>
   </object>
