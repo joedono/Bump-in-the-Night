@@ -57,9 +57,12 @@ function Floor:addDoors(layer, direction)
 end
 
 function Floor:addPortals(layer)
-  for index, portal in pairs(layer.objects) do
-    table.insert(self.portals, portal);
-    BumpWorld:add(portal, portal.x + self.origin.x, portal.y + self.origin.y, portal.width, portal.height);
+  self.portals = layer.objects;
+
+  for index, portal in pairs(self.portals) do
+    portal.x = portal.x + self.origin.x;
+    portal.y = portal.y + self.origin.y;
+    BumpWorld:add(portal, portal.x, portal.y, portal.width, portal.height);
   end
 end
 
@@ -83,12 +86,12 @@ function Floor:draw(camera)
   if DRAW_BOXES then
     love.graphics.setColor(100, 100, 100);
     for index, wall in pairs(self.walls) do
-      love.graphics.rectangle("fill", wall.x + self.origin.x, wall.y + self.origin.y, wall.width, wall.height);
+      love.graphics.rectangle("fill", wall.x, wall.y, wall.width, wall.height);
     end
 
     love.graphics.setColor(255, 255, 0);
     for index, portal in pairs(self.portals) do
-      love.graphics.rectangle("fill", portal.x + self.origin.x, portal.y + self.origin.y, portal.width, portal.height);
+      love.graphics.rectangle("fill", portal.x, portal.y, portal.width, portal.height);
     end
   end
 end
