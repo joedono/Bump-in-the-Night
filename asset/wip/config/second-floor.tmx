@@ -193,6 +193,9 @@
   <object id="153" type="path" x="288" y="352" width="32" height="32">
    <properties>
     <property name="connections" value="152"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="53"/>
+    <property name="multifloorIndex" type="int" value="4"/>
    </properties>
   </object>
   <object id="154" type="path" x="416" y="128" width="32" height="32">
@@ -473,6 +476,9 @@
   <object id="216" type="path" x="1088" y="1152" width="32" height="32">
    <properties>
     <property name="connections" value="215,218"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="203"/>
+    <property name="multifloorIndex" type="int" value="1"/>
    </properties>
   </object>
   <object id="217" type="path" x="1472" y="960" width="32" height="32">
@@ -498,6 +504,9 @@
   <object id="222" type="path" x="1984" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="208"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="182"/>
+    <property name="multifloorIndex" type="int" value="3"/>
    </properties>
   </object>
   <object id="327" type="path" x="480" y="1184" width="32" height="32">

@@ -799,7 +799,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "54"
+            ["connections"] = "54",
+            ["multifloor"] = true,
+            ["multifloorID"] = 153,
+            ["multifloorIndex"] = 2
           }
         },
         {

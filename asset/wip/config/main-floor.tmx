@@ -186,6 +186,9 @@
   <object id="170" type="path" x="160" y="128" width="32" height="32">
    <properties>
     <property name="connections" value="171"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="135"/>
+    <property name="multifloorIndex" type="int" value="3"/>
    </properties>
   </object>
   <object id="171" type="path" x="448" y="128" width="32" height="32">
@@ -276,11 +279,17 @@
   <object id="190" type="path" x="1216" y="1152" width="32" height="32">
    <properties>
     <property name="connections" value="203"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="216"/>
+    <property name="multifloorIndex" type="int" value="2"/>
    </properties>
   </object>
   <object id="191" type="path" x="992" y="1152" width="32" height="32">
    <properties>
     <property name="connections" value="203"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="216"/>
+    <property name="multifloorIndex" type="int" value="2"/>
    </properties>
   </object>
   <object id="192" type="path" x="672" y="960" width="32" height="32">
@@ -291,6 +300,9 @@
   <object id="193" type="path" x="640" y="672" width="32" height="32">
    <properties>
     <property name="connections" value="234"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="142"/>
+    <property name="multifloorIndex" type="int" value="3"/>
    </properties>
   </object>
   <object id="194" type="path" x="448" y="352" width="32" height="32">
@@ -511,6 +523,9 @@
   <object id="269" type="path" x="1952" y="576" width="32" height="32">
    <properties>
     <property name="connections" value="231"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="150"/>
+    <property name="multifloorIndex" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>

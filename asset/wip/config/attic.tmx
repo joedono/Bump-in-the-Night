@@ -119,6 +119,9 @@
   <object id="53" type="path" x="192" y="320" width="32" height="32">
    <properties>
     <property name="connections" value="54"/>
+    <property name="multifloor" type="bool" value="true"/>
+    <property name="multifloorID" type="int" value="153"/>
+    <property name="multifloorIndex" type="int" value="2"/>
    </properties>
   </object>
   <object id="54" type="path" x="96" y="320" width="32" height="32">

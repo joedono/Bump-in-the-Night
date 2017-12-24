@@ -1362,7 +1362,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "171"
+            ["connections"] = "171",
+            ["multifloor"] = true,
+            ["multifloorID"] = 135,
+            ["multifloorIndex"] = 3
           }
         },
         {
@@ -1632,7 +1635,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "203"
+            ["connections"] = "203",
+            ["multifloor"] = true,
+            ["multifloorID"] = 216,
+            ["multifloorIndex"] = 2
           }
         },
         {
@@ -1647,7 +1653,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "203"
+            ["connections"] = "203",
+            ["multifloor"] = true,
+            ["multifloorID"] = 216,
+            ["multifloorIndex"] = 2
           }
         },
         {
@@ -1677,7 +1686,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "234"
+            ["connections"] = "234",
+            ["multifloor"] = true,
+            ["multifloorID"] = 142,
+            ["multifloorIndex"] = 3
           }
         },
         {
@@ -2337,7 +2349,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "231"
+            ["connections"] = "231",
+            ["multifloor"] = true,
+            ["multifloorID"] = 150,
+            ["multifloorIndex"] = 3
           }
         }
       }
