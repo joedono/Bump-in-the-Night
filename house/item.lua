@@ -40,17 +40,39 @@ Item = Class {
 		self.heldImage = love.graphics.newImage(heldImageData);
 		self.worldImage = love.graphics.newImage(worldImageData);
 
+		self.light = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 255, 255, 255);
+		self.glowStrength = 0;
+		self.glowChange = ITEM_GLOW_RATE;
+
     self.type = "item";
     self.active = true;
 	end
 }
+
+function Item:pickup()
+	self.active = false;
+	LightWorld:remove(self.light);
+	BumpWorld:remove(self);
+end
 
 function Item:update(dt)
   if not self.active then
     return;
   end
 
-  -- TODO Update glow timer
+	self.glowStrength = self.glowStrength + self.glowChange * dt;
+
+	if self.glowStrength <= ITEM_WIDTH / 2 then
+		self.glowStrength = ITEM_WIDTH / 2;
+		self.glowChange = ITEM_GLOW_RATE;
+	end
+
+	if self.glowStrength >= ITEM_WIDTH * 2/3 then
+		self.glowStrength = ITEM_WIDTH * 2/3;
+		self.glowChange = -ITEM_GLOW_RATE;
+	end
+
+	self.light:setRange(self.glowStrength);
 end
 
 function Item:draw()
