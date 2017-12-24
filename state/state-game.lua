@@ -77,17 +77,18 @@ end
 
 function State_Game:loadPathfinding()
 	local allPaths = {};
+	local floorPaths = {};
 
 	for index, floor in pairs(self.floors) do
-		local floorPaths = {};
+		local curFloorPaths = {};
 		for index2, path in pairs(floor.paths) do
-			table.insert(floorPaths, Path(index, floor, path));
+			table.insert(curFloorPaths, Path(index, floor, path));
 		end
 
-		for index2, path in pairs(floorPaths) do
+		for index2, path in pairs(curFloorPaths) do
 			local connections = path.source.properties["connections"];
 			for id in string.gmatch(connections, "%d+") do
-				for index2, connection in pairs(floorPaths) do
+				for index2, connection in pairs(curFloorPaths) do
 					if tonumber(id) == connection.source.id then
 						path:addConnection(connection);
 					end
@@ -95,7 +96,23 @@ function State_Game:loadPathfinding()
 			end
 		end
 
-		for index, path in pairs(floorPaths) do
+		table.insert(floorPaths, curFloorPaths);
+	end
+
+	for index, floorPath in pairs(floorPaths) do
+		for index2, path in pairs(floorPath) do
+			if path.source.properties["multifloor"] then
+				local floorIndex = path.source.properties["multifloorIndex"];
+				local pathId = path.source.properties["multifloorID"];
+				local connectedPaths = floorPaths[floorIndex];
+
+				for index3, connection in pairs(connectedPaths) do
+					if pathId == connection.source.id then
+						path:addConnection(connection);
+					end
+				end
+			end
+
 			table.insert(allPaths, path);
 		end
 	end
