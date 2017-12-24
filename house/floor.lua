@@ -88,7 +88,9 @@ function Floor:draw(camera)
     for index, wall in pairs(self.walls) do
       love.graphics.rectangle("fill", wall.x, wall.y, wall.width, wall.height);
     end
+  end
 
+  if DRAW_PORTALS then
     love.graphics.setColor(255, 255, 0);
     for index, portal in pairs(self.portals) do
       love.graphics.rectangle("fill", portal.x, portal.y, portal.width, portal.height);
