@@ -1336,10 +1336,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "141",
-            ["multifloor"] = true,
-            ["multifloorID"] = 193,
-            ["multifloorIndex"] = 1
+            ["connections"] = "141"
           }
         },
         {
