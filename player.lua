@@ -11,10 +11,10 @@ Player = Class {
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
-    self.flashLight = LightWorld:newLight(0, 0, 255, 255, 255, 200);
+    self.flashLight = LightWorld:newLight(0, 0, 255, 255, 255, 400);
 		self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 		self.flashLight:setDirection(math.pi);
-		self.flashLight:setAngle(math.pi * 1/2);
+		self.flashLight:setAngle(math.pi * 1/3);
 
 		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 200);
 		self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
