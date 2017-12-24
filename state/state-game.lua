@@ -301,6 +301,9 @@ function State_Game:updateCamera(x, y)
 	cameraX = math.clamp(cameraX, curFloor.origin.x, curFloor.origin.x + FLOOR_WIDTH - SCREEN_WIDTH);
 	cameraY = math.clamp(cameraY, curFloor.origin.y, curFloor.origin.y + FLOOR_HEIGHT - SCREEN_HEIGHT + HUD_HEIGHT);
 
+	cameraX = math.floor(cameraX);
+	cameraY = math.floor(cameraY);
+
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
 end
 
