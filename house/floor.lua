@@ -24,7 +24,7 @@ Floor = Class {
       if layer.name == "Floor" then
         table.insert(self.tiles, layer);
       elseif layer.name == "Wall" then
-        self:loadWalls(layer);
+        self:addWalls(layer);
       elseif layer.name == "Door H" then
         self:addDoors(layer, "horizontal");
       elseif layer.name == "Door V" then
@@ -40,12 +40,19 @@ Floor = Class {
   end
 }
 
-function Floor:loadWalls(layer)
+function Floor:addWalls(layer)
   self.walls = layer.objects;
 
   for index, wall in pairs(self.walls) do
     wall.x = wall.x + self.origin.x;
     wall.y = wall.y + self.origin.y;
+
+    LightWorld:newRectangle(
+      wall.x + wall.width / 2 + self.origin.x,
+      wall.y + wall.height / 2 + self.origin.y,
+      wall.width,
+      wall.height
+    );
     BumpWorld:add(wall, wall.x, wall.y, wall.width, wall.height);
   end
 end

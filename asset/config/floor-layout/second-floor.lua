@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 329,
+  nextobjectid = 374,
   properties = {},
   tilesets = {
     {
