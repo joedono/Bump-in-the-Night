@@ -1,8 +1,8 @@
 pathfinding = {};
 
-function pathfinding.findPath(startX, startY, goalX, goalY, nodes, walls)
-  local startNode = pathfinding.findClosestNode(startX, startY, nodes, walls);
-  local goalNode = pathfinding.findClosestNode(goalX, goalY, nodes, walls);
+function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
+  local startNode = pathfinding.findClosestNode(startX, startY, nodes);
+  local goalNode = pathfinding.findClosestNode(goalX, goalY, nodes);
   local path = {};
   local closedList = {};
   local openList = {};
@@ -91,12 +91,12 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes, walls)
   return path;
 end
 
-function pathfinding.findClosestNode(x, y, nodes, walls)
+function pathfinding.findClosestNode(x, y, nodes)
   local closestNode = nodes[1];
   local dist = math.dist(x, y, closestNode.center.x, closestNode.center.y);
 
   for index, node in pairs(nodes) do
-    if math.dist(x, y, node.center.x, node.center.y) < dist and pathfinding.canReachNode(x, y, node, walls) then
+    if math.dist(x, y, node.center.x, node.center.y) < dist and pathfinding.canReachNode(x, y, node) then
       dist = math.dist(x, y, node.center.x, node.center.y);
       closestNode = node;
     end
@@ -105,18 +105,16 @@ function pathfinding.findClosestNode(x, y, nodes, walls)
   return closestNode;
 end
 
-function pathfinding.canReachNode(x, y, node, walls)
+function pathfinding.canReachNode(x, y, node)
   local nodeX = node.center.x;
   local nodeY = node.center.y;
 
-  for index, wall in pairs(walls) do
-    if findIntersect(x, y, nodeX, nodeY, wall.origin.x, wall.origin.y, wall.origin.x + wall.origin.w, wall.origin.y, true, true) or
-      findIntersect(x, y, nodeX, nodeY, wall.origin.x, wall.origin.y, wall.origin.x, wall.origin.y + wall.origin.h, true, true) or
-      findIntersect(x, y, nodeX, nodeY, wall.origin.x + wall.origin.w, wall.origin.y, wall.origin.x + wall.origin.w, wall.origin.y + wall.origin.h, true, true) or
-      findIntersect(x, y, nodeX, nodeY, wall.origin.x, wall.origin.y + wall.origin.h, wall.origin.x + wall.origin.w, wall.origin.y + wall.origin.h, true, true) then
-      return false;
-    end
-  end
+  local items, len = BumpWorld:querySegment(x, y, nodeX, nodeY, canMoveFilter);
 
-  return true;
+  return len == 0;
+end
+
+function pathfinding.canSeePosition(startX, startY, goalX, goalY)
+  local items, len = BumpWorld:querySegment(startX, startY, goalX, goalY, canSeeFilter);
+  return len == 0;
 end

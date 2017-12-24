@@ -21,3 +21,21 @@ playerCollision = function(player, other)
 
   return nil;
 end
+
+-- Says which objects should be considered when asked "Can I move from here to there?"
+canMoveFilter = function(other)
+  if other.type == "wall" then
+    return true;
+  end
+
+  return false;
+end
+
+-- Says which objects should be considered when asked "Can I see over there?"
+canSeeFilter = function(other)
+  if other.type == "wall" or other.type == "door" then
+    return true;
+  end
+
+  return false;
+end
