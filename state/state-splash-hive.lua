@@ -1,6 +1,6 @@
 State_Splash_Hive = {};
 
-function State_Splash_Hive:enter()
+function State_Splash_Hive:init()
   self.hiveImage = love.graphics.newImage("asset/image/splash/hive.png");
   self.imageScale = 0.75;
   self.font = love.graphics.newFont("asset/font/RifficFree-bold.ttf", 30);
@@ -23,7 +23,9 @@ function State_Splash_Hive:enter()
     y1 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 10,
     y2 = self.imagePos.y + self.hiveImage:getHeight() * self.imageScale + 45
   };
+end
 
+function State_Splash_Hive:enter()
   self.alphas = {
     imageAlpha = 0,
     eyeAlpha = 0,

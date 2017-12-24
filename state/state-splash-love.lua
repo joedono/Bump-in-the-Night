@@ -2,7 +2,7 @@ State_Splash_Love = {};
 
 function State_Splash_Love:enter()
   local splash = require "lib/o-ten-one";
-  self.splash = splash({fill="lighten"});
+  self.splash = splash();
   self.splash.onDone = self.onDone;
 end
 
