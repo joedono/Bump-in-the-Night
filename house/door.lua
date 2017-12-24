@@ -22,6 +22,11 @@ Door = Class {
 		self.isOpen = false;
 		self.openTimer = 0;
 
+		local lightBody = LightWorld:newRectangle(self.x + self.w / 2, self.y + self.h / 2, self.w, self.h);
+		lightBody:setColor(255, 255, 255);
+		lightBody:setAlpha(255 * 0.2);
+		self.lightBody = lightBody;
+
 		self.type = "door";
 	end
 }
@@ -29,6 +34,7 @@ Door = Class {
 function Door:open()
 	self.isOpen = true;
 	self.openTimer = DOOR_OPEN_TIMER;
+	self.lightBody:setShadow(false);
 end
 
 function Door:update(dt)
@@ -40,6 +46,7 @@ function Door:update(dt)
 
 			if len <= 1 then
 				self.isOpen = false;
+				self.lightBody:setShadow(true);
 			end
 		end
 	end
