@@ -5,6 +5,7 @@ Timer = require "lib/hump/timer";
 Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 Inspect = require "lib/inspect";
+Light = require "lib/lightWorld";
 
 require "lib/general";
 require "lib/pathfinding";

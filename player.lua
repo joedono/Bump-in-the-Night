@@ -11,6 +11,14 @@ Player = Class {
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
+    self.flashLight = LightWorld:newLight(0, 0, 255, 255, 255, 200);
+		self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+		self.flashLight:setDirection(math.pi);
+		self.flashLight:setAngle(math.pi * 1/2);
+
+		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 200);
+		self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+
     self:resetKeys();
 
     self.active = true;
@@ -23,6 +31,12 @@ function Player:resetKeys()
   self.rightPressed = false;
   self.upPressed = false;
   self.downPressed = false;
+
+  self.leftLightPressed = false;
+  self.rightLightPressed = false;
+  self.upLightPressed = false;
+  self.downLightPressed = false;
+
   self.runPressed = false;
   self.axisVelocity = { x = 0, y = 0 };
 end
@@ -35,6 +49,7 @@ function Player:update(dt)
   self:updateVelocity();
   self:updateRotation();
   self:updatePosition(dt);
+  self:updateLights();
 end
 
 function Player:updateVelocity()
@@ -117,6 +132,43 @@ function Player:updatePosition(dt)
     self.box.x = actualX;
     self.box.y = actualY;
   end
+end
+
+function Player:updateLights()
+  local lx = 0;
+  local ly = 0;
+
+  if self.leftLightPressed or self.rightLightPressed or self.upLightPressed or self.downLightPressed then
+    if self.leftLightPressed then
+      lx = lx - 1;
+    end
+
+    if self.rightLightPressed then
+      lx = lx + 1;
+    end
+
+    if self.upLightPressed then
+      ly = ly - 1;
+    end
+
+    if self.downLightPressed then
+      ly = ly + 1;
+    end
+  else
+    -- TODO Handle gamepad flashlight input
+  end
+
+  if lx ~= 0 or ly ~= 0 then
+    local facing = math.angle(0, 0, ly, lx);
+    if(facing < 0) then
+      facing = facing + math.pi * 2;
+    end
+
+    self.flashLight:setDirection(facing);
+  end
+
+  self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+  self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 end
 
 function Player:moveThroughPortal(portal)

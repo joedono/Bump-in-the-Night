@@ -8,6 +8,10 @@ State_Game = {};
 
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
+	LightWorld = Light({
+		ambient = {0, 0, 0},
+		shadowBlur = 0.0
+	});
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -154,19 +158,19 @@ function State_Game:keypressed(key, unicode)
   end
 
 	if key == KEY_LIGHT_LEFT then
-		self.player.flashlightFacing.x = -1;
+		self.player.leftLightPressed = true;
 	end
 
 	if key == KEY_LIGHT_RIGHT then
-		self.player.flashlightFacing.x = 1;
+		self.player.rightLightPressed = true;
 	end
 
 	if key == KEY_LIGHT_UP then
-    self.player.flashlightFacing.y = 1;
+    self.player.upLightPressed = true;
   end
 
 	if key == KEY_LIGHT_DOWN then
-    self.player.flashlightFacing.y = -1;
+    self.player.downLightPressed = true;
   end
 
   if key == KEY_RUN then
@@ -193,6 +197,22 @@ function State_Game:keyreleased(key, unicode)
 
   if key == KEY_DOWN then
     self.player.downPressed = false;
+  end
+
+	if key == KEY_LIGHT_LEFT then
+		self.player.leftLightPressed = false;
+	end
+
+	if key == KEY_LIGHT_RIGHT then
+		self.player.rightLightPressed = false;
+	end
+
+	if key == KEY_LIGHT_UP then
+    self.player.upLightPressed = false;
+  end
+
+	if key == KEY_LIGHT_DOWN then
+    self.player.downLightPressed = false;
   end
 
   if key == KEY_RUN then
@@ -282,7 +302,7 @@ function State_Game:update(dt)
 	end
 
 	self.player:update(dt);
-
+	LightWorld:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
 end
 
@@ -322,6 +342,7 @@ function State_Game:updateCamera(x, y)
 	cameraY = math.floor(cameraY);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
+	LightWorld:setTranslation(-cameraX, -cameraY, 1);
 end
 
 function State_Game:getPlayerFloor()
@@ -351,27 +372,38 @@ function State_Game:draw()
 		love.graphics.clear();
 		self.camera:attach();
 
-		for index, floor in pairs(self.floors) do
-			floor:draw(self.camera);
+		if DRAW_LIGHTS then
+			LightWorld:draw(function()
+				self:drawGame();
+			end);
+		else
+			self:drawGame();
 		end
 
-		for index, item in pairs(self.items) do
-			item:draw();
-		end
-
-		if DRAW_PATHS then
-			for index, path in pairs(self.paths) do
-				path:draw();
-			end
-		end
-
-    self.player:draw();
 		self.camera:detach();
 		self:drawHUD();
   end);
 
   love.graphics.setColor(255, 255, 255);
   love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+end
+
+function State_Game:drawGame()
+	for index, floor in pairs(self.floors) do
+		floor:draw(self.camera);
+	end
+
+	for index, item in pairs(self.items) do
+		item:draw();
+	end
+
+	if DRAW_PATHS then
+		for index, path in pairs(self.paths) do
+			path:draw();
+		end
+	end
+
+	self.player:draw();
 end
 
 function State_Game:drawHUD()
