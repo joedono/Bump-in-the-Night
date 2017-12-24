@@ -141,4 +141,4 @@ SCENARIO_ITEMS = {
 DRAW_BOXES = false;
 DRAW_PORTALS = true;
 DRAW_PATHS = false;
-DRAW_LIGHTS = true;
+DRAW_LIGHTS = false;
