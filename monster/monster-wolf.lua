@@ -83,8 +83,6 @@ function Monster_Wolf:updateIdle(dt)
 	if self.target == nil then
 		self.finalTarget = self.parent:randomNode();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.x, self.parent.paths);
-		print(self.finalTarget.source.id .. ", " .. self.finalTarget.floorIndex);
-		print(Inspect(self.path, {depth=4}));
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
@@ -171,8 +169,8 @@ function Monster_Wolf:canSmellMeat()
 end
 
 function Monster_Wolf:updatePosition(dt)
-	local dx = self.box.x + self.velocity.x * self.speed * dt;
-  local dy = self.box.y + self.velocity.y * self.speed * dt;
+	local dx = self.box.x;-- + self.velocity.x * self.speed * dt;
+  local dy = self.box.y;-- + self.velocity.y * self.speed * dt;
 
 	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
