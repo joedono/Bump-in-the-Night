@@ -21,6 +21,11 @@ require "state/state-pause";
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
 
+	if DRAW_ENTIRE_HOUSE then
+		SCREEN_WIDTH = SCREEN_WIDTH_WHOLE_HOUSE;
+		SCREEN_HEIGHT = SCREEN_HEIGHT_WHOLE_HOUSE;
+	end
+
   CANVAS = love.graphics.newCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
 
   local w = love.graphics.getWidth();
@@ -29,10 +34,10 @@ function love.load()
   local scaleX = 1;
   local scaleY = 1;
 
-  --if FULLSCREEN then
+  if FULLSCREEN or DRAW_ENTIRE_HOUSE then
     scaleX = w / SCREEN_WIDTH;
     scaleY = h / SCREEN_HEIGHT;
-  --end
+  end
 
   CANVAS_SCALE = math.min(scaleX, scaleY);
 

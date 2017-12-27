@@ -372,7 +372,9 @@ end
 function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
-		--self.camera:attach();
+		if not DRAW_ENTIRE_HOUSE then
+			self.camera:attach();
+		end
 
 		if DRAW_LIGHTS then
 			LightWorld:draw(function()
@@ -382,7 +384,9 @@ function State_Game:draw()
 			self:drawGame();
 		end
 
-		--self.camera:detach();
+		if not DRAW_ENTIRE_HOUSE then
+			self.camera:detach();
+		end
 		self:drawHUD();
   end);
 
