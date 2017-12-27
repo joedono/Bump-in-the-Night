@@ -5,9 +5,9 @@ Player = Class {
 
     self.box = PLAYER_INITIAL_DIMENSIONS;
     self.velocity = { x = 0, y = 0 };
-    self.axisVelocity = { x = 0, y = 0 };
-    self.flashlightFacing = { x = 0, y = 0 };
+    self.gamepadVelocity = { x = 0, y = 0 };
     self.facing = { x = 0, y = 0 };
+    self.flashlightFacing = { x = 0, y = 0 };
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
@@ -38,7 +38,7 @@ function Player:resetKeys()
   self.downLightPressed = false;
 
   self.runPressed = false;
-  self.axisVelocity = { x = 0, y = 0 };
+  self.gamepadVelocity = { x = 0, y = 0 };
 end
 
 function Player:update(dt)
@@ -73,8 +73,8 @@ function Player:updateVelocity()
       vy = vy + 1;
     end
   else
-    vx = self.axisVelocity.x;
-    vy = self.axisVelocity.y;
+    vx = self.gamepadVelocity.x;
+    vy = self.gamepadVelocity.y;
 
     if math.dist(0, 0, vx, vy) < GAMEPAD_DEADZONE then
       vx = 0;

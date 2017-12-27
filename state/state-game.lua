@@ -282,9 +282,9 @@ end
 
 function State_Game:gamepadaxis(joystick, axis, value)
 	if axis == "leftx" then -- X Movement
-		self.player.axisVelocity.x = value;
+		self.player.gamepadVelocity.x = value;
 	elseif axis == "lefty" then -- Y Movement
-		self.player.axisVelocity.y = value;
+		self.player.gamepadVelocity.y = value;
 	elseif axis == "rightx" then -- X Flashlight
 		self.player.flashlightFacing.x = value;
 	elseif axis == "righty" then -- Y Flashlight
