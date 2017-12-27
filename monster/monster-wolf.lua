@@ -63,32 +63,34 @@ function Monster_Wolf:update(dt)
 end
 
 -- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
-function Monster_wolf:updateIdle(dt)
+function Monster_Wolf:updateIdle(dt)
 	if self:canHearPlayer() then
-		self.state == "alert";
+		self.state = "alert";
 		return;
 	end
 
 	if self:canSeePlayer() then
-		self.state == "spotted";
+		self.state = "spotted";
 		return;
 	end
 
 	if self:canSmellMeat() then
-		self.state == "smells-meat";
+		self.state = "smells-meat";
 		return;
 	end
 
 	-- Nothing interesting is happening. Amble around
 	if self.target == nil then
-		local finalTarget = self.parent:randomNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.x, nodes);
+		self.finalTarget = self.parent:randomNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.x, self.parent.paths);
+		print(self.finalTarget.source.id .. ", " .. self.finalTarget.floorIndex);
+		print(Inspect(self.path, {depth=4}));
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
 		self.velocity = {
-			x = self.target.origin.x - self.box.x,
-			y = self.target.origin.y - self.box.y
+			x = self.target.node.origin.x - self.box.x,
+			y = self.target.node.origin.y - self.box.y
 		};
 		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
 		self.speed = MONSTER_WOLF_IDLE_SPEED;
@@ -104,16 +106,17 @@ function Monster_wolf:updateIdle(dt)
 	    end
 
 	    if col.other.type == "path" then
-	      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
+	      if col.other.floorIndex == self.target.node.floorIndex and col.other.source.id == self.target.node.source.id then
 					-- Reached target node. Go after next node
 					self.targetIndex = self.targetIndex + 1;
 					self.target = self.path[self.targetIndex];
 
 					-- Move to other floor
-					if self.curFloor ~= self.target.floorIndex then
-						self.box.x = self.target.origin.x;
-						self.box.y = self.target.origin.y;
+					if self.target ~= nil and self.curFloor ~= self.target.node.floorIndex then
+						self.box.x = self.target.node.origin.x;
+						self.box.y = self.target.node.origin.y;
 						BumpWorld:update(self, self.box.x, self.box.y);
+					end
 				end
 	    end
 	  end
@@ -124,27 +127,27 @@ function Monster_wolf:updateIdle(dt)
 end
 
 -- Has heard the player. Look towards sound. If can't see player for some time, walk towards source of sound. If still can't see player for some time, go back to idle
-function Monster_wolf:updateAlert(dt)
+function Monster_Wolf:updateAlert(dt)
 end
 
 -- Sees the player. Alert for a little bit, then give chase
-function Monster_wolf:updateSpotted(dt)
+function Monster_Wolf:updateSpotted(dt)
 end
 
 -- Is giving chase and can still see the player. Constantly pathfind to the node closest to the player. If the player is within range, attack the player
-function Monster_wolf:updateActiveChase(dt)
+function Monster_Wolf:updateActiveChase(dt)
 end
 
 -- Is giving chase and cannot see the player. Stop at node closest to last known player location. Downgrade to Alert when node is reached.
-function Monster_wolf:updatePassiveChase(dt)
+function Monster_Wolf:updatePassiveChase(dt)
 end
 
 -- Player has dropped meat somewhere on the floor. Walk to Meat
-function Monster_wolf:updateSmellsMeat(dt)
+function Monster_Wolf:updateSmellsMeat(dt)
 end
 
 -- Reached meat that isn't in a trap. Consume meat for a time.
-function Monster_wolf:updateEating(dt)
+function Monster_Wolf:updateEating(dt)
 end
 
 -- Has walked into a beartrap. Whimper and try to free seld
@@ -152,7 +155,7 @@ function Monster_Wolf:updateTrapped(dt)
 end
 
 -- Shot by player. Dead
-function Monster_wolf:updateDead(dt)
+function Monster_Wolf:updateDead(dt)
 end
 
 function Monster_Wolf:canHearPlayer()
@@ -181,4 +184,12 @@ function Monster_Wolf:draw()
 
 	love.graphics.setColor(255, 255, 255);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
+
+	love.graphics.setColor(255, 0, 0);
+	for index, path in pairs(self.path) do
+		love.graphics.rectangle("fill", path.node.origin.x, path.node.origin.y, path.node.origin.w, path.node.origin.h);
+	end
+
+	love.graphics.setColor(0, 0, 255);
+	love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, self.finalTarget.origin.w, self.finalTarget.origin.h);
 end

@@ -16,11 +16,12 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
   });
 
   for index, node in pairs(startNode.connections) do
+    local path = node.path;
     table.insert(openList, {
       from = startNode,
-      distanceFromStart = math.dist(startNode.center.x, startNode.center.y, node.center.x, node.center.y),
-      distanceFromGoal = math.dist(node.center.x, node.center.y, goalNode.center.x, goalNode.center.y),
-      node = node
+      distanceFromStart = node.distance,
+      distanceFromGoal = math.dist(path.center.x, path.center.y, goalNode.center.x, goalNode.center.y),
+      node = path
     });
   end
 
@@ -44,14 +45,16 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
     table.remove(openList, curIndex);
 
     -- Add all of that node's connections for evaluation
-    for index, node in pairs(testNode.connections) do
+    for index, node in pairs(testNode.node.connections) do
+      local path = node.path;
+
       for index2, closedNode in pairs(closedList) do
         -- Only insert if node isn't already on the closed list
-        if closedNode.id ~= node.id and closedNode.floorIndex ~= node.floorIndex then
+        if closedNode.id ~= path.id and closedNode.floorIndex ~= path.floorIndex then
           table.insert(openList, {
             from = testNode,
-            distanceFromStart = testNode.distanceFromStart + math.dist(testNode.center.x, testNode.center.y, node.center.x, node.center.y),
-            distanceFromGoal = math.dist(node.center.x, node.center.y, goalNode.center.x, goalNode.center.y),
+            distanceFromStart = testNode.distanceFromStart + node.distance,
+            distanceFromGoal = math.dist(path.center.x, path.center.y, goalNode.center.x, goalNode.center.y),
             node = node
           });
         end

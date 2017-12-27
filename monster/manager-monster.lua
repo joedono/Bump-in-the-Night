@@ -11,7 +11,7 @@ Manager_Monster = Class {
 };
 
 function Manager_Monster:spawnMonsters(scenarioId)
-	table.insert(self.monsters, Wolf(self, 1, 1090, 1290));
+	table.insert(self.monsters, Monster_Wolf(self, 1, 1090, 1290));
 end
 
 function Manager_Monster:randomNode()
