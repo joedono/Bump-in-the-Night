@@ -19,7 +19,7 @@ playerCollision = function(player, other)
     return "cross";
   end
 
-  if other.type == "monster" then
+  if other.type == "monster" and KILL_PLAYER then
     return "cross";
   end
 
@@ -47,7 +47,7 @@ monsterCollision = function(monster, other)
     return "cross";
   end
 
-  if other.type == "player" then
+  if other.type == "player" and KILL_PLAYER then
     return "cross";
   end
 
