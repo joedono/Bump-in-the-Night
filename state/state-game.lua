@@ -1,4 +1,5 @@
 require "player";
+require "monster/manager-monster";
 
 require "house/floor";
 require "house/item";
@@ -12,6 +13,8 @@ function State_Game:init()
 		ambient = {0, 0, 0},
 		shadowBlur = 0.0
 	});
+
+	self.monsterManager = Manager_Monster();
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -28,6 +31,7 @@ function State_Game:enter(previous, scenarioId)
 	self.items = self:spawnItems(scenarioId);
 	self.inventory = {};
 	self.paths = self:loadPathfinding();
+	self.monsterManager:spawnMonsters(scenarioId);
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -302,6 +306,7 @@ function State_Game:update(dt)
 	end
 
 	self.player:update(dt);
+	self.monsterManager:update(dt);
 	LightWorld:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
 end
@@ -402,6 +407,7 @@ function State_Game:drawGame()
 	end
 
 	self.player:draw();
+	self.monsterManager:draw();
 end
 
 function State_Game:drawHUD()
