@@ -1,5 +1,5 @@
-SCREEN_WIDTH = 1600;
-SCREEN_HEIGHT = 900;
+SCREEN_WIDTH = 5000;
+SCREEN_HEIGHT = 3800;
 FULLSCREEN = false;
 
 KEY_LEFT = "a";
@@ -146,6 +146,6 @@ SCENARIO_ITEMS = {
 -- Debug Variables
 DRAW_BOXES = false;
 DRAW_PORTALS = true;
-DRAW_PATHS = false;
+DRAW_PATHS = true;
 DRAW_LIGHTS = false;
 KILL_PLAYER = false;

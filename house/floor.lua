@@ -124,11 +124,11 @@ function Floor:drawTile(tile, camera)
 			dy = (y - 1) * (self.tilesetData.tileheight) + self.origin.y;
 
 			-- Only draw if inside the camera frame
-			if dx > cx - SCREEN_WIDTH / 2 - 100
-				and dx < cx + SCREEN_WIDTH / 2 + 100
-				and dy > cy - SCREEN_HEIGHT / 2 - 100
-				and dy < cy + SCREEN_HEIGHT / 2 + 100
-			then
+			-- if dx > cx - SCREEN_WIDTH / 2 - 100
+			-- 	and dx < cx + SCREEN_WIDTH / 2 + 100
+			-- 	and dy > cy - SCREEN_HEIGHT / 2 - 100
+			-- 	and dy < cy + SCREEN_HEIGHT / 2 + 100
+			-- then
 				qx = 1;
 				qy = 1;
 				tileIndex = tile.data[curIndex];
@@ -158,7 +158,7 @@ function Floor:drawTile(tile, camera)
 						dx, dy
 					);
 				end
-			end
+			-- end
 
 			curIndex = curIndex + 1;
 		end

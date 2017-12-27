@@ -20,7 +20,6 @@ require "state/state-pause";
 
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
-	love.mouse.setVisible(false);
 
   CANVAS = love.graphics.newCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -30,10 +29,10 @@ function love.load()
   local scaleX = 1;
   local scaleY = 1;
 
-  if FULLSCREEN then
+  --if FULLSCREEN then
     scaleX = w / SCREEN_WIDTH;
     scaleY = h / SCREEN_HEIGHT;
-  end
+  --end
 
   CANVAS_SCALE = math.min(scaleX, scaleY);
 
