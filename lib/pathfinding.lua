@@ -47,37 +47,54 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
     -- Add all of that node's connections for evaluation
     for index, node in pairs(testNode.node.connections) do
       local path = node.path;
+      local toAdd = true;
 
-      for index2, closedNode in pairs(closedList) do
-        -- Only insert if node isn't already on the closed list
-        if closedNode.id ~= path.id and closedNode.floorIndex ~= path.floorIndex then
-          table.insert(openList, {
-            from = testNode,
-            distanceFromStart = testNode.distanceFromStart + node.distance,
-            distanceFromGoal = math.dist(path.center.x, path.center.y, goalNode.center.x, goalNode.center.y),
-            node = node
-          });
+      -- Only insert if node isn't already on the open list
+      for index2, openNode in pairs(openList) do
+        if openNode.node.id == path.id and openNode.node.floorIndex == path.floorIndex then
+          toAdd = false;
         end
+      end
+
+      -- Only insert if node isn't already on the closed list
+      for index2, closedNode in pairs(closedList) do
+        if closedNode.node.id == path.id and closedNode.node.floorIndex == path.floorIndex then
+          toAdd = false;
+        end
+      end
+
+      if toAdd then
+        table.insert(openList, {
+          from = testNode,
+          distanceFromStart = testNode.distanceFromStart + node.distance,
+          distanceFromGoal = math.dist(path.center.x, path.center.y, goalNode.center.x, goalNode.center.y),
+          node = path
+        });
       end
     end
 
     -- No more open paths to take
-    if #openList == 0 then
-      return nil;
+    if #openList == 0 or #openList > 1000 then
+      error("Path not found");
     else
+      local endNode = nil;
       for index, node in pairs(openList) do
         if node.node.id == goalNode.id and node.node.floorIndex == goalNode.floorIndex then
-          -- Goal node found
-          table.insert(path, node);
-          local fromNode = node.from;
-
-          while fromNode ~= nil do
-            table.insert(path, fromMode)
-            fromNode = fromNode.from;
-          end
-
-          done = true;
+          endNode = node;
         end
+      end
+
+      if endNode ~= nil then
+        -- Goal node found
+        table.insert(path, endNode.node);
+        local fromNode = endNode.from;
+
+        while fromNode ~= nil do
+          table.insert(path, fromNode.node);
+          fromNode = fromNode.from;
+        end
+
+        done = true;
       end
     end
   end

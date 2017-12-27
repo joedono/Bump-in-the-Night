@@ -146,6 +146,6 @@ SCENARIO_ITEMS = {
 -- Debug Variables
 DRAW_BOXES = false;
 DRAW_PORTALS = true;
-DRAW_PATHS = true;
+DRAW_PATHS = false;
 DRAW_LIGHTS = false;
 KILL_PLAYER = false;

@@ -87,8 +87,8 @@ function Monster_Wolf:updateIdle(dt)
 		self.target = self.path[self.targetIndex];
 	else
 		self.velocity = {
-			x = self.target.node.origin.x - self.box.x,
-			y = self.target.node.origin.y - self.box.y
+			x = self.target.origin.x - self.box.x,
+			y = self.target.origin.y - self.box.y
 		};
 		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
 		self.speed = MONSTER_WOLF_IDLE_SPEED;
@@ -104,15 +104,15 @@ function Monster_Wolf:updateIdle(dt)
 	    end
 
 	    if col.other.type == "path" then
-	      if col.other.floorIndex == self.target.node.floorIndex and col.other.source.id == self.target.node.source.id then
+	      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
 					-- Reached target node. Go after next node
 					self.targetIndex = self.targetIndex + 1;
 					self.target = self.path[self.targetIndex];
 
 					-- Move to other floor
-					if self.target ~= nil and self.curFloor ~= self.target.node.floorIndex then
-						self.box.x = self.target.node.origin.x;
-						self.box.y = self.target.node.origin.y;
+					if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
+						self.box.x = self.target.origin.x;
+						self.box.y = self.target.origin.y;
 						BumpWorld:update(self, self.box.x, self.box.y);
 					end
 				end
@@ -169,8 +169,8 @@ function Monster_Wolf:canSmellMeat()
 end
 
 function Monster_Wolf:updatePosition(dt)
-	local dx = self.box.x;-- + self.velocity.x * self.speed * dt;
-  local dy = self.box.y;-- + self.velocity.y * self.speed * dt;
+	local dx = self.box.x + self.velocity.x * self.speed * dt;
+  local dy = self.box.y + self.velocity.y * self.speed * dt;
 
 	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
@@ -185,7 +185,7 @@ function Monster_Wolf:draw()
 
 	love.graphics.setColor(255, 0, 0);
 	for index, path in pairs(self.path) do
-		love.graphics.rectangle("fill", path.node.origin.x, path.node.origin.y, path.node.origin.w, path.node.origin.h);
+		love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
 	end
 
 	love.graphics.setColor(0, 0, 255);

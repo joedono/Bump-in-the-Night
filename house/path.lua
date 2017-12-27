@@ -1,5 +1,6 @@
 Path = Class {
   init = function (self, floorIndex, floor, source)
+    self.id = source.id;
     self.source = source;
     self.floorIndex = floorIndex;
     self.origin = {
