@@ -12,7 +12,9 @@ Dead - Shot by player. Dead
 ]]
 
 Monster_Wolf = Class {
-	init = function(self, x, y)
+	init = function(self, parent, curFloor, x, y)
+		self.parent = parent;
+		self.curFloor = curFloor;
 		self.box = {
 			x = x,
 			y = y,
@@ -27,7 +29,7 @@ Monster_Wolf = Class {
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
 		self.state = "idle";
-		self.type = "wolf";
+		self.type = "monster";
 		self.active = true;
 	end
 };
@@ -62,6 +64,63 @@ end
 
 -- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
 function Monster_wolf:updateIdle(dt)
+	if self:canHearPlayer() then
+		self.state == "alert";
+		return;
+	end
+
+	if self:canSeePlayer() then
+		self.state == "spotted";
+		return;
+	end
+
+	if self:canSmellMeat() then
+		self.state == "smells-meat";
+		return;
+	end
+
+	-- Nothing interesting is happening. Amble around
+	if self.target == nil then
+		local finalTarget = self.parent:randomNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.x, nodes);
+		self.targetIndex = 1;
+		self.target = self.path[self.targetIndex];
+	else
+		self.velocity = {
+			x = self.target.origin.x - self.box.x,
+			y = self.target.origin.y - self.box.y
+		};
+		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+		self.speed = MONSTER_WOLF_IDLE_SPEED;
+
+		local actualX, actualY, cols, len = self:updatePosition(dt);
+
+		for i = 1, len do
+	    local col = cols[i];
+	    if col.other.type == "door" then
+	      if not col.other.isOpen then
+	        col.other:open();
+	      end
+	    end
+
+	    if col.other.type == "path" then
+	      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
+					-- Reached target node. Go after next node
+					self.targetIndex = self.targetIndex + 1;
+					self.target = self.path[self.targetIndex];
+
+					-- Move to other floor
+					if self.curFloor ~= self.target.floorIndex then
+						self.box.x = self.target.origin.x;
+						self.box.y = self.target.origin.y;
+						BumpWorld:update(self, self.box.x, self.box.y);
+				end
+	    end
+	  end
+
+		self.box.x = actualX;
+    self.box.y = actualY;
+	end
 end
 
 -- Has heard the player. Look towards sound. If can't see player for some time, walk towards source of sound. If still can't see player for some time, go back to idle
@@ -94,6 +153,25 @@ end
 
 -- Shot by player. Dead
 function Monster_wolf:updateDead(dt)
+end
+
+function Monster_Wolf:canHearPlayer()
+	return false;
+end
+
+function Monster_Wolf:canSeePlayer()
+	return false;
+end
+
+function Monster_Wolf:canSmellMeat()
+	return false;
+end
+
+function Monster_Wolf:updatePosition(dt)
+	local dx = self.box.x + self.velocity.x * self.speed * dt;
+  local dy = self.box.y + self.velocity.y * self.speed * dt;
+
+	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
 
 function Monster_Wolf:draw()

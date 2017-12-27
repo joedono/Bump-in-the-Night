@@ -19,6 +19,38 @@ playerCollision = function(player, other)
     return "cross";
   end
 
+  if other.type == "monster" then
+    return "cross";
+  end
+
+  return nil;
+end
+
+monsterCollision = function(monster, other)
+  if other.type == "wall" then
+    return "slide";
+  end
+
+  if other.type == "door" then
+		if other.isOpen then
+			return nil;
+		else
+			return "touch";
+		end
+  end
+
+  if other.type == "portal" then
+    return "cross";
+  end
+
+  if other.type == "path" then
+    return "cross";
+  end
+
+  if other.type == "player" then
+    return "cross";
+  end
+
   return nil;
 end
 
