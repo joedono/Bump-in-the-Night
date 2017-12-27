@@ -82,7 +82,7 @@ function Monster_Wolf:updateIdle(dt)
 	-- Nothing interesting is happening. Amble around
 	if self.target == nil then
 		self.finalTarget = self.parent:randomNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.x, self.parent.paths);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
