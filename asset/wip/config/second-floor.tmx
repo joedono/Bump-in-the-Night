@@ -203,12 +203,12 @@
     <property name="connections" value="152,155"/>
    </properties>
   </object>
-  <object id="155" type="path" x="96" y="128" width="32" height="32">
+  <object id="155" type="path" x="64" y="128" width="32" height="32">
    <properties>
     <property name="connections" value="154,156"/>
    </properties>
   </object>
-  <object id="156" type="path" x="96" y="544" width="32" height="32">
+  <object id="156" type="path" x="64" y="544" width="32" height="32">
    <properties>
     <property name="connections" value="155,157,158,159"/>
    </properties>
@@ -353,17 +353,17 @@
     <property name="connections" value="187,189"/>
    </properties>
   </object>
-  <object id="189" type="path" x="1376" y="96" width="32" height="32">
+  <object id="189" type="path" x="1344" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="188,190"/>
    </properties>
   </object>
-  <object id="190" type="path" x="1632" y="96" width="32" height="32">
+  <object id="190" type="path" x="1632" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="189,191"/>
    </properties>
   </object>
-  <object id="191" type="path" x="2112" y="96" width="32" height="32">
+  <object id="191" type="path" x="2144" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="190,192"/>
    </properties>

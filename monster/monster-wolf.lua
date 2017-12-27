@@ -86,6 +86,7 @@ function Monster_Wolf:updateIdle(dt)
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
+		local warped = false;
 		self.velocity = {
 			x = self.target.origin.x - self.box.x,
 			y = self.target.origin.y - self.box.y
@@ -113,14 +114,18 @@ function Monster_Wolf:updateIdle(dt)
 					if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
 						self.box.x = self.target.origin.x;
 						self.box.y = self.target.origin.y;
+						self.curFloor = self.target.floorIndex;
 						BumpWorld:update(self, self.box.x, self.box.y);
+						warped = true;
 					end
 				end
 	    end
 	  end
 
-		self.box.x = actualX;
-    self.box.y = actualY;
+		if not warped then
+			self.box.x = actualX;
+	    self.box.y = actualY;
+		end
 	end
 end
 
@@ -183,11 +188,13 @@ function Monster_Wolf:draw()
 	love.graphics.setColor(255, 255, 255);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
-	love.graphics.setColor(255, 0, 0);
-	for index, path in pairs(self.path) do
-		love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
-	end
+	if DRAW_MONSTER_PATH then
+		love.graphics.setColor(255, 0, 0);
+		for index, path in pairs(self.path) do
+			love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
+		end
 
-	love.graphics.setColor(0, 0, 255);
-	love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, self.finalTarget.origin.w, self.finalTarget.origin.h);
+		love.graphics.setColor(0, 0, 255);
+		love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, self.finalTarget.origin.w, self.finalTarget.origin.h);
+	end
 end

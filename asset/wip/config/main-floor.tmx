@@ -226,22 +226,22 @@
     <property name="connections" value="173,179"/>
    </properties>
   </object>
-  <object id="179" type="path" x="96" y="352" width="32" height="32">
+  <object id="179" type="path" x="64" y="320" width="32" height="32">
    <properties>
     <property name="connections" value="178,180"/>
    </properties>
   </object>
-  <object id="180" type="path" x="96" y="608" width="32" height="32">
+  <object id="180" type="path" x="64" y="608" width="32" height="32">
    <properties>
     <property name="connections" value="179,181"/>
    </properties>
   </object>
-  <object id="181" type="path" x="96" y="928" width="32" height="32">
+  <object id="181" type="path" x="64" y="928" width="32" height="32">
    <properties>
     <property name="connections" value="180,183"/>
    </properties>
   </object>
-  <object id="183" type="path" x="96" y="1408" width="32" height="32">
+  <object id="183" type="path" x="64" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="181,184"/>
    </properties>
@@ -360,12 +360,12 @@
     <property name="connections" value="206,208"/>
    </properties>
   </object>
-  <object id="208" type="path" x="1632" y="1408" width="32" height="32">
+  <object id="208" type="path" x="1600" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="207,209"/>
    </properties>
   </object>
-  <object id="209" type="path" x="2016" y="1408" width="32" height="32">
+  <object id="209" type="path" x="2016" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="208,211"/>
    </properties>
@@ -440,22 +440,22 @@
     <property name="connections" value="227,237"/>
    </properties>
   </object>
-  <object id="227" type="path" x="2112" y="96" width="32" height="32">
+  <object id="227" type="path" x="2144" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="226,228"/>
    </properties>
   </object>
-  <object id="228" type="path" x="2112" y="416" width="32" height="32">
+  <object id="228" type="path" x="2144" y="416" width="32" height="32">
    <properties>
     <property name="connections" value="227,229"/>
    </properties>
   </object>
-  <object id="229" type="path" x="2112" y="736" width="32" height="32">
+  <object id="229" type="path" x="2144" y="736" width="32" height="32">
    <properties>
     <property name="connections" value="228,230"/>
    </properties>
   </object>
-  <object id="230" type="path" x="2112" y="960" width="32" height="32">
+  <object id="230" type="path" x="2144" y="992" width="32" height="32">
    <properties>
     <property name="connections" value="204,229"/>
    </properties>

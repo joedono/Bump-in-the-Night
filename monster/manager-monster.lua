@@ -15,11 +15,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 end
 
 function Manager_Monster:randomNode()
-	for index, path in pairs(self.paths) do
-		if path.source.id == 194 then
-			return path;
-		end
-	end
+	return self.paths[love.math.random(self.numPaths)];
 end
 
 function Manager_Monster:update(dt)

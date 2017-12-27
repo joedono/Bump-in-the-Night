@@ -253,12 +253,12 @@
     <property name="multifloorIndex" type="int" value="1"/>
    </properties>
   </object>
-  <object id="151" type="path" x="2112" y="96" width="32" height="32">
+  <object id="151" type="path" x="2144" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="154,149"/>
    </properties>
   </object>
-  <object id="152" type="path" x="384" y="96" width="32" height="32">
+  <object id="152" type="path" x="352" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="153,154"/>
    </properties>
@@ -268,7 +268,7 @@
     <property name="connections" value="152,197,155"/>
    </properties>
   </object>
-  <object id="154" type="path" x="1088" y="96" width="32" height="32">
+  <object id="154" type="path" x="1088" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="151,152"/>
    </properties>
@@ -308,17 +308,17 @@
     <property name="connections" value="160,164,159"/>
    </properties>
   </object>
-  <object id="162" type="path" x="96" y="1408" width="32" height="32">
+  <object id="162" type="path" x="64" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="163,164"/>
    </properties>
   </object>
-  <object id="163" type="path" x="96" y="1120" width="32" height="32">
+  <object id="163" type="path" x="64" y="1088" width="32" height="32">
    <properties>
     <property name="connections" value="138,162"/>
    </properties>
   </object>
-  <object id="164" type="path" x="480" y="1408" width="32" height="32">
+  <object id="164" type="path" x="512" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="162,167,161"/>
    </properties>
@@ -328,7 +328,7 @@
     <property name="connections" value="158,159,160"/>
    </properties>
   </object>
-  <object id="167" type="path" x="480" y="1120" width="32" height="32">
+  <object id="167" type="path" x="512" y="1088" width="32" height="32">
    <properties>
     <property name="connections" value="138,164"/>
    </properties>
@@ -388,17 +388,17 @@
     <property name="connections" value="177,179"/>
    </properties>
   </object>
-  <object id="179" type="path" x="1088" y="1408" width="32" height="32">
+  <object id="179" type="path" x="1056" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="178,181"/>
    </properties>
   </object>
-  <object id="180" type="path" x="1856" y="1408" width="32" height="32">
+  <object id="180" type="path" x="1888" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="181,187"/>
    </properties>
   </object>
-  <object id="181" type="path" x="1536" y="1408" width="32" height="32">
+  <object id="181" type="path" x="1536" y="1440" width="32" height="32">
    <properties>
     <property name="connections" value="179,180"/>
    </properties>
