@@ -130,7 +130,7 @@ function Monster_Wolf:updateWalk(dt)
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
-		self:followPath(MONSTER_WOLF_WALK_SPEED);
+		self:followPath(dt, MONSTER_WOLF_WALK_SPEED);
 	end
 end
 
@@ -171,7 +171,7 @@ function Monster_Wolf:updateInvestigating(dt)
 		self.target = self.path[self.targetIndex];
 	end
 
-	self:followPath(MONSTER_WOLF_INVESTIGATE_SPEED);
+	self:followPath(dt, MONSTER_WOLF_INVESTIGATE_SPEED);
 end
 
 -- Sees the player. Alert for a little bit, then give chase
@@ -231,7 +231,7 @@ function Monster_Wolf:resetPath()
 	self.target = nil;
 end
 
-function Monster_Wolf:followPath(speed)
+function Monster_Wolf:followPath(dt, speed)
 	local warped = false;
 	self.velocity = {
 		x = self.target.origin.x - self.box.x,
