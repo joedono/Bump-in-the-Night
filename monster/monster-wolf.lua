@@ -130,53 +130,7 @@ function Monster_Wolf:updateWalk(dt)
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
-		local warped = false;
-		self.velocity = {
-			x = self.target.origin.x - self.box.x,
-			y = self.target.origin.y - self.box.y
-		};
-		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
-		self.speed = MONSTER_WOLF_WALK_SPEED;
-
-		local actualX, actualY, cols, len = self:updatePosition(dt);
-
-		for i = 1, len do
-	    local col = cols[i];
-	    if col.other.type == "door" then
-	      if not col.other.isOpen then
-	        col.other:open();
-	      end
-	    end
-
-	    if col.other.type == "path" then
-	      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
-					-- Reached target node. Go after next node
-					self.targetIndex = self.targetIndex + 1;
-					self.target = self.path[self.targetIndex];
-
-					-- Move to other floor
-					if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
-						self.box.x = self.target.origin.x;
-						self.box.y = self.target.origin.y;
-						self.curFloor = self.target.floorIndex;
-						BumpWorld:update(self, self.box.x, self.box.y);
-						warped = true;
-					end
-
-					if self.target == nil then
-						-- Reached the point where the player was last heard. Stop and idle
-						self:resetPath();
-						self.state = "idle";
-						self.stateTimer = love.math.random(2, 5);
-					end
-				end
-	    end
-	  end
-
-		if not warped then
-			self.box.x = actualX;
-	    self.box.y = actualY;
-		end
+		self:followPath(MONSTER_WOLF_WALK_SPEED);
 	end
 end
 
@@ -217,53 +171,7 @@ function Monster_Wolf:updateInvestigating(dt)
 		self.target = self.path[self.targetIndex];
 	end
 
-	local warped = false;
-	self.velocity = {
-		x = self.target.origin.x - self.box.x,
-		y = self.target.origin.y - self.box.y
-	};
-	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
-	self.speed = MONSTER_WOLF_INVESTIGATE_SPEED;
-
-	local actualX, actualY, cols, len = self:updatePosition(dt);
-
-	for i = 1, len do
-    local col = cols[i];
-    if col.other.type == "door" then
-      if not col.other.isOpen then
-        col.other:open();
-      end
-    end
-
-    if col.other.type == "path" then
-      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
-				-- Reached target node. Go after next node
-				self.targetIndex = self.targetIndex + 1;
-				self.target = self.path[self.targetIndex];
-
-				-- Move to other floor
-				if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
-					self.box.x = self.target.origin.x;
-					self.box.y = self.target.origin.y;
-					self.curFloor = self.target.floorIndex;
-					BumpWorld:update(self, self.box.x, self.box.y);
-					warped = true;
-				end
-
-				if self.target == nil then
-					-- Reached the point where the player was last heard. Stop and idle
-					self:resetPath();
-					self.state = "idle";
-					self.stateTimer = love.math.random(2, 5);
-				end
-			end
-    end
-	end
-
-	if not warped then
-		self.box.x = actualX;
-    self.box.y = actualY;
-	end
+	self:followPath(MONSTER_WOLF_INVESTIGATE_SPEED);
 end
 
 -- Sees the player. Alert for a little bit, then give chase
@@ -321,6 +229,56 @@ function Monster_Wolf:resetPath()
 	self.path = nil;
 	self.targetIndex = 1;
 	self.target = nil;
+end
+
+function Monster_Wolf:followPath(speed)
+	local warped = false;
+	self.velocity = {
+		x = self.target.origin.x - self.box.x,
+		y = self.target.origin.y - self.box.y
+	};
+	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+	self.speed = speed;
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+    local col = cols[i];
+    if col.other.type == "door" then
+      if not col.other.isOpen then
+        col.other:open();
+      end
+    end
+
+    if col.other.type == "path" then
+      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
+				-- Reached target node. Go after next node
+				self.targetIndex = self.targetIndex + 1;
+				self.target = self.path[self.targetIndex];
+
+				-- Move to other floor
+				if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
+					self.box.x = self.target.origin.x;
+					self.box.y = self.target.origin.y;
+					self.curFloor = self.target.floorIndex;
+					BumpWorld:update(self, self.box.x, self.box.y);
+					warped = true;
+				end
+
+				if self.target == nil then
+					-- Reached the point where the player was last heard. Stop and idle
+					self:resetPath();
+					self.state = "idle";
+					self.stateTimer = love.math.random(2, 5);
+				end
+			end
+    end
+	end
+
+	if not warped then
+		self.box.x = actualX;
+    self.box.y = actualY;
+	end
 end
 
 function Monster_Wolf:updatePosition(dt)
