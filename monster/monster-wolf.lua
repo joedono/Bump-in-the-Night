@@ -22,13 +22,14 @@ Monster_Wolf = Class {
 			h = MONSTER_WOLF_HEIGHT
 		};
 
+		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
+
 		self.velocity = { x = 0, y = 0 };
 		self.speed = 0;
     self.facing = { x = 0, y = 0 };
 
-    BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
-
 		self.state = "idle";
+		self.stateTimer = 0;
 		self.type = "monster";
 		self.active = true;
 	end
@@ -39,8 +40,14 @@ function Monster_Wolf:update(dt)
 		return;
 	end
 
+	if self.stateTimer > 0 then
+		self.stateTimer = self.stateTimer - dt;
+	end
+
 	if self.state == "idle" then
 		self:updateIdle(dt);
+	elseif self.state == "walk" then
+		self:updateWalk(dt);
 	elseif self.state == "alert" then
 		self:updateAlert(dt);
 	elseif self.state == "spotted" then
@@ -62,8 +69,31 @@ function Monster_Wolf:update(dt)
 	end
 end
 
--- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
 function Monster_Wolf:updateIdle(dt)
+	if self:canHearPlayer() then
+		self.state = "alert";
+		return;
+	end
+
+	if self:canSeePlayer() then
+		self.state = "spotted";
+		return;
+	end
+
+	if self:canSmellMeat() then
+		self.state = "smells-meat";
+		return;
+	end
+	
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		self.state = "walk";
+		self.stateTimer = love.math.random(10, 20);
+	end
+end
+
+-- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
+function Monster_Wolf:updateWalk(dt)
 	if self:canHearPlayer() then
 		self.state = "alert";
 		return;
@@ -92,7 +122,7 @@ function Monster_Wolf:updateIdle(dt)
 			y = self.target.origin.y - self.box.y
 		};
 		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
-		self.speed = MONSTER_WOLF_IDLE_SPEED;
+		self.speed = MONSTER_WOLF_WALK_SPEED;
 
 		local actualX, actualY, cols, len = self:updatePosition(dt);
 
@@ -126,6 +156,12 @@ function Monster_Wolf:updateIdle(dt)
 			self.box.x = actualX;
 	    self.box.y = actualY;
 		end
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		self.state = "idle";
+		self.stateTimer = love.math.random(2, 5);
 	end
 end
 
@@ -173,6 +209,13 @@ function Monster_Wolf:canSmellMeat()
 	return false;
 end
 
+function Monster_Wolf:resetPath()
+	self.finalTarget = nil;
+	self.path = nil;
+	self.targetIndex = 1;
+	self.target = nil;
+end
+
 function Monster_Wolf:updatePosition(dt)
 	local dx = self.box.x + self.velocity.x * self.speed * dt;
   local dy = self.box.y + self.velocity.y * self.speed * dt;
@@ -188,7 +231,7 @@ function Monster_Wolf:draw()
 	love.graphics.setColor(255, 255, 255);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
-	if DRAW_MONSTER_PATH then
+	if DRAW_MONSTER_PATH and self.path ~= nil then
 		love.graphics.setColor(255, 0, 0);
 		for index, path in pairs(self.path) do
 			love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
