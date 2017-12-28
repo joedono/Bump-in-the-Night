@@ -125,8 +125,8 @@ function Monster_Wolf:updateWalk(dt)
 
 	-- Nothing interesting is happening. Amble around
 	if self.target == nil then
-		local finalTarget = self.parent:randomNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.y, self.parent.paths);
+		self.finalTarget = self.parent:randomNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
@@ -183,13 +183,13 @@ end
 -- Has heard the player. Look towards sound. If can't see player for some time, switch to alert
 function Monster_Wolf:updateHeardPlayer(dt)
 	if self.stateTimer <= 0 then
+		self:resetPath();
 		self.state = "investigating";
 	end
 end
 
 -- Has heard the player. Walk towards source of sound. If still can't see player for some time, go back to idle
 function Monster_Wolf:updateInvestigating(dt)
-	local finalTarget = nil;
 	local heardTarget = false;
 
 	if self:canHearPlayer() then
@@ -210,9 +210,9 @@ function Monster_Wolf:updateInvestigating(dt)
 		return;
 	end
 
-	if heardTarget or finalTarget == nil then
-		finalTarget = pathfinding.findClosestNode(self.audioTarget.x, self.audioTarget.y, self.parent.paths);
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.y, self.parent.paths);
+	if heardTarget or self.finalTarget == nil then
+		self.finalTarget = pathfinding.findClosestNode(self.audioTarget.x, self.audioTarget.y, self.parent.paths);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	end
@@ -258,11 +258,11 @@ function Monster_Wolf:updateInvestigating(dt)
 				end
 			end
     end
+	end
 
-		if not warped then
-			self.box.x = actualX;
-	    self.box.y = actualY;
-		end
+	if not warped then
+		self.box.x = actualX;
+    self.box.y = actualY;
 	end
 end
 
@@ -317,10 +317,10 @@ function Monster_Wolf:canSmellMeat()
 end
 
 function Monster_Wolf:resetPath()
+	self.finalTarget = nil;
 	self.path = nil;
 	self.targetIndex = 1;
 	self.target = nil;
-	self.audioTarget = nil;
 end
 
 function Monster_Wolf:updatePosition(dt)
