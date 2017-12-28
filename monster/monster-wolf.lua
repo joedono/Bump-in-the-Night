@@ -80,6 +80,7 @@ function Monster_Wolf:updateIdle(dt)
 		};
 
 		self.state = "heard-player";
+		self.stateTimer = 2;
 		return;
 	end
 
@@ -96,7 +97,6 @@ function Monster_Wolf:updateIdle(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "walk";
-		self.stateTimer = love.math.random(10, 20);
 	end
 end
 
@@ -109,6 +109,7 @@ function Monster_Wolf:updateWalk(dt)
 		};
 
 		self.state = "heard-player";
+		self.stateTimer = 2;
 		return;
 	end
 
@@ -124,89 +125,8 @@ function Monster_Wolf:updateWalk(dt)
 
 	-- Nothing interesting is happening. Amble around
 	if self.target == nil then
-		self.finalTarget = self.parent:randomNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
-		self.targetIndex = 1;
-		self.target = self.path[self.targetIndex];
-	else
-		local warped = false;
-		self.velocity = {
-			x = self.target.origin.x - self.box.x,
-			y = self.target.origin.y - self.box.y
-		};
-		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
-		self.speed = MONSTER_WOLF_WALK_SPEED;
-
-		local actualX, actualY, cols, len = self:updatePosition(dt);
-
-		for i = 1, len do
-	    local col = cols[i];
-	    if col.other.type == "door" then
-	      if not col.other.isOpen then
-	        col.other:open();
-	      end
-	    end
-
-	    if col.other.type == "path" then
-	      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
-					-- Reached target node. Go after next node
-					self.targetIndex = self.targetIndex + 1;
-					self.target = self.path[self.targetIndex];
-
-					-- Move to other floor
-					if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
-						self.box.x = self.target.origin.x;
-						self.box.y = self.target.origin.y;
-						self.curFloor = self.target.floorIndex;
-						BumpWorld:update(self, self.box.x, self.box.y);
-						warped = true;
-					end
-				end
-	    end
-	  end
-
-		if not warped then
-			self.box.x = actualX;
-	    self.box.y = actualY;
-		end
-	end
-
-	if self.stateTimer <= 0 then
-		self:resetPath();
-		self.state = "idle";
-		self.stateTimer = love.math.random(2, 5);
-	end
-end
-
--- Has heard the player. Look towards sound. If can't see player for some time, switch to alert
-function Monster_Wolf:updateHeardPlayer(dt)
-	if self.stateTimer <= 0 then
-		self.state = "investigating";
-	end
-end
-
--- Has heard the player. Walk towards source of sound. If still can't see player for some time, go back to idle
-function Monster_Wolf:updateInvestigating(dt)
-	if self:canHearPlayer() then
-		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-	end
-
-	if self:canSeePlayer() then
-		self.state = "spotted";
-		return;
-	end
-
-	if self:canSmellMeat() then
-		self.state = "smells-meat";
-		return;
-	end
-
-	if self.target == nil then
-		self.finalTarget = pathfinding.findClosestNode(self.audioTarget.x, self.audioTarget.y, self.parent.paths);
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
+		local finalTarget = self.parent:randomNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.y, self.parent.paths);
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
@@ -260,6 +180,92 @@ function Monster_Wolf:updateInvestigating(dt)
 	end
 end
 
+-- Has heard the player. Look towards sound. If can't see player for some time, switch to alert
+function Monster_Wolf:updateHeardPlayer(dt)
+	if self.stateTimer <= 0 then
+		self.state = "investigating";
+	end
+end
+
+-- Has heard the player. Walk towards source of sound. If still can't see player for some time, go back to idle
+function Monster_Wolf:updateInvestigating(dt)
+	local finalTarget = nil;
+	local heardTarget = false;
+
+	if self:canHearPlayer() then
+		heardTarget = true;
+		self.audioTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+	end
+
+	if self:canSeePlayer() then
+		self.state = "spotted";
+		return;
+	end
+
+	if self:canSmellMeat() then
+		self.state = "smells-meat";
+		return;
+	end
+
+	if heardTarget or finalTarget == nil then
+		finalTarget = pathfinding.findClosestNode(self.audioTarget.x, self.audioTarget.y, self.parent.paths);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.y, self.parent.paths);
+		self.targetIndex = 1;
+		self.target = self.path[self.targetIndex];
+	end
+
+	local warped = false;
+	self.velocity = {
+		x = self.target.origin.x - self.box.x,
+		y = self.target.origin.y - self.box.y
+	};
+	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+	self.speed = MONSTER_WOLF_INVESTIGATE_SPEED;
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+    local col = cols[i];
+    if col.other.type == "door" then
+      if not col.other.isOpen then
+        col.other:open();
+      end
+    end
+
+    if col.other.type == "path" then
+      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
+				-- Reached target node. Go after next node
+				self.targetIndex = self.targetIndex + 1;
+				self.target = self.path[self.targetIndex];
+
+				-- Move to other floor
+				if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
+					self.box.x = self.target.origin.x;
+					self.box.y = self.target.origin.y;
+					self.curFloor = self.target.floorIndex;
+					BumpWorld:update(self, self.box.x, self.box.y);
+					warped = true;
+				end
+
+				if self.target == nil then
+					-- Reached the point where the player was last heard. Stop and idle
+					self:resetPath();
+					self.state = "idle";
+					self.stateTimer = love.math.random(2, 5);
+				end
+			end
+    end
+
+		if not warped then
+			self.box.x = actualX;
+	    self.box.y = actualY;
+		end
+	end
+end
+
 -- Sees the player. Alert for a little bit, then give chase
 function Monster_Wolf:updateSpotted(dt)
 end
@@ -289,6 +295,16 @@ function Monster_Wolf:updateDead(dt)
 end
 
 function Monster_Wolf:canHearPlayer()
+	local dist = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
+
+	if dist < MONSTER_WOLF_RUN_HEAR_DISTANCE and self.player.runPressed and (self.player.velocity.x > 0 or self.player.velocity.y > 0) then
+		return true;
+	end
+
+	if dist < MONSTER_WOLF_WALK_HEAR_DISTANCE and not self.player.runPressed and (self.player.velocity.x > 0 or self.player.velocity.y > 0) then
+		return true;
+	end
+
 	return false;
 end
 
@@ -301,7 +317,6 @@ function Monster_Wolf:canSmellMeat()
 end
 
 function Monster_Wolf:resetPath()
-	self.finalTarget = nil;
 	self.path = nil;
 	self.targetIndex = 1;
 	self.target = nil;
@@ -323,13 +338,26 @@ function Monster_Wolf:draw()
 	love.graphics.setColor(255, 255, 255);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
-	if DRAW_MONSTER_PATH and self.path ~= nil then
-		love.graphics.setColor(255, 0, 0);
-		for index, path in pairs(self.path) do
-			love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
+	if DRAW_MONSTER_PATH then
+		if self.path ~= nil then
+			love.graphics.setColor(255, 0, 0);
+			for index, path in pairs(self.path) do
+				love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
+			end
 		end
 
-		love.graphics.setColor(0, 0, 255);
-		love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, self.finalTarget.origin.w, self.finalTarget.origin.h);
+		if self.finalTarget ~= nil then
+			love.graphics.setColor(0, 0, 255);
+			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, self.finalTarget.origin.w, self.finalTarget.origin.h);
+		end
 	end
+
+	if DRAW_MONSTER_SENSES then
+		love.graphics.setColor(255, 255, 255);
+		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_WOLF_RUN_HEAR_DISTANCE);
+		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_WOLF_WALK_HEAR_DISTANCE);
+	end
+
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.print(self.state, 0, 0, 0, 12, 12);
 end

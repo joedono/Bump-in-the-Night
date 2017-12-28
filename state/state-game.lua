@@ -29,7 +29,7 @@ function State_Game:enter(previous, scenarioId)
 	self.items = self:spawnItems(scenarioId);
 	self.inventory = {};
 	self.paths = self:loadPathfinding();
-	self.monsterManager = Manager_Monster(self.paths);
+	self.monsterManager = Manager_Monster(self.paths, self.player);
 	self.monsterManager:spawnMonsters(scenarioId);
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
