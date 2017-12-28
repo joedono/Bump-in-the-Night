@@ -85,7 +85,13 @@ function Monster_Wolf:updateIdle(dt)
 	end
 
 	if self:canSeePlayer() then
+		self.visualTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+
 		self.state = "spotted";
+		self.stateTimer = 1;
 		return;
 	end
 
@@ -114,7 +120,13 @@ function Monster_Wolf:updateWalk(dt)
 	end
 
 	if self:canSeePlayer() then
+		self.visualTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+
 		self.state = "spotted";
+		self.stateTimer = 1;
 		return;
 	end
 
@@ -155,7 +167,13 @@ function Monster_Wolf:updateInvestigating(dt)
 	end
 
 	if self:canSeePlayer() then
+		self.visualTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+
 		self.state = "spotted";
+		self.stateTimer = 1;
 		return;
 	end
 
@@ -176,6 +194,21 @@ end
 
 -- Sees the player. Alert for a little bit, then give chase
 function Monster_Wolf:updateSpotted(dt)
+	if self:canSeePlayer() then
+		self.visualTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		if self:canSeePlayer() then
+			self.state = "active-chase";
+		else
+			self.state = "passive-chase";
+		end
+	end
 end
 
 -- Is giving chase and can still see the player. Constantly pathfind to the node closest to the player. If the player is within range, attack the player
