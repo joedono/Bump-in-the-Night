@@ -12,8 +12,9 @@ Dead - Shot by player. Dead
 ]]
 
 Monster_Wolf = Class {
-	init = function(self, parent, curFloor, x, y)
+	init = function(self, parent, player, curFloor, x, y)
 		self.parent = parent;
+		self.player = player;
 		self.curFloor = curFloor;
 		self.box = {
 			x = x,
@@ -48,8 +49,10 @@ function Monster_Wolf:update(dt)
 		self:updateIdle(dt);
 	elseif self.state == "walk" then
 		self:updateWalk(dt);
-	elseif self.state == "alert" then
-		self:updateAlert(dt);
+	elseif self.state == "heard-player" then
+		self:updateHeardPlayer(dt);
+	elseif self.state == "investigating" then
+		self:updateInvestigating(dt);
 	elseif self.state == "spotted" then
 		self:updateSpotted(dt);
 	elseif self.state == "active-chase" then
@@ -71,7 +74,12 @@ end
 
 function Monster_Wolf:updateIdle(dt)
 	if self:canHearPlayer() then
-		self.state = "alert";
+		self.audioTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+
+		self.state = "heard-player";
 		return;
 	end
 
@@ -84,7 +92,7 @@ function Monster_Wolf:updateIdle(dt)
 		self.state = "smells-meat";
 		return;
 	end
-	
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "walk";
@@ -95,7 +103,12 @@ end
 -- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
 function Monster_Wolf:updateWalk(dt)
 	if self:canHearPlayer() then
-		self.state = "alert";
+		self.audioTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+
+		self.state = "heard-player";
 		return;
 	end
 
@@ -165,8 +178,86 @@ function Monster_Wolf:updateWalk(dt)
 	end
 end
 
--- Has heard the player. Look towards sound. If can't see player for some time, walk towards source of sound. If still can't see player for some time, go back to idle
-function Monster_Wolf:updateAlert(dt)
+-- Has heard the player. Look towards sound. If can't see player for some time, switch to alert
+function Monster_Wolf:updateHeardPlayer(dt)
+	if self.stateTimer <= 0 then
+		self.state = "investigating";
+	end
+end
+
+-- Has heard the player. Walk towards source of sound. If still can't see player for some time, go back to idle
+function Monster_Wolf:updateInvestigating(dt)
+	if self:canHearPlayer() then
+		self.audioTarget = {
+			x = self.player.box.x + self.player.box.w / 2,
+			y = self.player.box.y + self.player.box.h / 2
+		};
+	end
+
+	if self:canSeePlayer() then
+		self.state = "spotted";
+		return;
+	end
+
+	if self:canSmellMeat() then
+		self.state = "smells-meat";
+		return;
+	end
+
+	if self.target == nil then
+		self.finalTarget = pathfinding.findClosestNode(self.audioTarget.x, self.audioTarget.y, self.parent.paths);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
+		self.targetIndex = 1;
+		self.target = self.path[self.targetIndex];
+	else
+		local warped = false;
+		self.velocity = {
+			x = self.target.origin.x - self.box.x,
+			y = self.target.origin.y - self.box.y
+		};
+		self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+		self.speed = MONSTER_WOLF_WALK_SPEED;
+
+		local actualX, actualY, cols, len = self:updatePosition(dt);
+
+		for i = 1, len do
+	    local col = cols[i];
+	    if col.other.type == "door" then
+	      if not col.other.isOpen then
+	        col.other:open();
+	      end
+	    end
+
+	    if col.other.type == "path" then
+	      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
+					-- Reached target node. Go after next node
+					self.targetIndex = self.targetIndex + 1;
+					self.target = self.path[self.targetIndex];
+
+					-- Move to other floor
+					if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
+						self.box.x = self.target.origin.x;
+						self.box.y = self.target.origin.y;
+						self.curFloor = self.target.floorIndex;
+						BumpWorld:update(self, self.box.x, self.box.y);
+						warped = true;
+					end
+
+					if self.target == nil then
+						-- Reached the point where the player was last heard. Stop and idle
+						self:resetPath();
+						self.state = "idle";
+						self.stateTimer = love.math.random(2, 5);
+					end
+				end
+	    end
+	  end
+
+		if not warped then
+			self.box.x = actualX;
+	    self.box.y = actualY;
+		end
+	end
 end
 
 -- Sees the player. Alert for a little bit, then give chase
@@ -214,6 +305,7 @@ function Monster_Wolf:resetPath()
 	self.path = nil;
 	self.targetIndex = 1;
 	self.target = nil;
+	self.audioTarget = nil;
 end
 
 function Monster_Wolf:updatePosition(dt)

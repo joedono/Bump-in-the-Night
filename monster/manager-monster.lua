@@ -3,15 +3,16 @@ require "lib/pathfinding";
 require "monster/monster-wolf";
 
 Manager_Monster = Class {
-	init = function(self, paths)
+	init = function(self, paths, player)
 		self.monsters = {};
 		self.paths = paths;
 		self.numPaths = #paths;
+		self.player = player;
 	end
 };
 
 function Manager_Monster:spawnMonsters(scenarioId)
-	table.insert(self.monsters, Monster_Wolf(self, 1, 1090, 1290));
+	table.insert(self.monsters, Monster_Wolf(self, self.player, 1, 1090, 1290));
 end
 
 function Manager_Monster:randomNode()
