@@ -103,8 +103,24 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
     j = j - 1;
   end
 
-  -- Test to see if the goal will be reached before the last node
+
   if pathLen > 1 then
+    -- Test to see if the first node will be away from the goal
+    local firstNode = path[1];
+    local secondNode = path[2];
+
+    local startToSecond = math.dist(startX, startY, secondNode.origin.x, secondNode.origin.y);
+    local firstToSecond = math.dist(firstNode.origin.x, firstNode.origin.y, secondNode.origin.x, secondNode.origin.y);
+
+    -- Going to first node will be farther from goal
+    if startToSecond < firstToSecond then
+      table.remove(path, 1);
+      pathLen = pathLen - 1;
+    end
+  end
+
+  if pathLen > 1 then
+    -- Test to see if the goal will be reached before the last node
     local lastNode = path[pathLen];
     local secondLastNode = path[pathLen-1];
 
