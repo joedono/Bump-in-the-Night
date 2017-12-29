@@ -74,7 +74,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
     end
 
     -- No more open paths to take
-    if #openList == 0 or #openList > 1000 then
+    if #openList == 0 then
       error("Path not found");
     else
       local endNode = nil;
@@ -99,14 +99,44 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
     end
   end
 
+  local pathLen = #path;
+
   -- Reverse the path so path[1] is the start node
-  local i, j = 1, #path;
+  local i, j = 1, pathLen;
   while i < j do
     path[i], path[j] = path[j], path[i];
 
     i = i + 1;
     j = j - 1;
   end
+
+  -- Test to see if the goal will be reached before the last node
+  if pathLen > 1 then
+    local lastNode = path[pathLen];
+    local secondLastNode = path[pathLen-1];
+
+    local secondToLast = math.dist(secondLastNode.origin.x, secondLastNode.origin.y, lastNode.origin.x, lastNode.origin.y);
+    local secondToGoal = math.dist(secondLastNode.origin.x, secondLastNode.origin.y, goalX, goalY);
+
+    -- Pathfinder will reach the goal before reaching the last node
+    if secondToGoal < secondToLast then
+      table.remove(path);
+      pathLen = pathLen - 1;
+    end
+  end
+
+  -- Insert the goal as a node at the end
+  table.insert(path, {
+    origin = {
+      x = goalX,
+      y = goalY,
+      w = 32,
+      h = 32
+    },
+    floorIndex = path[pathLen].floorIndex,
+    type = "path",
+    isGoal = true
+  });
 
   return path;
 end

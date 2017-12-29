@@ -137,8 +137,8 @@ function Monster_Wolf:updateWalk(dt)
 
 	-- Nothing interesting is happening. Amble around
 	if self.target == nil then
-		self.finalTarget = self.parent:randomNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
+		local finalTarget = self.parent:randomNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.y, self.parent.paths);
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	else
@@ -182,9 +182,8 @@ function Monster_Wolf:updateInvestigating(dt)
 		return;
 	end
 
-	if heardTarget or self.finalTarget == nil then
-		self.finalTarget = pathfinding.findClosestNode(self.audioTarget.x, self.audioTarget.y, self.parent.paths);
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.finalTarget.center.x, self.finalTarget.center.y, self.parent.paths);
+	if heardTarget or self.path == nil then
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parent.paths);
 		self.targetIndex = 1;
 		self.target = self.path[self.targetIndex];
 	end
@@ -238,11 +237,11 @@ end
 function Monster_Wolf:canHearPlayer()
 	local dist = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
 
-	if dist < MONSTER_WOLF_RUN_HEAR_DISTANCE and self.player.runPressed and (self.player.velocity.x > 0 or self.player.velocity.y > 0) then
+	if dist < MONSTER_WOLF_RUN_HEAR_DISTANCE and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
 		return true;
 	end
 
-	if dist < MONSTER_WOLF_WALK_HEAR_DISTANCE and not self.player.runPressed and (self.player.velocity.x > 0 or self.player.velocity.y > 0) then
+	if dist < MONSTER_WOLF_WALK_HEAR_DISTANCE and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
 		return true;
 	end
 
@@ -258,7 +257,6 @@ function Monster_Wolf:canSmellMeat()
 end
 
 function Monster_Wolf:resetPath()
-	self.finalTarget = nil;
 	self.path = nil;
 	self.targetIndex = 1;
 	self.target = nil;
@@ -284,7 +282,7 @@ function Monster_Wolf:followPath(dt, speed)
     end
 
     if col.other.type == "path" then
-      if col.other.floorIndex == self.target.floorIndex and col.other.source.id == self.target.source.id then
+      if col.other.floorIndex == self.target.floorIndex and col.other.id == self.target.id then
 				-- Reached target node. Go after next node
 				self.targetIndex = self.targetIndex + 1;
 				self.target = self.path[self.targetIndex];
@@ -298,8 +296,8 @@ function Monster_Wolf:followPath(dt, speed)
 					warped = true;
 				end
 
+				-- Reached end of path
 				if self.target == nil then
-					-- Reached the point where the player was last heard. Stop and idle
 					self:resetPath();
 					self.state = "idle";
 					self.stateTimer = love.math.random(2, 5);
@@ -311,6 +309,12 @@ function Monster_Wolf:followPath(dt, speed)
 	if not warped then
 		self.box.x = actualX;
     self.box.y = actualY;
+	end
+
+	if self.target.isGoal and math.dist(self.box.x, self.box.y, self.target.origin.x, self.target.origin.y) < 32 then
+		self:resetPath();
+		self.state = "idle";
+		self.stateTimer = love.math.random(2, 5);
 	end
 end
 
