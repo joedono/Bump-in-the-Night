@@ -435,6 +435,11 @@ function Monster_Wolf:draw()
 	love.graphics.setColor(255, 255, 255);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
+	-- Draw eyes
+	love.graphics.setColor(255, 0, 0);
+	love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
+	love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
+
 	if DRAW_MONSTER_PATH then
 		if self.path ~= nil then
 			love.graphics.setColor(255, 0, 0);
