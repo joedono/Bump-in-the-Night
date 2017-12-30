@@ -21,10 +21,10 @@ PathNode = Class {
   end
 }
 
-function PathNode:addConnection(path)
+function PathNode:addConnection(pathNode)
   local newConnection = {
-    path = path,
-    distance = math.dist(self.center.x, self.center.y, path.center.x, path.center.y)
+    pathNode = pathNode,
+    distance = math.dist(self.center.x, self.center.y, pathNode.center.x, pathNode.center.y)
   };
 
   table.insert(self.connections, newConnection);
@@ -38,7 +38,7 @@ function PathNode:draw()
   for index, connection in pairs(self.connections) do
     love.graphics.line(
       self.origin.x, self.origin.y,
-      connection.path.origin.x + connection.path.origin.w, connection.path.origin.y + connection.path.origin.h
+      connection.pathNode.origin.x + connection.pathNode.origin.w, connection.pathNode.origin.y + connection.pathNode.origin.h
     );
   end
 end

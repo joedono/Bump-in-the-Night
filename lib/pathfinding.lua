@@ -1,66 +1,66 @@
 pathfinding = {};
 
-function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
-  local startNode = pathfinding.findClosestNode(startX, startY, nodes);
-  local goalNode = pathfinding.findClosestNode(goalX, goalY, nodes);
-  local path = {};
+function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
+  local startPathNode = pathfinding.findClosestNode(startX, startY, pathNodes);
+  local goalPathNode = pathfinding.findClosestNode(goalX, goalY, pathNodes);
+  local finalPath = {};
   local closedList = {};
   local openList = {};
   local done = false;
 
-  if startNode.id == goalNode.id and startNode.floorIndex == goalNode.floorIndex then
-    table.insert(path, startNode);
+  if startPathNode.id == goalPathNode.id and startPathNode.floorIndex == goalPathNode.floorIndex then
+    table.insert(finalPath, startPathNode);
   else
     table.insert(openList, {
       from = nil,
       distanceFromStart = 0,
-      distanceFromGoal = math.dist(startNode.center.x, startNode.center.y, goalNode.center.x, goalNode.center.y),
-      node = startNode
+      distanceFromGoal = math.dist(startPathNode.center.x, startPathNode.center.y, goalPathNode.center.x, goalPathNode.center.y),
+      pathNode = startPathNode
     });
 
     while not done do
       -- Find the node in the open list with the shortest distance between the start and the goal
       local curIndex = 1;
-      local testNode = openList[curIndex];
-      local shortestDistance = testNode.distanceFromStart + testNode.distanceFromGoal;
+      local testPathfindingNode = openList[curIndex];
+      local shortestDistance = testPathfindingNode.distanceFromStart + testPathfindingNode.distanceFromGoal;
 
       -- Find the path with the shortest distance
-      for index, node in pairs(openList) do
-        if node.distanceFromStart + node.distanceFromGoal < shortestDistance then
+      for index, pathfindingNode in pairs(openList) do
+        if pathfindingNode.distanceFromStart + pathfindingNode.distanceFromGoal < shortestDistance then
           curIndex = index;
-          testNode = node;
-          shortestDistance = testNode.distanceFromStart + testNode.distanceFromGoal;
+          testPathfindingNode = pathfindingNode;
+          shortestDistance = testPathfindingNode.distanceFromStart + testPathfindingNode.distanceFromGoal;
         end
       end
 
-      table.insert(closedList, testNode);
+      table.insert(closedList, testPathfindingNode);
       table.remove(openList, curIndex);
 
       -- Add all of that node's connections for evaluation
-      for index, node in pairs(testNode.node.connections) do
-        local path = node.path;
+      for index, connectionNode in pairs(testPathfindingNode.pathNode.connections) do
+        local pathNode = connectionNode.pathNode;
         local toAdd = true;
 
         -- Only insert if node isn't already on the open list
-        for index2, openNode in pairs(openList) do
-          if openNode.node.id == path.id and openNode.node.floorIndex == path.floorIndex then
+        for index2, openPathfindingNode in pairs(openList) do
+          if openPathfindingNode.pathNode.id == pathNode.id and openPathfindingNode.pathNode.floorIndex == pathNode.floorIndex then
             toAdd = false;
           end
         end
 
         -- Only insert if node isn't already on the closed list
-        for index2, closedNode in pairs(closedList) do
-          if closedNode.node.id == path.id and closedNode.node.floorIndex == path.floorIndex then
+        for index2, closedPathfindingNode in pairs(closedList) do
+          if closedPathfindingNode.pathNode.id == pathNode.id and closedPathfindingNode.pathNode.floorIndex == pathNode.floorIndex then
             toAdd = false;
           end
         end
 
         if toAdd then
           table.insert(openList, {
-            from = testNode,
-            distanceFromStart = testNode.distanceFromStart + node.distance,
-            distanceFromGoal = math.dist(path.center.x, path.center.y, goalNode.center.x, goalNode.center.y),
-            node = path
+            from = testPathfindingNode,
+            distanceFromStart = testPathfindingNode.distanceFromStart + connectionNode.distance,
+            distanceFromGoal = math.dist(pathNode.center.x, pathNode.center.y, goalPathNode.center.x, goalPathNode.center.y),
+            pathNode = pathNode
           });
         end
       end
@@ -69,21 +69,21 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
       if #openList == 0 then
         error("Path not found");
       else
-        local endNode = nil;
-        for index, node in pairs(openList) do
-          if node.node.id == goalNode.id and node.node.floorIndex == goalNode.floorIndex then
-            endNode = node;
+        local endPathfindingNode = nil;
+        for index, pathfindingNode in pairs(openList) do
+          if pathfindingNode.pathNode.id == goalPathNode.id and pathfindingNode.pathNode.floorIndex == goalPathNode.floorIndex then
+            endPathfindingNode = pathfindingNode;
           end
         end
 
-        if endNode ~= nil then
+        if endPathfindingNode ~= nil then
           -- Goal node found
-          table.insert(path, endNode.node);
-          local fromNode = endNode.from;
+          table.insert(finalPath, endPathfindingNode.pathNode);
+          local fromPathfindingNode = endPathfindingNode.from;
 
-          while fromNode ~= nil do
-            table.insert(path, fromNode.node);
-            fromNode = fromNode.from;
+          while fromPathfindingNode ~= nil do
+            table.insert(finalPath, fromPathfindingNode.pathNode);
+            fromPathfindingNode = fromPathfindingNode.from;
           end
 
           done = true;
@@ -92,83 +92,83 @@ function pathfinding.findPath(startX, startY, goalX, goalY, nodes)
     end
   end
 
-  local pathLen = #path;
+  local finalPathLen = #finalPath;
 
-  -- Reverse the path so path[1] is the start node
-  local i, j = 1, pathLen;
+  -- Reverse the finalPath so finalPath[1] is the start node
+  local i, j = 1, finalPathLen;
   while i < j do
-    path[i], path[j] = path[j], path[i];
+    finalPath[i], finalPath[j] = finalPath[j], finalPath[i];
 
     i = i + 1;
     j = j - 1;
   end
 
 
-  if pathLen > 1 then
+  if finalPathLen > 1 then
     -- Test to see if the first node will be away from the goal
-    local firstNode = path[1];
-    local secondNode = path[2];
+    local firstPathNode = finalPath[1];
+    local secondPathNode = finalPath[2];
 
-    local startToSecond = math.dist(startX, startY, secondNode.origin.x, secondNode.origin.y);
-    local firstToSecond = math.dist(firstNode.origin.x, firstNode.origin.y, secondNode.origin.x, secondNode.origin.y);
+    local startToSecond = math.dist(startX, startY, secondPathNode.origin.x, secondPathNode.origin.y);
+    local firstToSecond = math.dist(firstPathNode.origin.x, firstPathNode.origin.y, secondPathNode.origin.x, secondPathNode.origin.y);
 
     -- Going to first node will be farther from goal
     if startToSecond < firstToSecond then
-      table.remove(path, 1);
-      pathLen = pathLen - 1;
+      table.remove(finalPath, 1);
+      finalPathLen = finalPathLen - 1;
     end
   end
 
-  if pathLen > 1 then
+  if finalPathLen > 1 then
     -- Test to see if the goal will be reached before the last node
-    local lastNode = path[pathLen];
-    local secondLastNode = path[pathLen-1];
+    local lastPathNode = finalPath[finalPathLen];
+    local secondLastPathNode = finalPath[finalPathLen-1];
 
-    local secondToLast = math.dist(secondLastNode.origin.x, secondLastNode.origin.y, lastNode.origin.x, lastNode.origin.y);
-    local secondToGoal = math.dist(secondLastNode.origin.x, secondLastNode.origin.y, goalX, goalY);
+    local secondToLast = math.dist(secondLastPathNode.origin.x, secondLastPathNode.origin.y, lastPathNode.origin.x, lastPathNode.origin.y);
+    local secondToGoal = math.dist(secondLastPathNode.origin.x, secondLastPathNode.origin.y, goalX, goalY);
 
     -- Pathfinder will reach the goal before reaching the last node
     if secondToGoal < secondToLast then
-      table.remove(path);
-      pathLen = pathLen - 1;
+      table.remove(finalPath);
+      finalPathLen = finalPathLen - 1;
     end
   end
 
   -- Insert the goal as a node at the end
-  table.insert(path, {
+  table.insert(finalPath, {
     origin = {
       x = goalX,
       y = goalY,
       w = 32,
       h = 32
     },
-    floorIndex = path[pathLen].floorIndex,
+    floorIndex = finalPath[finalPathLen].floorIndex,
     type = "path",
     isGoal = true
   });
 
-  return path;
+  return finalPath;
 end
 
-function pathfinding.findClosestNode(x, y, nodes)
-  local closestNode = nodes[1];
-  local dist = math.dist(x, y, closestNode.center.x, closestNode.center.y);
+function pathfinding.findClosestNode(x, y, pathNodes)
+  local closestPathNode = pathNodes[1];
+  local dist = math.dist(x, y, closestPathNode.center.x, closestPathNode.center.y);
 
-  for index, node in pairs(nodes) do
-    if math.dist(x, y, node.center.x, node.center.y) < dist and pathfinding.canReachNode(x, y, node) then
-      dist = math.dist(x, y, node.center.x, node.center.y);
-      closestNode = node;
+  for index, pathNode in pairs(pathNodes) do
+    if math.dist(x, y, pathNode.center.x, pathNode.center.y) < dist and pathfinding.canReachNode(x, y, pathNode) then
+      dist = math.dist(x, y, pathNode.center.x, pathNode.center.y);
+      closestPathNode = pathNode;
     end
   end
 
-  return closestNode;
+  return closestPathNode;
 end
 
-function pathfinding.canReachNode(x, y, node)
-  local nodeX = node.center.x;
-  local nodeY = node.center.y;
+function pathfinding.canReachNode(x, y, pathNode)
+  local pathNodeX = pathNode.center.x;
+  local pathNodeY = pathNode.center.y;
 
-  local items, len = BumpWorld:querySegment(x, y, nodeX, nodeY, canMoveFilter);
+  local items, len = BumpWorld:querySegment(x, y, pathNodeX, pathNodeY, canMoveFilter);
 
   return len == 0;
 end

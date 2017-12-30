@@ -136,11 +136,11 @@ function Monster_Wolf:updateWalk(dt)
 	end
 
 	-- Nothing interesting is happening. Amble around
-	if self.target == nil then
-		local finalTarget = self.parent:randomNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalTarget.center.x, finalTarget.center.y, self.parent.paths);
-		self.targetIndex = 1;
-		self.target = self.path[self.targetIndex];
+	if self.targetPathNode == nil then
+		local finalPathNode = self.parent:randomPathNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.center.x, finalPathNode.center.y, self.parent.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	else
 		self:followPath(dt, MONSTER_WOLF_WALK_SPEED);
 	end
@@ -183,9 +183,9 @@ function Monster_Wolf:updateInvestigating(dt)
 	end
 
 	if heardTarget or self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parent.paths);
-		self.targetIndex = 1;
-		self.target = self.path[self.targetIndex];
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parent.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
 
 	self:followPath(dt, MONSTER_WOLF_INVESTIGATE_SPEED);
@@ -258,15 +258,15 @@ end
 
 function Monster_Wolf:resetPath()
 	self.path = nil;
-	self.targetIndex = 1;
-	self.target = nil;
+	self.targetPathNodeIndex = 1;
+	self.targetPathNode = nil;
 end
 
 function Monster_Wolf:followPath(dt, speed)
 	local warped = false;
 	self.velocity = {
-		x = self.target.origin.x - self.box.x,
-		y = self.target.origin.y - self.box.y
+		x = self.targetPathNode.origin.x - self.box.x,
+		y = self.targetPathNode.origin.y - self.box.y
 	};
 	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
 	self.speed = speed;
@@ -282,22 +282,22 @@ function Monster_Wolf:followPath(dt, speed)
     end
 
     if col.other.type == "path" then
-      if col.other.floorIndex == self.target.floorIndex and col.other.id == self.target.id then
+      if col.other.floorIndex == self.targetPathNode.floorIndex and col.other.id == self.targetPathNode.id then
 				-- Reached target node. Go after next node
-				self.targetIndex = self.targetIndex + 1;
-				self.target = self.path[self.targetIndex];
+				self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
+				self.targetPathNode = self.path[self.targetPathNodeIndex];
 
 				-- Move to other floor
-				if self.target ~= nil and self.curFloor ~= self.target.floorIndex then
-					self.box.x = self.target.origin.x;
-					self.box.y = self.target.origin.y;
-					self.curFloor = self.target.floorIndex;
+				if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+					self.box.x = self.targetPathNode.origin.x;
+					self.box.y = self.targetPathNode.origin.y;
+					self.curFloor = self.targetPathNode.floorIndex;
 					BumpWorld:update(self, self.box.x, self.box.y);
 					warped = true;
 				end
 
 				-- Reached end of path
-				if self.target == nil then
+				if self.targetPathNode == nil then
 					self:resetPath();
 					self.state = "idle";
 					self.stateTimer = love.math.random(2, 5);
@@ -311,7 +311,7 @@ function Monster_Wolf:followPath(dt, speed)
     self.box.y = actualY;
 	end
 
-	if self.target.isGoal and math.dist(self.box.x, self.box.y, self.target.origin.x, self.target.origin.y) < 32 then
+	if self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
 		self:resetPath();
 		self.state = "idle";
 		self.stateTimer = love.math.random(2, 5);
