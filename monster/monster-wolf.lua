@@ -325,11 +325,11 @@ end
 function Monster_Wolf:canHearPlayer()
 	local dist = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
 
-	if dist < MONSTER_WOLF_RUN_HEAR_DISTANCE and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
+	if dist < MONSTER_WOLF_RUN_HEAR_DISTANCE and self.player.runPressed and  (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
 		return true;
 	end
 
-	if dist < MONSTER_WOLF_WALK_HEAR_DISTANCE and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
+	if dist < MONSTER_WOLF_WALK_HEAR_DISTANCE and not self.player.runPressed and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
 		return true;
 	end
 
