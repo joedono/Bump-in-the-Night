@@ -18,7 +18,7 @@ Floor = Class {
     self.doors = {};
     self.portals = {};
     self.itemLocations = {};
-    self.paths = {};
+    self.sourceNodes = {};
 
     for index, layer in pairs(self.source.layers) do
       if layer.name == "Floor" then
@@ -34,7 +34,7 @@ Floor = Class {
       elseif layer.name == "Item" then
         self.itemLocations = layer.objects;
       elseif layer.name == "Paths" then
-        self.paths = layer.objects;
+        self.sourceNodes = layer.objects;
       end
     end
   end

@@ -3,7 +3,7 @@ require "monster/manager-monster";
 
 require "house/floor";
 require "house/item";
-require "house/path";
+require "house/path-node";
 
 State_Game = {};
 
@@ -28,8 +28,8 @@ function State_Game:enter(previous, scenarioId)
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
 	self.inventory = {};
-	self.paths = self:loadPathfinding();
-	self.monsterManager = Manager_Monster(self.paths, self.player);
+	self.pathNodes = self:loadPathfinding();
+	self.monsterManager = Manager_Monster(self.pathNodes, self.player);
 	self.monsterManager:spawnMonsters(scenarioId);
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
@@ -83,48 +83,50 @@ function State_Game:spawnItems(scenarioId)
 end
 
 function State_Game:loadPathfinding()
-	local allPaths = {};
-	local floorPaths = {};
+	local allPathNodes = {};
+	local allFloorPathNodes = {};
 
+	-- Add connections within floors
 	for index, floor in pairs(self.floors) do
-		local curFloorPaths = {};
-		for index2, path in pairs(floor.paths) do
-			table.insert(curFloorPaths, Path(index, floor, path));
+		local curFloorPathNodes = {};
+		for index2, sourceNode in pairs(floor.sourceNodes) do
+			table.insert(curFloorPathNodes, PathNode(index, floor, sourceNode));
 		end
 
-		for index2, path in pairs(curFloorPaths) do
-			local connections = path.source.properties["connections"];
-			for id in string.gmatch(connections, "%d+") do
-				for index2, connection in pairs(curFloorPaths) do
-					if tonumber(id) == connection.source.id then
-						path:addConnection(connection);
+		for index2, pathNode in pairs(curFloorPathNodes) do
+			local connectionIds = pathNode.sourceNode.properties["connections"];
+			for id in string.gmatch(connectionIds, "%d+") do
+				for index2, pathNodeConnection in pairs(curFloorPathNodes) do
+					if tonumber(id) == pathNodeConnection.sourceNode.id then
+						pathNode:addConnection(pathNodeConnection);
 					end
 				end
 			end
 		end
 
-		table.insert(floorPaths, curFloorPaths);
+		table.insert(allFloorPathNodes, curFloorPathNodes);
 	end
 
-	for index, floorPath in pairs(floorPaths) do
-		for index2, path in pairs(floorPath) do
-			if path.source.properties["multifloor"] then
-				local floorIndex = path.source.properties["multifloorIndex"];
-				local pathId = path.source.properties["multifloorID"];
-				local connectedPaths = floorPaths[floorIndex];
+	-- Add connections between floors
+	for index, floorPathNodes in pairs(allFloorPathNodes) do
+		for index2, floorPathNode in pairs(floorPathNodes) do
+			if floorPathNode.sourceNode.properties["multifloor"] then
+				local multifloorIndex = floorPathNode.sourceNode.properties["multifloorIndex"];
+				local multifloorID = floorPathNode.sourceNode.properties["multifloorID"];
+				local connectedPathNodes = allFloorPathNodes[multifloorIndex];
 
-				for index3, connection in pairs(connectedPaths) do
-					if pathId == connection.source.id then
-						path:addConnection(connection);
+				for index3, connectedPathNode in pairs(connectedPathNodes) do
+					if multifloorID == connectedPathNode.sourceNode.id then
+						floorPathNode:addConnection(connectedPathNode);
 					end
 				end
 			end
 
-			table.insert(allPaths, path);
+			table.insert(allPathNodes, floorPathNode);
 		end
 	end
 
-	return allPaths;
+	return allPathNodes;
 end
 
 function State_Game:focus(focused)
@@ -404,8 +406,8 @@ function State_Game:drawGame()
 	end
 
 	if DRAW_PATHS then
-		for index, path in pairs(self.paths) do
-			path:draw();
+		for index, pathNode in pairs(self.pathNodes) do
+			pathNode:draw();
 		end
 	end
 
