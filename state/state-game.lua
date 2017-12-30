@@ -320,22 +320,22 @@ function State_Game:updateCamera(x, y)
 	cameraY = cameraY - SCREEN_HEIGHT / 2;
 	local moveCamera = false;
 
-	if(cameraFocusX < CAMERA_LEFT_BOUND) then
+	if cameraFocusX < CAMERA_LEFT_BOUND then
 		cameraX = x - CAMERA_LEFT_BOUND;
 		moveCamera = true;
 	end
 
-	if(cameraFocusX > CAMERA_RIGHT_BOUND) then
+	if cameraFocusX > CAMERA_RIGHT_BOUND then
 		cameraX = x - CAMERA_RIGHT_BOUND;
 		moveCamera = true;
 	end
 
-	if(cameraFocusY < CAMERA_TOP_BOUND) then
+	if cameraFocusY < CAMERA_TOP_BOUND then
 		cameraY = y - CAMERA_TOP_BOUND;
 		moveCamera = true;
 	end
 
-	if(cameraFocusY > CAMERA_BOTTOM_BOUND) then
+	if cameraFocusY > CAMERA_BOTTOM_BOUND then
 		cameraY = y - CAMERA_BOTTOM_BOUND;
 		moveCamera = true;
 	end
