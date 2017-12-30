@@ -103,9 +103,8 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
     j = j - 1;
   end
 
-
+  -- Test to see if the first node will be away from the goal
   if finalPathLen > 1 then
-    -- Test to see if the first node will be away from the goal
     local firstPathNode = finalPath[1];
     local secondPathNode = finalPath[2];
 
@@ -119,8 +118,8 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
     end
   end
 
+  -- Test to see if the goal will be reached before the last node
   if finalPathLen > 1 then
-    -- Test to see if the goal will be reached before the last node
     local lastPathNode = finalPath[finalPathLen];
     local secondLastPathNode = finalPath[finalPathLen-1];
 
@@ -134,6 +133,17 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
     end
   end
 
+  -- If there is only one node, test to see if it goes away from the goal
+  if finalPathLen == 1 then
+    local currentToGoal = math.dist(startX, startY, goalX, goalY);
+    local pathToGoal = math.dist(finalPath[1].origin.x, finalPath[1].origin.y, goalX, goalY);
+
+    if currentToGoal < pathToGoal then
+      table.remove(finalPath);
+      finalPathLen = finalPathLen - 1;
+    end
+  end
+
   -- Insert the goal as a node at the end
   table.insert(finalPath, {
     origin = {
@@ -142,7 +152,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
       w = 32,
       h = 32
     },
-    floorIndex = finalPath[finalPathLen].floorIndex,
+    floorIndex = goalPathNode.floorIndex,
     type = "path",
     isGoal = true
   });
