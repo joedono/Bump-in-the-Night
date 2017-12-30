@@ -790,7 +790,7 @@ return {
         {
           id = 53,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 192,
           y = 320,
@@ -808,7 +808,7 @@ return {
         {
           id = 54,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 96,
           y = 320,
@@ -823,7 +823,7 @@ return {
         {
           id = 55,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 64,
           y = 480,
@@ -838,7 +838,7 @@ return {
         {
           id = 56,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 384,
           y = 512,
@@ -853,7 +853,7 @@ return {
         {
           id = 57,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 64,
           y = 704,
@@ -868,7 +868,7 @@ return {
         {
           id = 58,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 384,
           y = 672,
@@ -883,7 +883,7 @@ return {
         {
           id = 59,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 416,
           y = 320,
@@ -898,7 +898,7 @@ return {
         {
           id = 60,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 512,
           y = 320,
@@ -913,7 +913,7 @@ return {
         {
           id = 61,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 672,
           y = 480,
@@ -928,7 +928,7 @@ return {
         {
           id = 62,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 288,
           y = 672,
@@ -943,7 +943,7 @@ return {
         {
           id = 63,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 288,
           y = 864,
@@ -958,7 +958,7 @@ return {
         {
           id = 64,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 64,
           y = 832,
@@ -973,7 +973,7 @@ return {
         {
           id = 65,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 64,
           y = 1024,
@@ -988,7 +988,7 @@ return {
         {
           id = 66,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 96,
           y = 1216,
@@ -1003,7 +1003,7 @@ return {
         {
           id = 67,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 320,
           y = 1216,
@@ -1018,7 +1018,7 @@ return {
         {
           id = 68,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 320,
           y = 1056,
@@ -1033,7 +1033,7 @@ return {
         {
           id = 69,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 640,
           y = 1024,
@@ -1048,7 +1048,7 @@ return {
         {
           id = 70,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 640,
           y = 864,
@@ -1063,7 +1063,7 @@ return {
         {
           id = 71,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 640,
           y = 672,
@@ -1078,7 +1078,7 @@ return {
         {
           id = 72,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 960,
           y = 672,
@@ -1093,7 +1093,7 @@ return {
         {
           id = 73,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 960,
           y = 864,
@@ -1108,7 +1108,7 @@ return {
         {
           id = 74,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 960,
           y = 1024,
@@ -1123,7 +1123,7 @@ return {
         {
           id = 75,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 960,
           y = 1216,
@@ -1138,7 +1138,7 @@ return {
         {
           id = 76,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 960,
           y = 480,
@@ -1153,7 +1153,7 @@ return {
         {
           id = 77,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 960,
           y = 320,
@@ -1168,7 +1168,7 @@ return {
         {
           id = 78,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1216,
           y = 320,
@@ -1183,7 +1183,7 @@ return {
         {
           id = 79,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1216,
           y = 640,
@@ -1198,7 +1198,7 @@ return {
         {
           id = 80,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1216,
           y = 1184,
@@ -1213,7 +1213,7 @@ return {
         {
           id = 81,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1568,
           y = 1184,
@@ -1228,7 +1228,7 @@ return {
         {
           id = 82,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1568,
           y = 864,
@@ -1243,7 +1243,7 @@ return {
         {
           id = 83,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1248,
           y = 960,
@@ -1258,7 +1258,7 @@ return {
         {
           id = 86,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1376,
           y = 288,
@@ -1273,7 +1273,7 @@ return {
         {
           id = 87,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1568,
           y = 288,
@@ -1288,7 +1288,7 @@ return {
         {
           id = 88,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1760,
           y = 288,
@@ -1303,7 +1303,7 @@ return {
         {
           id = 89,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1952,
           y = 288,
@@ -1318,7 +1318,7 @@ return {
         {
           id = 90,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 2144,
           y = 288,
@@ -1333,7 +1333,7 @@ return {
         {
           id = 91,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 2144,
           y = 704,
@@ -1348,7 +1348,7 @@ return {
         {
           id = 92,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1952,
           y = 704,
@@ -1363,7 +1363,7 @@ return {
         {
           id = 93,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1888,
           y = 672,
@@ -1378,7 +1378,7 @@ return {
         {
           id = 94,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1760,
           y = 704,
@@ -1393,7 +1393,7 @@ return {
         {
           id = 95,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1568,
           y = 672,
@@ -1408,7 +1408,7 @@ return {
         {
           id = 96,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1312,
           y = 640,
@@ -1423,7 +1423,7 @@ return {
         {
           id = 97,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1888,
           y = 864,
@@ -1438,7 +1438,7 @@ return {
         {
           id = 98,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 2016,
           y = 864,
@@ -1453,7 +1453,7 @@ return {
         {
           id = 99,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 2016,
           y = 1120,
@@ -1468,7 +1468,7 @@ return {
         {
           id = 100,
           name = "",
-          type = "path",
+          type = "node",
           shape = "rectangle",
           x = 1824,
           y = 1120,
@@ -1483,7 +1483,7 @@ return {
         {
           id = 114,
           name = "",
-          type = "",
+          type = "node",
           shape = "rectangle",
           x = 1408,
           y = 704,
