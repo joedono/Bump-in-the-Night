@@ -12,7 +12,12 @@ Manager_Monster = Class {
 };
 
 function Manager_Monster:spawnMonsters(scenarioId)
-	table.insert(self.monsters, Monster_Wolf(self, self.player, 1, 1090, 1290));
+	local spawnPoint = self:randomPathNode();
+	table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+	spawnPoint = self:randomPathNode();
+	table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+	spawnPoint = self:randomPathNode();
+	table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
 end
 
 function Manager_Monster:randomPathNode()
