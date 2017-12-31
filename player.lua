@@ -41,6 +41,9 @@ function Player:resetKeys()
   self.gamepadVelocity = { x = 0, y = 0 };
 end
 
+function Player:toggleFlashlight()
+end
+
 function Player:update(dt)
   if not self.active then
     return;

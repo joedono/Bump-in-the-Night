@@ -28,6 +28,7 @@ function State_Game:enter(previous, scenarioId)
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
 	self.inventory = {};
+	self.selectedItemIndex = 1;
 	self.pathNodes = self:loadPathfinding();
 	self.monsterManager = Manager_Monster(self.pathNodes, self.player);
 	self.monsterManager:spawnMonsters(scenarioId);
@@ -142,11 +143,7 @@ function State_Game:keypressed(key, unicode)
     return;
   end
 
-	if key == KEY_PAUSE then
-		GameState.push(State_Pause);
-	end
-
-  if key == KEY_LEFT then
+	if key == KEY_LEFT then
     self.player.leftPressed = true;
   end
 
@@ -162,6 +159,30 @@ function State_Game:keypressed(key, unicode)
     self.player.downPressed = true;
   end
 
+	if key == KEY_FLASHLIGHT then
+    self.player:toggleFlashlight();
+  end
+
+	if key == KEY_RUN then
+    self.player.runPressed = true;
+  end
+
+	if key == KEY_ITEM_LEFT then
+		self:selectItem(-1);
+  end
+
+	if key == KEY_ITEM_RIGHT then
+    self:selectItem(1);
+  end
+
+	if key == KEY_ITEM_USE then
+    self:useItem();
+  end
+
+	if key == KEY_PAUSE then
+		GameState.push(State_Pause);
+	end
+
 	if key == KEY_LIGHT_LEFT then
 		self.player.leftLightPressed = true;
 	end
@@ -176,10 +197,6 @@ function State_Game:keypressed(key, unicode)
 
 	if key == KEY_LIGHT_DOWN then
     self.player.downLightPressed = true;
-  end
-
-  if key == KEY_RUN then
-    self.player.runPressed = true;
   end
 end
 
@@ -204,6 +221,10 @@ function State_Game:keyreleased(key, unicode)
     self.player.downPressed = false;
   end
 
+	if key == KEY_RUN then
+    self.player.runPressed = false;
+  end
+
 	if key == KEY_LIGHT_LEFT then
 		self.player.leftLightPressed = false;
 	end
@@ -218,10 +239,6 @@ function State_Game:keyreleased(key, unicode)
 
 	if key == KEY_LIGHT_DOWN then
     self.player.downLightPressed = false;
-  end
-
-  if key == KEY_RUN then
-    self.player.runPressed = false;
   end
 end
 
@@ -246,8 +263,24 @@ function State_Game:gamepadpressed(joystick, button)
     self.player.downPressed = true;
   end
 
+	if key == GAMEPAD_FLASHLIGHT then
+    self.player:toggleFlashlight();
+  end
+
   if button == GAMEPAD_RUN then
     self.player.runPressed = true;
+  end
+
+	if key == GAMEPAD_ITEM_LEFT then
+		self:selectItem(-1);
+  end
+
+	if key == GAMEPAD_ITEM_RIGHT then
+    self:selectItem(1);
+  end
+
+	if key == GAMEPAD_ITEM_USE then
+    self:useItem();
   end
 
   if button == GAMEPAD_START then
@@ -371,6 +404,27 @@ function State_Game:pickupItem(item)
 	item:pickup();
 end
 
+function State_Game:selectItem(dir)
+	local numItems = #self.inventory;
+
+	if numItems == 0 then
+		return;
+	end
+
+	self.selectedItemIndex = self.selectedItemIndex + dir;
+	if self.selectedItemIndex < 1 then
+		self.selectedItemIndex = numItems;
+	elseif self.selectedItemIndex > numItems then
+		self.selectedItemIndex = 1;
+	end
+end
+
+function State_Game:useItem()
+	local selectedItem = self.inventory[self.selectedItemIndex];
+
+	-- TODO
+end
+
 function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
@@ -422,5 +476,9 @@ function State_Game:drawHUD()
 	local y = SCREEN_HEIGHT - HUD_HEIGHT + 20;
 	for index, item in pairs(self.inventory) do
 		item:drawInventory((index-1) * 100 + 30, y);
+		if self.selectedItemIndex == index then
+			love.graphics.setColor(255, 255, 255);
+			love.graphics.rectangle("line", (index-1) * 100 + 30, y, INVENTORY_ITEM_WIDTH, INVENTORY_ITEM_HEIGHT);
+		end
 	end
 end
