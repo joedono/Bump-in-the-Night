@@ -1,6 +1,6 @@
 -- Left around to lure the wolf or bear into the trap
 Meat = Class {
-	init = function(self)
+	init = function(self, x, y)
 
 	end
 }

@@ -1,6 +1,6 @@
 -- Fired from the shotgun
 Bullets = Class {
-	init = function(self)
+	init = function(self, x, y, dirX, dirY)
 
 	end
 }

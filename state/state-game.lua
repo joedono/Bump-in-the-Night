@@ -5,6 +5,17 @@ require "house/floor";
 require "house/item";
 require "house/path-node";
 
+require "used-items/axe";
+require "used-items/blood-pool";
+require "used-items/bucket-water";
+require "used-items/bullets";
+require "used-items/lighter";
+require "used-items/meat";
+require "used-items/salt";
+require "used-items/stake";
+require "used-items/taser";
+require "used-items/trap";
+
 State_Game = {};
 
 function State_Game:init()
@@ -428,11 +439,14 @@ function State_Game:useItem()
 	local selectedItem = self.inventory[self.selectedItemIndex];
 
 	if selectedItem.itemType == "meat" then
-
+		table.insert(self.usedItems, Meat(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2));
+		table.remove(self.inventory, self.selectedItemIndex);
 	elseif selectedItem.itemType == "trap" then
+		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2));
+		table.remove(self.inventory, self.selectedItemIndex);
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
-
+			table.insert(self.usedItems, Bullets(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.player.facing.x, self.player.facing.y));
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
 		-- Load Shotgun
@@ -445,10 +459,13 @@ function State_Game:useItem()
 			end
 		end
 	elseif selectedItem.itemType == "taser" then
+		table.insert(self.usedItems, Taser(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.player.facing.x, self.player.facing.y));
 	elseif selectedItem.itemType == "cellphone_dead" then
-		-- Do Nothing
-		return;
+		-- Do nothing
 	elseif selectedItem.itemType == "cellphone_live" then
+		if self:areEnemiesDown() then
+			-- TODO Win Game
+		end
 	elseif selectedItem.itemType == "cellphone_battery" then
 		-- Replace battery in cell phone
 		local hasDeadPhone = false;
@@ -472,20 +489,39 @@ function State_Game:useItem()
 			self.inventory = newInventory;
 		end
 	elseif selectedItem.itemType == "bucket" then
+
 	elseif selectedItem.itemType == "fuse" then
+
 	elseif selectedItem.itemType == "book" then
+
 	elseif selectedItem.itemType == "cross" then
+
 	elseif selectedItem.itemType == "stake" then
+
 	elseif selectedItem.itemType == "knife" then
+
 	elseif selectedItem.itemType == "music_box" then
+
 	elseif selectedItem.itemType == "battery" then
+
 	elseif selectedItem.itemType == "foil" then
+
 	elseif selectedItem.itemType == "axe" then
+
 	elseif selectedItem.itemType == "gasoline" then
+
 	elseif selectedItem.itemType == "lighter" then
+
 	elseif selectedItem.itemType == "crystal" then
+
 	elseif selectedItem.itemType == "scroll" then
+
 	end
+end
+
+function State_Game:areEnemiesDown()
+	-- TODO
+	return false;
 end
 
 function State_Game:draw()

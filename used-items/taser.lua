@@ -1,6 +1,6 @@
 -- Shot at one of the humanoid threats
 Taser = Class {
-	init = function(self)
+	init = function(self, x, y, dirX, dirY)
 
 	end
 }

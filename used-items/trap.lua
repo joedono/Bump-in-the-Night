@@ -1,6 +1,6 @@
 -- Left around to trap the wolf or bear
 Trap = Class {
-	init = function(self)
+	init = function(self, x, y)
 
 	end
 }
