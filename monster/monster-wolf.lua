@@ -467,7 +467,4 @@ function Monster_Wolf:draw()
 			facingAngle - MONSTER_WOLF_SIGHT_CONE / 2, facingAngle + MONSTER_WOLF_SIGHT_CONE / 2
 		);
 	end
-
-	love.graphics.setColor(255, 255, 255);
-	love.graphics.print(self.state, 0, 0, 0, 12, 12);
 end
