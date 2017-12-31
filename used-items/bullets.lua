@@ -1,7 +1,8 @@
 -- Fired from the shotgun
 Bullets = Class {
 	init = function(self, x, y, dirX, dirY)
-
+		self.type = "placed-bullets";
+		self.active = true;
 	end
 }
 
