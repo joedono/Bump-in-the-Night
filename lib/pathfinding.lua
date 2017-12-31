@@ -112,7 +112,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
     local firstToSecond = math.dist(firstPathNode.origin.x, firstPathNode.origin.y, secondPathNode.origin.x, secondPathNode.origin.y);
 
     -- Going to first node will be farther from goal
-    if startToSecond < firstToSecond then
+    if startToSecond < firstToSecond and firstPathNode.floorIndex == secondPathNode.floorIndex then
       table.remove(finalPath, 1);
       finalPathLen = finalPathLen - 1;
     end
@@ -127,7 +127,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
     local secondToGoal = math.dist(secondLastPathNode.origin.x, secondLastPathNode.origin.y, goalX, goalY);
 
     -- Pathfinder will reach the goal before reaching the last node
-    if secondToGoal < secondToLast then
+    if secondToGoal < secondToLast and lastPathNode.floorIndex == secondLastPathNode.floorIndex then
       table.remove(finalPath);
       finalPathLen = finalPathLen - 1;
     end
