@@ -415,9 +415,8 @@ function Monster_Wolf:followPath(dt, speed)
 		end
 
 		if col.other.type == "placed-bullets" then
-			col.other.active = false;
-
 			if sef.state == "trapped" then
+				col.other.active = false;
 				self.state = "dead";
 			else
 				self.visualTarget = {
