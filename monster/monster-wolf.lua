@@ -30,7 +30,7 @@ Monster_Wolf = Class {
     self.facing = { x = 0, y = 0 };
 
 		self.state = "idle";
-		self.stateTimer = 0;
+		self.stateTimer = 5;
 		self.type = "monster";
 		self.active = true;
 	end
@@ -66,7 +66,7 @@ function Monster_Wolf:update(dt)
 	elseif self.state == "trapped" then
 		self:updateTrapped(dt);
 	elseif self.state == "dead" then
-		self:updateDead(dt);
+		-- Do nothing
 	elseif self.state == "test" then
 
 	else
@@ -102,11 +102,6 @@ function Monster_Wolf:updateIdle(dt)
 		return;
 	end
 
-	if self:canSmellMeat() then
-		self.state = "smells-meat";
-		return;
-	end
-
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "walk";
@@ -139,11 +134,6 @@ function Monster_Wolf:updateWalk(dt)
 
 		self.state = "spotted";
 		self.stateTimer = 1;
-		return;
-	end
-
-	if self:canSmellMeat() then
-		self.state = "smells-meat";
 		return;
 	end
 
@@ -191,11 +181,6 @@ function Monster_Wolf:updateInvestigating(dt)
 
 		self.state = "spotted";
 		self.stateTimer = 1;
-		return;
-	end
-
-	if self:canSmellMeat() then
-		self.state = "smells-meat";
 		return;
 	end
 
@@ -259,11 +244,6 @@ function Monster_Wolf:updateActiveChase(dt)
 		return;
 	end
 
-	if self:canSmellMeat() then
-		self.state = "smells-meat";
-		return;
-	end
-
 	if seeTarget or self.path == nil then
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parent.pathNodes);
 		self.targetPathNodeIndex = 1;
@@ -292,11 +272,6 @@ function Monster_Wolf:updatePassiveChase(dt)
 		};
 	end
 
-	if self:canSmellMeat() then
-		self.state = "smells-meat";
-		return;
-	end
-
 	if hearTarget or self.path == nil then
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parent.pathNodes);
 		self.targetPathNodeIndex = 1;
@@ -308,18 +283,31 @@ end
 
 -- Player has dropped meat somewhere on the floor. Walk to Meat
 function Monster_Wolf:updateSmellsMeat(dt)
+	local smellTarget = false;
+
+	if smellTarget or self.path == nil then
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.smellTarget.x, self.smellTarget.y, self.parent.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	end
+
+	self:followPath(dt, MONSTER_WOLF_INVESTIGATE_SPEED);
 end
 
 -- Reached meat that isn't in a trap. Consume meat for a time.
 function Monster_Wolf:updateEating(dt)
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		self.state = "idle";
+	end
 end
 
 -- Has walked into a beartrap. Whimper and try to free seld
 function Monster_Wolf:updateTrapped(dt)
-end
-
--- Shot by player. Dead
-function Monster_Wolf:updateDead(dt)
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		self.state = "idle";
+	end
 end
 
 function Monster_Wolf:canHearPlayer()
@@ -403,6 +391,41 @@ function Monster_Wolf:followPath(dt, speed)
 				end
 			end
     end
+
+		if col.other.type == "placed-meat" and self.state == "smells-meat" then
+			self:resetPath();
+			self.state = "eating";
+			self.stateTimer = 5;
+			col.other.active = false;
+		end
+
+		if col.other.type == "placed-trap" and (self.state == "idle" or self.state == "walk" or self.state == "smells-meat") then
+			self:resetPath();
+			self.state = "trapped";
+			self.stateTimer = 5;
+			col.other.active = false;
+		end
+
+		if col.other.type == "placed-bullets" then
+			col.other.active = false;
+
+			if sef.state == "trapped" then
+				self.state = "dead";
+			else
+				self.visualTarget = {
+					x = self.player.box.x + self.player.box.w / 2,
+					y = self.player.box.y + self.player.box.h / 2
+				};
+
+				self.audioTarget = {
+					x = self.player.box.x + self.player.box.w / 2,
+					y = self.player.box.y + self.player.box.h / 2
+				};
+
+				self.state = "spotted";
+				self.stateTimer = 1;
+			end
+		end
 	end
 
 	if not warped then
@@ -410,7 +433,7 @@ function Monster_Wolf:followPath(dt, speed)
     self.box.y = actualY;
 	end
 
-	if self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
+	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
 		self:resetPath();
 		self.state = "idle";
 		self.stateTimer = love.math.random(2, 5);

@@ -57,12 +57,15 @@ function Manager_Monster:updateWolfSpecial(dt)
 		local distToClosestWolf = 0;
 
 		for index, wolf in pairs(self.monsters) do
-			if wolf.state ~= "dead" and (closestWolf == nil or math.dist(wolf.box.x, wolf.box.y, usedMeat.box.x, usedMeat.box.y) < distToClosestWolf) then
+			local dist = math.dist(wolf.box.x, wolf.box.y, usedMeat.box.x, usedMeat.box.y);
+			if wolf.state ~= "dead" and (closestWolf == nil or dist < distToClosestWolf) then
+				distToClosestWolf = dist;
 				closestWolf = wolf;
 			end
 		end
 
 		if closestWolf ~= nil then
+			closestWolf:resetPath();
 			closestWolf.state = "smells-meat";
 			closestWolf.smellTarget = {
 				x = usedMeat.box.x,
