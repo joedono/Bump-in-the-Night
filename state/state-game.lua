@@ -351,9 +351,16 @@ function State_Game:update(dt)
 		item:update(dt);
 	end
 
-	for index, placedItem in pairs(self.usedItems) do
-		placedItem:update(dt);
+	local activeUsedItems = {};
+	for index, usedItem in pairs(self.usedItems) do
+		usedItem:update(dt);
+		if usedItem.active then
+			table.insert(activeUsedItems, usedItem);
+		else
+			BumpWorld:remove(usedItem);
+		end
 	end
+	self.usedItems = activeUsedItems;
 
 	self.player:update(dt);
 	self.monsterManager:update(dt);
@@ -439,8 +446,12 @@ function State_Game:useItem()
 	local selectedItem = self.inventory[self.selectedItemIndex];
 
 	if selectedItem.itemType == "meat" then
-		table.insert(self.usedItems, Meat(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2));
-		table.remove(self.inventory, self.selectedItemIndex);
+		local placedMeat = self:getPlacedMeat();
+		if placedMeat ~= nil then
+			placedMeat.active = false;
+		end
+
+		table.insert(self.usedItems, Meat(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "trap" then
 		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2));
 		table.remove(self.inventory, self.selectedItemIndex);
@@ -483,7 +494,7 @@ function State_Game:useItem()
 				end
 			end
 
-			local newItem = Item(-1000, -1000, "cellphone_live", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet));
+			local newItem = Item(-1000, -1000, "cellphone_live", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet);
 			newItem:pickup();
 			table.insert(newInventory, newItem);
 			self.inventory = newInventory;
@@ -517,6 +528,16 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "scroll" then
 
 	end
+end
+
+function State_Game:getPlacedMeat()
+	for index, usedItem in pairs(self.usedItems) do
+		if usedItem.type == "placed-meat" then
+			return usedItem;
+		end
+	end
+
+	return nil;
 end
 
 function State_Game:areEnemiesDown()
