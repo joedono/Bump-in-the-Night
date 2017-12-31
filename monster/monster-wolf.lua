@@ -459,7 +459,7 @@ function Monster_Wolf:updatePosition(dt)
 end
 
 function Monster_Wolf:draw()
-	if not self.active then
+	if not self.active or self.state == "dead" then
 		return;
 	end
 
