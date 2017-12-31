@@ -460,6 +460,7 @@ function State_Game:useItem()
 		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
+			-- Fire Shotgun
 			table.insert(self.usedItems, Bullets(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.player.facing.x, self.player.facing.y));
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
