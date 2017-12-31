@@ -3,8 +3,8 @@ require "lib/pathfinding";
 require "monster/monster-wolf";
 
 Manager_Monster = Class {
-	init = function(self, parent, pathNodes, player)
-		self.parent = parent;
+	init = function(self, parentStateGame, pathNodes, player)
+		self.parentStateGame = parentStateGame;
 		self.monsters = {};
 		self.pathNodes = pathNodes;
 		self.numPathNodes = #pathNodes;
@@ -37,12 +37,17 @@ function Manager_Monster:update(dt)
 end
 
 function Manager_Monster:updateWolfSpecial(dt)
+	local allWolvesDead = true;
 	local wolfGoingAfterMeat = false;
-	local usedMeat = self.parent:getPlacedItem("placed-meat");
+	local usedMeat = self.parentStateGame:getPlacedItem("placed-meat");
 
 	for index, wolf in pairs(self.monsters) do
 		if wolf.state == "smells-meat" then
 			wolfGoingAfterMeat = true;
+		end
+
+		if wolf.state ~= "dead" then
+			allWolvesDead = false;
 		end
 	end
 
@@ -73,6 +78,9 @@ function Manager_Monster:updateWolfSpecial(dt)
 			};
 		end
 	end
+
+	if allWolvesDead then
+
 end
 
 function Manager_Monster:draw()

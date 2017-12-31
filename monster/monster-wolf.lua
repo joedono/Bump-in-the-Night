@@ -12,8 +12,8 @@ Dead - Shot by player. Dead
 ]]
 
 Monster_Wolf = Class {
-	init = function(self, parent, player, curFloor, x, y)
-		self.parent = parent;
+	init = function(self, parentManager, player, curFloor, x, y)
+		self.parentManager = parentManager;
 		self.player = player;
 		self.curFloor = curFloor;
 		self.box = {
@@ -139,8 +139,8 @@ function Monster_Wolf:updateWalk(dt)
 
 	-- Nothing interesting is happening. Amble around
 	if self.targetPathNode == nil then
-		local finalPathNode = self.parent:randomPathNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.center.x, finalPathNode.center.y, self.parent.pathNodes);
+		local finalPathNode = self.parentManager:randomPathNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.center.x, finalPathNode.center.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	else
@@ -185,7 +185,7 @@ function Monster_Wolf:updateInvestigating(dt)
 	end
 
 	if hearTarget or self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parent.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
@@ -245,7 +245,7 @@ function Monster_Wolf:updateActiveChase(dt)
 	end
 
 	if seeTarget or self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parent.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
@@ -273,7 +273,7 @@ function Monster_Wolf:updatePassiveChase(dt)
 	end
 
 	if hearTarget or self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parent.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
@@ -284,7 +284,7 @@ end
 -- Player has dropped meat somewhere on the floor. Walk to Meat
 function Monster_Wolf:updateSmellsMeat(dt)
 	local canSmellTarget = false;
-	local placedMeat = self.parent.parent:getPlacedItem("placed-meat");
+	local placedMeat = self.parentManager.parentStateGame:getPlacedItem("placed-meat");
 	if placedMeat ~= nil and (self.smellTarget == nil or self.smellTarget.x ~= placedMeat.center.x or self.smellTarget.y ~= placedMeat.center.y) then
 		canSmellTarget = true;
 		self.smellTarget = {
@@ -294,7 +294,7 @@ function Monster_Wolf:updateSmellsMeat(dt)
 	end
 
 	if canSmellTarget or self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.smellTarget.x, self.smellTarget.y, self.parent.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.smellTarget.x, self.smellTarget.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
