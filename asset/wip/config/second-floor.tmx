@@ -313,12 +313,12 @@
     <property name="connections" value="181,177,176"/>
    </properties>
   </object>
-  <object id="181" type="node" x="864" y="96" width="32" height="32">
+  <object id="181" type="node" x="864" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="178,182"/>
    </properties>
   </object>
-  <object id="182" type="node" x="1184" y="96" width="32" height="32">
+  <object id="182" type="node" x="1184" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="181,183"/>
    </properties>
@@ -353,7 +353,7 @@
     <property name="connections" value="187,189"/>
    </properties>
   </object>
-  <object id="189" type="node" x="1344" y="64" width="32" height="32">
+  <object id="189" type="node" x="1376" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="188,190"/>
    </properties>
@@ -363,7 +363,7 @@
     <property name="connections" value="189,191"/>
    </properties>
   </object>
-  <object id="191" type="node" x="2144" y="64" width="32" height="32">
+  <object id="191" type="node" x="2112" y="64" width="32" height="32">
    <properties>
     <property name="connections" value="190,192"/>
    </properties>

@@ -4,10 +4,10 @@ PathNode = Class {
     self.sourceNode = sourceNode;
     self.floorIndex = floorIndex;
     self.origin = {
-      x = sourceNode.x + floor.origin.x,
-      y = sourceNode.y + floor.origin.y,
-      w = sourceNode.width,
-      h = sourceNode.height
+      x = sourceNode.x + floor.origin.x + sourceNode.width / 2,
+      y = sourceNode.y + floor.origin.y + sourceNode.height / 2,
+      w = PATH_NODE_SIZE,
+      h = PATH_NODE_SIZE
     };
 
     self.center = {
