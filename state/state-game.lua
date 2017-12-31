@@ -41,7 +41,7 @@ function State_Game:enter(previous, scenarioId)
 	self.inventory = {};
 	self.selectedItemIndex = 1;
 	self.pathNodes = self:loadPathfinding();
-	self.monsterManager = Manager_Monster(self.pathNodes, self.player);
+	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player);
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
 
