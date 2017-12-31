@@ -479,7 +479,7 @@ function State_Game:useItem()
 		-- Do nothing
 	elseif selectedItem.itemType == "cellphone_live" then
 		if self:areEnemiesDown() then
-			-- TODO Win Game
+			self:winGame();
 		end
 	elseif selectedItem.itemType == "cellphone_battery" then
 		-- Replace battery in cell phone
@@ -547,6 +547,10 @@ end
 function State_Game:areEnemiesDown()
 	-- TODO
 	return false;
+end
+
+function State_Game:winGame()
+	-- TODO Win Game
 end
 
 function State_Game:draw()

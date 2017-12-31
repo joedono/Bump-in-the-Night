@@ -80,7 +80,8 @@ function Manager_Monster:updateWolfSpecial(dt)
 	end
 
 	if allWolvesDead then
-
+		self.parentStateGame:winGame();
+	end
 end
 
 function Manager_Monster:draw()
