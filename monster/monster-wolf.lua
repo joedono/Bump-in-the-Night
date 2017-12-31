@@ -475,13 +475,13 @@ function Monster_Wolf:draw()
 		if self.path ~= nil then
 			love.graphics.setColor(255, 0, 0);
 			for index, path in pairs(self.path) do
-				love.graphics.rectangle("fill", path.origin.x, path.origin.y, path.origin.w, path.origin.h);
+				love.graphics.rectangle("fill", path.origin.x, path.origin.y, 32, 32);
 			end
 		end
 
 		if self.finalTarget ~= nil then
 			love.graphics.setColor(0, 0, 255);
-			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, self.finalTarget.origin.w, self.finalTarget.origin.h);
+			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, 32, 32);
 		end
 	end
 
