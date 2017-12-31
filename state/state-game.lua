@@ -32,6 +32,7 @@ function State_Game:enter(previous, scenarioId)
 	self.pathNodes = self:loadPathfinding();
 	self.monsterManager = Manager_Monster(self.pathNodes, self.player);
 	self.monsterManager:spawnMonsters(scenarioId);
+	self.usedItems = {};
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -339,6 +340,10 @@ function State_Game:update(dt)
 		item:update(dt);
 	end
 
+	for index, placedItem in pairs(self.usedItems) do
+		placedItem:update(dt);
+	end
+
 	self.player:update(dt);
 	self.monsterManager:update(dt);
 	LightWorld:update(dt);
@@ -422,7 +427,65 @@ end
 function State_Game:useItem()
 	local selectedItem = self.inventory[self.selectedItemIndex];
 
-	-- TODO
+	if selectedItem.itemType == "meat" then
+
+	elseif selectedItem.itemType == "trap" then
+	elseif selectedItem.itemType == "shotgun" then
+		if selectedItem.loaded then
+
+		end
+	elseif selectedItem.itemType == "shotgun_rounds" then
+		-- Load Shotgun
+		for index, item in pairs(self.inventory) do
+			if item.itemType == "shotgun" then
+				item.loaded = true;
+				table.remove(self.inventory, self.selectedItemIndex);
+				self.selectedItemIndex = 1;
+				return;
+			end
+		end
+	elseif selectedItem.itemType == "taser" then
+	elseif selectedItem.itemType == "cellphone_dead" then
+		-- Do Nothing
+		return;
+	elseif selectedItem.itemType == "cellphone_live" then
+	elseif selectedItem.itemType == "cellphone_battery" then
+		-- Replace battery in cell phone
+		local hasDeadPhone = false;
+		for index, item in pairs(self.inventory) do
+			if item.itemType == "cellphone_dead" then
+				hasDeadPhone = true;
+			end
+		end
+
+		if hasDeadPhone then
+			local newInventory = {};
+			for index, item in pairs(self.inventory) do
+				if item.itemType ~= "cellphone_dead" and item.itemType ~= "cellphone_battery" then
+					table.insert(newInventory, item);
+				end
+			end
+
+			local newItem = Item(-1000, -1000, "cellphone_live", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet));
+			newItem:pickup();
+			table.insert(newInventory, newItem);
+			self.inventory = newInventory;
+		end
+	elseif selectedItem.itemType == "bucket" then
+	elseif selectedItem.itemType == "fuse" then
+	elseif selectedItem.itemType == "book" then
+	elseif selectedItem.itemType == "cross" then
+	elseif selectedItem.itemType == "stake" then
+	elseif selectedItem.itemType == "knife" then
+	elseif selectedItem.itemType == "music_box" then
+	elseif selectedItem.itemType == "battery" then
+	elseif selectedItem.itemType == "foil" then
+	elseif selectedItem.itemType == "axe" then
+	elseif selectedItem.itemType == "gasoline" then
+	elseif selectedItem.itemType == "lighter" then
+	elseif selectedItem.itemType == "crystal" then
+	elseif selectedItem.itemType == "scroll" then
+	end
 end
 
 function State_Game:draw()
@@ -457,6 +520,10 @@ function State_Game:drawGame()
 
 	for index, item in pairs(self.items) do
 		item:draw();
+	end
+
+	for index, placedItem in pairs(self.usedItems) do
+		placedItem:draw();
 	end
 
 	if DRAW_PATHS then
