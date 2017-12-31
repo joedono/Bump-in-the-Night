@@ -446,15 +446,19 @@ function State_Game:useItem()
 	local selectedItem = self.inventory[self.selectedItemIndex];
 
 	if selectedItem.itemType == "meat" then
-		local placedMeat = self:getPlacedMeat();
+		local placedMeat = self:getPlacedItem("placed-meat");
 		if placedMeat ~= nil then
 			placedMeat.active = false;
 		end
 
 		table.insert(self.usedItems, Meat(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "trap" then
-		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2));
-		table.remove(self.inventory, self.selectedItemIndex);
+		local placedMeat = self:getPlacedItem("placed-trap");
+		if placedMeat ~= nil then
+			placedMeat.active = false;
+		end
+
+		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
 			table.insert(self.usedItems, Bullets(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.player.facing.x, self.player.facing.y));
@@ -530,9 +534,9 @@ function State_Game:useItem()
 	end
 end
 
-function State_Game:getPlacedMeat()
+function State_Game:getPlacedItem(itemType)
 	for index, usedItem in pairs(self.usedItems) do
-		if usedItem.type == "placed-meat" then
+		if usedItem.type == itemType then
 			return usedItem;
 		end
 	end

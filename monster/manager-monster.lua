@@ -38,7 +38,7 @@ end
 
 function Manager_Monster:updateWolfSpecial(dt)
 	local wolfGoingAfterMeat = false;
-	local usedMeat = self.parent:getPlacedMeat();
+	local usedMeat = self.parent:getPlacedItem("placed-meat");
 
 	for index, wolf in pairs(self.monsters) do
 		if wolf.state == "smells-meat" then
@@ -64,7 +64,7 @@ function Manager_Monster:updateWolfSpecial(dt)
 			end
 		end
 
-		if closestWolf ~= nil then
+		if closestWolf ~= nil and closestWolf.state ~= "trapped" then
 			closestWolf:resetPath();
 			closestWolf.state = "smells-meat";
 			closestWolf.smellTarget = {

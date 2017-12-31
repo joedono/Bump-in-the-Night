@@ -283,9 +283,17 @@ end
 
 -- Player has dropped meat somewhere on the floor. Walk to Meat
 function Monster_Wolf:updateSmellsMeat(dt)
-	local smellTarget = false;
+	local canSmellTarget = false;
+	local placedMeat = self.parent.parent:getPlacedItem("placed-meat");
+	if placedMeat ~= nil and (self.smellTarget == nil or self.smellTarget.x ~= placedMeat.box.x or self.smellTarget.y ~= placedMeat.box.y) then
+		canSmellTarget = true;
+		self.smellTarget = {
+			x = placedMeat.box.x,
+			y = placedMeat.box.y
+		};
+	end
 
-	if smellTarget or self.path == nil then
+	if canSmellTarget or self.path == nil then
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.smellTarget.x, self.smellTarget.y, self.parent.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
@@ -399,7 +407,7 @@ function Monster_Wolf:followPath(dt, speed)
 			col.other.active = false;
 		end
 
-		if col.other.type == "placed-trap" and (self.state == "idle" or self.state == "walk" or self.state == "smells-meat") then
+		if col.other.type == "placed-trap" and (self.state == "idle" or self.state == "walk" or self.state == "smells-meat" or self.state == "eating") then
 			self:resetPath();
 			self.state = "trapped";
 			self.stateTimer = 5;
