@@ -285,11 +285,11 @@ end
 function Monster_Wolf:updateSmellsMeat(dt)
 	local canSmellTarget = false;
 	local placedMeat = self.parent.parent:getPlacedItem("placed-meat");
-	if placedMeat ~= nil and (self.smellTarget == nil or self.smellTarget.x ~= placedMeat.box.x or self.smellTarget.y ~= placedMeat.box.y) then
+	if placedMeat ~= nil and (self.smellTarget == nil or self.smellTarget.x ~= placedMeat.center.x or self.smellTarget.y ~= placedMeat.center.y) then
 		canSmellTarget = true;
 		self.smellTarget = {
-			x = placedMeat.box.x,
-			y = placedMeat.box.y
+			x = placedMeat.center.x,
+			y = placedMeat.center.y
 		};
 	end
 

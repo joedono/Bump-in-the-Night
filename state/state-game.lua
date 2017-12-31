@@ -35,11 +35,11 @@ function State_Game:enter(previous, scenarioId)
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
+	self.inventory = {};
+	self.selectedItemIndex = 1;
 	self.player = Player(self);
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
-	self.inventory = {};
-	self.selectedItemIndex = 1;
 	self.pathNodes = self:loadPathfinding();
 	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player);
 	self.monsterManager:spawnMonsters(scenarioId);
@@ -88,7 +88,6 @@ function State_Game:spawnItems(scenarioId)
 
 		local x = randomLocation.x + randomFloor.origin.x;
 		local y = randomLocation.y + randomFloor.origin.y;
-
 		table.insert(items, Item(x, y, item, self.itemWorldSpriteSheet, self.itemHeldSpriteSheet));
 	end
 

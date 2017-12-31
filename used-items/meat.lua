@@ -8,6 +8,11 @@ Meat = Class {
 			h = INVENTORY_ITEM_HEIGHT
 		};
 
+		self.center = {
+			x = self.box.x + self.box.w / 2,
+			y = self.box.y + self.box.h / 2
+		};
+
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
 		local ix = INVENTORY_MAP.held["meat"].x;
