@@ -47,15 +47,7 @@ monsterCollision = function(monster, other)
     return "cross";
   end
 
-  if other.type == "placed-meat" then
-    return "cross";
-  end
-
-  if other.type == "placed-trap" then
-    return "cross";
-  end
-
-  if other.type == "placed-bullets" then
+  if other.type == "placed-meat" or other.type == "placed-trap" or other.type == "placed-bullets" then
     return "cross";
   end
 
