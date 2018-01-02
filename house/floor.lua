@@ -9,9 +9,11 @@ Floor = Class {
 
     self.source = love.filesystem.load(layoutFile)();
 
-    local imageFilename = string.gsub(self.source.tilesets[1].image, "%.%./%.%.", "asset");
-    self.tilesetImage = love.graphics.newImage(imageFilename);
-    self.tilesetData = self.source.tilesets[1];
+    self.tilesets = self.source.tilesets;
+    for index, tileset in pairs(self.tilesets) do
+      local imageFilename = string.gsub(tileset.image, "%.%./%.%.", "asset");
+      tileset.tilesetImage = love.graphics.newImage(imageFilename);
+    end
 
     self.tiles = {};
     self.walls = {};
@@ -21,7 +23,7 @@ Floor = Class {
     self.sourceNodes = {};
 
     for index, layer in pairs(self.source.layers) do
-      if layer.name == "Floor" then
+      if layer.type == "tilelayer" then
         table.insert(self.tiles, layer);
       elseif layer.name == "Wall" then
         self:addWalls(layer);
@@ -112,7 +114,6 @@ function Floor:drawTile(tile, camera)
 
 	local curIndex = 1;
 	local tileIndex = 0;
-	local numHorizTiles = self.tilesetData.imagewidth / self.tilesetData.tilewidth;
 	local quad = {};
 	local cx, cy = camera:position();
 	local qx, qy;
@@ -120,8 +121,8 @@ function Floor:drawTile(tile, camera)
 
 	for y = 1, tile.height do
 		for x = 1, tile.width do
-			dx = (x - 1) * (self.tilesetData.tilewidth) + self.origin.x;
-			dy = (y - 1) * (self.tilesetData.tileheight) + self.origin.y;
+			dx = (x - 1) * (self.source.tilewidth) + self.origin.x;
+			dy = (y - 1) * (self.source.tileheight) + self.origin.y;
 
 			-- Only draw if inside the camera frame
 			if (dx > cx - SCREEN_WIDTH / 2 - 100
@@ -135,26 +136,35 @@ function Floor:drawTile(tile, camera)
 				tileIndex = tile.data[curIndex];
 
 				if tileIndex ~= 0 then
-					qx = tileIndex;
+          local tilesetData = nil;
+          for index, tileset in pairs(self.tilesets) do
+            if tileIndex >= tileset.firstgid then
+              tilesetData = tileset;
+            end
+          end
+
+          local numHorizTiles = tilesetData.imagewidth / tilesetData.tilewidth;
+
+					qx = tileIndex - tilesetData.firstgid + 1;
 					while qx > numHorizTiles do
 						qx = qx - numHorizTiles;
 						qy = qy + 1;
 					end
 
-					qx = (qx - 1) * self.tilesetData.tilewidth;
-					qy = (qy - 1) * self.tilesetData.tileheight;
+					qx = (qx - 1) * self.source.tilewidth;
+					qy = (qy - 1) * self.source.tileheight;
 
 					quad = love.graphics.newQuad(
 						qx,
 						qy,
-						self.tilesetData.tilewidth,
-						self.tilesetData.tileheight,
-						self.tilesetData.imagewidth,
-						self.tilesetData.imageheight
+						self.source.tilewidth,
+						self.source.tileheight,
+						tilesetData.imagewidth,
+						tilesetData.imageheight
 					);
 
 					love.graphics.draw(
-						self.tilesetImage,
+						tilesetData.tilesetImage,
 						quad,
 						dx, dy
 					);
