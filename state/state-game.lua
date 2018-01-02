@@ -355,7 +355,7 @@ function State_Game:update(dt)
 		usedItem:update(dt);
 		if usedItem.active then
 			table.insert(activeUsedItems, usedItem);
-		else
+		elseif BumpWorld:hasItem(usedItem) then
 			BumpWorld:remove(usedItem);
 		end
 	end
