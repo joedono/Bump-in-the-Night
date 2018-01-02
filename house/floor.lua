@@ -50,8 +50,8 @@ function Floor:addWalls(layer)
     wall.y = wall.y + self.origin.y;
 
     LightWorld:newRectangle(
-      wall.x + wall.width / 2 + self.origin.x,
-      wall.y + wall.height / 2 + self.origin.y,
+      wall.x + wall.width / 2,
+      wall.y + wall.height / 2,
       wall.width,
       wall.height
     );
