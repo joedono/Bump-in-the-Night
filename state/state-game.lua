@@ -8,10 +8,10 @@ require "house/path-node";
 require "used-items/axe";
 require "used-items/blood-pool";
 require "used-items/bucket-water";
-require "used-items/bullets";
 require "used-items/lighter";
 require "used-items/meat";
 require "used-items/salt";
+require "used-items/shotgun-blast";
 require "used-items/stake";
 require "used-items/taser";
 require "used-items/trap";
@@ -24,6 +24,13 @@ function State_Game:init()
 		ambient = {0, 0, 0},
 		shadowBlur = 0.0
 	});
+
+	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
+	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
+
+	self.usedItemImages = {
+		"shotgun-blast" = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
+	};
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -31,9 +38,6 @@ function State_Game:enter(previous, scenarioId)
   for index, item in pairs(items) do
     BumpWorld:remove(item);
   end
-
-	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
-	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
 	self.inventory = {};
 	self.selectedItemIndex = 1;
@@ -461,7 +465,14 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
 			-- Fire Shotgun
-			table.insert(self.usedItems, Bullets(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.player.facing.x, self.player.facing.y));
+			table.insert(
+				self.usedItems,
+				Shotgun_Blast(
+					self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+					self.player.facing.x, self.player.facing.y,
+					self.usedItemImages["shotgun-blast"]
+				)
+			);
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
 		-- Load Shotgun

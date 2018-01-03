@@ -1,5 +1,5 @@
 -- Fired from the shotgun
-Bullets = Class {
+Shotgun_Blast = Class {
 	init = function(self, originX, originY, dirX, dirY)
 		local dirVector = Vector(dirX, dirY);
 		dirVector:normalizeInplace();
@@ -40,12 +40,12 @@ Bullets = Class {
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
 		self.activeTimer = 0.25;
-		self.type = "placed-bullets";
+		self.type = "placed-shotgun-blash";
 		self.active = true;
 	end
 }
 
-function Bullets:update(dt)
+function Shotgun_Blast:update(dt)
   if not self.active then
     return;
   end
@@ -56,7 +56,7 @@ function Bullets:update(dt)
 	end
 end
 
-function Bullets:draw()
+function Shotgun_Blast:draw()
   if not self.active then
     return;
   end
