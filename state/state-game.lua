@@ -29,7 +29,7 @@ function State_Game:init()
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
 	self.usedItemImages = {
-		"shotgun-blast" = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
+		["shotgun-blast"] = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
 	};
 end
 
@@ -561,7 +561,7 @@ function State_Game:areEnemiesDown()
 end
 
 function State_Game:winGame()
-	-- TODO Win Game
+	print("I'M THE WINNER");
 end
 
 function State_Game:draw()
@@ -599,7 +599,9 @@ function State_Game:drawGame()
 	end
 
 	for index, placedItem in pairs(self.usedItems) do
-		placedItem:draw();
+		if placedItem.belowPlayer then
+			placedItem:draw();
+		end
 	end
 
 	if DRAW_PATHS then
@@ -610,6 +612,12 @@ function State_Game:drawGame()
 
 	self.player:draw();
 	self.monsterManager:draw();
+
+	for index, placedItem in pairs(self.usedItems) do
+		if not placedItem.belowPlayer then
+			placedItem:draw();
+		end
+	end
 end
 
 function State_Game:drawHUD()

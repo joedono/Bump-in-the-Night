@@ -1,12 +1,12 @@
 -- Fired from the shotgun
 Shotgun_Blast = Class {
-	init = function(self, originX, originY, dirX, dirY)
+	init = function(self, originX, originY, dirX, dirY, image)
 		local dirVector = Vector(dirX, dirY);
 		dirVector:normalizeInplace();
-		dirVector = dirVector * SHOTGUN_RANGE;
 
-		local insideVector = Vector(originX, originY);
-		local outsideVector = insideVector + dirVector;
+		offsetVector = dirVector * (PLAYER_WIDTH / 2 - 7);
+		local insideVector = Vector(originX, originY) + offsetVector;
+		local outsideVector = insideVector + (dirVector * SHOTGUN_RANGE) + offsetVector;
 
 		-- Get outside points of the shotgun bounded box
 		local x1 = math.min(insideVector.x, outsideVector.x);
@@ -39,8 +39,19 @@ Shotgun_Blast = Class {
 
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
-		self.activeTimer = 0.25;
-		self.type = "placed-shotgun-blash";
+		self.rotation = math.angle(0, 0, dirY, dirX);
+		if self.rotation < 0 then
+	    self.rotation = self.rotation + math.pi * 2;
+	  end
+
+		self.image = image;
+		self.imageData = {
+			w = image:getWidth(),
+			h = image:getHeight();
+		};
+		self.activeTimer = 0.1;
+		self.belowPlayer = false;
+		self.type = "placed-shotgun-blast";
 		self.active = true;
 	end
 }
@@ -49,6 +60,17 @@ function Shotgun_Blast:update(dt)
   if not self.active then
     return;
   end
+
+	local actualX, actualY, cols, len = BumpWorld:check(self, self.box.x, self.box.y, shotgunBlastCollision);
+
+	for i = 1, len do
+		local col = cols[i];
+		if col.other.monsterType == "wolf" then
+			if col.other.state == "trapped" then
+				col.other.state = "dead";
+			end
+		end
+	end
 
 	self.activeTimer = self.activeTimer - dt;
 	if self.activeTimer < 0 then
@@ -61,6 +83,14 @@ function Shotgun_Blast:draw()
     return;
   end
 
-	love.graphics.setColor(255, 255, 255);
-	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.w, self.box.h);
+	love.graphics.draw(
+		self.image,
+		self.box.x + self.box.w / 2,
+		self.box.y + self.box.h / 2,
+		self.rotation,
+    1,
+    1,
+		self.imageData.w / 2,
+		self.imageData.h / 2
+	);
 end

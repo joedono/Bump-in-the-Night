@@ -58,6 +58,14 @@ monsterCollision = function(monster, other)
   return nil;
 end
 
+shotgunBlastCollision = function(shotgunBlast, other)
+  if other.type == "monster" then
+    return "cross";
+  end
+
+  return nil;
+end
+
 -- Says which objects should be considered when asked "Can I move from here to there?"
 canMoveFilter = function(other)
   if other.type == "wall" then

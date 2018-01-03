@@ -31,6 +31,7 @@ Monster_Wolf = Class {
 
 		self.state = "idle";
 		self.stateTimer = 5;
+		self.monsterType = "wolf";
 		self.type = "monster";
 		self.active = true;
 	end
@@ -415,7 +416,7 @@ function Monster_Wolf:followPath(dt, speed)
 		end
 
 		if col.other.type == "placed-shotgun-blast" then
-			if sef.state == "trapped" then
+			if self.state == "trapped" then
 				col.other.active = false;
 				self.state = "dead";
 			else
@@ -458,7 +459,7 @@ function Monster_Wolf:updatePosition(dt)
 end
 
 function Monster_Wolf:draw()
-	if not self.active or self.state == "dead" then
+	if not self.active then
 		return;
 	end
 
@@ -466,11 +467,13 @@ function Monster_Wolf:draw()
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
 	-- Draw eyes
-	love.graphics.setColor(255, 0, 0);
-	love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
-	love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
+	if self.state ~= "dead" then
+		love.graphics.setColor(255, 0, 0);
+		love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
+		love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
+	end
 
-	if DRAW_MONSTER_PATH then
+	if DRAW_MONSTER_PATH and self.state ~= "dead" then
 		if self.path ~= nil then
 			love.graphics.setColor(255, 0, 0);
 			for index, path in pairs(self.path) do
@@ -484,7 +487,7 @@ function Monster_Wolf:draw()
 		end
 	end
 
-	if DRAW_MONSTER_SENSES then
+	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
 		love.graphics.setColor(255, 255, 255);
 		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_WOLF_RUN_HEAR_DISTANCE);
 		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_WOLF_WALK_HEAR_DISTANCE);
