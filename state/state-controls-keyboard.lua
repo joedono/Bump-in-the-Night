@@ -1,33 +1,33 @@
-State_Controls = {};
+State_Controls_Keyboard = {};
 
-function State_Controls:init()
-	self.image = love.graphics.newImage("asset/image/screen/controls.png");
+function State_Controls_Keyboard:init()
+	self.image = love.graphics.newImage("asset/image/screen/controls-keyboard.png");
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 30);
 	self.controlsFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
 end
 
-function State_Controls:enter()
+function State_Controls_Keyboard:enter()
 	love.graphics.setBackgroundColor(0, 0, 0);
 end
 
-function State_Controls:keypressed(key, unicode)
+function State_Controls_Keyboard:keypressed(key, unicode)
 	GameState.switch(State_Title, false);
 end
 
-function State_Controls:gamepadpressed(joystick, button)
+function State_Controls_Keyboard:gamepadpressed(joystick, button)
 	GameState.switch(State_Title, false);
 end
 
-function State_Controls:update(dt)
+function State_Controls_Keyboard:update(dt)
 end
 
-function State_Controls:draw()
+function State_Controls_Keyboard:draw()
 	CANVAS:renderTo(function()
     love.graphics.clear();
 		love.graphics.setColor(255, 0, 0);
 		love.graphics.draw(self.image, 0, 0);
 		love.graphics.setFont(self.titleFont);
-		love.graphics.printf("Controls", 0, 12, SCREEN_WIDTH, "center");
+		love.graphics.printf("Keyboard", 0, 12, SCREEN_WIDTH, "center");
 
 		love.graphics.setFont(self.controlsFont);
 		love.graphics.print("L1/LB - Previous Item", 50, 195);
@@ -39,7 +39,7 @@ function State_Controls:draw()
 		love.graphics.print("R Joystick - Flashlight", 1040, 725);
 		love.graphics.print("Use Item", 1275, 455);
 
-		love.graphics.printf("Press any button to go back", 0, 840, SCREEN_WIDTH, "center");
+		love.graphics.printf("Press any key to go back", 0, 840, SCREEN_WIDTH, "center");
   end);
 
   love.graphics.setColor(255, 255, 255);
