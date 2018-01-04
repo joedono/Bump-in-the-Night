@@ -378,6 +378,12 @@ function Monster_Wolf:followPath(dt, speed)
 
 	for i = 1, len do
     local col = cols[i];
+		if KILL_PLAYER and col.other.type == "player" and col.other.active and
+			self.state ~= "smells-meat" and self.state ~= "eating" and self.state ~= "trapped" and self.state ~= "dead" then
+			col.other.active = false;
+			self.parentManager.parentStateGame:loseGame();
+		end
+
     if col.other.type == "door" then
       if not col.other.isOpen then
         col.other:open();

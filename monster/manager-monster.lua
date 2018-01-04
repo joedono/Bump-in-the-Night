@@ -26,6 +26,20 @@ function Manager_Monster:randomPathNode()
 	return self.pathNodes[love.math.random(self.numPathNodes)];
 end
 
+function Manager_Monster:areEnemiesDown()
+	local allEnemiesDown = true;
+
+	if self.scenarioId == "wolf" then
+		for index, monster in pairs(self.monsters) do
+			if monster.state ~= "dead" then
+				allEnemiesDown = false;
+			end
+		end
+	end
+
+	return allEnemiesDown;
+end
+
 function Manager_Monster:update(dt)
 	for index, monster in pairs(self.monsters) do
 		monster:update(dt);

@@ -489,7 +489,7 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "cellphone_dead" then
 		-- Do nothing
 	elseif selectedItem.itemType == "cellphone_live" then
-		if self:areEnemiesDown() then
+		if self.monsterManager:areEnemiesDown() then
 			self:winGame();
 		end
 	elseif selectedItem.itemType == "cellphone_battery" then
@@ -555,13 +555,12 @@ function State_Game:getPlacedItem(itemType)
 	return nil;
 end
 
-function State_Game:areEnemiesDown()
-	-- TODO
-	return false;
-end
-
 function State_Game:winGame()
 	print("I'M THE WINNER");
+end
+
+function State_Game:loseGame()
+	print("I'M THE LOSER");
 end
 
 function State_Game:draw()
