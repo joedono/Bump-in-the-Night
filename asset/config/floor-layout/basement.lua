@@ -14,7 +14,7 @@ return {
     {
       name = "Main Floor",
       firstgid = 1,
-      filename = "../../wip/config/base-layout.tsx",
+      filename = "../../../wip/config/base-layout.tsx",
       tilewidth = 32,
       tileheight = 32,
       spacing = 0,
@@ -40,7 +40,7 @@ return {
     {
       name = "Decorations",
       firstgid = 118,
-      filename = "../../wip/config/decorations.tsx",
+      filename = "../../../wip/config/decorations.tsx",
       tilewidth = 32,
       tileheight = 32,
       spacing = 0,
