@@ -30,14 +30,14 @@ function State_Controls_Keyboard:draw()
 		love.graphics.printf("Keyboard", 0, 12, SCREEN_WIDTH, "center");
 
 		love.graphics.setFont(self.controlsFont);
-		love.graphics.print("L1/LB - Previous Item", 50, 195);
-		love.graphics.print("Select/Back - Quit", 630, 125);
-		love.graphics.print("Start - Pause", 800, 175);
-		love.graphics.print("R1/RB - Next Item", 1315, 195);
-		love.graphics.print("R2/RT - Run", 1315, 105);
-		love.graphics.print("DPad/L Joystick - Walk", 210, 725);
-		love.graphics.print("R Joystick - Flashlight", 1040, 725);
-		love.graphics.print("Use Item", 1275, 455);
+    love.graphics.print("Walk", 280, 390);
+    love.graphics.print("Flashlight", 660, 390);
+    love.graphics.print("Confirm/Pause", 1290, 320);
+    love.graphics.print("Quit", 1290, 410);
+    love.graphics.print("Previous Item", 300, 575);
+		love.graphics.print("Next Item", 300, 675);
+    love.graphics.print("Use Item", 705, 605);
+		love.graphics.print("Run", 1290, 605);
 
 		love.graphics.printf("Press any key to go back", 0, 840, SCREEN_WIDTH, "center");
   end);
