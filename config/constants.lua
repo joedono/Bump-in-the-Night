@@ -2,7 +2,17 @@ SCREEN_WIDTH = 1600;
 SCREEN_HEIGHT = 900;
 SCREEN_WIDTH_WHOLE_HOUSE = 5000;
 SCREEN_HEIGHT_WHOLE_HOUSE = 3800;
-FULLSCREEN = false;
+FULLSCREEN = true;
+
+-- Debug Variables
+DRAW_BOXES = false;
+DRAW_PORTALS = true;
+DRAW_PATHS = false;
+DRAW_LIGHTS = true;
+KILL_PLAYER = false;
+DRAW_MONSTER_PATH = false;
+DRAW_MONSTER_SENSES = false;
+DRAW_ENTIRE_HOUSE = false;
 
 KEY_LEFT = "a";
 KEY_RIGHT = "d";
@@ -161,14 +171,4 @@ SCENARIO_ITEMS = {
   ["alien"] = {"music_box", "battery", "foil"},
   ["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
   ["elder_god"] = {"crystal", "scroll"}
-}
-
--- Debug Variables
-DRAW_BOXES = false;
-DRAW_PORTALS = true;
-DRAW_PATHS = false;
-DRAW_LIGHTS = false;
-KILL_PLAYER = false;
-DRAW_MONSTER_PATH = false;
-DRAW_MONSTER_SENSES = false;
-DRAW_ENTIRE_HOUSE = false;
+};
