@@ -47,6 +47,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
+	-- GameState.switch(State_Splash_Hive);
 	GameState.switch(State_Game, "wolf");
 end
 
