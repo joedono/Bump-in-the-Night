@@ -557,7 +557,7 @@ function State_Game:winGame()
 end
 
 function State_Game:loseGame()
-	print("I'M THE LOSER");
+	GameState.push(State_Losing);
 end
 
 function State_Game:draw()
