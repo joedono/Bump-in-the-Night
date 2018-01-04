@@ -62,7 +62,7 @@ function State_Scenario_Select:gamepadpressed(joystick, button)
 
 	self:fixSelection();
 
-	if button == GAMEPAD_START then
+	if button == GAMEPAD_START or button == GAMEPAD_ITEM_USE then
 		self:selectScenario();
 	end
 end
