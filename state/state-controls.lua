@@ -4,6 +4,7 @@ function State_Controls:init()
 end
 
 function State_Controls:enter()
+	love.graphics.setBackgroundColor(0, 0, 0);
 end
 
 function State_Controls:keypressed(key, unicode)

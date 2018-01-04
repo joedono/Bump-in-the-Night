@@ -26,6 +26,7 @@ function State_Splash_Hive:init()
 end
 
 function State_Splash_Hive:enter()
+  love.graphics.setBackgroundColor(0, 0, 0);
   self.alphas = {
     imageAlpha = 0,
     eyeAlpha = 0,

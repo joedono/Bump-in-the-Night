@@ -36,6 +36,7 @@ function State_Game:init()
 end
 
 function State_Game:enter(previous, scenarioId)
+	love.graphics.setBackgroundColor(0, 0, 0);
 	local items = BumpWorld:getItems();
   for index, item in pairs(items) do
     BumpWorld:remove(item);

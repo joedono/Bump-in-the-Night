@@ -7,6 +7,7 @@ function State_Scenario_Select:init()
 end
 
 function State_Scenario_Select:enter()
+	love.graphics.setBackgroundColor(0, 0, 0);
 	self.indicatorVisible = true;
 	self.selection = {
 		x = 2,

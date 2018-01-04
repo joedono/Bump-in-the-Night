@@ -6,6 +6,7 @@ function State_Title:init()
 end
 
 function State_Title:enter()
+	love.graphics.setBackgroundColor(0, 0, 0);
 	self.alphas = {
 		titleAlpha = 0
 	};
