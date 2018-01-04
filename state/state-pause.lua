@@ -1,7 +1,7 @@
 State_Pause = {};
 
 function State_Pause:init()
-  self.font = love.graphics.newFont("asset/font/RifficFree-bold.ttf", 100);
+  self.font = love.graphics.newFont("asset/font/Fiendish.ttf", 100);
 end
 
 function State_Pause:enter(from)
