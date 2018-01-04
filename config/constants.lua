@@ -164,6 +164,14 @@ INVENTORY_MAP = {
 	}
 };
 
+SCENARIO_SELECTION = {
+  {"wolf", "bear", "burgler", "arson"},
+  {"killer", "random", "vampire"},
+  {"ghost", "alien", "zombie", "elder_god"}
+};
+
+SCENARIO_RANDOM = {"wolf", "bear", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
+
 SCENARIO_ITEMS = {
   ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
   ["bear"] = {"meat", "trap", "shotgun", "shotgun_rounds"},

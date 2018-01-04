@@ -99,6 +99,13 @@ function State_Scenario_Select:fixSelection()
 end
 
 function State_Scenario_Select:selectScenario()
+	local scenarioDescription = SCENARIO_SELECTION[self.selection.y][self.selection.x];
+
+	if scenarioDescription == "random" then
+		scenarioDescription = SCENARIO_RANDOM[love.math.random(10)];
+	end
+
+	GameState.switch(State_Game, scenarioDescription)
 end
 
 function State_Scenario_Select:draw()
@@ -110,6 +117,13 @@ function State_Scenario_Select:draw()
 		love.graphics.setColor(255, 0, 0);
 		love.graphics.setFont(self.titleFont);
 		love.graphics.printf("Select a Threat", 0, 15, SCREEN_WIDTH, "center");
+
+		love.graphics.print("?", 770, 315);
+
+		local scenarioDescription = SCENARIO_SELECTION[self.selection.y][self.selection.x];
+		scenarioDescription = scenarioDescription:gsub("_", " ");
+		scenarioDescription = scenarioDescription:gsub("(%l)(%w*)", function(a,b) return string.upper(a) .. b end);
+		love.graphics.printf(scenarioDescription, 0, 650, SCREEN_WIDTH, "center");
 
 		if self.indicatorVisible then
 			love.graphics.setColor(255, 255, 255);
