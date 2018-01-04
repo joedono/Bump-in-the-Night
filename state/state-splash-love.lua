@@ -1,8 +1,11 @@
 State_Splash_Love = {};
 
+function State_Splash_Love:init()
+  self.splashLib = require "lib/o-ten-one";
+end
+
 function State_Splash_Love:enter()
-  local splash = require "lib/o-ten-one";
-  self.splash = splash();
+  self.splash = self.splashLib();
   self.splash.onDone = self.onDone;
 end
 
