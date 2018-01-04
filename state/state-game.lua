@@ -520,33 +520,19 @@ function State_Game:useItem()
 			self.inventory = newInventory;
 		end
 	elseif selectedItem.itemType == "bucket" then
-
 	elseif selectedItem.itemType == "fuse" then
-
 	elseif selectedItem.itemType == "book" then
-
 	elseif selectedItem.itemType == "cross" then
-
 	elseif selectedItem.itemType == "stake" then
-
 	elseif selectedItem.itemType == "knife" then
-
 	elseif selectedItem.itemType == "music_box" then
-
 	elseif selectedItem.itemType == "battery" then
-
 	elseif selectedItem.itemType == "foil" then
-
 	elseif selectedItem.itemType == "axe" then
-
 	elseif selectedItem.itemType == "gasoline" then
-
 	elseif selectedItem.itemType == "lighter" then
-
 	elseif selectedItem.itemType == "crystal" then
-
 	elseif selectedItem.itemType == "scroll" then
-
 	end
 end
 

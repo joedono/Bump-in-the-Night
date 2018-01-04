@@ -14,12 +14,24 @@ Manager_Monster = Class {
 
 function Manager_Monster:spawnMonsters(scenarioId)
 	self.scenarioId = scenarioId;
-	local spawnPoint = self:randomPathNode();
-	table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
-	spawnPoint = self:randomPathNode();
-	table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
-	spawnPoint = self:randomPathNode();
-	table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+
+	if scenarioId == "wolf" then
+		local spawnPoint = self:randomPathNode();
+		table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		spawnPoint = self:randomPathNode();
+		table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		spawnPoint = self:randomPathNode();
+		table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+	elseif scenarioId == "bear" then
+	elseif scenarioId == "burgler" then
+	elseif scenarioId == "arson" then
+	elseif scenarioId == "killer" then
+	elseif scenarioId == "vampire" then
+	elseif scenarioId == "ghost" then
+	elseif scenarioId == "alien" then
+	elseif scenarioId == "zombie" then
+	elseif scenarioId == "elder_god" then
+	end
 end
 
 function Manager_Monster:randomPathNode()
