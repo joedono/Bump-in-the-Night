@@ -54,7 +54,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
-	GameState.switch(State_Game, "wolf");
+	GameState.switch(State_Title);
 end
 
 function love.keypressed(key, unicode)
