@@ -143,10 +143,10 @@ function Player:updatePosition(dt)
 end
 
 function Player:updateLights()
-  local lx = 0;
-  local ly = 0;
-
   if self.leftLightPressed or self.rightLightPressed or self.upLightPressed or self.downLightPressed then
+    local lx = 0;
+    local ly = 0;
+
     if self.leftLightPressed then
       lx = lx - 1;
     end
@@ -162,12 +162,14 @@ function Player:updateLights()
     if self.downLightPressed then
       ly = ly + 1;
     end
-  else
-    -- TODO Handle gamepad flashlight input
+
+    self.flashlightFacing.x = lx;
+    self.flashlightFacing.y = ly;
   end
 
-  if lx ~= 0 or ly ~= 0 then
-    local facing = math.angle(0, 0, ly, lx);
+  if (self.flashlightFacing.x ~= 0 or self.flashlightFacing.y ~= 0) and
+    math.dist(0, 0, self.flashlightFacing.x, self.flashlightFacing.y) > GAMEPAD_DEADZONE then
+    local facing = math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x);
     if facing < 0 then
       facing = facing + math.pi * 2;
     end
