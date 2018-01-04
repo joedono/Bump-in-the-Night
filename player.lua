@@ -3,7 +3,12 @@ Player = Class {
     self.parent = parent;
     self.image = love.graphics.newImage("asset/image/player.png");
 
-    self.box = PLAYER_INITIAL_DIMENSIONS;
+    self.box = {
+      x = PLAYER_INITIAL_DIMENSIONS.x,
+      y = PLAYER_INITIAL_DIMENSIONS.y,
+      w = PLAYER_INITIAL_DIMENSIONS.w,
+      h = PLAYER_INITIAL_DIMENSIONS.h
+    };
     self.velocity = { x = 0, y = 0 };
     self.gamepadVelocity = { x = 0, y = 0 };
     self.facing = { x = 0, y = 0 };

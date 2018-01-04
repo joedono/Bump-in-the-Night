@@ -41,6 +41,9 @@ function State_Game:enter(previous, scenarioId)
     BumpWorld:remove(item);
   end
 
+	LightWorld:clearLights();
+	LightWorld:clearBodies();
+
 	self.inventory = {};
 	self.selectedItemIndex = 1;
 	self.player = Player(self);
