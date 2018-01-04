@@ -55,7 +55,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
-	GameState.switch(State_Title);
+	GameState.switch(State_Scenario_Select);
 end
 
 function love.keypressed(key, unicode)
