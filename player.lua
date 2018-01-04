@@ -47,6 +47,7 @@ function Player:resetKeys()
 end
 
 function Player:toggleFlashlight()
+  -- TODO
 end
 
 function Player:update(dt)

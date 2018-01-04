@@ -288,7 +288,7 @@ function State_Game:gamepadpressed(joystick, button)
     self.player.downPressed = true;
   end
 
-	if key == GAMEPAD_FLASHLIGHT then
+	if button == GAMEPAD_FLASHLIGHT then
     self.player:toggleFlashlight();
   end
 
@@ -296,15 +296,15 @@ function State_Game:gamepadpressed(joystick, button)
     self.player.runPressed = true;
   end
 
-	if key == GAMEPAD_ITEM_LEFT then
+	if button == GAMEPAD_ITEM_LEFT then
 		self:selectItem(-1);
   end
 
-	if key == GAMEPAD_ITEM_RIGHT then
+	if button == GAMEPAD_ITEM_RIGHT then
     self:selectItem(1);
   end
 
-	if key == GAMEPAD_ITEM_USE then
+	if button == GAMEPAD_ITEM_USE then
     self:useItem();
   end
 
@@ -348,6 +348,18 @@ function State_Game:gamepadaxis(joystick, axis, value)
 		self.player.flashlightFacing.x = value;
 	elseif axis == "righty" then -- Y Flashlight
 		self.player.flashlightFacing.y = value;
+	elseif axis == "triggerleft" then -- L2
+		if value > GAMEPAD_DEADZONE then
+			self.player.runPressed = true;
+		elseif value == 0 then
+			self.player.runPressed = false;
+		end
+	elseif axis == "triggerright" then -- R2
+		if value > GAMEPAD_DEADZONE then
+			self.player.runPressed = true;
+		elseif value == 0 then
+			self.player.runPressed = false;
+		end
 	end
 end
 

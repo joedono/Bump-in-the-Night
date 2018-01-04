@@ -41,9 +41,9 @@ GAMEPAD_UP = "dpup";
 GAMEPAD_DOWN = "dpdown";
 GAMEPAD_FLASHLIGHT = "";
 GAMEPAD_RUN = "";
-GAMEPAD_ITEM_LEFT = "rightshoulder";
-GAMEPAD_ITEM_RIGHT = "leftshoulder";
-GAMEPAD_ITEM_USE = "";
+GAMEPAD_ITEM_LEFT = "leftshoulder";
+GAMEPAD_ITEM_RIGHT = "rightshoulder";
+GAMEPAD_ITEM_USE = "a";
 GAMEPAD_START = "start";
 GAMEPAD_QUIT = "back";
 
