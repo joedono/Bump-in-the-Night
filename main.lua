@@ -26,6 +26,7 @@ require "state/state-won";
 
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
+	love.mouse.setVisible(false);
 
 	if DRAW_ENTIRE_HOUSE then
 		SCREEN_WIDTH = SCREEN_WIDTH_WHOLE_HOUSE;
@@ -53,7 +54,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
-	GameState.switch(State_Splash_Hive);
+	GameState.switch(State_Game, "wolf");
 end
 
 function love.keypressed(key, unicode)

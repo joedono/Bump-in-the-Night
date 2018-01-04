@@ -25,6 +25,10 @@ function State_Game:init()
 		shadowBlur = 0.0
 	});
 
+	-- LightWorld:refreshScreenSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	LightWorld:setAmbientColor(150, 150, 150);
+	-- LightWorld:setScale(CANVAS_SCALE);
+
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
@@ -402,7 +406,7 @@ function State_Game:updateCamera(x, y)
 	cameraY = math.floor(cameraY);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
-	LightWorld:setTranslation(-cameraX, -cameraY, 1);
+	LightWorld:setTranslation(-cameraX, -cameraY);
 end
 
 function State_Game:getPlayerFloor()
