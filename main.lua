@@ -28,6 +28,7 @@ require "state/state-won";
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
 	love.mouse.setVisible(false);
+	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	if DRAW_ENTIRE_HOUSE then
 		SCREEN_WIDTH = SCREEN_WIDTH_WHOLE_HOUSE;
@@ -38,7 +39,6 @@ function love.load()
 
   local w = love.graphics.getWidth();
   local h = love.graphics.getHeight();
-
   local scaleX = 1;
   local scaleY = 1;
 
@@ -48,11 +48,8 @@ function love.load()
   end
 
   CANVAS_SCALE = math.min(scaleX, scaleY);
-
   CANVAS_OFFSET_X = w / 2 - (SCREEN_WIDTH * CANVAS_SCALE) / 2;
   CANVAS_OFFSET_Y = h / 2 - (SCREEN_HEIGHT * CANVAS_SCALE) / 2;
-
-	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
 	GameState.switch(State_Title);
