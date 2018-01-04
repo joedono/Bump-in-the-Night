@@ -1,5 +1,8 @@
 State_Won = {};
 
+function State_Won:init()
+end
+
 function State_Won:enter()
 end
 

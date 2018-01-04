@@ -1,5 +1,8 @@
 State_Scenario_Select = {};
 
+function State_Scenario_Select:init()
+end
+
 function State_Scenario_Select:enter()
 end
 

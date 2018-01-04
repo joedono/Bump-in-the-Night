@@ -1,5 +1,8 @@
 State_Winning = {};
 
+function State_Winning:init()
+end
+
 function State_Winning:enter()
 end
 
