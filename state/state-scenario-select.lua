@@ -1,19 +1,15 @@
 State_Scenario_Select = {};
 
 function State_Scenario_Select:enter()
-
 end
 
 function State_Scenario_Select:keypressed(key, unicode)
-
 end
 
 function State_Scenario_Select:gamepadpressed(joystick, button)
-
 end
 
 function State_Scenario_Select:update(dt)
-
 end
 
 function State_Scenario_Select:draw()
