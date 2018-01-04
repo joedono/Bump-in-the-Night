@@ -76,7 +76,7 @@ function State_Title:gamepadpressed(joystick, button)
 		end
 	end
 
-	if button == GAMEPAD_START then
+	if button == GAMEPAD_START or button == GAMEPAD_ITEM_USE then
 		if self.menuSelection == 1 then
 			GameState.switch(State_Scenario_Select);
 		elseif self.menuSelection == 2 then

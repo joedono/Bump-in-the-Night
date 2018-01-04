@@ -52,7 +52,7 @@ function love.load()
   CANVAS_OFFSET_Y = h / 2 - (SCREEN_HEIGHT * CANVAS_SCALE) / 2;
 
 	GameState.registerEvents();
-	GameState.switch(State_Game);
+	GameState.switch(State_Title);
 end
 
 function love.keypressed(key, unicode)
