@@ -5,7 +5,7 @@ function State_Title:init()
 	self.menuFont = love.graphics.newFont("asset/font/Fiendish.ttf", 30);
 end
 
-function State_Title:enter()
+function State_Title:enter(previous, animate)
 	love.graphics.setBackgroundColor(0, 0, 0);
 	self.alphas = {
 		titleAlpha = 0
@@ -14,11 +14,21 @@ function State_Title:enter()
 	self.menuSelection = 1;
 
 	Timer.clear();
-	Timer.script(function(wait)
-    Timer.tween(5, self.alphas, {titleAlpha = 255}, "in-linear");
-    wait(5);
+
+	if animate == nil then
+		animate = true;
+	end
+
+	if animate then
+		Timer.script(function(wait)
+	    Timer.tween(5, self.alphas, {titleAlpha = 255}, "in-linear");
+	    wait(5);
+			self.showMenu = true;
+	  end);
+	else
+		self.alphas.titleAlpha = 255;
 		self.showMenu = true;
-  end);
+	end
 end
 
 function State_Title:keypressed(key, unicode)

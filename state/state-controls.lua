@@ -8,9 +8,11 @@ function State_Controls:enter()
 end
 
 function State_Controls:keypressed(key, unicode)
+	GameState.switch(State_Title, false);
 end
 
 function State_Controls:gamepadpressed(joystick, button)
+	GameState.switch(State_Title, false);
 end
 
 function State_Controls:update(dt)
