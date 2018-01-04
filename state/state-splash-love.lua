@@ -7,7 +7,8 @@ function State_Splash_Love:enter()
 end
 
 function State_Splash_Love:onDone()
-  GameState.switch(State_Game, "wolf");
+  love.graphics.setNewFont(14);
+  GameState.switch(State_Title);
 end
 
 function State_Splash_Love:keypressed(key, unicode)

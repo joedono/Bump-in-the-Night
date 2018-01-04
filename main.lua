@@ -13,10 +13,16 @@ require "lib/pathfinding";
 require "config/collisions";
 require "config/constants";
 
-require "state/state-splash-love";
 require "state/state-splash-hive";
+require "state/state-splash-love";
+require "state/state-title";
+require "state/state-scenario-select";
 require "state/state-game";
 require "state/state-pause";
+require "state/state-losing";
+require "state/state-lost";
+require "state/state-winning";
+require "state/state-won";
 
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
@@ -47,8 +53,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	GameState.registerEvents();
-	-- GameState.switch(State_Splash_Hive);
-	GameState.switch(State_Game, "wolf");
+	GameState.switch(State_Splash_Hive);
 end
 
 function love.keypressed(key, unicode)
