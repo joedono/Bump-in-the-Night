@@ -47,6 +47,8 @@ function splashlib.new(init)
   init = init or {}
   local self = {}
   local width, height = love.graphics.getDimensions()
+  width = SCREEN_WIDTH;
+  height = SCREEN_HEIGHT;
 
   self.background = init.background == nil and colors.bg or init.background
   self.delay_before = init.delay_before or 0.3
@@ -78,8 +80,8 @@ function splashlib.new(init)
       local ox = rain.ox
       local oy = rain.oy
 
-      local batch_w = 2 * math.ceil(love.graphics.getWidth() / sx) + 2
-      local batch_h = 2 * math.ceil(love.graphics.getHeight() / sy) + 2
+      local batch_w = 2 * math.ceil(width / sx) + 2
+      local batch_h = 2 * math.ceil(height / sy) + 2
 
       batch:clear()
 
@@ -191,7 +193,7 @@ function splashlib.new(init)
   }
   ]]
 
-  self.canvas = love.graphics.newCanvas()
+  self.canvas = love.graphics.newCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
 
   self.elapsed = 0
   self.alpha = 1
@@ -305,6 +307,8 @@ end
 
 function splashlib:draw()
   local width, height = love.graphics.getDimensions()
+  width = SCREEN_WIDTH;
+  height = SCREEN_HEIGHT;
 
   if self.background then
     love.graphics.clear(self.background)
