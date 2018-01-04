@@ -29,6 +29,15 @@ Monster_Wolf = Class {
 		self.speed = 0;
     self.facing = { x = 0, y = 0 };
 
+		self.eyeLights = {
+			LightWorld:newLight(0, 0, 255, 0, 0, 15),
+			LightWorld:newLight(0, 0, 255, 0, 0, 15)
+		};
+
+		self.sightLight = LightWorld:newLight(0, 0, 150, 0, 0, MONSTER_WOLF_SIGHT_DISTANCE);
+		self.sightLight:setDirection(0);
+		self.sightLight:setAngle(MONSTER_WOLF_SIGHT_CONE);
+
 		self.state = "idle";
 		self.stateTimer = 5;
 		self.monsterType = "wolf";
@@ -73,6 +82,8 @@ function Monster_Wolf:update(dt)
 	else
 		error("Invalid State " .. self.state);
 	end
+
+	self:updateLights(dt);
 end
 
 function Monster_Wolf:updateIdle(dt)
@@ -452,6 +463,31 @@ function Monster_Wolf:updatePosition(dt)
 	self.facing.y = self.velocity.y;
 
 	return BumpWorld:move(self, dx, dy, monsterCollision);
+end
+
+function Monster_Wolf:updateLights()
+	if self.state == "dead" then
+		if self.eyeLights ~= nil then
+			LightWorld:remove(self.eyeLights[1]);
+			LightWorld:remove(self.eyeLights[2]);
+			LightWorld:remove(self.sightLight);
+
+			self.eyeLights = nil;
+		end
+
+		return;
+	else
+		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
+		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+
+		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+    if facing < 0 then
+      facing = facing + math.pi * 2;
+    end
+
+    self.sightLight:setDirection(facing);
+		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
+	end
 end
 
 function Monster_Wolf:draw()
