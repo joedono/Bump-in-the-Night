@@ -25,9 +25,7 @@ function State_Game:init()
 		shadowBlur = 0.0
 	});
 
-	-- LightWorld:refreshScreenSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	LightWorld:setAmbientColor(150, 150, 150);
-	-- LightWorld:setScale(CANVAS_SCALE);
+	LightWorld:setScale(CANVAS_SCALE);
 
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
@@ -371,8 +369,8 @@ function State_Game:update(dt)
 
 	self.player:update(dt);
 	self.monsterManager:update(dt);
-	LightWorld:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
+	LightWorld:update(dt);
 end
 
 function State_Game:updateCamera(x, y)
@@ -406,7 +404,7 @@ function State_Game:updateCamera(x, y)
 	cameraY = math.floor(cameraY);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
-	LightWorld:setTranslation(-cameraX, -cameraY);
+	LightWorld:setTranslation(-cameraX * CANVAS_SCALE, -cameraY * CANVAS_SCALE);
 end
 
 function State_Game:getPlayerFloor()
@@ -566,7 +564,11 @@ function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
 		if not DRAW_ENTIRE_HOUSE then
-			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+			if DRAW_LIGHTS then
+				self.camera:attach(0, 0);
+			else
+				self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+			end
 		end
 
 		if DRAW_LIGHTS then
