@@ -372,7 +372,7 @@ function State_Game:update(dt)
 end
 
 function State_Game:updateCamera(x, y)
-	local cameraFocusX, cameraFocusY = self.camera:cameraCoords(x, y);
+	local cameraFocusX, cameraFocusY = self.camera:cameraCoords(x, y, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	local cameraX, cameraY = self.camera:position();
 
 	cameraX = cameraX - SCREEN_WIDTH / 2;
@@ -562,7 +562,7 @@ function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
 		if not DRAW_ENTIRE_HOUSE then
-			self.camera:attach();
+			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		end
 
 		if DRAW_LIGHTS then
