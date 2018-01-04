@@ -44,6 +44,10 @@ function State_Game:enter(previous, scenarioId)
 	LightWorld:clearLights();
 	LightWorld:clearBodies();
 
+	if scenarioId == nil then
+		scenarioId = "wolf";
+	end
+
 	self.inventory = {};
 	self.selectedItemIndex = 1;
 	self.player = Player(self);
@@ -556,7 +560,7 @@ function State_Game:getPlacedItem(itemType)
 end
 
 function State_Game:winGame()
-	print("I'M THE WINNER");
+	GameState.push(State_Winning);
 end
 
 function State_Game:loseGame()

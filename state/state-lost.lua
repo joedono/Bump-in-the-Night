@@ -6,6 +6,7 @@ function State_Lost:init()
 end
 
 function State_Lost:enter()
+	love.graphics.setBackgroundColor(255, 0, 0);
 	self.inputEnabled = false;
 	self.alphas = {
 		titleAlpha = 0,
@@ -43,7 +44,7 @@ end
 
 function State_Lost:draw()
 	CANVAS:renderTo(function()
-    love.graphics.clear(255, 0, 0);
+    love.graphics.clear();
 		love.graphics.setColor(0, 0, 0, self.alphas.titleAlpha);
 		love.graphics.setFont(self.titleFont);
 		love.graphics.printf("You lose", 0, 400, SCREEN_WIDTH, "center");
