@@ -16,6 +16,7 @@ require "config/constants";
 require "state/state-splash-hive";
 require "state/state-splash-love";
 require "state/state-title";
+require "state/state-controls";
 require "state/state-scenario-select";
 require "state/state-game";
 require "state/state-pause";

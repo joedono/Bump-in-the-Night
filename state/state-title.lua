@@ -1,26 +1,127 @@
 State_Title = {};
 
-function State_Title:enter()
+function State_Title:init()
+	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 80);
+	self.menuFont = love.graphics.newFont("asset/font/Fiendish.ttf", 30);
+end
 
+function State_Title:enter()
+	self.alphas = {
+		titleAlpha = 0
+	};
+	self.showMenu = false;
+	self.menuSelection = 1;
+
+	Timer.clear();
+	Timer.script(function(wait)
+    Timer.tween(5, self.alphas, {titleAlpha = 255}, "in-linear");
+    wait(5);
+		self.showMenu = true;
+  end);
 end
 
 function State_Title:keypressed(key, unicode)
+	if not self.showMenu then
+		Timer.clear();
+		self.alphas.titleAlpha = 255;
+		self.showMenu = true;
+		return;
+	end
 
+	if key == KEY_UP or key == KEY_MENU_UP then
+		self.menuSelection = self.menuSelection - 1;
+		if self.menuSelection < 1 then
+			self.menuSelection = 3;
+		end
+	end
+
+	if key == KEY_DOWN or key == KEY_MENU_DOWN then
+		self.menuSelection = self.menuSelection + 1;
+		if self.menuSelection > 3 then
+			self.menuSelection = 1;
+		end
+	end
+
+	if key == KEY_PAUSE then
+		if self.menuSelection == 1 then
+			GameState.switch(State_Scenario_Select);
+		elseif self.menuSelection == 2 then
+			GameState.switch(State_Controls);
+		elseif self.menuSelection == 3 then
+			love.event.quit();
+		end
+	end
 end
 
 function State_Title:gamepadpressed(joystick, button)
+	if not self.showMenu then
+		Timer.clear();
+		self.alphas.titleAlpha = 255;
+		self.showMenu = true;
+		return;
+	end
 
+	if button == GAMEPAD_UP then
+		self.menuSelection = self.menuSelection - 1;
+		if self.menuSelection < 1 then
+			self.menuSelection = 3;
+		end
+	end
+
+	if button == GAMEPAD_DOWN then
+		self.menuSelection = self.menuSelection + 1;
+		if self.menuSelection > 3 then
+			self.menuSelection = 1;
+		end
+	end
+
+	if button == GAMEPAD_START then
+		if self.menuSelection == 1 then
+			GameState.switch(State_Scenario_Select);
+		elseif self.menuSelection == 2 then
+			GameState.switch(State_Controls);
+		elseif self.menuSelection == 3 then
+			love.event.quit();
+		end
+	end
 end
 
 function State_Title:update(dt)
-
+	Timer.update(dt);
 end
 
 function State_Title:draw()
 	CANVAS:renderTo(function()
     love.graphics.clear();
-    love.graphics.setColor(255, 255, 255);
-    love.graphics.print("Bump in the Night", 400, 300);
+		love.graphics.setFont(self.titleFont);
+		love.graphics.setColor(255, 0, 0, self.alphas.titleAlpha);
+    love.graphics.printf("Bump in the Night", 0, 200, SCREEN_WIDTH, "center");
+		love.graphics.setColor(255, 255, 255, 255);
+
+		if self.showMenu then
+			love.graphics.setFont(self.menuFont);
+
+			if self.menuSelection == 1 then
+				love.graphics.setColor(100, 0, 0);
+			else
+				love.graphics.setColor(255, 255, 255);
+			end
+			love.graphics.printf("Start Game", 0, 550, SCREEN_WIDTH, "center");
+
+			if self.menuSelection == 2 then
+				love.graphics.setColor(100, 0, 0);
+			else
+				love.graphics.setColor(255, 255, 255);
+			end
+			love.graphics.printf("Controls", 0, 630, SCREEN_WIDTH, "center");
+
+			if self.menuSelection == 3 then
+				love.graphics.setColor(100, 0, 0);
+			else
+				love.graphics.setColor(255, 255, 255);
+			end
+			love.graphics.printf("Quit", 0, 710, SCREEN_WIDTH, "center");
+		end
   end);
 
   love.graphics.setColor(255, 255, 255);
