@@ -105,6 +105,8 @@ function State_Scenario_Select:selectScenario()
 		scenarioDescription = SCENARIO_RANDOM[love.math.random(10)];
 	end
 
+	scenarioDescription = "wolf";
+
 	GameState.switch(State_Game, scenarioDescription)
 end
 
