@@ -326,10 +326,6 @@ function Monster_Wolf:canHearPlayer()
 		return true;
 	end
 
-	if dist < MONSTER_WOLF_WALK_HEAR_DISTANCE and not self.player.runPressed and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
-		return true;
-	end
-
 	return false;
 end
 
@@ -490,7 +486,6 @@ function Monster_Wolf:draw()
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
 		love.graphics.setColor(255, 255, 255);
 		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_WOLF_RUN_HEAR_DISTANCE);
-		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_WOLF_WALK_HEAR_DISTANCE);
 
 		love.graphics.setColor(255, 255, 255, 150);
 		local facingAngle = math.angle(0, 0, self.facing.y, self.facing.x);
