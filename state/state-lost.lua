@@ -1,20 +1,23 @@
 State_Lost = {};
 
 function State_Lost:init()
-	self.font = love.graphics.newFont("asset/font/Fiendish.ttf", 100);
+	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
+	self.helpFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
 end
 
 function State_Lost:enter()
 	self.inputEnabled = false;
 	self.alphas = {
-		alpha = 0
+		titleAlpha = 0,
+		helpAlpha = 0
 	};
 
 	Timer.clear();
 	Timer.script(function(wait)
-		Timer.tween(4, self.alphas, {alpha = 255}, "in-linear");
+		Timer.tween(4, self.alphas, {titleAlpha = 255}, "in-linear");
     wait(4);
 		self.inputEnabled = true;
+		Timer.tween(4, self.alphas, {helpAlpha = 255}, "in-linear");
 	end);
 end
 
@@ -41,8 +44,13 @@ end
 function State_Lost:draw()
 	CANVAS:renderTo(function()
     love.graphics.clear(255, 0, 0);
-		love.graphics.setColor(0, 0, 0, self.alphas.alpha);
+		love.graphics.setColor(0, 0, 0, self.alphas.titleAlpha);
+		love.graphics.setFont(self.titleFont);
 		love.graphics.printf("You lose", 0, 400, SCREEN_WIDTH, "center");
+
+		love.graphics.setColor(0, 0, 0, self.alphas.helpAlpha);
+		love.graphics.setFont(self.helpFont);
+		love.graphics.printf("Press any button", 0, 600, SCREEN_WIDTH, "center");
   end);
 
   love.graphics.setColor(255, 255, 255);
