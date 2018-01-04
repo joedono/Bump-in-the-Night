@@ -19,7 +19,8 @@ end
 function State_Scenario_Select:draw()
 	CANVAS:renderTo(function()
     love.graphics.clear();
-
+		love.graphics.setColor(255, 255, 255, 255);
+		love.graphics.print("Scenario Selection", 0, 0);
   end);
 
   love.graphics.setColor(255, 255, 255);
