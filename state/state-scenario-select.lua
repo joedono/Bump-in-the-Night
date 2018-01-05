@@ -6,7 +6,7 @@ function State_Scenario_Select:init()
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
 
 	self.soundSelectionChange = love.audio.newSource("asset/sound/menu-option-change.wav", "static");
-	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav");
+	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav", "static");
 end
 
 function State_Scenario_Select:enter()
