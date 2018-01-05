@@ -119,7 +119,7 @@ function State_Scenario_Select:draw()
 		love.graphics.draw(self.background, 0, 0);
 		love.graphics.setColor(255, 0, 0);
 		love.graphics.setFont(self.titleFont);
-		love.graphics.printf("Select a Threat", 0, 15, SCREEN_WIDTH, "center");
+		love.graphics.printf("Choose Your Threat", 0, 15, SCREEN_WIDTH, "center");
 
 		love.graphics.print("?", 770, 315);
 
