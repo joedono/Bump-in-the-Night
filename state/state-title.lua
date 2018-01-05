@@ -3,6 +3,9 @@ State_Title = {};
 function State_Title:init()
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 80);
 	self.menuFont = love.graphics.newFont("asset/font/Fiendish.ttf", 30);
+
+	self.soundSelectionChange = love.audio.newSource("asset/sound/menu-option-change.wav", "static");
+	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav");
 end
 
 function State_Title:enter(previous, animate)
@@ -40,6 +43,8 @@ function State_Title:keypressed(key, unicode)
 	end
 
 	if key == KEY_UP or key == KEY_MENU_UP then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection - 1;
 		if self.menuSelection < 1 then
 			self.menuSelection = 4;
@@ -47,6 +52,8 @@ function State_Title:keypressed(key, unicode)
 	end
 
 	if key == KEY_DOWN or key == KEY_MENU_DOWN then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection + 1;
 		if self.menuSelection > 4 then
 			self.menuSelection = 1;
@@ -54,15 +61,7 @@ function State_Title:keypressed(key, unicode)
 	end
 
 	if key == KEY_PAUSE then
-		if self.menuSelection == 1 then
-			GameState.switch(State_Scenario_Select);
-		elseif self.menuSelection == 2 then
-			GameState.switch(State_Controls_Controller);
-		elseif self.menuSelection == 3 then
-			GameState.switch(State_Controls_Keyboard);
-		elseif self.menuSelection == 4 then
-			love.event.quit();
-		end
+		self:makeSelection();
 	end
 end
 
@@ -75,6 +74,8 @@ function State_Title:gamepadpressed(joystick, button)
 	end
 
 	if button == GAMEPAD_UP then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection - 1;
 		if self.menuSelection < 1 then
 			self.menuSelection = 4;
@@ -82,6 +83,8 @@ function State_Title:gamepadpressed(joystick, button)
 	end
 
 	if button == GAMEPAD_DOWN then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection + 1;
 		if self.menuSelection > 4 then
 			self.menuSelection = 1;
@@ -89,15 +92,21 @@ function State_Title:gamepadpressed(joystick, button)
 	end
 
 	if button == GAMEPAD_START or button == GAMEPAD_ITEM_USE then
-		if self.menuSelection == 1 then
-			GameState.switch(State_Scenario_Select);
-		elseif self.menuSelection == 2 then
-			GameState.switch(State_Controls_Controller);
-		elseif self.menuSelection == 3 then
-			GameState.switch(State_Controls_Keyboard);
-		elseif self.menuSelection == 4 then
-			love.event.quit();
-		end
+		self:makeSelection();
+	end
+end
+
+function State_Title:makeSelection()
+	if self.menuSelection == 1 then
+		self.soundSelect:rewind();
+		self.soundSelect:play();
+		GameState.switch(State_Scenario_Select);
+	elseif self.menuSelection == 2 then
+		GameState.switch(State_Controls_Controller);
+	elseif self.menuSelection == 3 then
+		GameState.switch(State_Controls_Keyboard);
+	elseif self.menuSelection == 4 then
+		love.event.quit();
 	end
 end
 

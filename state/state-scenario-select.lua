@@ -4,6 +4,9 @@ function State_Scenario_Select:init()
 	self.background = love.graphics.newImage("asset/image/screen/scenario-select.png");
 	self.indicator = love.graphics.newImage("asset/image/screen/scenario-select-indicator.png");
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
+
+	self.soundSelectionChange = love.audio.newSource("asset/sound/menu-option-change.wav", "static");
+	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav");
 end
 
 function State_Scenario_Select:enter()
@@ -21,18 +24,26 @@ end
 
 function State_Scenario_Select:keypressed(key, unicode)
 	if key == KEY_LEFT or key == KEY_MENU_LEFT then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x - 1;
 	end
 
 	if key == KEY_RIGHT or key == KEY_MENU_RIGHT then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x + 1;
 	end
 
 	if key == KEY_UP or key == KEY_MENU_UP then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y - 1;
 	end
 
 	if key == KEY_DOWN or key == KEY_MENU_DOWN then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y + 1;
 	end
 
@@ -45,18 +56,26 @@ end
 
 function State_Scenario_Select:gamepadpressed(joystick, button)
 	if button == GAMEPAD_LEFT then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x - 1;
 	end
 
 	if button == GAMEPAD_RIGHT then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x + 1;
 	end
 
 	if button == GAMEPAD_UP then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y - 1;
 	end
 
 	if button == GAMEPAD_DOWN then
+		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y + 1;
 	end
 
@@ -108,6 +127,8 @@ function State_Scenario_Select:selectScenario()
 
 	scenarioDescription = "wolf";
 
+	self.soundSelect:rewind();
+	self.soundSelect:play();
 	GameState.switch(State_Game, scenarioDescription)
 end
 
