@@ -33,6 +33,10 @@ function State_Game:init()
 	self.usedItemImages = {
 		["shotgun-blast"] = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
 	};
+
+	self.soundEffects = {
+		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static");
+	}
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -55,7 +59,7 @@ function State_Game:enter(previous, scenarioId)
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
 	self.pathNodes = self:loadPathfinding();
-	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player);
+	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player, self.soundEffects);
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
 

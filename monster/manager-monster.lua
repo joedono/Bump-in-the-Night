@@ -3,12 +3,13 @@ require "lib/pathfinding";
 require "monster/monster-wolf";
 
 Manager_Monster = Class {
-	init = function(self, parentStateGame, pathNodes, player)
+	init = function(self, parentStateGame, pathNodes, player, soundEffects)
 		self.parentStateGame = parentStateGame;
 		self.monsters = {};
 		self.pathNodes = pathNodes;
 		self.numPathNodes = #pathNodes;
 		self.player = player;
+		self.soundEffects = soundEffects;
 	end
 };
 
@@ -17,11 +18,11 @@ function Manager_Monster:spawnMonsters(scenarioId)
 
 	if scenarioId == "wolf" then
 		local spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
 		spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
 		spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Wolf(self, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
 	elseif scenarioId == "bear" then
 	elseif scenarioId == "burgler" then
 	elseif scenarioId == "arson" then

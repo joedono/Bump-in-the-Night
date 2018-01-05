@@ -12,8 +12,9 @@ Dead - Shot by player. Dead
 ]]
 
 Monster_Wolf = Class {
-	init = function(self, parentManager, player, curFloor, x, y)
+	init = function(self, parentManager, soundEffects, player, curFloor, x, y)
 		self.parentManager = parentManager;
+		self.soundEffects = soundEffects;
 		self.player = player;
 		self.curFloor = curFloor;
 		self.box = {
@@ -422,6 +423,8 @@ function Monster_Wolf:followPath(dt, speed)
 		end
 
 		if col.other.type == "placed-trap" and (self.state == "idle" or self.state == "walk" or self.state == "smells-meat" or self.state == "eating") then
+			self.soundEffects.trapSpring:rewind();
+			self.soundEffects.trapSpring:play();
 			self:resetPath();
 			self.state = "trapped";
 			self.stateTimer = 5;
