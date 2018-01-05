@@ -15,3 +15,6 @@ https://github.com/vrld/hump
 https://github.com/kikito/bump.lua
 https://github.com/kikito/inspect.lua
 https://github.com/tanema/light_world.lua
+
+# Sounds
+http://soundbible.com/1529-Dog-Bite.html
