@@ -185,6 +185,8 @@ function Monster_Wolf:updateSpotted(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self:canSeePlayer() then
+			self.soundEffects.monsterWolfRoar:rewind();
+			self.soundEffects.monsterWolfRoar:play();
 			self.state = "active-chase";
 		else
 			self.state = "passive-chase";
@@ -230,6 +232,8 @@ function Monster_Wolf:updatePassiveChase(dt)
 			y = self.player.box.y + self.player.box.h / 2
 		};
 
+		self.soundEffects.monsterWolfRoar:rewind();
+		self.soundEffects.monsterWolfRoar:play();
 		self.state = "active-chase";
 		return;
 	elseif self:canHearPlayer() then
