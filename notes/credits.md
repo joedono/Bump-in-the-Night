@@ -18,3 +18,6 @@ https://github.com/tanema/light_world.lua
 
 # Sounds
 http://soundbible.com/1529-Dog-Bite.html
+
+# Music
+https://opengameart.org/content/oves-essential-game-audio-pack-collection-160-files-updated

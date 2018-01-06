@@ -9,7 +9,8 @@ function State_Scenario_Select:init()
 	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav", "static");
 end
 
-function State_Scenario_Select:enter()
+function State_Scenario_Select:enter(previous)
+	self.previous = previous;
 	love.graphics.setBackgroundColor(0, 0, 0);
 	self.indicatorVisible = true;
 	self.selection = {
@@ -84,6 +85,10 @@ function State_Scenario_Select:gamepadpressed(joystick, button)
 	if button == GAMEPAD_START or button == GAMEPAD_ITEM_USE then
 		self:selectScenario();
 	end
+end
+
+function State_Scenario_Select:leave()
+	self.previous.music:stop();
 end
 
 function State_Scenario_Select:update(dt)

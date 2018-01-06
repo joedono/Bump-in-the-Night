@@ -6,6 +6,8 @@ function State_Title:init()
 
 	self.soundSelectionChange = love.audio.newSource("asset/sound/menu-option-change.wav", "static");
 	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav", "static");
+
+	self.music = love.audio.newSource("asset/music/title.ogg", "stream");
 end
 
 function State_Title:enter(previous, animate)
@@ -32,6 +34,8 @@ function State_Title:enter(previous, animate)
 		self.alphas.titleAlpha = 255;
 		self.showMenu = true;
 	end
+
+	self.music:play();
 end
 
 function State_Title:keypressed(key, unicode)

@@ -46,7 +46,7 @@ function State_Game:init()
 		playerDeathYell = love.audio.newSource("asset/sound/player-death-yell.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static")
-	}
+	};
 end
 
 function State_Game:enter(previous, scenarioId)
