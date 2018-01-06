@@ -35,7 +35,7 @@ Monster_Wolf = Class {
 			LightWorld:newLight(0, 0, 255, 0, 0, 15)
 		};
 
-		self.sightLight = LightWorld:newLight(0, 0, 150, 0, 0, MONSTER_WOLF_SIGHT_DISTANCE);
+		self.sightLight = LightWorld:newLight(0, 0, 150, 150, 150, MONSTER_WOLF_SIGHT_DISTANCE);
 		self.sightLight:setDirection(0);
 		self.sightLight:setAngle(MONSTER_WOLF_SIGHT_CONE);
 
@@ -481,6 +481,14 @@ function Monster_Wolf:updateLights()
 
     self.sightLight:setDirection(facing);
 		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
+
+		if self.state == "idle" or self.state == "walk" or self.state == "smells-meat" or self.state == "eating" then
+			self.sightLight:setColor(150, 150, 150);
+		elseif self.state == "heard-player" or self.state == "investigating" or self.state == "passive-chase" then
+			self.sightLight:setColor(150, 150, 0);
+		elseif self.state == "spotted" or self.state == "active-chase" or self.state == "trapped" then
+			self.sightLight:setColor(150, 0, 0);
+		end
 	end
 end
 
