@@ -1,7 +1,7 @@
 Player = Class {
 	init = function(self, startX, startY)
 		PLAYER_IMAGE = love.graphics.newImage("asset/image/player.png");
-		
+
 		self.x = startX;
 		self.y = startY;
 		self.w = 20;
@@ -90,7 +90,7 @@ function Player:updatePosition(dt, hudManager)
 			local col = cols[i];
 			if(col.other.bType == "door") then
 				if(not col.other.isOpen) then
-					col.other:open();
+					col.other:open(self);
 				end
 			elseif(col.other.bType == "portal") then
 				portal = col.other.dest;

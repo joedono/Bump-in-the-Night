@@ -1,5 +1,5 @@
 Door = Class {
-	init = function(self, x, y, direction)
+	init = function(self, x, y, direction, soundEffects)
 		self.x = x;
 		self.y = y;
 		self.w = 0;
@@ -27,14 +27,24 @@ Door = Class {
 		lightBody:setAlpha(255 * 0.2);
 		self.lightBody = lightBody;
 
+		self.soundOpen = soundEffects.doorOpen;
+		self.soundClose = soundEffects.doorClose;
+
+		self.openedByPlayer = false;
 		self.type = "door";
 	end
 }
 
-function Door:open()
+function Door:open(other)
 	self.isOpen = true;
 	self.openTimer = DOOR_OPEN_TIMER;
 	self.lightBody:setShadow(false);
+
+	if other.type == "player" then
+		self.soundOpen:rewind();
+		self.soundOpen:play();
+		self.openedByPlayer = true;
+	end
 end
 
 function Door:update(dt)
@@ -47,6 +57,13 @@ function Door:update(dt)
 			if len <= 1 then
 				self.isOpen = false;
 				self.lightBody:setShadow(true);
+
+				if self.openedByPlayer then
+					self.soundClose:rewind();
+					self.soundClose:play();
+				end
+
+				self.openedByPlayer = false;
 			end
 		end
 	end

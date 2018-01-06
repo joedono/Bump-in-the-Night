@@ -1,13 +1,14 @@
 require "house/door";
 
 Floor = Class {
-  init = function (self, layoutFile, originX, originY)
+  init = function (self, layoutFile, originX, originY, soundEffects)
     self.origin = {
       x = originX,
       y = originY
     };
 
     self.source = love.filesystem.load(layoutFile)();
+    self.soundEffects = soundEffects;
 
     self.tilesets = self.source.tilesets;
     for index, tileset in pairs(self.tilesets) do
@@ -61,7 +62,7 @@ end
 
 function Floor:addDoors(layer, direction)
   for index, door in pairs(layer.objects) do
-    table.insert(self.doors, Door(door.x + self.origin.x, door.y + self.origin.y, direction));
+    table.insert(self.doors, Door(door.x + self.origin.x, door.y + self.origin.y, direction, self.soundEffects));
   end
 end
 

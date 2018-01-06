@@ -35,7 +35,16 @@ function State_Game:init()
 	};
 
 	self.soundEffects = {
-		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static");
+		doorClose = love.audio.newSource("asset/sound/door-close.wav", "static"),
+		doorOpen = love.audio.newSource("asset/sound/door-open.wav", "static"),
+		footstepsRun = love.audio.newSource("asset/sound/footsteps-run.wav", "static"),
+		footstepsWalk = love.audio.newSource("asset/sound/footsteps-walk.wav", "static"),
+		gunshot = love.audio.newSource("asset/sound/gunshot.wav", "static"),
+		itemPickup = love.audio.newSource("asset/sound/item-pickup.wav", "static"),
+		monsterBite = love.audio.newSource("asset/sound/monster-bite.wav", "static"),
+		playerDeathYell = love.audio.newSource("asset/sound/player-death-yell.wav", "static"),
+		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
+		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static")
 	}
 end
 
@@ -76,10 +85,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua", 0, 0));
-	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua", FLOOR_WIDTH + FLOOR_GAP, 0));
-	table.insert(floors, Floor("asset/config/floor-layout/basement.lua", 0, FLOOR_HEIGHT + FLOOR_GAP));
-	table.insert(floors, Floor("asset/config/floor-layout/attic.lua", FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP));
+	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua", 0, 0, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua", FLOOR_WIDTH + FLOOR_GAP, 0, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/basement.lua", 0, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/attic.lua", FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
 
 	return floors;
 end

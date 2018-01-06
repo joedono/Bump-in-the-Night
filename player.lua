@@ -123,7 +123,7 @@ function Player:updatePosition(dt)
     local col = cols[i];
     if col.other.type == "door" then
       if not col.other.isOpen then
-        col.other:open();
+        col.other:open(self);
       end
     end
 

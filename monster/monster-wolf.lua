@@ -387,7 +387,7 @@ function Monster_Wolf:followPath(dt, speed)
 
     if col.other.type == "door" then
       if not col.other.isOpen then
-        col.other:open();
+        col.other:open(self);
       end
     end
 
