@@ -503,6 +503,9 @@ function State_Game:useItem()
 					self.usedItemImages["shotgun-blast"]
 				)
 			);
+
+			self.soundEffects.gunshot:rewind();
+			self.soundEffects.gunshot:play();
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
 		-- Load Shotgun
