@@ -1,5 +1,4 @@
-Bump in the Night
-====================
+<img src="https://raw.githubusercontent.com/joedono/Bump-in-the-Night/master/screenshot/02.png" />
 
 Welcome to the alpha build of Bump in the Night!
 
