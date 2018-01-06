@@ -89,29 +89,12 @@ end
 
 function Monster_Wolf:updateIdle(dt)
 	if self:canHearPlayer() then
-		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.state = "heard-player";
-		self.stateTimer = 2;
+		self:hasHeardPlayer();
 		return;
 	end
 
 	if self:canSeePlayer() then
-		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.state = "spotted";
-		self.stateTimer = 1;
+		self:hasSpottedPlayer();
 		return;
 	end
 
@@ -124,29 +107,12 @@ end
 -- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
 function Monster_Wolf:updateWalk(dt)
 	if self:canHearPlayer() then
-		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.state = "heard-player";
-		self.stateTimer = 2;
+		self:hasHeardPlayer();
 		return;
 	end
 
 	if self:canSeePlayer() then
-		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.state = "spotted";
-		self.stateTimer = 1;
+		self:hasSpottedPlayer();
 		return;
 	end
 
@@ -182,18 +148,7 @@ function Monster_Wolf:updateInvestigating(dt)
 	end
 
 	if self:canSeePlayer() then
-		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
-		};
-
-		self.state = "spotted";
-		self.stateTimer = 1;
+		self:hasSpottedPlayer();
 		return;
 	end
 
@@ -356,8 +311,32 @@ function Monster_Wolf:canSeePlayer()
 	return false;
 end
 
-function Monster_Wolf:canSmellMeat()
-	return false;
+function Monster_Wolf:hasHeardPlayer()
+	self.audioTarget = {
+		x = self.player.box.x + self.player.box.w / 2,
+		y = self.player.box.y + self.player.box.h / 2
+	};
+
+	self.state = "heard-player";
+	self.stateTimer = 2;
+end
+
+function Monster_Wolf:hasSpottedPlayer()
+	self.visualTarget = {
+		x = self.player.box.x + self.player.box.w / 2,
+		y = self.player.box.y + self.player.box.h / 2
+	};
+
+	self.audioTarget = {
+		x = self.player.box.x + self.player.box.w / 2,
+		y = self.player.box.y + self.player.box.h / 2
+	};
+
+	self.soundEffects.spotted:rewind();
+	self.soundEffects.spotted:play();
+
+	self.state = "spotted";
+	self.stateTimer = 1;
 end
 
 function Monster_Wolf:resetPath()
