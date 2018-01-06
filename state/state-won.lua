@@ -3,6 +3,8 @@ State_Won = {};
 function State_Won:init()
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
 	self.helpFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
+
+	self.music = love.audio.newSource("asset/music/you-win.ogg", "stream");
 end
 
 function State_Won:enter()
@@ -20,6 +22,8 @@ function State_Won:enter()
 		self.inputEnabled = true;
 		Timer.tween(4, self.alphas, {helpAlpha = 255}, "in-linear");
 	end);
+
+	self.music:play();
 end
 
 function State_Won:keypressed(key, unicode)
@@ -36,6 +40,10 @@ function State_Won:gamepadpressed(joystick, button)
 	end
 
 	GameState.switch(State_Title);
+end
+
+function State_Won:leave()
+	self.music:stop();
 end
 
 function State_Won:update(dt)

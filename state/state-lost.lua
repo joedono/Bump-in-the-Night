@@ -3,6 +3,8 @@ State_Lost = {};
 function State_Lost:init()
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
 	self.helpFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
+
+	self.music = love.audio.newSource("asset/music/you-win.ogg", "stream");
 end
 
 function State_Lost:enter()
@@ -20,6 +22,8 @@ function State_Lost:enter()
 		self.inputEnabled = true;
 		Timer.tween(4, self.alphas, {helpAlpha = 255}, "in-linear");
 	end);
+
+	self.music:play();
 end
 
 function State_Lost:keypressed(key, unicode)
@@ -36,6 +40,10 @@ function State_Lost:gamepadpressed(joystick, button)
 	end
 
 	GameState.switch(State_Title);
+end
+
+function State_Lost:leave()
+	self.music:stop();
 end
 
 function State_Lost:update(dt)
