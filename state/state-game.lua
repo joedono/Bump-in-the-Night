@@ -458,6 +458,9 @@ end
 function State_Game:pickupItem(item)
 	table.insert(self.inventory, item);
 	item:pickup();
+
+	self.soundEffects.itemPickup:rewind();
+	self.soundEffects.itemPickup:play();
 end
 
 function State_Game:selectItem(dir)
