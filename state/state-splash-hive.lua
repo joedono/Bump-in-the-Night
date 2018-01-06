@@ -3,7 +3,7 @@ State_Splash_Hive = {};
 function State_Splash_Hive:init()
   self.hiveImage = love.graphics.newImage("asset/image/splash/hive.png");
   self.imageScale = 0.75;
-  self.font = love.graphics.newFont("asset/font/RifficFree-bold.ttf", 30);
+  self.font = love.graphics.newFont("asset/font/RifficFree-Bold.ttf", 30);
 
   self.imagePos = {
     x = SCREEN_WIDTH / 2 - self.hiveImage:getWidth() / 2 * self.imageScale,
