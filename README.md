@@ -8,7 +8,7 @@ The only currently functional scenario is "Wolves.” To clear the "Wolves" scen
 
 The wolves will chase after you if they see you and they can hear you if you run. So sneak slowly and quietly.
 
-To run the game, head over to the Releases link near the top of this page and download the appropriate version for your computer. If you’re not on Windows, then download the .love file from the releases page. Go (here)[https://love2d.org], download and install the 0.10 version of LOVE for your computer. After that, if just doubleclicking on the .love file doesn’t run the game, then follow the instructions under “Running Games” (here)[https://love2d.org/wiki/Getting_Started].
+To run the game, head over to the Releases link near the top of this page and download the appropriate version for your computer. If you’re not on Windows, then download the .love file from the releases page. Go [here](https://love2d.org), download and install the 0.10 version of LOVE for your computer. After that, if just doubleclicking on the .love file doesn’t run the game, then follow the instructions under “Running Games” [here](https://love2d.org/wiki/Getting_Started).
 
 ## Current Issues
 * The wolf pathfinding needs some work. They will occasionally get stuck on walls or stop before getting to their objective.
