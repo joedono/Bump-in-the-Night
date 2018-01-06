@@ -590,7 +590,9 @@ end
 
 function State_Game:stopAllSounds()
 	for index, sound in pairs(self.soundEffects) do
-		sound:stop();
+		if index ~= "monsterBite" and index ~= "playerDeathYell" and index ~= "gunshot" then
+			sound:stop();
+		end
 	end
 end
 
