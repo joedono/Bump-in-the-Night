@@ -4,7 +4,8 @@ function State_Lost:init()
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
 	self.helpFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
 
-	self.music = love.audio.newSource("asset/music/you-win.ogg", "stream");
+	self.music = love.audio.newSource("asset/music/you-lose.ogg", "stream");
+	self.music:setVolume(0.4);
 end
 
 function State_Lost:enter()
