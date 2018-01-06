@@ -579,11 +579,19 @@ function State_Game:getPlacedItem(itemType)
 end
 
 function State_Game:winGame()
+	self:stopAllSounds();
 	GameState.push(State_Winning);
 end
 
 function State_Game:loseGame()
+	self:stopAllSounds();
 	GameState.push(State_Losing);
+end
+
+function State_Game:stopAllSounds()
+	for index, sound in pairs(self.soundEffects) do
+		sound:stop();
+	end
 end
 
 function State_Game:draw()
