@@ -1,5 +1,5 @@
 Player = Class {
-  init = function (self, parent)
+  init = function (self, parent, soundEffects)
     self.parent = parent;
     self.image = love.graphics.newImage("asset/image/player.png");
 
@@ -23,6 +23,9 @@ Player = Class {
 
 		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 200);
 		self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+
+    self.soundWalk = soundEffects.footstepsWalk;
+    self.soundRun = soundEffects.footstepsRun;
 
     self:resetKeys();
 
@@ -93,6 +96,17 @@ function Player:updateVelocity()
 
   if vx ~= 0 or vy ~= 0 then
     vx, vy = math.normalize(vx, vy);
+
+    if self.runPressed then
+      self.soundRun:play();
+      self.soundWalk:stop();
+    else
+      self.soundRun:stop();
+      self.soundWalk:play();
+    end
+  else
+    self.soundRun:stop();
+    self.soundWalk:stop();
   end
 
   if self.runPressed then

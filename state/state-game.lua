@@ -64,7 +64,7 @@ function State_Game:enter(previous, scenarioId)
 
 	self.inventory = {};
 	self.selectedItemIndex = 1;
-	self.player = Player(self);
+	self.player = Player(self, self.soundEffects);
 	self.floors = self:loadFloors();
 	self.items = self:spawnItems(scenarioId);
 	self.pathNodes = self:loadPathfinding();
