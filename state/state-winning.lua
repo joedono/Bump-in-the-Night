@@ -29,5 +29,5 @@ function State_Winning:draw()
 	self.from:draw();
 
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a);
-	love.graphics.rectangle("fill", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	love.graphics.rectangle("fill", 0, 0, SCREEN_WIDTH * CANVAS_SCALE, SCREEN_HEIGHT * CANVAS_SCALE);
 end
