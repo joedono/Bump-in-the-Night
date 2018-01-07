@@ -139,11 +139,11 @@
   <object id="32" type="wall" x="1760" y="928" width="224" height="96"/>
   <object id="33" type="wall" x="2080" y="928" width="96" height="96"/>
  </objectgroup>
- <objectgroup color="#00ff00" name="Door H" visible="0">
+ <objectgroup color="#00ff00" name="Door H">
   <object id="38" x="1984" y="960" width="96" height="32"/>
  </objectgroup>
- <objectgroup name="Door V" visible="0"/>
- <objectgroup color="#ff0000" name="Portals" visible="0">
+ <objectgroup name="Door V"/>
+ <objectgroup color="#ff0000" name="Portals">
   <object id="35" name="Stairs Down" type="portal" x="256" y="288" width="32" height="96">
    <properties>
     <property name="dx" type="int" value="288"/>
@@ -152,7 +152,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#820082" name="Item" visible="0">
+ <objectgroup color="#820082" name="Item">
   <object id="41" x="672" y="416" width="32" height="32"/>
   <object id="42" x="608" y="736" width="32" height="32"/>
   <object id="43" x="224" y="864" width="32" height="32"/>

@@ -610,7 +610,7 @@ return {
     {
       type = "objectgroup",
       name = "Door H",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -635,7 +635,7 @@ return {
     {
       type = "objectgroup",
       name = "Door V",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -646,7 +646,7 @@ return {
     {
       type = "objectgroup",
       name = "Portals",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -675,7 +675,7 @@ return {
     {
       type = "objectgroup",
       name = "Item",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
