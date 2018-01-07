@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 256,
+  nextobjectid = 428,
   properties = {},
   tilesets = {
     {
@@ -1104,7 +1104,7 @@ return {
     {
       type = "objectgroup",
       name = "Item",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1317,100 +1317,10 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "198",
+            ["connections"] = "256",
             ["multifloor"] = true,
             ["multifloorID"] = 170,
             ["multifloorIndex"] = 1
-          }
-        },
-        {
-          id = 136,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 96,
-          y = 576,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "197,137"
-          }
-        },
-        {
-          id = 137,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 96,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "136,169,170"
-          }
-        },
-        {
-          id = 138,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 320,
-          y = 1088,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "163,167,168"
-          }
-        },
-        {
-          id = 139,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 448,
-          y = 512,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "140,170"
-          }
-        },
-        {
-          id = 140,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 320,
-          y = 512,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "139"
-          }
-        },
-        {
-          id = 141,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 800,
-          y = 544,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "156,157,142"
           }
         },
         {
@@ -1425,112 +1335,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "141"
-          }
-        },
-        {
-          id = 143,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 544,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "156,144,190,184"
-          }
-        },
-        {
-          id = 144,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "216,143,190,184"
-          }
-        },
-        {
-          id = 145,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1472,
-          y = 512,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "146,190"
-          }
-        },
-        {
-          id = 146,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1664,
-          y = 512,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "145,189"
-          }
-        },
-        {
-          id = 147,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1920,
-          y = 640,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "148,191,196,195"
-          }
-        },
-        {
-          id = 148,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1920,
-          y = 256,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "147,149,155"
-          }
-        },
-        {
-          id = 149,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2112,
-          y = 256,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "148,150,151"
+            ["connections"] = ""
           }
         },
         {
@@ -1539,466 +1344,16 @@ return {
           type = "node",
           shape = "rectangle",
           x = 2112,
-          y = 384,
+          y = 416,
           width = 32,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "149",
+            ["connections"] = "340",
             ["multifloor"] = true,
             ["multifloorID"] = 269,
             ["multifloorIndex"] = 1
-          }
-        },
-        {
-          id = 151,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2112,
-          y = 64,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "154,149"
-          }
-        },
-        {
-          id = 152,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 384,
-          y = 64,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "153,154"
-          }
-        },
-        {
-          id = 153,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 384,
-          y = 288,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "152,197,155"
-          }
-        },
-        {
-          id = 154,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 64,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "151,152"
-          }
-        },
-        {
-          id = 155,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 256,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "148,153"
-          }
-        },
-        {
-          id = 156,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 928,
-          y = 544,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "141,143"
-          }
-        },
-        {
-          id = 157,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 800,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "141,170,216"
-          }
-        },
-        {
-          id = 158,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 896,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "166,172,159,160,216"
-          }
-        },
-        {
-          id = 159,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 832,
-          y = 1152,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "158,166,161,160"
-          }
-        },
-        {
-          id = 160,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 704,
-          y = 1152,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "158,159,166,161"
-          }
-        },
-        {
-          id = 161,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 704,
-          y = 1408,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "160,164,159"
-          }
-        },
-        {
-          id = 162,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 64,
-          y = 1440,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "163,164"
-          }
-        },
-        {
-          id = 163,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 64,
-          y = 1088,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "138,162"
-          }
-        },
-        {
-          id = 164,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 512,
-          y = 1440,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "162,167,161"
-          }
-        },
-        {
-          id = 166,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 704,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "158,159,160"
-          }
-        },
-        {
-          id = 167,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 512,
-          y = 1088,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "138,164"
-          }
-        },
-        {
-          id = 168,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 320,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "169,138"
-          }
-        },
-        {
-          id = 169,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 96,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "137,168"
-          }
-        },
-        {
-          id = 170,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 448,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "137,139,157"
-          }
-        },
-        {
-          id = 171,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1568,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "176,189"
-          }
-        },
-        {
-          id = 172,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1184,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "158,176,173"
-          }
-        },
-        {
-          id = 173,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1184,
-          y = 1088,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "172,174,177"
-          }
-        },
-        {
-          id = 174,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1376,
-          y = 1120,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "175,173"
-          }
-        },
-        {
-          id = 175,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1376,
-          y = 1248,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "174"
-          }
-        },
-        {
-          id = 176,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1568,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "171,172,188"
-          }
-        },
-        {
-          id = 177,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 1120,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "173,178"
-          }
-        },
-        {
-          id = 178,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 1280,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "177,179"
-          }
-        },
-        {
-          id = 179,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1088,
-          y = 1440,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "178,181"
-          }
-        },
-        {
-          id = 180,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1856,
-          y = 1440,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "181,187"
-          }
-        },
-        {
-          id = 181,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1536,
-          y = 1440,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "179,180"
           }
         },
         {
@@ -2007,215 +1362,20 @@ return {
           type = "node",
           shape = "rectangle",
           x = 2112,
-          y = 1280,
+          y = 1312,
           width = 32,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "183",
+            ["connections"] = "",
             ["multifloor"] = true,
             ["multifloorID"] = 222,
             ["multifloorIndex"] = 2
           }
         },
         {
-          id = 183,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2048,
-          y = 1216,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "182,187"
-          }
-        },
-        {
-          id = 184,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1280,
-          y = 704,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "143,144,190"
-          }
-        },
-        {
-          id = 186,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1760,
-          y = 1248,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "187,188"
-          }
-        },
-        {
-          id = 187,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1856,
-          y = 1216,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "180,186,183"
-          }
-        },
-        {
-          id = 188,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1568,
-          y = 1248,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "176,186"
-          }
-        },
-        {
-          id = 189,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1664,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "146,196,171"
-          }
-        },
-        {
-          id = 190,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1280,
-          y = 544,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "143,144,184,145"
-          }
-        },
-        {
-          id = 191,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2048,
-          y = 640,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "147,195,196"
-          }
-        },
-        {
-          id = 192,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2048,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "195,193"
-          }
-        },
-        {
-          id = 193,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1792,
-          y = 928,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "192"
-          }
-        },
-        {
-          id = 195,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2048,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "147,191,196,192"
-          }
-        },
-        {
-          id = 196,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 1920,
-          y = 736,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "147,191,195,189"
-          }
-        },
-        {
-          id = 197,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 96,
-          y = 288,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "136,153,198"
-          }
-        },
-        {
-          id = 198,
+          id = 256,
           name = "",
           type = "node",
           shape = "rectangle",
@@ -2226,11 +1386,881 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "135,197"
+            ["connections"] = "135,257"
           }
         },
         {
-          id = 216,
+          id = 257,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "256,258,320"
+          }
+        },
+        {
+          id = 258,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 384,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 259,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 480,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 260,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 261,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 672,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 262,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 263,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 264,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 192,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 265,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 320,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 266,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 320,
+          y = 1088,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 267,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 288,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 268,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 352,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 269,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 192,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 270,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 1088,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 271,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 64,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 272,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 64,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 273,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 160,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 274,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 288,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 275,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 352,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 276,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 448,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 277,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 512,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 278,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 512,
+          y = 1184,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 279,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 512,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 280,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 480,
+          y = 1088,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 282,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 64,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 283,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 96,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 284,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 160,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 285,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 288,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 286,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 352,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 287,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 448,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 288,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 512,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 289,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 290,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 291,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 292,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 293,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 294,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 295,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 296,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 297,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 298,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 299,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 300,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 301,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 302,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 303,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 304,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 192,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 306,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 320,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 307,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 448,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 308,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 448,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 309,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 384,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 310,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 288,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 311,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 544,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 313,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 314,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 315,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 800,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 316,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 317,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 832,
+          y = 480,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 318,
           name = "",
           type = "node",
           shape = "rectangle",
@@ -2241,7 +2271,1447 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "157,158,144"
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 319,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 896,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 320,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 256,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "257,322"
+          }
+        },
+        {
+          id = 322,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 384,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "320,323,360"
+          }
+        },
+        {
+          id = 323,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 480,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "322,324"
+          }
+        },
+        {
+          id = 324,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 576,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "323,325"
+          }
+        },
+        {
+          id = 325,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "324,326"
+          }
+        },
+        {
+          id = 326,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 768,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "325,327"
+          }
+        },
+        {
+          id = 327,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 864,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "326,328"
+          }
+        },
+        {
+          id = 328,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 960,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "327,329"
+          }
+        },
+        {
+          id = 329,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1056,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "328,330"
+          }
+        },
+        {
+          id = 330,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1152,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "329,331"
+          }
+        },
+        {
+          id = 331,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1248,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "330,332"
+          }
+        },
+        {
+          id = 332,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1344,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "331,333"
+          }
+        },
+        {
+          id = 333,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1440,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "332,334"
+          }
+        },
+        {
+          id = 334,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1536,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "333,335"
+          }
+        },
+        {
+          id = 335,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1632,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "334,336"
+          }
+        },
+        {
+          id = 336,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1728,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "335,337"
+          }
+        },
+        {
+          id = 337,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1824,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "336,338,361"
+          }
+        },
+        {
+          id = 338,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1920,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "337,361,339"
+          }
+        },
+        {
+          id = 339,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2112,
+          y = 256,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "341,340,338"
+          }
+        },
+        {
+          id = 340,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2112,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "339,150"
+          }
+        },
+        {
+          id = 341,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2112,
+          y = 96,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "342,339"
+          }
+        },
+        {
+          id = 342,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2080,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "344,341"
+          }
+        },
+        {
+          id = 344,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1888,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "346,342"
+          }
+        },
+        {
+          id = 346,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1632,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "348,344"
+          }
+        },
+        {
+          id = 348,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1440,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "350,346"
+          }
+        },
+        {
+          id = 350,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1248,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "352,348"
+          }
+        },
+        {
+          id = 352,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1056,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "350,354"
+          }
+        },
+        {
+          id = 354,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 864,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "356,352"
+          }
+        },
+        {
+          id = 356,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 672,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "358,354"
+          }
+        },
+        {
+          id = 358,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 544,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "359,356"
+          }
+        },
+        {
+          id = 359,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 416,
+          y = 64,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "360,358"
+          }
+        },
+        {
+          id = 360,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 384,
+          y = 96,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "322,359"
+          }
+        },
+        {
+          id = 361,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1920,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "338,337,362"
+          }
+        },
+        {
+          id = 362,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1920,
+          y = 448,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 363,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1920,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 364,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1920,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 365,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2048,
+          y = 640,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 366,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2048,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 367,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1920,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 368,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2048,
+          y = 896,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 369,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1984,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 370,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1856,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 371,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1760,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 372,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1760,
+          y = 992,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 373,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2048,
+          y = 992,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 374,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1824,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 375,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1728,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 376,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1664,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 377,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 379,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 380,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 382,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 1024,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 384,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 385,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 386,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1728,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 387,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1856,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 388,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1952,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 389,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2048,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 390,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 2112,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 391,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1856,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 392,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1824,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 393,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1728,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 394,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1568,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 395,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1440,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 396,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1312,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 397,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1216,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 398,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1120,
+          y = 1440,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 399,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1088,
+          y = 1408,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 400,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1088,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 402,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1088,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 403,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1120,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 404,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1184,
+          y = 1088,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 405,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1280,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 406,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1344,
+          y = 1120,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 407,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1376,
+          y = 1152,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 408,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1376,
+          y = 1248,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 409,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1312,
+          y = 1280,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 410,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 992,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 411,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1056,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 412,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1184,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 413,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1280,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 414,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1376,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 415,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1472,
+          y = 928,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 416,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1088,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 417,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1088,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 418,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1184,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 419,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1184,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 420,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1280,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 421,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1280,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 422,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1376,
+          y = 544,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 423,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1376,
+          y = 736,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 424,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1440,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 425,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1536,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 426,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1664,
+          y = 512,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
+          }
+        },
+        {
+          id = 427,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 1664,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = ""
           }
         }
       }
