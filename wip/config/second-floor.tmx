@@ -208,7 +208,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#820082" name="Item" visible="0">
+ <objectgroup color="#820082" name="Item">
   <object id="133" x="608" y="96" width="32" height="32"/>
   <object id="134" x="864" y="224" width="32" height="32"/>
   <object id="135" x="800" y="544" width="32" height="32"/>
@@ -230,7 +230,7 @@
  <objectgroup color="#550000" name="Paths">
   <object id="153" type="node" x="288" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="437"/>
     <property name="multifloor" type="bool" value="true"/>
     <property name="multifloorID" type="int" value="53"/>
     <property name="multifloorIndex" type="int" value="4"/>
@@ -444,122 +444,122 @@
   </object>
   <object id="418" type="node" x="96" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="421,423,419,417"/>
    </properties>
   </object>
   <object id="419" type="node" x="256" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="418,423,421,420,422"/>
    </properties>
   </object>
   <object id="420" type="node" x="416" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="419,421,422,444"/>
    </properties>
   </object>
   <object id="421" type="node" x="256" y="672" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="424,425,426,418,419,420,422,423"/>
    </properties>
   </object>
   <object id="422" type="node" x="416" y="672" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="424,425,421,419,420"/>
    </properties>
   </object>
   <object id="423" type="node" x="96" y="672" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="418,419,421,424,426"/>
    </properties>
   </object>
   <object id="424" type="node" x="256" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="421,422,423,426,425"/>
    </properties>
   </object>
   <object id="425" type="node" x="416" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="421,422,424,437"/>
    </properties>
   </object>
   <object id="426" type="node" x="96" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="427,421,423,424"/>
    </properties>
   </object>
   <object id="427" type="node" x="64" y="512" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="428,426"/>
    </properties>
   </object>
   <object id="428" type="node" x="64" y="416" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="429,427"/>
    </properties>
   </object>
   <object id="429" type="node" x="64" y="320" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="430,428"/>
    </properties>
   </object>
   <object id="430" type="node" x="64" y="224" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="431,429"/>
    </properties>
   </object>
   <object id="431" type="node" x="96" y="160" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="432,435,430"/>
    </properties>
   </object>
   <object id="432" type="node" x="192" y="160" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="436,433,435,431"/>
    </properties>
   </object>
   <object id="433" type="node" x="288" y="160" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="432,435,434,436"/>
    </properties>
   </object>
   <object id="434" type="node" x="416" y="160" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="436,433,437"/>
    </properties>
   </object>
   <object id="435" type="node" x="192" y="96" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="436,433,432,431"/>
    </properties>
   </object>
   <object id="436" type="node" x="288" y="96" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="432,435,434,433"/>
    </properties>
   </object>
   <object id="437" type="node" x="416" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="438,153,425,434"/>
    </properties>
   </object>
   <object id="438" type="node" x="512" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="439,437"/>
    </properties>
   </object>
   <object id="439" type="node" x="608" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="542,438,451,440"/>
    </properties>
   </object>
   <object id="440" type="node" x="608" y="160" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="439,441"/>
    </properties>
   </object>
   <object id="441" type="node" x="672" y="96" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="440"/>
    </properties>
   </object>
   <object id="442" type="node" x="288" y="960" width="32" height="32">
@@ -589,32 +589,32 @@
   </object>
   <object id="447" type="node" x="608" y="864" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="446,448"/>
    </properties>
   </object>
   <object id="448" type="node" x="608" y="768" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="447,449"/>
    </properties>
   </object>
   <object id="449" type="node" x="608" y="672" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="448,450"/>
    </properties>
   </object>
   <object id="450" type="node" x="608" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="449,451"/>
    </properties>
   </object>
   <object id="451" type="node" x="608" y="480" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="450,439"/>
    </properties>
   </object>
   <object id="452" type="node" x="736" y="960" width="32" height="32">
    <properties>
-    <property name="connections" value="446,454"/>
+    <property name="connections" value="446,454,453"/>
    </properties>
   </object>
   <object id="453" type="node" x="736" y="1056" width="32" height="32">
@@ -629,27 +629,27 @@
   </object>
   <object id="455" type="node" x="800" y="800" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="454,456"/>
    </properties>
   </object>
   <object id="456" type="node" x="800" y="736" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="455,457"/>
    </properties>
   </object>
   <object id="457" type="node" x="800" y="640" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="456,458"/>
    </properties>
   </object>
   <object id="458" type="node" x="800" y="544" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="457,459"/>
    </properties>
   </object>
   <object id="459" type="node" x="864" y="544" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="458,536"/>
    </properties>
   </object>
   <object id="460" type="node" x="864" y="960" width="32" height="32">
@@ -974,112 +974,112 @@
   </object>
   <object id="534" type="node" x="1056" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="532,533,538,539,535,536"/>
    </properties>
   </object>
   <object id="535" type="node" x="1152" y="576" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="532,533,538,539,537,534"/>
    </properties>
   </object>
   <object id="536" type="node" x="992" y="544" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="534,539,459"/>
    </properties>
   </object>
   <object id="537" type="node" x="1216" y="512" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="535,538,523"/>
    </properties>
   </object>
   <object id="538" type="node" x="1152" y="480" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="534,535,540,541,537,539"/>
    </properties>
   </object>
   <object id="539" type="node" x="1056" y="480" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="534,535,540,541,536,538"/>
    </properties>
   </object>
   <object id="540" type="node" x="1152" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="539,538,541,555"/>
    </properties>
   </object>
   <object id="541" type="node" x="1056" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="539,538,540,547"/>
    </properties>
   </object>
   <object id="542" type="node" x="672" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="543,439"/>
    </properties>
   </object>
   <object id="543" type="node" x="768" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="544,542"/>
    </properties>
   </object>
   <object id="544" type="node" x="864" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="545,546,547,543"/>
    </properties>
   </object>
   <object id="545" type="node" x="864" y="224" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="548,546,544"/>
    </properties>
   </object>
   <object id="546" type="node" x="960" y="288" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="541,547,544,545"/>
    </properties>
   </object>
   <object id="547" type="node" x="960" y="352" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="541,546,544"/>
    </properties>
   </object>
   <object id="548" type="node" x="864" y="96" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="549,545"/>
    </properties>
   </object>
   <object id="549" type="node" x="896" y="64" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="550,548"/>
    </properties>
   </object>
   <object id="550" type="node" x="992" y="64" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="551,549"/>
    </properties>
   </object>
   <object id="551" type="node" x="1088" y="64" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="552,550"/>
    </properties>
   </object>
   <object id="552" type="node" x="1152" y="64" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="553,551"/>
    </properties>
   </object>
   <object id="553" type="node" x="1184" y="96" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="554,552"/>
    </properties>
   </object>
   <object id="554" type="node" x="1184" y="224" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="555,553"/>
    </properties>
   </object>
   <object id="555" type="node" x="1184" y="320" width="32" height="32">
    <properties>
-    <property name="connections" value=""/>
+    <property name="connections" value="540,554"/>
    </properties>
   </object>
  </objectgroup>

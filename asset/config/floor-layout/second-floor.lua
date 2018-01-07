@@ -1243,7 +1243,7 @@ return {
     {
       type = "objectgroup",
       name = "Item",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1495,7 +1495,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "",
+            ["connections"] = "437",
             ["multifloor"] = true,
             ["multifloorID"] = 53,
             ["multifloorIndex"] = 4
@@ -2119,7 +2119,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "421,423,419,417"
           }
         },
         {
@@ -2134,7 +2134,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "418,423,421,420,422"
           }
         },
         {
@@ -2149,7 +2149,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "419,421,422,444"
           }
         },
         {
@@ -2164,7 +2164,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "424,425,426,418,419,420,422,423"
           }
         },
         {
@@ -2179,7 +2179,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "424,425,421,419,420"
           }
         },
         {
@@ -2194,7 +2194,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "418,419,421,424,426"
           }
         },
         {
@@ -2209,7 +2209,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "421,422,423,426,425"
           }
         },
         {
@@ -2224,7 +2224,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "421,422,424,437"
           }
         },
         {
@@ -2239,7 +2239,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "427,421,423,424"
           }
         },
         {
@@ -2254,7 +2254,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "428,426"
           }
         },
         {
@@ -2269,7 +2269,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "429,427"
           }
         },
         {
@@ -2284,7 +2284,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "430,428"
           }
         },
         {
@@ -2299,7 +2299,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "431,429"
           }
         },
         {
@@ -2314,7 +2314,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "432,435,430"
           }
         },
         {
@@ -2329,7 +2329,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "436,433,435,431"
           }
         },
         {
@@ -2344,7 +2344,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "432,435,434,436"
           }
         },
         {
@@ -2359,7 +2359,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "436,433,437"
           }
         },
         {
@@ -2374,7 +2374,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "436,433,432,431"
           }
         },
         {
@@ -2389,7 +2389,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "432,435,434,433"
           }
         },
         {
@@ -2404,7 +2404,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "438,153,425,434"
           }
         },
         {
@@ -2419,7 +2419,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "439,437"
           }
         },
         {
@@ -2434,7 +2434,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "542,438,451,440"
           }
         },
         {
@@ -2449,7 +2449,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "439,441"
           }
         },
         {
@@ -2464,7 +2464,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "440"
           }
         },
         {
@@ -2554,7 +2554,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "446,448"
           }
         },
         {
@@ -2569,7 +2569,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "447,449"
           }
         },
         {
@@ -2584,7 +2584,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "448,450"
           }
         },
         {
@@ -2599,7 +2599,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "449,451"
           }
         },
         {
@@ -2614,7 +2614,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "450,439"
           }
         },
         {
@@ -2629,7 +2629,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "446,454"
+            ["connections"] = "446,454,453"
           }
         },
         {
@@ -2674,7 +2674,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "454,456"
           }
         },
         {
@@ -2689,7 +2689,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "455,457"
           }
         },
         {
@@ -2704,7 +2704,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "456,458"
           }
         },
         {
@@ -2719,7 +2719,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "457,459"
           }
         },
         {
@@ -2734,7 +2734,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "458,536"
           }
         },
         {
@@ -3709,7 +3709,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "532,533,538,539,535,536"
           }
         },
         {
@@ -3724,7 +3724,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "532,533,538,539,537,534"
           }
         },
         {
@@ -3739,7 +3739,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "534,539,459"
           }
         },
         {
@@ -3754,7 +3754,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "535,538,523"
           }
         },
         {
@@ -3769,7 +3769,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "534,535,540,541,537,539"
           }
         },
         {
@@ -3784,7 +3784,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "534,535,540,541,536,538"
           }
         },
         {
@@ -3799,7 +3799,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "539,538,541,555"
           }
         },
         {
@@ -3814,7 +3814,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "539,538,540,547"
           }
         },
         {
@@ -3829,7 +3829,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "543,439"
           }
         },
         {
@@ -3844,7 +3844,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "544,542"
           }
         },
         {
@@ -3859,7 +3859,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "545,546,547,543"
           }
         },
         {
@@ -3874,7 +3874,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "548,546,544"
           }
         },
         {
@@ -3889,7 +3889,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "541,547,544,545"
           }
         },
         {
@@ -3904,7 +3904,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "541,546,544"
           }
         },
         {
@@ -3919,7 +3919,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "549,545"
           }
         },
         {
@@ -3934,7 +3934,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "550,548"
           }
         },
         {
@@ -3949,7 +3949,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "551,549"
           }
         },
         {
@@ -3964,7 +3964,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "552,550"
           }
         },
         {
@@ -3979,7 +3979,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "553,551"
           }
         },
         {
@@ -3994,7 +3994,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "554,552"
           }
         },
         {
@@ -4009,7 +4009,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "555,553"
           }
         },
         {
@@ -4024,7 +4024,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = ""
+            ["connections"] = "540,554"
           }
         }
       }
