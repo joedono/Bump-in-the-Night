@@ -24,9 +24,9 @@ function State_Pause:draw()
   self.from:draw();
 
   love.graphics.setColor(0, 0, 0, 150);
-  love.graphics.rectangle("fill", CANVAS_OFFSET_X, CANVAS_OFFSET_Y, SCREEN_WIDTH, SCREEN_HEIGHT);
+  love.graphics.rectangle("fill", CANVAS_OFFSET_X, CANVAS_OFFSET_Y, SCREEN_WIDTH * CANVAS_SCALE, SCREEN_HEIGHT * CANVAS_SCALE);
 
   love.graphics.setFont(self.font);
   love.graphics.setColor(255, 255, 255);
-  love.graphics.printf("PAUSED", 0, CANVAS_OFFSET_Y + SCREEN_HEIGHT / 2 - 100, SCREEN_WIDTH, "center");
+  love.graphics.printf("PAUSED", 0, CANVAS_OFFSET_Y + SCREEN_HEIGHT * CANVAS_SCALE / 2 - 100, SCREEN_WIDTH * CANVAS_SCALE, "center");
 end
