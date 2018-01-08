@@ -463,7 +463,7 @@
   </object>
   <object id="370" type="node" x="448" y="480" width="32" height="32">
    <properties>
-    <property name="connections" value="368,385,384,372"/>
+    <property name="connections" value="369,385,384,372"/>
    </properties>
   </object>
   <object id="372" type="node" x="448" y="608" width="32" height="32">

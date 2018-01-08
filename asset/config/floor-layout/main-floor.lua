@@ -2096,7 +2096,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "368,385,384,372"
+            ["connections"] = "369,385,384,372"
           }
         },
         {
