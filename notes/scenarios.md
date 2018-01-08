@@ -26,8 +26,8 @@ Hunts by sight. Moves randomly. Can shoot the player from long range with his gu
 
 ## Vampire
 Kill the vampire with a stake to the heart
-Required Items: Bible, Cross, Stake, Knife
-Use the knife to leave a small puddle of your own blood in a room to lure the vampire to you. Sneak up behind the Vampire as it drinks the blood, reading from the Bible with the Cross held before you to weaken the vampire. Once the vampire has lost his strength, finish the job with the Stake.
+Required Items: Cross, Stake
+Moves randomly and hunts by sight. Moving at all while within range of his ability will freeze the player and cause the vampire to move slowly towards the player. Attempting to move will gradually break the spell. Holding the cross will make the player immune to the freeze and the immediate-detect effect, allowing them to get close enough to use the stake.
 
 ## Ghost
 Dispel the ghost by performing an exorcism.
