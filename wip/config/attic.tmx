@@ -922,12 +922,12 @@
     <property name="connections" value="256,258"/>
    </properties>
   </object>
-  <object id="258" type="node" x="1408" y="416" width="32" height="32">
+  <object id="258" type="node" x="1376" y="416" width="32" height="32">
    <properties>
     <property name="connections" value="257,259"/>
    </properties>
   </object>
-  <object id="259" type="node" x="1408" y="352" width="32" height="32">
+  <object id="259" type="node" x="1376" y="352" width="32" height="32">
    <properties>
     <property name="connections" value="258,86"/>
    </properties>
