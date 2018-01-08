@@ -8,15 +8,9 @@ The only currently functional scenario is "Wolves.” To clear the "Wolves" scen
 
 The wolves will chase after you if they see you and they can hear you if you run. So sneak slowly and quietly.
 
-To run the game, head over to the Releases link near the top of this page and download the appropriate version for your computer. If you’re not on Windows, then download the .love file from the releases page. Go [here](https://love2d.org), download and install the 0.10 version of LOVE for your computer. After that, if just doubleclicking on the .love file doesn’t run the game, then follow the instructions under “Running Games” [here](https://love2d.org/wiki/Getting_Started).
+To run the game, head over to [Releases](https://github.com/joedono/Bump-in-the-Night/releases) and download the latest release. If you’re not on Windows, then download the .love file, go [here](https://love2d.org), download and install the 0.10 version of LOVE for your computer, and then double-click on the Bump-in-the-Night.love file you downloaded. If that doesn't run the game, then follow the instructions under “Running Games” [here](https://love2d.org/wiki/Getting_Started).
 
 ## Current Issues
 * The wolf pathfinding needs some work. They will occasionally get stuck on walls or stop before getting to their objective.
 * The lighting is a little weird. You can't see what's in a hallway on the other side of a wall, but you can see the wall on the other side of the wall
-* Sometimes, during repeated restarts, the items will stop lighting up
-* Graphics
-  * The stairs and other methods of getting around floors of the house are just yellow boxes
-  * The doors are just brown boxes
-  * The wolves are just white boxes
-  * The player is a blue circle
-  * The house itself is decent, but still just placeholder art
+* The graphics are almost entirely programmer art or placeholder art
