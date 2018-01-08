@@ -67,7 +67,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
 
       -- No more open paths to take
       if #openList == 0 then
-        error("Path not found");
+        error("Path not found: start " .. startX .. ", " .. startY .. " | goal " .. goalX .. ", " .. goalY);
       else
         local endPathfindingNode = nil;
         for index, pathfindingNode in pairs(openList) do

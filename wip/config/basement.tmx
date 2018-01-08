@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="428">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="429">
  <tileset firstgid="1" source="base-layout.tsx"/>
  <tileset firstgid="118" source="decorations.tsx"/>
  <layer name="Floor" width="70" height="48">
@@ -241,14 +241,6 @@
     <property name="multifloorIndex" type="int" value="1"/>
    </properties>
   </object>
-  <object id="182" type="node" x="2112" y="1312" width="32" height="32">
-   <properties>
-    <property name="connections" value="390"/>
-    <property name="multifloor" type="bool" value="true"/>
-    <property name="multifloorID" type="int" value="222"/>
-    <property name="multifloorIndex" type="int" value="2"/>
-   </properties>
-  </object>
   <object id="256" type="node" x="96" y="96" width="32" height="32">
    <properties>
     <property name="connections" value="135,257"/>
@@ -339,7 +331,7 @@
     <property name="connections" value="272,274"/>
    </properties>
   </object>
-  <object id="274" type="node" x="288" y="1248" width="32" height="32">
+  <object id="274" type="node" x="288" y="1280" width="32" height="32">
    <properties>
     <property name="connections" value="273,275"/>
    </properties>
@@ -349,14 +341,14 @@
     <property name="connections" value="274,276"/>
    </properties>
   </object>
-  <object id="276" type="node" x="448" y="1248" width="32" height="32">
+  <object id="276" type="node" x="448" y="1280" width="32" height="32">
    <properties>
     <property name="connections" value="275,277"/>
    </properties>
   </object>
-  <object id="277" type="node" x="512" y="1280" width="32" height="32">
+  <object id="277" type="node" x="512" y="1248" width="32" height="32">
    <properties>
-    <property name="connections" value="288,278,276"/>
+    <property name="connections" value="278,276,428"/>
    </properties>
   </object>
   <object id="278" type="node" x="512" y="1184" width="32" height="32">
@@ -384,7 +376,7 @@
     <property name="connections" value="282,284"/>
    </properties>
   </object>
-  <object id="284" type="node" x="160" y="1440" width="32" height="32">
+  <object id="284" type="node" x="160" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="283,285"/>
    </properties>
@@ -394,7 +386,7 @@
     <property name="connections" value="284,286"/>
    </properties>
   </object>
-  <object id="286" type="node" x="352" y="1440" width="32" height="32">
+  <object id="286" type="node" x="352" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="285,287"/>
    </properties>
@@ -406,7 +398,7 @@
   </object>
   <object id="288" type="node" x="512" y="1408" width="32" height="32">
    <properties>
-    <property name="connections" value="287,277,289"/>
+    <property name="connections" value="287,428,289"/>
    </properties>
   </object>
   <object id="289" type="node" x="672" y="1408" width="32" height="32">
@@ -619,22 +611,22 @@
     <property name="connections" value="332,334"/>
    </properties>
   </object>
-  <object id="334" type="node" x="1536" y="288" width="32" height="32">
+  <object id="334" type="node" x="1568" y="256" width="32" height="32">
    <properties>
     <property name="connections" value="333,335"/>
    </properties>
   </object>
-  <object id="335" type="node" x="1632" y="288" width="32" height="32">
+  <object id="335" type="node" x="1664" y="256" width="32" height="32">
    <properties>
     <property name="connections" value="334,336"/>
    </properties>
   </object>
-  <object id="336" type="node" x="1728" y="288" width="32" height="32">
+  <object id="336" type="node" x="1760" y="256" width="32" height="32">
    <properties>
     <property name="connections" value="335,337"/>
    </properties>
   </object>
-  <object id="337" type="node" x="1824" y="288" width="32" height="32">
+  <object id="337" type="node" x="1856" y="256" width="32" height="32">
    <properties>
     <property name="connections" value="336,338,361"/>
    </properties>
@@ -669,7 +661,7 @@
     <property name="connections" value="346,342"/>
    </properties>
   </object>
-  <object id="346" type="node" x="1632" y="64" width="32" height="32">
+  <object id="346" type="node" x="1632" y="96" width="32" height="32">
    <properties>
     <property name="connections" value="348,344"/>
    </properties>
@@ -679,7 +671,7 @@
     <property name="connections" value="350,346"/>
    </properties>
   </object>
-  <object id="350" type="node" x="1248" y="64" width="32" height="32">
+  <object id="350" type="node" x="1248" y="96" width="32" height="32">
    <properties>
     <property name="connections" value="352,348"/>
    </properties>
@@ -689,7 +681,7 @@
     <property name="connections" value="350,354"/>
    </properties>
   </object>
-  <object id="354" type="node" x="864" y="64" width="32" height="32">
+  <object id="354" type="node" x="864" y="96" width="32" height="32">
    <properties>
     <property name="connections" value="356,352"/>
    </properties>
@@ -699,7 +691,7 @@
     <property name="connections" value="358,354"/>
    </properties>
   </object>
-  <object id="358" type="node" x="544" y="64" width="32" height="32">
+  <object id="358" type="node" x="544" y="96" width="32" height="32">
    <properties>
     <property name="connections" value="359,356"/>
    </properties>
@@ -846,7 +838,7 @@
   </object>
   <object id="390" type="node" x="2112" y="1248" width="32" height="32">
    <properties>
-    <property name="connections" value="389,182"/>
+    <property name="connections" value="389"/>
    </properties>
   </object>
   <object id="391" type="node" x="1856" y="1408" width="32" height="32">
@@ -859,7 +851,7 @@
     <property name="connections" value="391,393"/>
    </properties>
   </object>
-  <object id="393" type="node" x="1728" y="1440" width="32" height="32">
+  <object id="393" type="node" x="1728" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="392,394"/>
    </properties>
@@ -869,7 +861,7 @@
     <property name="connections" value="393,395"/>
    </properties>
   </object>
-  <object id="395" type="node" x="1440" y="1440" width="32" height="32">
+  <object id="395" type="node" x="1440" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="394,396"/>
    </properties>
@@ -879,7 +871,7 @@
     <property name="connections" value="395,397"/>
    </properties>
   </object>
-  <object id="397" type="node" x="1216" y="1440" width="32" height="32">
+  <object id="397" type="node" x="1216" y="1408" width="32" height="32">
    <properties>
     <property name="connections" value="396,398"/>
    </properties>
@@ -1027,6 +1019,11 @@
   <object id="427" type="node" x="1664" y="576" width="32" height="32">
    <properties>
     <property name="connections" value="426,376"/>
+   </properties>
+  </object>
+  <object id="428" type="node" x="480" y="1344" width="32" height="32">
+   <properties>
+    <property name="connections" value="277,288"/>
    </properties>
   </object>
  </objectgroup>

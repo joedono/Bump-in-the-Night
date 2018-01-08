@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 428,
+  nextobjectid = 429,
   properties = {},
   tilesets = {
     {
@@ -1357,24 +1357,6 @@ return {
           }
         },
         {
-          id = 182,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 2112,
-          y = 1312,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "390",
-            ["multifloor"] = true,
-            ["multifloorID"] = 222,
-            ["multifloorIndex"] = 2
-          }
-        },
-        {
           id = 256,
           name = "",
           type = "node",
@@ -1650,7 +1632,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 288,
-          y = 1248,
+          y = 1280,
           width = 32,
           height = 32,
           rotation = 0,
@@ -1680,7 +1662,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 448,
-          y = 1248,
+          y = 1280,
           width = 32,
           height = 32,
           rotation = 0,
@@ -1695,13 +1677,13 @@ return {
           type = "node",
           shape = "rectangle",
           x = 512,
-          y = 1280,
+          y = 1248,
           width = 32,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "288,278,276"
+            ["connections"] = "278,276,428"
           }
         },
         {
@@ -1785,7 +1767,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 160,
-          y = 1440,
+          y = 1408,
           width = 32,
           height = 32,
           rotation = 0,
@@ -1815,7 +1797,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 352,
-          y = 1440,
+          y = 1408,
           width = 32,
           height = 32,
           rotation = 0,
@@ -1851,7 +1833,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "287,277,289"
+            ["connections"] = "287,428,289"
           }
         },
         {
@@ -2489,8 +2471,8 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 1536,
-          y = 288,
+          x = 1568,
+          y = 256,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2504,8 +2486,8 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 1632,
-          y = 288,
+          x = 1664,
+          y = 256,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2519,8 +2501,8 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 1728,
-          y = 288,
+          x = 1760,
+          y = 256,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2534,8 +2516,8 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 1824,
-          y = 288,
+          x = 1856,
+          y = 256,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2640,7 +2622,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1632,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2670,7 +2652,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1248,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2700,7 +2682,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 864,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -2730,7 +2712,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 544,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3171,7 +3153,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "389,182"
+            ["connections"] = "389"
           }
         },
         {
@@ -3210,7 +3192,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1728,
-          y = 1440,
+          y = 1408,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3240,7 +3222,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1440,
-          y = 1440,
+          y = 1408,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3270,7 +3252,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1216,
-          y = 1440,
+          y = 1408,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3712,6 +3694,21 @@ return {
           visible = true,
           properties = {
             ["connections"] = "426,376"
+          }
+        },
+        {
+          id = 428,
+          name = "",
+          type = "node",
+          shape = "rectangle",
+          x = 480,
+          y = 1344,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["connections"] = "277,288"
           }
         }
       }

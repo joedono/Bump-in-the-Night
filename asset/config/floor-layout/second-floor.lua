@@ -1515,7 +1515,7 @@ return {
           properties = {
             ["connections"] = "374,375",
             ["multifloor"] = true,
-            ["multifloorID"] = 203,
+            ["multifloorID"] = 190,
             ["multifloorIndex"] = 1
           }
         },
@@ -1531,10 +1531,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "387",
-            ["multifloor"] = true,
-            ["multifloorID"] = 182,
-            ["multifloorIndex"] = 3
+            ["connections"] = "387"
           }
         },
         {
@@ -2262,7 +2259,7 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 64,
+          x = 96,
           y = 416,
           width = 32,
           height = 32,
@@ -2277,7 +2274,7 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 64,
+          x = 96,
           y = 320,
           width = 32,
           height = 32,
@@ -2967,7 +2964,7 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 2144,
+          x = 2112,
           y = 800,
           width = 32,
           height = 32,
@@ -2982,7 +2979,7 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 2144,
+          x = 2112,
           y = 672,
           width = 32,
           height = 32,
@@ -3343,7 +3340,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1952,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3373,7 +3370,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1728,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3403,7 +3400,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 1504,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
@@ -3943,7 +3940,7 @@ return {
           type = "node",
           shape = "rectangle",
           x = 992,
-          y = 64,
+          y = 96,
           width = 32,
           height = 32,
           rotation = 0,
