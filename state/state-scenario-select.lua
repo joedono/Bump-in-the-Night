@@ -17,6 +17,7 @@ function State_Scenario_Select:enter(previous)
 		x = 2,
 		y = 2;
 	};
+	self.lastPressed = nil;
 
 	Timer.every(0.25, function()
 		self.indicatorVisible = not self.indicatorVisible;
@@ -28,24 +29,28 @@ function State_Scenario_Select:keypressed(key, unicode)
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x - 1;
+		self.lastPressed = "left";
 	end
 
 	if key == KEY_RIGHT or key == KEY_MENU_RIGHT then
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x + 1;
+		self.lastPressed = "right";
 	end
 
 	if key == KEY_UP or key == KEY_MENU_UP then
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y - 1;
+		self.lastPressed = "up";
 	end
 
 	if key == KEY_DOWN or key == KEY_MENU_DOWN then
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y + 1;
+		self.lastPressed = "down";
 	end
 
 	self:fixSelection();
@@ -60,24 +65,28 @@ function State_Scenario_Select:gamepadpressed(joystick, button)
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x - 1;
+		self.lastPressed = "left";
 	end
 
 	if button == GAMEPAD_RIGHT then
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.x = self.selection.x + 1;
+		self.lastPressed = "right";
 	end
 
 	if button == GAMEPAD_UP then
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y - 1;
+		self.lastPressed = "up";
 	end
 
 	if button == GAMEPAD_DOWN then
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.selection.y = self.selection.y + 1;
+		self.lastPressed = "down";
 	end
 
 	self:fixSelection();
@@ -110,7 +119,11 @@ function State_Scenario_Select:fixSelection()
 		end
 
 		if self.selection.x > 3 then
-			self.selection.x = 1;
+			if self.lastPressed == "up" or self.lastPressed == "down" then
+				self.selection.x = 3;
+			else
+				self.selection.x = 1;
+			end
 		end
 	else
 		if self.selection.x < 1 then
