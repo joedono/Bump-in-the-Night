@@ -13,6 +13,7 @@ KILL_PLAYER = true;
 DRAW_MONSTER_PATH = false;
 DRAW_MONSTER_SENSES = false;
 DRAW_ENTIRE_HOUSE = false;
+LOAD_SAVE_ENABLED = false;
 
 KEY_LEFT = "a";
 KEY_RIGHT = "d";

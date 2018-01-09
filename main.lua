@@ -71,6 +71,10 @@ function love.gamepadpressed(joystick, button)
 end
 
 function saveGame()
+	if not LOAD_SAVE_ENABLED then
+		return;
+	end
+
 	local file, errorStr = love.filesystem.newFile("data.sav");
 	file:open("w");
 	file:write("return " .. Inspect(SCENARIO_ALL));
@@ -78,6 +82,10 @@ function saveGame()
 end
 
 function loadGame()
+	if not LOAD_SAVE_ENABLED then
+		return;
+	end
+	
 	local data = love.filesystem.load("data.sav");
 	SCENARIO_COMPLETED = data();
 end
