@@ -7,7 +7,7 @@ Active Chase - Is giving chase and can still see the player. Constantly pathfind
 Passive Chase - Is giving chase and cannot see the player. Stop at node closest to last known player location. Downgrade to Alert when node is reached.
 Smells Meat - Player has dropped meat somewhere on the floor. Walk to Meat
 Eating - Reached meat that isn't in a trap. Consume meat for a time.
-Trapped - Has walked into a beartrap. Whimper and try to free seld
+Trapped - Has walked into a trap. Whimper and try to free seld
 Dead - Shot by player. Dead
 ]]
 
@@ -282,7 +282,7 @@ function Monster_Wolf:updateEating(dt)
 	end
 end
 
--- Has walked into a beartrap. Whimper and try to free seld
+-- Has walked into a trap. Whimper and try to free seld
 function Monster_Wolf:updateTrapped(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();

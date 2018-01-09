@@ -1,4 +1,4 @@
--- Left around to trap the wolf or bear
+-- Left around to trap the wolf or panther
 Trap = Class {
 	init = function(self, x, y, spriteSheet)
 		self.box = {

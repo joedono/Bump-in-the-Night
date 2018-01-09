@@ -1,4 +1,4 @@
--- Left around to lure the wolf or bear into the trap
+-- Left around to lure the wolf or panther into the trap
 Meat = Class {
 	init = function(self, x, y, spriteSheet)
 		self.box = {

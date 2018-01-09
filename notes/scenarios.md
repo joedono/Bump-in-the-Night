@@ -1,12 +1,12 @@
 # SCENARIOS
 ## Wolf
 Trap the wolf and put it down.
-Required Items: Raw Meat, Bear Trap, Shotgun, Shotgun Rounds
+Required Items: Raw Meat, Trap, Shotgun, Shotgun Rounds
 Hunts by sight and sound. Spawns in a group of 3. Can be seen without the flashlight. Load the bullets into the gun. Placing the meat will attract one of the wolves directly to it. Place the trap so the wolf runs into it, then finish it off with the gun. Killing all wolves is a win.
 
 ## Panther
 Trap the panther and put it down.
-Required Items: Raw Meat, Bear Trap, Shotgun, Shotgun Rounds
+Required Items: Raw Meat, Trap, Shotgun, Shotgun Rounds
 Hunts by sight and sound. Only one spawns. Randomly catches the player's scent and hunts them directly for a time. Cannot be seen without the flashlight. Catching and killing the panther is identical to the wolf scenario, but the panther can still move at reduced speed and kill the player while caught in the trap.
 
 ## Burglar

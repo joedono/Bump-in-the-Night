@@ -2,17 +2,17 @@ SCREEN_WIDTH = 1600;
 SCREEN_HEIGHT = 900;
 SCREEN_WIDTH_WHOLE_HOUSE = 5000;
 SCREEN_HEIGHT_WHOLE_HOUSE = 3800;
-FULLSCREEN = true;
+FULLSCREEN = false;
 
 -- Debug Variables
 DRAW_BOXES = false;
 DRAW_PORTALS = true;
 DRAW_PATHS = false;
-DRAW_LIGHTS = true;
-KILL_PLAYER = true;
+DRAW_LIGHTS = false;
+KILL_PLAYER = false;
 DRAW_MONSTER_PATH = false;
 DRAW_MONSTER_SENSES = false;
-DRAW_ENTIRE_HOUSE = false;
+DRAW_ENTIRE_HOUSE = true;
 
 KEY_LEFT = "a";
 KEY_RIGHT = "d";
@@ -165,22 +165,22 @@ INVENTORY_MAP = {
 };
 
 SCENARIO_SELECTION = {
-  {"wolf", "wolf", "wolf", "wolf"},
+  {"wolf", "panther", "wolf", "wolf"},
   {"wolf", "random", "wolf"},
   {"wolf", "wolf", "wolf", "wolf"}
 };
 
 -- SCENARIO_SELECTION = {
---   {"wolf", "bear", "burgler", "arson"},
+--   {"wolf", "panther", "burgler", "arson"},
 --   {"killer", "random", "vampire"},
 --   {"ghost", "alien", "zombie", "elder_god"}
 -- };
 
-SCENARIO_RANDOM = {"wolf", "bear", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
+SCENARIO_RANDOM = {"wolf", "panther", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
 
 SCENARIO_ITEMS = {
   ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
-  ["bear"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+  ["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
   ["burgler"] = {"taser", "cellphone_dead", "cellphone_battery"},
   ["arson"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
   ["killer"] = {"taser", "cellphone_dead", "cellphone_battery", "fuse"},
