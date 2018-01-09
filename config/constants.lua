@@ -179,19 +179,13 @@ INVENTORY_MAP = {
 };
 
 SCENARIO_SELECTION = {
-  {"wolf", "panther", "wolf", "wolf"},
-  {"wolf", "random", "wolf"},
-  {"wolf", "wolf", "wolf", "wolf"}
+  {"wolf", "panther", "burgler", "arson"},
+  {"killer", "random", "vampire"},
+  {"ghost", "alien", "zombie", "elder_god"}
 };
 
--- SCENARIO_SELECTION = {
---   {"wolf", "panther", "burgler", "arson"},
---   {"killer", "random", "vampire"},
---   {"ghost", "alien", "zombie", "elder_god"}
--- };
-
 SCENARIO_ALL = {"wolf", "panther", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_COMPLETED = {};
+SCENARIO_COMPLETED = {"wolf", "panther"};
 
 SCENARIO_ITEMS = {
   ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},

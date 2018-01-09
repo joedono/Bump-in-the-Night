@@ -17,7 +17,6 @@ function State_Scenario_Select:enter(previous)
 		x = 2,
 		y = 2;
 	};
-	self.lastPressed = nil;
 
 	Timer.every(0.25, function()
 		self.indicatorVisible = not self.indicatorVisible;
@@ -25,35 +24,33 @@ function State_Scenario_Select:enter(previous)
 end
 
 function State_Scenario_Select:keypressed(key, unicode)
+	local x = self.selection.x;
+	local y = self.selection.y;
+	local pressed = nil;
+
 	if key == KEY_LEFT or key == KEY_MENU_LEFT then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.x = self.selection.x - 1;
-		self.lastPressed = "left";
+		x = x - 1;
+		pressed = "left";
 	end
 
 	if key == KEY_RIGHT or key == KEY_MENU_RIGHT then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.x = self.selection.x + 1;
-		self.lastPressed = "right";
+		x = x + 1;
+		pressed = "right";
 	end
 
 	if key == KEY_UP or key == KEY_MENU_UP then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.y = self.selection.y - 1;
-		self.lastPressed = "up";
+		y = y - 1;
+		pressed = "up";
 	end
 
 	if key == KEY_DOWN or key == KEY_MENU_DOWN then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.y = self.selection.y + 1;
-		self.lastPressed = "down";
+		y = y + 1;
+		pressed = "down";
 	end
 
-	self:fixSelection();
+	if pressed ~= nil then
+		self:updateSelection(x, y, pressed);
+	end
 
 	if key == KEY_PAUSE then
 		self:selectScenario();
@@ -61,35 +58,33 @@ function State_Scenario_Select:keypressed(key, unicode)
 end
 
 function State_Scenario_Select:gamepadpressed(joystick, button)
+	local x = self.selection.x;
+	local y = self.selection.y;
+	local pressed = nil;
+
 	if button == GAMEPAD_LEFT then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.x = self.selection.x - 1;
-		self.lastPressed = "left";
+		x = x - 1;
+		pressed = "left";
 	end
 
 	if button == GAMEPAD_RIGHT then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.x = self.selection.x + 1;
-		self.lastPressed = "right";
+		x = x + 1;
+		pressed = "right";
 	end
 
 	if button == GAMEPAD_UP then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.y = self.selection.y - 1;
-		self.lastPressed = "up";
+		y = y - 1;
+		pressed = "up";
 	end
 
 	if button == GAMEPAD_DOWN then
-		self.soundSelectionChange:rewind();
-		self.soundSelectionChange:play();
-		self.selection.y = self.selection.y + 1;
-		self.lastPressed = "down";
+		y = y + 1;
+		pressed = "down";
 	end
 
-	self:fixSelection();
+	if pressed ~= nil then
+		self:updateSelection(x, y, pressed);
+	end
 
 	if button == GAMEPAD_START or button == GAMEPAD_ITEM_USE then
 		self:selectScenario();
@@ -104,36 +99,42 @@ function State_Scenario_Select:update(dt)
 	Timer.update(dt);
 end
 
-function State_Scenario_Select:fixSelection()
-	if self.selection.y < 1 then
-		self.selection.y = 3;
+function State_Scenario_Select:updateSelection(x, y, pressed)
+	if y < 1 then
+		y = 3;
 	end
 
-	if self.selection.y > 3 then
-		self.selection.y = 1;
+	if y > 3 then
+		y = 1;
 	end
 
-	if self.selection.y == 2 then
-		if self.selection.x < 1 then
-			self.selection.x = 3;
+	if y == 2 then
+		if x < 1 then
+			x = 3;
 		end
 
-		if self.selection.x > 3 then
-			if self.lastPressed == "up" or self.lastPressed == "down" then
-				self.selection.x = 3;
+		if x > 3 then
+			if pressed == "up" or pressed == "down" then
+				x = 3;
 			else
-				self.selection.x = 1;
+				x = 1;
 			end
 		end
 	else
-		if self.selection.x < 1 then
-			self.selection.x = 4;
+		if x < 1 then
+			x = 4;
 		end
 
-		if self.selection.x > 4 then
-			self.selection.x = 1;
+		if x > 4 then
+			x = 1;
 		end
 	end
+
+	self.selection.x = x;
+	self.selection.y = y;
+	
+	self.soundSelectionChange:rewind();
+	self.soundSelectionChange:play();
 end
 
 function State_Scenario_Select:selectScenario()
