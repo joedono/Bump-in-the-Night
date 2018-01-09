@@ -37,9 +37,8 @@ Monster_Panther = Class {
 			LightWorld:newLight(0, 0, 255, 0, 0, 15)
 		};
 
-		for index, eyeLight in pairs(self.eyeLights) do
-			eyeLight:setVisible(false);
-		end
+		self.eyeLights[1]:setVisible(false);
+		self.eyeLights[2]:setVisible(false);
 
 		self.state = "idle";
 		self.stateTimer = 5;
@@ -102,10 +101,15 @@ function Monster_Panther:updateIdle(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		self.state = "walk";
-	end
 
-	-- TODO Randomly head directly for player
+		local randomHunt = love.math.random(100);
+		if randomHunt < MONSTER_PANTHER_HUNT_CHANCE then
+			self:hasHeardPlayer();
+			self.state = "investigating";
+		else
+			self.state = "walk";
+		end
+	end
 end
 
 -- Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
@@ -288,6 +292,17 @@ end
 
 -- Has walked into a trap. Whimper and try to free seld
 function Monster_Panther:updateTrapped(dt)
+	self.visualTarget = {
+		x = self.player.box.x + self.player.box.w / 2,
+		y = self.player.box.y + self.player.box.h / 2
+	};
+
+	self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
+	self.targetPathNodeIndex = 1;
+	self.targetPathNode = self.path[self.targetPathNodeIndex];
+
+	self:followPath(dt, MONSTER_PANTHER_TRAPPED_CHASE_SPEED);
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "idle";
@@ -367,7 +382,7 @@ function Monster_Panther:followPath(dt, speed)
 	for i = 1, len do
     local col = cols[i];
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and
-			self.state ~= "smells-meat" and self.state ~= "eating" and self.state ~= "trapped" and self.state ~= "dead" then
+			self.state ~= "smells-meat" and self.state ~= "eating" and self.state ~= "dead" then
 			col.other.active = false;
 
 			self.soundEffects.monsterBite:rewind();
@@ -481,7 +496,15 @@ function Monster_Panther:updateLights()
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
-		-- TODO Turn on eyelights when chasing player or when just close to player
+		if self.state == "heard-player" or self.state == "investigating" or self.state == "spotted"
+			or self.state == "active-chase" or self.state == "passive-chase" or self.state == "trapped"
+			or math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_PANTHER_EYES_PLAYER_DISTANCE then
+			self.eyeLights[1]:setVisible(true);
+			self.eyeLights[2]:setVisible(true);
+		else
+			self.eyeLights[1]:setVisible(false);
+			self.eyeLights[2]:setVisible(false);
+		end
 	end
 end
 
