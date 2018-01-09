@@ -907,7 +907,7 @@
     <property name="connections" value="96,79,237,114"/>
    </properties>
   </object>
-  <object id="255" type="node" x="1408" y="608" width="32" height="32">
+  <object id="255" type="node" x="1376" y="608" width="32" height="32">
    <properties>
     <property name="connections" value="96,114,254,256"/>
    </properties>

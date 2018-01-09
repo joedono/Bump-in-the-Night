@@ -3089,7 +3089,7 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 1408,
+          x = 1376,
           y = 608,
           width = 32,
           height = 32,
