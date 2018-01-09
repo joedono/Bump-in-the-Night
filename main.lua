@@ -77,7 +77,7 @@ function saveGame()
 
 	local file, errorStr = love.filesystem.newFile("data.sav");
 	file:open("w");
-	file:write("return " .. Inspect(SCENARIO_ALL));
+	file:write("return " .. Inspect(SCENARIO_COMPLETED));
 	file:close();
 end
 
@@ -85,7 +85,7 @@ function loadGame()
 	if not LOAD_SAVE_ENABLED then
 		return;
 	end
-	
+
 	local data = love.filesystem.load("data.sav");
 	SCENARIO_COMPLETED = data();
 end

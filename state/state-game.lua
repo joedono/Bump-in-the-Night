@@ -65,6 +65,7 @@ function State_Game:enter(previous, scenarioId)
 		scenarioId = "panther";
 	end
 
+	self.scenarioId = scenarioId;
 	self.inventory = {};
 	self.selectedItemIndex = 1;
 	self.player = Player(self, self.soundEffects);
@@ -581,6 +582,18 @@ function State_Game:getPlacedItem(itemType)
 end
 
 function State_Game:winGame()
+	local alreadyCompleted = false;
+	for index, completedScenario in pairs(SCENARIO_COMPLETED) do
+		if self.scenarioId == completedScenario then
+			alreadyCompleted = true;
+		end
+	end
+
+	if not alreadyCompleted then
+		table.insert(SCENARIO_COMPLETED, self.scenarioId);
+		saveGame();
+	end
+
 	self:stopAllSounds();
 	GameState.push(State_Winning);
 end

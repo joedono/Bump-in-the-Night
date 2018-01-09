@@ -13,6 +13,7 @@ function State_Scenario_Select:enter(previous)
 	self.previous = previous;
 	love.graphics.setBackgroundColor(0, 0, 0);
 	self.indicatorVisible = true;
+	self.scenarioDescription = "Random";
 	self.selection = {
 		x = 2,
 		y = 2;
@@ -130,9 +131,27 @@ function State_Scenario_Select:updateSelection(x, y, pressed)
 		end
 	end
 
+	local scenarioDescription = SCENARIO_SELECTION[y][x];
+	local unlocked = false;
+
+	for index, scenario in pairs(SCENARIO_COMPLETED) do
+		if scenario == scenarioDescription then
+			unlocked = true;
+		end
+	end
+
+	if scenarioDescription == "random" or unlocked then
+		scenarioDescription = scenarioDescription:gsub("_", " ");
+		scenarioDescription = scenarioDescription:gsub("(%l)(%w*)", function(a,b) return string.upper(a) .. b end);
+	else
+		scenarioDescription = "LOCKED";
+	end
+
+	self.scenarioDescription = scenarioDescription;
+
 	self.selection.x = x;
 	self.selection.y = y;
-	
+
 	self.soundSelectionChange:rewind();
 	self.soundSelectionChange:play();
 end
@@ -140,15 +159,43 @@ end
 function State_Scenario_Select:selectScenario()
 	local scenarioDescription = SCENARIO_SELECTION[self.selection.y][self.selection.x];
 
-	if scenarioDescription == "random" then
-		scenarioDescription = SCENARIO_ALL[love.math.random(10)];
+	local unlocked = false;
+
+	for index, scenario in pairs(SCENARIO_COMPLETED) do
+		if scenario == scenarioDescription then
+			unlocked = true;
+		end
 	end
 
-	scenarioDescription = "wolf";
+	if scenarioDescription == "random" then
+		scenarioDescription = self:chooseRandomLockedScenario();
+	elseif not unlocked then
+		-- TODO Play locked noise or something
+		return;
+	end
 
 	self.soundSelect:rewind();
 	self.soundSelect:play();
 	GameState.switch(State_Game, scenarioDescription)
+end
+
+function State_Scenario_Select:chooseRandomLockedScenario()
+	local lockedScenarios = {};
+
+	for index, availableScenario in pairs(SCENARIO_ALL) do
+		local locked = true;
+		for index2, completedScenario in pairs(SCENARIO_COMPLETED) do
+			if availableScenario == completedScenario then
+				locked = false;
+			end
+		end
+
+		if locked then
+			table.insert(lockedScenarios, availableScenario);
+		end
+	end
+
+	return lockedScenarios[love.math.random(#lockedScenarios)];
 end
 
 function State_Scenario_Select:draw()
@@ -163,10 +210,7 @@ function State_Scenario_Select:draw()
 
 		love.graphics.print("?", 770, 315);
 
-		local scenarioDescription = SCENARIO_SELECTION[self.selection.y][self.selection.x];
-		scenarioDescription = scenarioDescription:gsub("_", " ");
-		scenarioDescription = scenarioDescription:gsub("(%l)(%w*)", function(a,b) return string.upper(a) .. b end);
-		love.graphics.printf(scenarioDescription, 0, 650, SCREEN_WIDTH, "center");
+		love.graphics.printf(self.scenarioDescription, 0, 650, SCREEN_WIDTH, "center");
 
 		if self.indicatorVisible then
 			love.graphics.setColor(255, 255, 255);
