@@ -127,7 +127,7 @@ function State_Scenario_Select:selectScenario()
 	local scenarioDescription = SCENARIO_SELECTION[self.selection.y][self.selection.x];
 
 	if scenarioDescription == "random" then
-		scenarioDescription = SCENARIO_RANDOM[love.math.random(10)];
+		scenarioDescription = SCENARIO_ALL[love.math.random(10)];
 	end
 
 	scenarioDescription = "wolf";

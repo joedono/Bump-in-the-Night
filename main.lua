@@ -52,8 +52,10 @@ function love.load()
   CANVAS_OFFSET_X = w / 2 - (SCREEN_WIDTH * CANVAS_SCALE) / 2;
   CANVAS_OFFSET_Y = h / 2 - (SCREEN_HEIGHT * CANVAS_SCALE) / 2;
 
+	loadGame();
+
 	GameState.registerEvents();
-	GameState.switch(State_Game);
+	GameState.switch(State_Title);
 end
 
 function love.keypressed(key, unicode)
@@ -66,4 +68,16 @@ function love.gamepadpressed(joystick, button)
   if button == GAMEPAD_QUIT then
     love.event.quit();
   end
+end
+
+function saveGame()
+	local file, errorStr = love.filesystem.newFile("data.sav");
+	file:open("w");
+	file:write("return " .. Inspect(SCENARIO_ALL));
+	file:close();
+end
+
+function loadGame()
+	local data = love.filesystem.load("data.sav");
+	SCENARIO_COMPLETED = data();
 end
