@@ -513,7 +513,7 @@ function Monster_Panther:draw()
 		return;
 	end
 
-	love.graphics.setColor(0, 0, 0);
+	love.graphics.setColor(75, 75, 75);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
 	-- Draw eyes

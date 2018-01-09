@@ -63,6 +63,8 @@ function Manager_Monster:update(dt)
 
 	if self.scenarioId == "wolf" then
 		self:updateWolfSpecial(dt);
+	elseif self.scenarioId == "panther" then
+		self:updatePantherSpecial(dt);
 	end
 end
 
@@ -110,6 +112,40 @@ function Manager_Monster:updateWolfSpecial(dt)
 	end
 
 	if allWolvesDead then
+		self.parentStateGame:winGame();
+	end
+end
+
+function Manager_Monster:updatePantherSpecial(dt)
+	local pantherIsDead = true;
+	local pantherGoingAfterMeat = false;
+	local usedMeat = self.parentStateGame:getPlacedItem("placed-meat");
+	local panther = self.monsters[1];
+
+	if panther.state == "smells-meat" then
+		pantherGoingAfterMeat = true;
+	end
+
+	if panther.state ~= "dead" then
+		pantherIsDead = false;
+	end
+
+	if usedMeat == nil then -- Clean up if the panther is going after the meat
+		if panther.state == "smells-meat" then
+			panther.state = "idle";
+		end
+	elseif not pantherGoingAfterMeat then -- Send the panther after the meat
+		if panther.state ~= "trapped" and panther.state ~= "dead" then
+			panther:resetPath();
+			panther.state = "smells-meat";
+			panther.smellTarget = {
+				x = usedMeat.center.x,
+				y = usedMeat.center.y
+			};
+		end
+	end
+
+	if pantherIsDead then
 		self.parentStateGame:winGame();
 	end
 end
