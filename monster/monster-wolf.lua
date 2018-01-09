@@ -1,7 +1,9 @@
 --[[
 States:
 Idle - Hasn't seen or heard player and player hasn't dropped meat. Randomly walk around sniffing and eating things. Avoid traps
-Alert - Has heard the player. Look towards sound. If can't see player for some time, walk towards source of sound. If still can't see player for some time, go back to idle
+Walk - Moving randomly around the level
+Heard Player - Has heard player. Idle for a bit, then switch to Investigating
+Investigating - Has heard player. Has Idled. Is now moving towards the source of the sound
 Spotted - Sees the player. Alert for a little bit, then give chase
 Active Chase - Is giving chase and can still see the player. Constantly pathfind to the node closest to the player. If the player is within range, attack the player
 Passive Chase - Is giving chase and cannot see the player. Stop at node closest to last known player location. Downgrade to Alert when node is reached.
@@ -87,6 +89,7 @@ function Monster_Wolf:update(dt)
 	self:updateLights(dt);
 end
 
+-- Hasn't seen or heard player and player hasn't dropped meat. Sit for a while
 function Monster_Wolf:updateIdle(dt)
 	if self:canHearPlayer() then
 		self:hasHeardPlayer();

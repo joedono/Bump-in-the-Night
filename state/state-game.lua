@@ -44,6 +44,7 @@ function State_Game:init()
 		itemPickup = love.audio.newSource("asset/sound/item-pickup.wav", "static"),
 		monsterBite = love.audio.newSource("asset/sound/monster-bite.wav", "static"),
 		monsterWolfRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
+		monsterPantherRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
 		playerDeathYell = love.audio.newSource("asset/sound/player-death-yell.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static")

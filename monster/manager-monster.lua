@@ -25,6 +25,8 @@ function Manager_Monster:spawnMonsters(scenarioId)
 		spawnPoint = self:randomPathNode();
 		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
 	elseif scenarioId == "panther" then
+		local spawnPoint = self:randomPathNode();
+		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
 	elseif scenarioId == "burgler" then
 	elseif scenarioId == "arson" then
 	elseif scenarioId == "killer" then
