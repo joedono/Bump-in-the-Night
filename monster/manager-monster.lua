@@ -1,5 +1,6 @@
 require "lib/pathfinding";
 
+require "monster/base-monster"
 require "monster/monster-wolf";
 require "monster/monster-panther";
 

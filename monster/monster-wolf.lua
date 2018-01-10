@@ -13,8 +13,9 @@ Trapped - Has walked into a trap. Whimper and try to free seld
 Dead - Shot by player. Dead
 ]]
 
-Monster_Wolf = Class {
+Monster_Wolf = Class {__includes = Monster,
 	init = function(self, parentManager, soundEffects, player, curFloor, x, y)
+		Monster.init(self);
 		self.parentManager = parentManager;
 		self.soundEffects = soundEffects;
 		self.player = player;
@@ -27,10 +28,6 @@ Monster_Wolf = Class {
 		};
 
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
-
-		self.velocity = { x = 0, y = 0 };
-		self.speed = 0;
-    self.facing = { x = 0, y = 0 };
 
 		self.eyeLights = {
 			LightWorld:newLight(0, 0, 255, 0, 0, 15),
@@ -86,6 +83,7 @@ function Monster_Wolf:update(dt)
 		error("Invalid State " .. self.state);
 	end
 
+	self:updateFacing(dt, MONSTER_WOLF_TURN_SPEED);
 	self:updateLights(dt);
 end
 
@@ -459,10 +457,6 @@ end
 function Monster_Wolf:updatePosition(dt)
 	local dx = self.box.x + self.velocity.x * self.speed * dt;
   local dy = self.box.y + self.velocity.y * self.speed * dt;
-
-	self.facing.x = self.velocity.x;
-	self.facing.y = self.velocity.y;
-
 	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
 
