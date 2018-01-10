@@ -7,18 +7,27 @@ Monster = Class {
 };
 
 function Monster:updateFacing(dt, turnSpeed)
-  local dx, dy = self.velocity.x, self.velocity.y;
-
-	if dx ~= 0 or dy ~= 0 then
-		local goalFacing = math.angle(0, 0, dy, dx);
+	if self.velocity.x ~= 0 or self.velocity.y ~= 0 then
+		local goalFacing = math.angle(0, 0, self.velocity.y, self.velocity.x);
 		local curFacing = math.angle(0, 0, self.facing.y, self.facing.x);
 
-		if(goalFacing < 0) then
+    if goalFacing > math.pi * 2 then
+      goalFacing = goalFacing - math.pi * 2;
+    elseif goalFacing < 0 then
 			goalFacing = goalFacing + math.pi * 2;
 		end
 
+    if curFacing > math.pi * 2 then
+      curFacing = curFacing - math.pi * 2;
+    elseif curFacing < 0 then
+      curFacing = curFacing + math.pi * 2;
+    end
+
+    print("Initial Goal " .. goalFacing);
+    print("Initial Facing " .. curFacing);
+
 		if math.abs(goalFacing - curFacing) < 0.15 then
-			-- Close enough. Don't update facing
+			goalFacing = curFacing;
 		else
 			-- Determine which circular direction will get to the goal the fastest
 			local positiveSearch = curFacing;
@@ -40,21 +49,14 @@ function Monster:updateFacing(dt, turnSpeed)
 
 			if math.abs(positiveSearch - goalFacing) < 0.15 then
 				finalDirection = turnSpeed * dt;
-			elseif(math.abs(negativeSearch - goalFacing) < 0.15) then
+			elseif math.abs(negativeSearch - goalFacing) < 0.15 then
 				finalDirection = -turnSpeed * dt;
 			end
 
 			goalFacing = curFacing + finalDirection;
 		end
 
-		if goalFacing > math.pi * 2 then
-			goalFacing = goalFacing - math.pi * 2;
-		end
-
-		if goalFacing < 0 then
-			goalFacing = goalFacing + math.pi * 2;
-		end
-
+    print("Final Change " .. goalFacing);
 		self.facing.x = math.cos(goalFacing);
 		self.facing.y = math.sin(goalFacing);
 	end
