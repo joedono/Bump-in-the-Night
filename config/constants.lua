@@ -9,7 +9,7 @@ DRAW_BOXES = false;
 DRAW_PORTALS = true;
 DRAW_PATHS = false;
 DRAW_LIGHTS = true;
-KILL_PLAYER = true;
+KILL_PLAYER = false;
 DRAW_MONSTER_PATH = false;
 DRAW_MONSTER_SENSES = false;
 DRAW_ENTIRE_HOUSE = false;
@@ -186,7 +186,8 @@ SCENARIO_SELECTION = {
   {"ghost", "alien", "zombie", "elder_god"}
 };
 
-SCENARIO_ALL = {"wolf", "panther", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
+--SCENARIO_ALL = {"wolf", "panther", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
+SCENARIO_ALL = {"wolf", "panther"};
 SCENARIO_COMPLETED = {"wolf", "panther"};
 
 SCENARIO_ITEMS = {
