@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/joedono/Bump-in-the-Night/master/screenshot/02.png" />
+<img src="https://joedono.github.io/img/screenshot/bump-in-the-night/02.png" />
 
 ## Description
 Welcome to the alpha build of Bump in the Night!
