@@ -87,5 +87,8 @@ function loadGame()
 	end
 
 	local data = love.filesystem.load("data.sav");
-	SCENARIO_COMPLETED = data();
+
+	if data ~= nil then
+		SCENARIO_COMPLETED = data();
+	end
 end
