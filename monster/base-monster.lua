@@ -23,9 +23,6 @@ function Monster:updateFacing(dt, turnSpeed)
       curFacing = curFacing + math.pi * 2;
     end
 
-    print("Initial Goal " .. goalFacing);
-    print("Initial Facing " .. curFacing);
-
 		if math.abs(goalFacing - curFacing) < 0.15 then
 			goalFacing = curFacing;
 		else
@@ -56,7 +53,6 @@ function Monster:updateFacing(dt, turnSpeed)
 			goalFacing = curFacing + finalDirection;
 		end
 
-    print("Final Change " .. goalFacing);
 		self.facing.x = math.cos(goalFacing);
 		self.facing.y = math.sin(goalFacing);
 	end
