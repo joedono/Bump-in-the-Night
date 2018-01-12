@@ -485,6 +485,10 @@ end
 function State_Game:useItem()
 	local selectedItem = self.inventory[self.selectedItemIndex];
 
+	if selectedItem == nil then
+		return;
+	end
+
 	if selectedItem.itemType == "meat" then
 		local placedMeat = self:getPlacedItem("placed-meat");
 		if placedMeat ~= nil then
