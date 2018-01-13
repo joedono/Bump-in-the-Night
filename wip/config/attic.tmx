@@ -277,7 +277,7 @@
     <property name="connections" value="229,223,232"/>
    </properties>
   </object>
-  <object id="74" type="node" x="960" y="1024" width="32" height="32">
+  <object id="74" type="node" x="960" y="1040" width="32" height="32">
    <properties>
     <property name="connections" value="215,219,232"/>
    </properties>
@@ -457,7 +457,7 @@
     <property name="connections" value="56,160"/>
    </properties>
   </object>
-  <object id="162" type="node" x="352" y="576" width="32" height="32">
+  <object id="162" type="node" x="352" y="544" width="32" height="32">
    <properties>
     <property name="connections" value="56,163"/>
    </properties>
@@ -792,7 +792,7 @@
     <property name="connections" value="223,73,228"/>
    </properties>
   </object>
-  <object id="232" type="node" x="960" y="928" width="32" height="32">
+  <object id="232" type="node" x="960" y="960" width="32" height="32">
    <properties>
     <property name="connections" value="73,74"/>
    </properties>

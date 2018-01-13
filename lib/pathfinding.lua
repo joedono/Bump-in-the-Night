@@ -14,7 +14,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
     table.insert(openList, {
       from = nil,
       distanceFromStart = 0,
-      distanceFromGoal = math.dist(startPathNode.center.x, startPathNode.center.y, goalPathNode.center.x, goalPathNode.center.y),
+      distanceFromGoal = math.dist(startPathNode.origin.x, startPathNode.origin.y, goalPathNode.origin.x, goalPathNode.origin.y),
       pathNode = startPathNode
     });
 
@@ -59,7 +59,7 @@ function pathfinding.findPath(startX, startY, goalX, goalY, pathNodes)
           table.insert(openList, {
             from = testPathfindingNode,
             distanceFromStart = testPathfindingNode.distanceFromStart + connectionNode.distance,
-            distanceFromGoal = math.dist(pathNode.center.x, pathNode.center.y, goalPathNode.center.x, goalPathNode.center.y),
+            distanceFromGoal = math.dist(pathNode.origin.x, pathNode.origin.y, goalPathNode.origin.x, goalPathNode.origin.y),
             pathNode = pathNode
           });
         end
@@ -162,11 +162,11 @@ end
 
 function pathfinding.findClosestNode(x, y, pathNodes)
   local closestPathNode = pathNodes[1];
-  local dist = math.dist(x, y, closestPathNode.center.x, closestPathNode.center.y);
+  local dist = math.dist(x, y, closestPathNode.origin.x, closestPathNode.origin.y);
 
   for index, pathNode in pairs(pathNodes) do
-    if math.dist(x, y, pathNode.center.x, pathNode.center.y) < dist and pathfinding.canReachNode(x, y, pathNode) then
-      dist = math.dist(x, y, pathNode.center.x, pathNode.center.y);
+    if math.dist(x, y, pathNode.origin.x, pathNode.origin.y) < dist and pathfinding.canReachNode(x, y, pathNode) then
+      dist = math.dist(x, y, pathNode.origin.x, pathNode.origin.y);
       closestPathNode = pathNode;
     end
   end
@@ -175,8 +175,8 @@ function pathfinding.findClosestNode(x, y, pathNodes)
 end
 
 function pathfinding.canReachNode(x, y, pathNode)
-  local pathNodeX = pathNode.center.x;
-  local pathNodeY = pathNode.center.y;
+  local pathNodeX = pathNode.origin.x;
+  local pathNodeY = pathNode.origin.y;
 
   local items, len = BumpWorld:querySegment(x, y, pathNodeX, pathNodeY, canMoveFilter);
 

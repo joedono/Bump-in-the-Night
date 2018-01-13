@@ -4,18 +4,10 @@ PathNode = Class {
     self.sourceNode = sourceNode;
     self.floorIndex = floorIndex;
     self.origin = {
-      x = sourceNode.x + floor.origin.x + sourceNode.width / 2,
-      y = sourceNode.y + floor.origin.y + sourceNode.height / 2,
-      w = PATH_NODE_SIZE,
-      h = PATH_NODE_SIZE
+      x = sourceNode.x + floor.origin.x,
+      y = sourceNode.y + floor.origin.y
     };
 
-    self.center = {
-      x = self.origin.x + self.origin.w / 2,
-      y = self.origin.y + self.origin.h / 2
-    };
-
-    BumpWorld:add(self, self.origin.x, self.origin.y, self.origin.w, self.origin.h);
     self.connections = {};
     self.type = "path";
   end
@@ -24,7 +16,7 @@ PathNode = Class {
 function PathNode:addConnection(pathNode)
   local newConnection = {
     pathNode = pathNode,
-    distance = math.dist(self.center.x, self.center.y, pathNode.center.x, pathNode.center.y)
+    distance = math.dist(self.origin.x, self.origin.y, pathNode.origin.x, pathNode.origin.y)
   };
 
   table.insert(self.connections, newConnection);
@@ -32,13 +24,13 @@ end
 
 function PathNode:draw()
   love.graphics.setColor(100, 255, 0);
-  love.graphics.rectangle("fill", self.origin.x, self.origin.y, self.origin.w, self.origin.h);
+  love.graphics.rectangle("fill", self.origin.x, self.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
 
   love.graphics.setColor(255, 255, 255);
   for index, connection in pairs(self.connections) do
     love.graphics.line(
       self.origin.x, self.origin.y,
-      connection.pathNode.origin.x + connection.pathNode.origin.w, connection.pathNode.origin.y + connection.pathNode.origin.h
+      connection.pathNode.origin.x + PATH_NODE_SIZE, connection.pathNode.origin.y + PATH_NODE_SIZE
     );
   end
 end
