@@ -434,34 +434,37 @@ function Monster_Panther:followPath(dt, speed)
 		end
 	end
 
-	local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
-	local distanceToPath = math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y);
+	if self.targetPathNode ~= nil then
+		local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
+		local distanceToPath = math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y);
 
-	if distanceToPath < distanceTraveled or distanceToPath == 0 then
-		-- Reached target node. Go after next node
-		self.box.x = self.targetPathNode.origin.x;
-		self.box.y = self.targetPathNode.origin.y;
-		BumpWorld:update(self, self.box.x, self.box.y);
-		warped = true;
-
-		self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
-		self.targetPathNode = self.path[self.targetPathNodeIndex];
-
-		-- Move to other floor
-		if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+		if distanceToPath < distanceTraveled or distanceToPath == 0 then
+			-- Reached target node. Go after next node
 			self.box.x = self.targetPathNode.origin.x;
 			self.box.y = self.targetPathNode.origin.y;
-			self.curFloor = self.targetPathNode.floorIndex;
 			BumpWorld:update(self, self.box.x, self.box.y);
-		end
+			warped = true;
 
-		-- Reached end of path
-		if self.targetPathNode == nil then
-			self:resetPath();
-			self.state = "idle";
-			self.stateTimer = love.math.random(2, 5);
+			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
+			self.targetPathNode = self.path[self.targetPathNodeIndex];
+
+			-- Move to other floor
+			if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+				self.box.x = self.targetPathNode.origin.x;
+				self.box.y = self.targetPathNode.origin.y;
+				self.curFloor = self.targetPathNode.floorIndex;
+				BumpWorld:update(self, self.box.x, self.box.y);
+			end
+
+			-- Reached end of path
+			if self.targetPathNode == nil then
+				self:resetPath();
+				self.state = "idle";
+				self.stateTimer = love.math.random(2, 5);
+			end
 		end
 	end
+
 	if not warped then
 		self.box.x = actualX;
     self.box.y = actualY;
