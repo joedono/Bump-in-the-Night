@@ -528,11 +528,6 @@ function Monster_Panther:draw()
 				love.graphics.rectangle("fill", path.origin.x, path.origin.y, 32, 32);
 			end
 		end
-
-		if self.finalTarget ~= nil then
-			love.graphics.setColor(0, 0, 255);
-			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, 32, 32);
-		end
 	end
 
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
@@ -547,7 +542,4 @@ function Monster_Panther:draw()
 			facingAngle - MONSTER_PANTHER_SIGHT_CONE / 2, facingAngle + MONSTER_PANTHER_SIGHT_CONE / 2
 		);
 	end
-
-	love.graphics.setColor(255, 255, 255, 255);
-	love.graphics.print(self.state, 0, 0, 0, 10, 10);
 end

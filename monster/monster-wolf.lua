@@ -520,11 +520,6 @@ function Monster_Wolf:draw()
 				love.graphics.rectangle("fill", path.origin.x, path.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
 			end
 		end
-
-		if self.finalTarget ~= nil then
-			love.graphics.setColor(0, 0, 255);
-			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
-		end
 	end
 
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
