@@ -120,7 +120,7 @@ function Monster_Wolf:updateWalk(dt)
 	-- Nothing interesting is happening. Amble around
 	if self.targetPathNode == nil then
 		local finalPathNode = self.parentManager:randomPathNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.center.x, finalPathNode.center.y, self.parentManager.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	else
@@ -143,8 +143,8 @@ function Monster_Wolf:updateInvestigating(dt)
 	if self:canHearPlayer() then
 		hearTarget = true;
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
@@ -166,20 +166,20 @@ end
 function Monster_Wolf:updateSpotted(dt)
 	if self:canHearPlayer() then
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
 	if self:canSeePlayer() then
 		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
@@ -202,13 +202,13 @@ function Monster_Wolf:updateActiveChase(dt)
 	if self:canSeePlayer() then
 		seeTarget = true;
 		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	elseif self:canHearPlayer() then
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 
 		self.state = "passive-chase";
@@ -229,8 +229,8 @@ function Monster_Wolf:updatePassiveChase(dt)
 	local hearTarget = false;
 	if self:canSeePlayer() then
 		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 
 		self.soundEffects.monsterWolfRoar:rewind();
@@ -240,8 +240,8 @@ function Monster_Wolf:updatePassiveChase(dt)
 	elseif self:canHearPlayer() then
 		hearTarget = true;
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
@@ -318,8 +318,8 @@ end
 
 function Monster_Wolf:hasHeardPlayer()
 	self.audioTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.state = "heard-player";
@@ -328,13 +328,13 @@ end
 
 function Monster_Wolf:hasSpottedPlayer()
 	self.visualTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.audioTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.soundEffects.spotted:rewind();
@@ -381,30 +381,6 @@ function Monster_Wolf:followPath(dt, speed)
       end
     end
 
-    if col.other.type == "path" then
-      if col.other.floorIndex == self.targetPathNode.floorIndex and col.other.id == self.targetPathNode.id then
-				-- Reached target node. Go after next node
-				self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
-				self.targetPathNode = self.path[self.targetPathNodeIndex];
-
-				-- Move to other floor
-				if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
-					self.box.x = self.targetPathNode.origin.x;
-					self.box.y = self.targetPathNode.origin.y;
-					self.curFloor = self.targetPathNode.floorIndex;
-					BumpWorld:update(self, self.box.x, self.box.y);
-					warped = true;
-				end
-
-				-- Reached end of path
-				if self.targetPathNode == nil then
-					self:resetPath();
-					self.state = "idle";
-					self.stateTimer = love.math.random(2, 5);
-				end
-			end
-    end
-
 		if col.other.type == "placed-meat" and self.state == "smells-meat" then
 			self:resetPath();
 			self.state = "eating";
@@ -427,18 +403,47 @@ function Monster_Wolf:followPath(dt, speed)
 				self.state = "dead";
 			else
 				self.visualTarget = {
-					x = self.player.box.x + self.player.box.w / 2,
-					y = self.player.box.y + self.player.box.h / 2
+					x = self.player.box.x,
+					y = self.player.box.y
 				};
 
 				self.audioTarget = {
-					x = self.player.box.x + self.player.box.w / 2,
-					y = self.player.box.y + self.player.box.h / 2
+					x = self.player.box.x,
+					y = self.player.box.y
 				};
 
 				self.state = "spotted";
 				self.stateTimer = 1;
 			end
+		end
+	end
+
+	local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
+	local distanceToPath = math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y);
+
+	if distanceToPath < distanceTraveled or distanceToPath == 0 then
+		-- Reached target node. Go after next node
+		self.box.x = self.targetPathNode.origin.x;
+		self.box.y = self.targetPathNode.origin.y;
+		BumpWorld:update(self, self.box.x, self.box.y);
+		warped = true;
+
+		self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+
+		-- Move to other floor
+		if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+			self.box.x = self.targetPathNode.origin.x;
+			self.box.y = self.targetPathNode.origin.y;
+			self.curFloor = self.targetPathNode.floorIndex;
+			BumpWorld:update(self, self.box.x, self.box.y);
+		end
+
+		-- Reached end of path
+		if self.targetPathNode == nil then
+			self:resetPath();
+			self.state = "idle";
+			self.stateTimer = love.math.random(2, 5);
 		end
 	end
 
@@ -512,13 +517,13 @@ function Monster_Wolf:draw()
 		if self.path ~= nil then
 			love.graphics.setColor(255, 0, 0);
 			for index, path in pairs(self.path) do
-				love.graphics.rectangle("fill", path.origin.x, path.origin.y, 32, 32);
+				love.graphics.rectangle("fill", path.origin.x, path.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
 			end
 		end
 
 		if self.finalTarget ~= nil then
 			love.graphics.setColor(0, 0, 255);
-			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, 32, 32);
+			love.graphics.rectangle("fill", self.finalTarget.origin.x, self.finalTarget.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
 		end
 	end
 

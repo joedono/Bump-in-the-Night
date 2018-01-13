@@ -125,7 +125,7 @@ function Monster_Panther:updateWalk(dt)
 	-- Nothing interesting is happening. Amble around
 	if self.targetPathNode == nil then
 		local finalPathNode = self.parentManager:randomPathNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.center.x, finalPathNode.center.y, self.parentManager.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	else
@@ -148,8 +148,8 @@ function Monster_Panther:updateInvestigating(dt)
 	if self:canHearPlayer() then
 		hearTarget = true;
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
@@ -171,20 +171,20 @@ end
 function Monster_Panther:updateSpotted(dt)
 	if self:canHearPlayer() then
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
 	if self:canSeePlayer() then
 		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
@@ -207,13 +207,13 @@ function Monster_Panther:updateActiveChase(dt)
 	if self:canSeePlayer() then
 		seeTarget = true;
 		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	elseif self:canHearPlayer() then
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 
 		self.state = "passive-chase";
@@ -234,8 +234,8 @@ function Monster_Panther:updatePassiveChase(dt)
 	local hearTarget = false;
 	if self:canSeePlayer() then
 		self.visualTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 
 		self.soundEffects.monsterPantherRoar:rewind();
@@ -245,8 +245,8 @@ function Monster_Panther:updatePassiveChase(dt)
 	elseif self:canHearPlayer() then
 		hearTarget = true;
 		self.audioTarget = {
-			x = self.player.box.x + self.player.box.w / 2,
-			y = self.player.box.y + self.player.box.h / 2
+			x = self.player.box.x,
+			y = self.player.box.y
 		};
 	end
 
@@ -291,8 +291,8 @@ end
 -- Has walked into a trap. Whimper and try to free seld
 function Monster_Panther:updateTrapped(dt)
 	self.visualTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
@@ -334,8 +334,8 @@ end
 
 function Monster_Panther:hasHeardPlayer()
 	self.audioTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.state = "heard-player";
@@ -344,13 +344,13 @@ end
 
 function Monster_Panther:hasSpottedPlayer()
 	self.visualTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.audioTarget = {
-		x = self.player.box.x + self.player.box.w / 2,
-		y = self.player.box.y + self.player.box.h / 2
+		x = self.player.box.x,
+		y = self.player.box.y
 	};
 
 	self.soundEffects.spotted:rewind();
@@ -397,30 +397,6 @@ function Monster_Panther:followPath(dt, speed)
       end
     end
 
-    if col.other.type == "path" then
-      if col.other.floorIndex == self.targetPathNode.floorIndex and col.other.id == self.targetPathNode.id then
-				-- Reached target node. Go after next node
-				self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
-				self.targetPathNode = self.path[self.targetPathNodeIndex];
-
-				-- Move to other floor
-				if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
-					self.box.x = self.targetPathNode.origin.x;
-					self.box.y = self.targetPathNode.origin.y;
-					self.curFloor = self.targetPathNode.floorIndex;
-					BumpWorld:update(self, self.box.x, self.box.y);
-					warped = true;
-				end
-
-				-- Reached end of path
-				if self.targetPathNode == nil then
-					self:resetPath();
-					self.state = "idle";
-					self.stateTimer = love.math.random(2, 5);
-				end
-			end
-    end
-
 		if col.other.type == "placed-meat" and self.state == "smells-meat" then
 			self:resetPath();
 			self.state = "eating";
@@ -443,13 +419,13 @@ function Monster_Panther:followPath(dt, speed)
 				self.state = "dead";
 			else
 				self.visualTarget = {
-					x = self.player.box.x + self.player.box.w / 2,
-					y = self.player.box.y + self.player.box.h / 2
+					x = self.player.box.x,
+					y = self.player.box.y
 				};
 
 				self.audioTarget = {
-					x = self.player.box.x + self.player.box.w / 2,
-					y = self.player.box.y + self.player.box.h / 2
+					x = self.player.box.x,
+					y = self.player.box.y
 				};
 
 				self.state = "spotted";
@@ -458,6 +434,34 @@ function Monster_Panther:followPath(dt, speed)
 		end
 	end
 
+	local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
+	local distanceToPath = math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y);
+
+	if distanceToPath < distanceTraveled or distanceToPath == 0 then
+		-- Reached target node. Go after next node
+		self.box.x = self.targetPathNode.origin.x;
+		self.box.y = self.targetPathNode.origin.y;
+		BumpWorld:update(self, self.box.x, self.box.y);
+		warped = true;
+
+		self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+
+		-- Move to other floor
+		if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+			self.box.x = self.targetPathNode.origin.x;
+			self.box.y = self.targetPathNode.origin.y;
+			self.curFloor = self.targetPathNode.floorIndex;
+			BumpWorld:update(self, self.box.x, self.box.y);
+		end
+
+		-- Reached end of path
+		if self.targetPathNode == nil then
+			self:resetPath();
+			self.state = "idle";
+			self.stateTimer = love.math.random(2, 5);
+		end
+	end
 	if not warped then
 		self.box.x = actualX;
     self.box.y = actualY;
@@ -543,4 +547,7 @@ function Monster_Panther:draw()
 			facingAngle - MONSTER_PANTHER_SIGHT_CONE / 2, facingAngle + MONSTER_PANTHER_SIGHT_CONE / 2
 		);
 	end
+
+	love.graphics.setColor(255, 255, 255, 255);
+	love.graphics.print(self.state, 0, 0, 0, 10, 10);
 end
