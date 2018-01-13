@@ -71,3 +71,51 @@ function findIntersect(l1p1x,l1p1y, l1p2x,l1p2y, l2p1x,l2p1y, l2p2x,l2p2y, seg1,
 	end
 	return x,y
 end
+
+function gradualTurn(startAngle, endAngle, turnSpeed, dt)
+	if endAngle > math.pi * 2 then
+		endAngle = endAngle - math.pi * 2;
+	elseif endAngle < 0 then
+		endAngle = endAngle + math.pi * 2;
+	end
+
+	if startAngle > math.pi * 2 then
+		startAngle = startAngle - math.pi * 2;
+	elseif startAngle < 0 then
+		startAngle = startAngle + math.pi * 2;
+	end
+
+	local nextAngle = endAngle;
+
+	if math.abs(endAngle - startAngle) < 0.15 then
+		nextAngle = startAngle;
+	else
+		-- Determine which circular direction will get to the goal the fastest
+		local positiveSearch = startAngle;
+		local negativeSearch = startAngle;
+		local finalDirection = 0;
+
+		while math.abs(positiveSearch - endAngle) > 0.15 and math.abs(negativeSearch - endAngle) > 0.15 do
+			positiveSearch = positiveSearch + 0.1;
+			negativeSearch = negativeSearch - 0.1;
+
+			if positiveSearch > math.pi * 2 then
+				positiveSearch = positiveSearch - math.pi * 2;
+			end
+
+			if negativeSearch < 0 then
+				negativeSearch = negativeSearch + math.pi * 2;
+			end
+		end
+
+		if math.abs(positiveSearch - endAngle) < 0.15 then
+			finalDirection = turnSpeed * dt;
+		elseif math.abs(negativeSearch - endAngle) < 0.15 then
+			finalDirection = -turnSpeed * dt;
+		end
+
+		nextAngle = startAngle + finalDirection;
+	end
+
+	return nextAngle;
+end

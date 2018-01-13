@@ -3,8 +3,6 @@ Player = Class {
     self.parent = parent;
     self.image = love.graphics.newImage("asset/image/player.png");
 
-    print(Inspect(spawnPoint));
-
     self.box = {
       x = spawnPoint.x + spawnOffset.x,
       y = spawnPoint.y + spawnOffset.y,
@@ -71,7 +69,7 @@ function Player:update(dt)
   self:updateVelocity();
   self:updateRotation();
   self:updatePosition(dt);
-  self:updateLights();
+  self:updateLights(dt);
 end
 
 function Player:updateVelocity()
@@ -167,7 +165,7 @@ function Player:updatePosition(dt)
   end
 end
 
-function Player:updateLights()
+function Player:updateLights(dt)
   if self.leftLightPressed or self.rightLightPressed or self.upLightPressed or self.downLightPressed then
     local lx = 0;
     local ly = 0;
@@ -192,14 +190,12 @@ function Player:updateLights()
     self.flashlightFacing.y = ly;
   end
 
-  if (self.flashlightFacing.x ~= 0 or self.flashlightFacing.y ~= 0) and
-    math.dist(0, 0, self.flashlightFacing.x, self.flashlightFacing.y) > GAMEPAD_DEADZONE then
-    local facing = math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x);
-    if facing < 0 then
-      facing = facing + math.pi * 2;
-    end
+  if (self.flashlightFacing.x ~= 0 or self.flashlightFacing.y ~= 0) and math.dist(0, 0, self.flashlightFacing.x, self.flashlightFacing.y) > GAMEPAD_DEADZONE then
+    local curFacing = self.flashLight.direction;
+    local goalFacing = math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x);
+    local nextFacing = gradualTurn(curFacing, goalFacing, PLAYER_TURN_SPEED, dt);
 
-    self.flashLight:setDirection(facing);
+    self.flashLight:setDirection(nextFacing);
   end
 
   self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
