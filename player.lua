@@ -1,18 +1,26 @@
 Player = Class {
-  init = function (self, parent, soundEffects)
+  init = function (self, parent, spawnPoint, spawnOffset, soundEffects)
     self.parent = parent;
     self.image = love.graphics.newImage("asset/image/player.png");
 
+    print(Inspect(spawnPoint));
+
     self.box = {
-      x = PLAYER_INITIAL_DIMENSIONS.x,
-      y = PLAYER_INITIAL_DIMENSIONS.y,
+      x = spawnPoint.x + spawnOffset.x,
+      y = spawnPoint.y + spawnOffset.y,
       w = PLAYER_INITIAL_DIMENSIONS.w,
       h = PLAYER_INITIAL_DIMENSIONS.h
     };
     self.velocity = { x = 0, y = 0 };
     self.gamepadVelocity = { x = 0, y = 0 };
-    self.facing = { x = 0, y = 0 };
-    self.flashlightFacing = { x = 0, y = 0 };
+    self.facing = {
+      x = spawnPoint.properties.dirX,
+      y = spawnPoint.properties.dirY,
+    };
+    self.flashlightFacing = {
+      x = self.facing.x,
+      y = self.facing.y
+    };
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 

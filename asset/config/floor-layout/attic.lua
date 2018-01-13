@@ -906,7 +906,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "152,153"
+            ["connections"] = "153,151"
           }
         },
         {
@@ -1574,29 +1574,14 @@ return {
           name = "",
           type = "node",
           shape = "rectangle",
-          x = 160,
+          x = 144,
           y = 320,
           width = 32,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["connections"] = "53,152"
-          }
-        },
-        {
-          id = 152,
-          name = "",
-          type = "node",
-          shape = "rectangle",
-          x = 128,
-          y = 320,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["connections"] = "151,54"
+            ["connections"] = "53,54"
           }
         },
         {

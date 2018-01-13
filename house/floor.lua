@@ -22,6 +22,7 @@ Floor = Class {
     self.portals = {};
     self.itemLocations = {};
     self.sourceNodes = {};
+    self.spawns = {};
 
     for index, layer in pairs(self.source.layers) do
       if layer.type == "tilelayer" then
@@ -38,6 +39,8 @@ Floor = Class {
         self.itemLocations = layer.objects;
       elseif layer.name == "Paths" then
         self.sourceNodes = layer.objects;
+      elseif layer.name == "Spawn" then
+        self.spawns = layer.objects;
       end
     end
   end

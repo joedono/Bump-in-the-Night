@@ -19,15 +19,11 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	self.scenarioId = scenarioId;
 
 	if scenarioId == "wolf" then
-		local spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
-		spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
-		spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "panther" then
-		local spawnPoint = self:randomPathNode();
-		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.player, spawnPoint.floorIndex, spawnPoint.origin.x, spawnPoint.origin.y));
+		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "burgler" then
 	elseif scenarioId == "arson" then
 	elseif scenarioId == "killer" then

@@ -68,8 +68,13 @@ function State_Game:enter(previous, scenarioId)
 	self.scenarioId = scenarioId;
 	self.inventory = {};
 	self.selectedItemIndex = 1;
-	self.player = Player(self, self.soundEffects);
 	self.floors = self:loadFloors();
+
+	local playerStartFloor = self.floors[2];
+	local playerSpawnPoint = playerStartFloor.spawns[love.math.random(#playerStartFloor.spawns)];
+
+	self.player = Player(self, playerSpawnPoint, playerStartFloor.origin, self.soundEffects);
+
 	self.items = self:spawnItems(scenarioId);
 	self.pathNodes = self:loadPathfinding();
 	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player, self.soundEffects);

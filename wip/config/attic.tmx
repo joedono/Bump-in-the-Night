@@ -179,7 +179,7 @@
   </object>
   <object id="54" type="node" x="96" y="320" width="32" height="32">
    <properties>
-    <property name="connections" value="152,153"/>
+    <property name="connections" value="153,151"/>
    </properties>
   </object>
   <object id="55" type="node" x="80" y="480" width="32" height="32">
@@ -402,14 +402,9 @@
     <property name="connections" value="254,255,287"/>
    </properties>
   </object>
-  <object id="151" type="node" x="160" y="320" width="32" height="32">
+  <object id="151" type="node" x="144" y="320" width="32" height="32">
    <properties>
-    <property name="connections" value="53,152"/>
-   </properties>
-  </object>
-  <object id="152" type="node" x="128" y="320" width="32" height="32">
-   <properties>
-    <property name="connections" value="151,54"/>
+    <property name="connections" value="53,54"/>
    </properties>
   </object>
   <object id="153" type="node" x="96" y="384" width="32" height="32">

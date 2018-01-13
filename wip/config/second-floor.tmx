@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="556">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="561">
  <tileset firstgid="1" source="base-layout.tsx"/>
  <tileset firstgid="118" source="decorations.tsx"/>
  <layer name="Floor" width="70" height="48">
@@ -1077,6 +1077,38 @@
   <object id="555" type="node" x="1184" y="320" width="32" height="32">
    <properties>
     <property name="connections" value="540,554"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#5500ff" name="Spawn">
+  <object id="556" type="player" x="368" y="112" width="32" height="32">
+   <properties>
+    <property name="dirX" type="int" value="0"/>
+    <property name="dirY" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="557" type="player" x="1904" y="272" width="32" height="32">
+   <properties>
+    <property name="dirX" type="int" value="0"/>
+    <property name="dirY" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="558" type="player" x="1920" y="704" width="32" height="32">
+   <properties>
+    <property name="dirX" type="int" value="-1"/>
+    <property name="dirY" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="559" type="player" x="1392" y="752" width="32" height="32">
+   <properties>
+    <property name="dirX" type="int" value="1"/>
+    <property name="dirY" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="560" type="player" x="816" y="560" width="32" height="32">
+   <properties>
+    <property name="dirX" type="int" value="1"/>
+    <property name="dirY" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

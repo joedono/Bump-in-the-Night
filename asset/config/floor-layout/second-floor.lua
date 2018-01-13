@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 556,
+  nextobjectid = 561,
   properties = {},
   tilesets = {
     {
@@ -4022,6 +4022,98 @@ return {
           visible = true,
           properties = {
             ["connections"] = "540,554"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "Spawn",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 556,
+          name = "",
+          type = "player",
+          shape = "rectangle",
+          x = 368,
+          y = 112,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["dirX"] = 0,
+            ["dirY"] = 1
+          }
+        },
+        {
+          id = 557,
+          name = "",
+          type = "player",
+          shape = "rectangle",
+          x = 1904,
+          y = 272,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["dirX"] = 0,
+            ["dirY"] = 1
+          }
+        },
+        {
+          id = 558,
+          name = "",
+          type = "player",
+          shape = "rectangle",
+          x = 1920,
+          y = 704,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["dirX"] = -1,
+            ["dirY"] = -1
+          }
+        },
+        {
+          id = 559,
+          name = "",
+          type = "player",
+          shape = "rectangle",
+          x = 1392,
+          y = 752,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["dirX"] = 1,
+            ["dirY"] = -1
+          }
+        },
+        {
+          id = 560,
+          name = "",
+          type = "player",
+          shape = "rectangle",
+          x = 816,
+          y = 560,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["dirX"] = 1,
+            ["dirY"] = 0
           }
         }
       }
