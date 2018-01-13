@@ -199,6 +199,7 @@ function State_Scenario_Select:chooseRandomLockedScenario()
 		return lockedScenarios[love.math.random(#lockedScenarios)];
 	else
 		return SCENARIO_ALL[love.math.random(#SCENARIO_ALL)];
+	end
 end
 
 function State_Scenario_Select:draw()
