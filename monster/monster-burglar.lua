@@ -82,6 +82,10 @@ function Monster_Burglar:update(dt)
 end
 
 function Monster_Burglar:updateIdle(dt)
+	if self:hasCalledPolice() then
+		self:panic();
+	end
+
 	if self:canSeePlayer() then
 		self:hasSpottedPlayer();
 		return;
@@ -94,6 +98,10 @@ function Monster_Burglar:updateIdle(dt)
 end
 
 function Monster_Burglar:updateWalk(dt)
+	if self:hasCalledPolice() then
+		self:panic();
+	end
+
 	if self:canSeePlayer() then
 		self:hasSpottedPlayer();
 		return;
@@ -111,6 +119,10 @@ function Monster_Burglar:updateWalk(dt)
 end
 
 function Monster_Burglar:updateSpotted(dt)
+	if self:hasCalledPolice() then
+		self:panic();
+	end
+
 	if self:canSeePlayer() then
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -125,8 +137,11 @@ function Monster_Burglar:updateSpotted(dt)
 end
 
 function Monster_Burglar:updateActiveChase(dt)
-	local seeTarget = false;
+	if self:hasCalledPolice() then
+		self:panic();
+	end
 
+	local seeTarget = false;
 	if self:canSeePlayer() then
 		seeTarget = true;
 		self.visualTarget = {
@@ -141,25 +156,71 @@ function Monster_Burglar:updateActiveChase(dt)
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
 
-	self:followPath(dt, MONSTER_BURGLAR_ACTIVE_CHASE_SPEED);
+	self:followPath(dt, MONSTER_BURGLAR_CHASE_SPEED);
 end
 
 function Monster_Burglar:updateCalledPoliceIdle(dt)
+	if self:canSeePlayer() then
+		self:hasSpottedPlayer();
+		return;
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		self.state = "called-police-walk";
+	end
 end
 
 function Monster_Burglar:updateCalledPoliceWalk(dt)
+	if self:canSeePlayer() then
+		self:hasSpottedPlayer();
+		return;
+	end
+
+	if self.targetPathNode == nil then
+		local finalPathNode = self.parentManager:randomPathNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	else
+		self:followPath(dt, MONSTER_BURGLAR_PANIC_WALK_SPEED);
+	end
 end
 
 function Monster_Burglar:updateCalledPolicePursue(dt)
+	local seeTarget = false;
+	if self:canSeePlayer() then
+		seeTarget = true;
+		self.visualTarget = {
+			x = self.player.box.x,
+			y = self.player.box.y
+		};
+	end
+
+	if seeTarget or self.path == nil then
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	end
+
+	self:followPath(dt, MONSTER_BURGLAR_PANIC_CHASE_SPEED);
 end
 
 function Monster_Burglar:updateStunned(dt)
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		if self:hasCalledPolice() then
+			self.state = "idle";
+		else
+			self.state = "called-police-idle";
+		end
+	end
 end
 
 function Monster_Burglar:canSeePlayer()
 	local facingAngle = math.deg(math.angle(0, 0, self.facing.y, self.facing.x));
 	local targetAngle = math.deg(math.angle(self.box.y, self.box.x, self.player.box.y, self.player.box.x));
-	local sightCone = math.deg(MONSTER_WOLF_SIGHT_CONE / 2);
+	local sightCone = math.deg(MONSTER_BURGLAR_SIGHT_CONE / 2);
 	local angleDiff = (math.abs(facingAngle - targetAngle) + 180 + 360) % 360 - 180;
 	local distToPlayer = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
 	local items, len = BumpWorld:querySegment(self.box.x, self.box.y, self.player.box.x, self.player.box.y, canSeeFilter);
@@ -180,13 +241,22 @@ function Monster_Burglar:hasSpottedPlayer()
 	self.soundEffects.spotted:rewind();
 	self.soundEffects.spotted:play();
 
-	if true then
+	if self:hasCalledPolice() then
 		self.state = "spotted";
 	else
 		self.state = "called-police-pursue";
 	end
 
 	self.stateTimer = 1;
+end
+
+function Monster_Burglar:hasCalledPolice()
+	self.parentManager.parentStateGame:hasPlayerCalledPolice();
+end
+
+function Monster_Burglar:panic()
+	self.state = "called-police-idle";
+	self.stateTimer = 2;
 end
 
 function Monster_Burglar:followPath(dt, speed)

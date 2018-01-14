@@ -590,6 +590,10 @@ function State_Game:getPlacedItem(itemType)
 	return nil;
 end
 
+function State_Game:hasPlayerCalledPolice()
+	return false;
+end
+
 function State_Game:winGame()
 	local alreadyCompleted = false;
 	for index, completedScenario in pairs(SCENARIO_COMPLETED) do
