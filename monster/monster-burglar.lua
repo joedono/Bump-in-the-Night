@@ -125,6 +125,8 @@ function Monster_Burglar:updateSpotted(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
+		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:play();
 		self.state = "active-chase";
 	end
 end
@@ -159,7 +161,6 @@ function Monster_Burglar:updateCalledPoliceIdle(dt)
 		local randomHunt = love.math.random(100);
 		if randomHunt < MONSTER_BURGLAR_HUNT_CHANCE then
 			self:hasSpottedPlayer();
-			self.state = "called-police-pursue";
 		else
 			self.state = "called-police-walk";
 		end
@@ -236,6 +237,8 @@ function Monster_Burglar:hasSpottedPlayer()
 	if self.panicked then
 		self.state = "spotted";
 	else
+		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:play();
 		self.state = "called-police-pursue";
 	end
 
@@ -267,6 +270,11 @@ function Monster_Burglar:followPath(dt, speed)
     local col = cols[i];
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" then
 			col.other.active = false;
+
+			self.soundEffects.knifeStab:rewind();
+			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.knifeStab:play();
+			self.soundEffects.playerDeathYell:play();
 
 			self.parentManager.parentStateGame:loseGame();
 		end

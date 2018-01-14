@@ -18,6 +18,9 @@ https://github.com/tanema/light_world.lua
 
 # Sounds
 http://soundbible.com/1529-Dog-Bite.html
+http://soundbible.com/1869-Phone-Ringing-8x.html
+http://soundbible.com/700-Screaming.html
+https://opengameart.org/content/electricity-sound-effects
 
 # Music
 https://opengameart.org/content/oves-essential-game-audio-pack-collection-160-files-updated

@@ -42,12 +42,18 @@ function State_Game:init()
 		footstepsRun = love.audio.newSource("asset/sound/footsteps-run.wav", "static"),
 		footstepsWalk = love.audio.newSource("asset/sound/footsteps-walk.wav", "static"),
 		gunshot = love.audio.newSource("asset/sound/gunshot.wav", "static"),
+		humanAttackYell = love.audio.newSource("asset/sound/human-attack-yell.wav", "static"),
 		itemPickup = love.audio.newSource("asset/sound/item-pickup.wav", "static"),
+		knifeStab = love.audio.newSource("asset/sound/knife-stab.wav", "static"),
 		monsterBite = love.audio.newSource("asset/sound/monster-bite.wav", "static"),
 		monsterWolfRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
 		monsterPantherRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
+		phoneRing = love.audio.newSource("asset/sound/phone-ring.wav", "static"),
 		playerDeathYell = love.audio.newSource("asset/sound/player-death-yell.wav", "static"),
+		policeSiren = love.audio.newSource("asset/sound/police-siren.wav", "static"),
+		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
+		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static")
 	};
 end
@@ -520,7 +526,8 @@ function State_Game:useItem()
 		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
-			-- Fire Shotgun
+			self.soundEffects.gunshot:rewind();
+			self.soundEffects.gunshot:play();
 			table.insert(
 				self.usedItems,
 				Shotgun_Blast(
@@ -529,9 +536,6 @@ function State_Game:useItem()
 					self.usedItemImages.shotgunBlast
 				)
 			);
-
-			self.soundEffects.gunshot:rewind();
-			self.soundEffects.gunshot:play();
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
 		-- Load Shotgun
@@ -544,6 +548,8 @@ function State_Game:useItem()
 			end
 		end
 	elseif selectedItem.itemType == "taser" then
+		self.soundEffects.taser:rewind();
+		self.soundEffects.taser:play();
 		table.insert(
 			self.usedItems,
 			Taser_Blast(
@@ -555,7 +561,7 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "cellphone_dead" then
 		-- Do nothing
 	elseif selectedItem.itemType == "cellphone_live" then
-		self.calledPolice = true;
+		self:callPolice();
 	elseif selectedItem.itemType == "cellphone_battery" then
 		-- Replace battery in cell phone
 		local hasDeadPhone = false;
@@ -607,6 +613,10 @@ end
 
 function State_Game:hasPlayerCalledPolice()
 	return self.calledPolice;
+end
+
+function State_Game:callPolice()
+	self.calledPolice = true;
 end
 
 function State_Game:winGame()

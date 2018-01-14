@@ -12,3 +12,9 @@
 [x] Metallic Clang - A trap has sprung on a wolf
 [x] Menu Selection
 [x] Menu Selection Change
+
+[x] Taser shock noise
+[x] Phone Call
+[x] Police Siren
+[x] Stabbing noise
+[x] Yelling attack
