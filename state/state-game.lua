@@ -56,6 +56,11 @@ function State_Game:init()
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static")
 	};
+
+	self.soundEffects.phoneRing:setLooping(true);
+	self.soundEffects.policeSiren:setLooping(true);
+
+	self.callPoliceSoundTimer = Timer.new();
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -88,7 +93,7 @@ function State_Game:enter(previous, scenarioId)
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
 	self.calledPolice = false;
-	self.policeTimer = POLICE_TIMER;
+	self.policeTime = POLICE_TIMER;
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -400,8 +405,9 @@ function State_Game:update(dt)
   end
 
 	if self.calledPolice then
-		self.policeTimer = self.policeTimer - dt;
-		if self.policeTimer <= 0 then
+		self.callPoliceSoundTimer:update(dt);
+		self.policeTime = self.policeTime - dt;
+		if self.policeTime <= 0 then
 			self:winGame();
 		end
 	end
@@ -617,6 +623,12 @@ end
 
 function State_Game:callPolice()
 	self.calledPolice = true;
+	self.callPoliceSoundTimer:script(function(wait)
+		self.soundEffects.phoneRing:play();
+		wait(5);
+		self.soundEffects.phoneRing:stop();
+		self.soundEffects.policeSiren:play();
+	end);
 end
 
 function State_Game:winGame()
@@ -647,6 +659,8 @@ function State_Game:stopAllSounds()
 			sound:stop();
 		end
 	end
+
+	self.callPoliceSoundTimer:clear();
 end
 
 function State_Game:draw()
@@ -724,6 +738,6 @@ function State_Game:drawHUD()
 
 	if self.calledPolice then
 		love.graphics.setColor(255, 255, 255);
-		love.graphics.print("Police will arrive in " .. math.floor(self.policeTimer * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 2, 2);
+		love.graphics.print("Police will arrive in " .. math.floor(self.policeTime * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 2, 2);
 	end
 end

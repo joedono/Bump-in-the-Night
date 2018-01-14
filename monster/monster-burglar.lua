@@ -235,11 +235,13 @@ function Monster_Burglar:hasSpottedPlayer()
 	};
 
 	if self.panicked then
-		self.state = "spotted";
-	else
 		self.soundEffects.humanAttackYell:rewind();
 		self.soundEffects.humanAttackYell:play();
 		self.state = "called-police-pursue";
+	else
+		self.soundEffects.spotted:rewind();
+		self.soundEffects.spotted:play();
+		self.state = "spotted";
 	end
 
 	self.stateTimer = 1;
