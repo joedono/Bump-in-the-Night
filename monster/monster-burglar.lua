@@ -68,12 +68,8 @@ function Monster_Burglar:update(dt)
 		self:updateSpotted(dt);
 	elseif self.state == "active-chase" then
 		self:updateActiveChase(dt);
-	elseif self.state == "called-police-idle" then
-		self:updateCalledPoliceIdle(dt);
-	elseif self.state == "called-police-walk" then
-		self:updateCalledPoliceWalk(dt);
-	elseif self.state == "called-police-pursue" then
-		self:updateCalledPolicePursue(dt);
+	elseif self.state == "panicked" then
+		self:updatePanicked(dt);
 	elseif self.state == "stunned" then
 		self:updateStunned(dt);
 	elseif self.state == "test" then
@@ -150,63 +146,24 @@ function Monster_Burglar:updateActiveChase(dt)
 	self:followPath(dt, MONSTER_BURGLAR_CHASE_SPEED);
 end
 
-function Monster_Burglar:updateCalledPoliceIdle(dt)
-	if self:canSeePlayer() then
-		self:hasSpottedPlayer();
-		return;
-	end
-
-	if self.stateTimer <= 0 then
-		self:resetPath();
-		local randomHunt = love.math.random(100);
-		if randomHunt < MONSTER_BURGLAR_HUNT_CHANCE then
-			self:hasSpottedPlayer();
-		else
-			self.state = "called-police-walk";
-		end
-	end
-end
-
-function Monster_Burglar:updateCalledPoliceWalk(dt)
-	if self:canSeePlayer() then
-		self:hasSpottedPlayer();
-		return;
-	end
-
+function Monster_Burglar:updatePanicked(dt)
 	if self.targetPathNode == nil then
-		local finalPathNode = self.parentManager:randomPathNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
-		self.targetPathNodeIndex = 1;
-		self.targetPathNode = self.path[self.targetPathNodeIndex];
-	else
-		self:followPath(dt, MONSTER_BURGLAR_PANIC_WALK_SPEED);
-	end
-end
-
-function Monster_Burglar:updateCalledPolicePursue(dt)
-	local seeTarget = false;
-	if self:canSeePlayer() then
-		seeTarget = true;
-		self.visualTarget = {
-			x = self.player.box.x,
-			y = self.player.box.y
-		};
-	end
-
-	if seeTarget or self.path == nil then
+		self:hasSpottedPlayer();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	else
+		self:followPath(dt, MONSTER_BURGLAR_PANIC_CHASE_SPEED);
 	end
-
-	self:followPath(dt, MONSTER_BURGLAR_PANIC_CHASE_SPEED);
 end
 
 function Monster_Burglar:updateStunned(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self.panicked then
-			self.state = "called-police-idle";
+			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:play();
+			self.state = "panicked";
 		else
 			self.state = "idle";
 		end
@@ -235,9 +192,7 @@ function Monster_Burglar:hasSpottedPlayer()
 	};
 
 	if self.panicked then
-		self.soundEffects.humanAttackYell:rewind();
-		self.soundEffects.humanAttackYell:play();
-		self.state = "called-police-pursue";
+		self.state = "panicked";
 	else
 		self.soundEffects.spotted:rewind();
 		self.soundEffects.spotted:play();
@@ -253,7 +208,7 @@ end
 
 function Monster_Burglar:panic()
 	self.panicked = true;
-	self.state = "called-police-idle";
+	self.state = "panicked";
 	self.stateTimer = 2;
 end
 
@@ -316,7 +271,7 @@ function Monster_Burglar:followPath(dt, speed)
 				self.stateTimer = love.math.random(2, 5);
 
 				if self.panicked then
-					self.state = "called-police-idle";
+					self.state = "panicked";
 				else
 					self.state = "idle";
 				end
@@ -334,7 +289,7 @@ function Monster_Burglar:followPath(dt, speed)
 		self.stateTimer = love.math.random(2, 5);
 
 		if self.panicked then
-			self.state = "called-police-idle";
+			self.state = "panicked";
 		else
 			self.state = "idle";
 		end
@@ -364,9 +319,7 @@ function Monster_Burglar:updateLights()
 
 		if self.state == "idle" or self.state == "walk" then
 			self.sightLight:setColor(150, 150, 150);
-		elseif self.state == "called-police-idle" or self.state == "called-police-walk" then
-			self.sightLight:setColor(150, 150, 0);
-		elseif self.state == "spotted" or self.state == "active-chase" or self.state == "called-police-pursue" then
+		elseif self.state == "spotted" or self.state == "active-chase" or self.state == "panicked" then
 			self.sightLight:setColor(150, 0, 0);
 		end
 	end
