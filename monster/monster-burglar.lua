@@ -129,7 +129,7 @@ end
 
 function Monster_Burglar:updateActiveChase(dt)
 	local seeTarget = false;
-	if self:canSeePlayer() then
+	if self:canSeePlayer() or self.path == nil then
 		seeTarget = true;
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -209,7 +209,8 @@ end
 function Monster_Burglar:panic()
 	self.panicked = true;
 	self.state = "panicked";
-	self.stateTimer = 2;
+	self.soundEffects.humanAttackYell:rewind();
+	self.soundEffects.humanAttackYell:play();
 end
 
 function Monster_Burglar:followPath(dt, speed)
@@ -315,7 +316,7 @@ function Monster_Burglar:updateLights()
     end
 
     self.sightLight:setDirection(facing);
-		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
+		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
 		if self.state == "idle" or self.state == "walk" then
 			self.sightLight:setColor(150, 150, 150);
@@ -358,7 +359,4 @@ function Monster_Burglar:draw()
 			facingAngle - MONSTER_BURGLAR_SIGHT_CONE / 2, facingAngle + MONSTER_BURGLAR_SIGHT_CONE / 2
 		);
 	end
-
-	love.graphics.setColor(255, 255, 255, 255);
-	love.graphics.print(self.state, 0, 0, 0, 10, 10);
 end
