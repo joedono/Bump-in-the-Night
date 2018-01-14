@@ -3,6 +3,7 @@ require "lib/pathfinding";
 require "monster/base-monster"
 require "monster/monster-wolf";
 require "monster/monster-panther";
+require "monster/monster-burglar";
 
 Manager_Monster = Class {
 	init = function(self, parentStateGame, pathNodes, player, soundEffects)
@@ -24,7 +25,8 @@ function Manager_Monster:spawnMonsters(scenarioId)
 		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "panther" then
 		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
-	elseif scenarioId == "burgler" then
+	elseif scenarioId == "burglar" then
+		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "arson" then
 	elseif scenarioId == "killer" then
 	elseif scenarioId == "vampire" then

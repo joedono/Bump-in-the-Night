@@ -12,7 +12,7 @@ DRAW_LIGHTS = false;
 KILL_PLAYER = false;
 DRAW_MONSTER_PATH = false;
 DRAW_MONSTER_SENSES = true;
-DRAW_ENTIRE_HOUSE = false;
+DRAW_ENTIRE_HOUSE = true;
 LOAD_SAVE_ENABLED = false;
 
 KEY_LEFT = "a";
@@ -130,6 +130,11 @@ MONSTER_PANTHER_HUNT_CHANCE = 25;
 MONSTER_PANTHER_EYES_PLAYER_DISTANCE = 400;
 MONSTER_PANTHER_TURN_SPEED = 3;
 
+MONSTER_BURGLAR_WIDTH = 32 * MONSTER_SCALE;
+MONSTER_BURGLAR_HEIGHT = 32 * MONSTER_SCALE;
+MONSTER_BURGLAR_SIGHT_DISTANCE = 350;
+MONSTER_BURGLAR_SIGHT_CONE = math.pi * 1/4;
+
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
 
@@ -185,19 +190,19 @@ INVENTORY_MAP = {
 };
 
 SCENARIO_SELECTION = {
-  {"wolf", "panther", "burgler", "arson"},
+  {"wolf", "panther", "burglar", "arson"},
   {"killer", "random", "vampire"},
   {"ghost", "alien", "zombie", "elder_god"}
 };
 
---SCENARIO_ALL = {"wolf", "panther", "burgler", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther"};
-SCENARIO_COMPLETED = {"wolf", "panther"};
+--SCENARIO_ALL = {"wolf", "panther", "burglar", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
+SCENARIO_ALL = {"wolf", "panther", "burglar"};
+SCENARIO_COMPLETED = {"wolf", "panther", "burglar"};
 
 SCENARIO_ITEMS = {
   ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
   ["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
-  ["burgler"] = {"taser", "cellphone_dead", "cellphone_battery"},
+  ["burglar"] = {"taser", "cellphone_dead", "cellphone_battery"},
   ["arson"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
   ["killer"] = {"taser", "cellphone_dead", "cellphone_battery", "fuse"},
   ["vampire"] = {"book", "stake", "knife", "cross"},
