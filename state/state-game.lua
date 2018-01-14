@@ -33,7 +33,7 @@ function State_Game:init()
 
 	self.usedItemImages = {
 		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
-		taserBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
+		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png")
 	};
 
 	self.soundEffects = {
