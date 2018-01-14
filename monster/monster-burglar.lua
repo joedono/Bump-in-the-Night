@@ -38,6 +38,7 @@ Monster_Burglar = Class {__includes = Monster,
 		self.sightLight:setDirection(0);
 		self.sightLight:setAngle(MONSTER_BURGLAR_SIGHT_CONE);
 
+		self.panicked = false;
 		self.state = "idle";
 		self.stateTimer = 5;
 		self.monsterType = "burglar";
@@ -49,6 +50,10 @@ Monster_Burglar = Class {__includes = Monster,
 function Monster_Burglar:update(dt)
 	if not self.active then
 		return;
+	end
+
+	if self:hasCalledPolice() and not self.panicked then
+		self:panic();
 	end
 
 	if self.stateTimer > 0 then
@@ -82,10 +87,6 @@ function Monster_Burglar:update(dt)
 end
 
 function Monster_Burglar:updateIdle(dt)
-	if self:hasCalledPolice() then
-		self:panic();
-	end
-
 	if self:canSeePlayer() then
 		self:hasSpottedPlayer();
 		return;
@@ -98,10 +99,6 @@ function Monster_Burglar:updateIdle(dt)
 end
 
 function Monster_Burglar:updateWalk(dt)
-	if self:hasCalledPolice() then
-		self:panic();
-	end
-
 	if self:canSeePlayer() then
 		self:hasSpottedPlayer();
 		return;
@@ -119,10 +116,6 @@ function Monster_Burglar:updateWalk(dt)
 end
 
 function Monster_Burglar:updateSpotted(dt)
-	if self:hasCalledPolice() then
-		self:panic();
-	end
-
 	if self:canSeePlayer() then
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -137,10 +130,6 @@ function Monster_Burglar:updateSpotted(dt)
 end
 
 function Monster_Burglar:updateActiveChase(dt)
-	if self:hasCalledPolice() then
-		self:panic();
-	end
-
 	local seeTarget = false;
 	if self:canSeePlayer() then
 		seeTarget = true;
@@ -215,7 +204,7 @@ end
 function Monster_Burglar:updateStunned(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		if self:hasCalledPolice() then
+		if self.panicked then
 			self.state = "called-police-idle";
 		else
 			self.state = "idle";
@@ -244,7 +233,7 @@ function Monster_Burglar:hasSpottedPlayer()
 		y = self.player.box.y
 	};
 
-	if self:hasCalledPolice() then
+	if self.panicked then
 		self.state = "spotted";
 	else
 		self.state = "called-police-pursue";
@@ -254,10 +243,11 @@ function Monster_Burglar:hasSpottedPlayer()
 end
 
 function Monster_Burglar:hasCalledPolice()
-	self.parentManager.parentStateGame:hasPlayerCalledPolice();
+	return self.parentManager.parentStateGame:hasPlayerCalledPolice();
 end
 
 function Monster_Burglar:panic()
+	self.panicked = true;
 	self.state = "called-police-idle";
 	self.stateTimer = 2;
 end
@@ -313,8 +303,13 @@ function Monster_Burglar:followPath(dt, speed)
 			-- Reached end of path
 			if self.targetPathNode == nil then
 				self:resetPath();
-				self.state = "idle";
 				self.stateTimer = love.math.random(2, 5);
+
+				if self.panicked then
+					self.state = "called-police-idle";
+				else
+					self.state = "idle";
+				end
 			end
 		end
 	end
@@ -326,8 +321,13 @@ function Monster_Burglar:followPath(dt, speed)
 
 	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
 		self:resetPath();
-		self.state = "idle";
 		self.stateTimer = love.math.random(2, 5);
+
+		if self.panicked then
+			self.state = "called-police-idle";
+		else
+			self.state = "idle";
+		end
 	end
 end
 
@@ -395,4 +395,7 @@ function Monster_Burglar:draw()
 			facingAngle - MONSTER_BURGLAR_SIGHT_CONE / 2, facingAngle + MONSTER_BURGLAR_SIGHT_CONE / 2
 		);
 	end
+
+	love.graphics.setColor(255, 255, 255, 255);
+	love.graphics.print(self.state, 0, 0, 0, 10, 10);
 end
