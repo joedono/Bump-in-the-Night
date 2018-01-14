@@ -16,3 +16,15 @@ function Monster:updateFacing(dt, turnSpeed)
 		self.facing.y = math.sin(nextFacing);
 	end
 end
+
+function Monster:updatePosition(dt)
+	local dx = self.box.x + self.velocity.x * self.speed * dt;
+  local dy = self.box.y + self.velocity.y * self.speed * dt;
+	return BumpWorld:move(self, dx, dy, monsterCollision);
+end
+
+function Monster:resetPath()
+	self.path = nil;
+	self.targetPathNodeIndex = 1;
+	self.targetPathNode = nil;
+end

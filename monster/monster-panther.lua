@@ -360,12 +360,6 @@ function Monster_Panther:hasSpottedPlayer()
 	self.stateTimer = 1;
 end
 
-function Monster_Panther:resetPath()
-	self.path = nil;
-	self.targetPathNodeIndex = 1;
-	self.targetPathNode = nil;
-end
-
 function Monster_Panther:followPath(dt, speed)
 	local warped = false;
 	self.velocity = {
@@ -475,12 +469,6 @@ function Monster_Panther:followPath(dt, speed)
 		self.state = "idle";
 		self.stateTimer = love.math.random(2, 5);
 	end
-end
-
-function Monster_Panther:updatePosition(dt)
-	local dx = self.box.x + self.velocity.x * self.speed * dt;
-  local dy = self.box.y + self.velocity.y * self.speed * dt;
-	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
 
 function Monster_Panther:updateLights()
