@@ -1,14 +1,13 @@
--- Fired from the shotgun
-Shotgun_Blast = Class {
+Taser_Blast = Class {
 	init = function(self, originX, originY, dirX, dirY, image)
 		local dirVector = Vector(dirX, dirY);
 		dirVector:normalizeInplace();
 
 		offsetVector = dirVector * (PLAYER_WIDTH / 2 - 7);
 		local insideVector = Vector(originX, originY) + offsetVector;
-		local outsideVector = insideVector + (dirVector * SHOTGUN_RANGE) + offsetVector;
+		local outsideVector = insideVector + (dirVector * TASER_RANGE) + offsetVector;
 
-		-- Get outside points of the shotgun bounded box
+		-- Get outside points of the taser bounded box
 		local x1 = math.min(insideVector.x, outsideVector.x);
 		local y1 = math.min(insideVector.y, outsideVector.y);
 		local x2 = math.max(insideVector.x, outsideVector.x);
@@ -18,15 +17,15 @@ Shotgun_Blast = Class {
 		local h = y2 - y1;
 
 		-- Box is too small. Stretch it to the min size
-		if w < SHOTGUN_MIN_SIZE then
-			local diffX = SHOTGUN_MIN_SIZE - w;
-			w = SHOTGUN_MIN_SIZE;
+		if w < TASER_MIN_SIZE then
+			local diffX = TASER_MIN_SIZE - w;
+			w = TASER_MIN_SIZE;
 			x1 = x1 - diffX / 2;
 		end
 
-		if h < SHOTGUN_MIN_SIZE then
-			local diffY = SHOTGUN_MIN_SIZE - h;
-			h = SHOTGUN_MIN_SIZE;
+		if h < TASER_MIN_SIZE then
+			local diffY = TASER_MIN_SIZE - h;
+			h = TASER_MIN_SIZE;
 			y1 = y1 - diffY / 2;
 		end
 
@@ -49,14 +48,15 @@ Shotgun_Blast = Class {
 			w = image:getWidth(),
 			h = image:getHeight();
 		};
+
 		self.activeTimer = 0.1;
 		self.belowPlayer = false;
-		self.type = "placed-shotgun-blast";
+		self.type = "placed-taser-blast";
 		self.active = true;
 	end
 }
 
-function Shotgun_Blast:update(dt)
+function Taser_Blast:update(dt)
   if not self.active then
     return;
   end
@@ -65,11 +65,7 @@ function Shotgun_Blast:update(dt)
 
 	for i = 1, len do
 		local col = cols[i];
-		if col.other.monsterType == "wolf" then
-			if col.other.state == "trapped" then
-				col.other.state = "dead";
-			end
-		end
+		col.other:stun();
 	end
 
 	self.activeTimer = self.activeTimer - dt;
@@ -78,7 +74,7 @@ function Shotgun_Blast:update(dt)
 	end
 end
 
-function Shotgun_Blast:draw()
+function Taser_Blast:draw()
   if not self.active then
     return;
   end

@@ -210,9 +210,9 @@ function Monster_Burglar:updateStunned(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self:hasCalledPolice() then
-			self.state = "idle";
-		else
 			self.state = "called-police-idle";
+		else
+			self.state = "idle";
 		end
 	end
 end
@@ -288,15 +288,6 @@ function Monster_Burglar:followPath(dt, speed)
         col.other:open(self);
       end
     end
-
-		if col.other.type == "placed-taser-blast" then
-			self.soundEffects.trapSpring:rewind();
-			self.soundEffects.trapSpring:play();
-			self:resetPath();
-			self.state = "stunned";
-			self.stateTimer = 5;
-			col.other.active = false;
-		end
 	end
 
 	if self.targetPathNode ~= nil then

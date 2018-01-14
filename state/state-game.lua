@@ -13,7 +13,7 @@ require "used-items/meat";
 require "used-items/salt";
 require "used-items/shotgun-blast";
 require "used-items/stake";
-require "used-items/taser";
+require "used-items/taser-blast";
 require "used-items/trap";
 
 State_Game = {};
@@ -32,7 +32,8 @@ function State_Game:init()
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
 	self.usedItemImages = {
-		["shotgun-blast"] = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
+		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
+		taserBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png")
 	};
 
 	self.soundEffects = {
@@ -80,6 +81,8 @@ function State_Game:enter(previous, scenarioId)
 	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player, self.soundEffects);
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
+	self.calledPolice = false;
+	self.policeTimer = POLICE_TIMER;
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -390,6 +393,13 @@ function State_Game:update(dt)
     return;
   end
 
+	if self.calledPolice then
+		self.policeTimer = self.policeTimer - dt;
+		if self.policeTimer <= 0 then
+			self:winGame();
+		end
+	end
+
 	for index, floor in pairs(self.floors) do
 		floor:update(dt);
 	end
@@ -516,7 +526,7 @@ function State_Game:useItem()
 				Shotgun_Blast(
 					self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
 					self.player.facing.x, self.player.facing.y,
-					self.usedItemImages["shotgun-blast"]
+					self.usedItemImages.shotgunBlast
 				)
 			);
 
@@ -534,13 +544,18 @@ function State_Game:useItem()
 			end
 		end
 	elseif selectedItem.itemType == "taser" then
-		table.insert(self.usedItems, Taser(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.player.facing.x, self.player.facing.y));
+		table.insert(
+			self.usedItems,
+			Taser_Blast(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y,
+				self.usedItemImages.taserBlast
+			)
+		);
 	elseif selectedItem.itemType == "cellphone_dead" then
 		-- Do nothing
 	elseif selectedItem.itemType == "cellphone_live" then
-		if self.monsterManager:areEnemiesDown() then
-			self:winGame();
-		end
+		self.calledPolice = true;
 	elseif selectedItem.itemType == "cellphone_battery" then
 		-- Replace battery in cell phone
 		local hasDeadPhone = false;
@@ -591,7 +606,7 @@ function State_Game:getPlacedItem(itemType)
 end
 
 function State_Game:hasPlayerCalledPolice()
-	return false;
+	return self.calledPolice;
 end
 
 function State_Game:winGame()
@@ -695,5 +710,10 @@ function State_Game:drawHUD()
 			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("line", (index-1) * 100 + 30, y, INVENTORY_ITEM_WIDTH, INVENTORY_ITEM_HEIGHT);
 		end
+	end
+
+	if self.calledPolice then
+		love.graphics.setColor(255, 255, 255);
+		love.graphics.print("Police will arrive in " .. math.floor(self.policeTimer * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 2, 2);
 	end
 end

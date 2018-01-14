@@ -28,3 +28,9 @@ function Monster:resetPath()
 	self.targetPathNodeIndex = 1;
 	self.targetPathNode = nil;
 end
+
+function Monster:stun()
+  self:resetPath();
+  self.state = "stunned";
+  self.stateTimer = 5;
+end

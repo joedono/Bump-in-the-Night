@@ -54,7 +54,7 @@ monsterCollision = function(monster, other)
   return nil;
 end
 
-shotgunBlastCollision = function(shotgunBlast, other)
+weaponBlastCollision = function(shotgunBlast, other)
   if other.type == "monster" then
     return "cross";
   end
