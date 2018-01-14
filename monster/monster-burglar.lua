@@ -167,7 +167,13 @@ function Monster_Burglar:updateCalledPoliceIdle(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		self.state = "called-police-walk";
+		local randomHunt = love.math.random(100);
+		if randomHunt < MONSTER_BURGLAR_HUNT_CHANCE then
+			self:hasSpottedPlayer();
+			self.state = "called-police-pursue";
+		else
+			self.state = "called-police-walk";
+		end
 	end
 end
 
@@ -238,9 +244,6 @@ function Monster_Burglar:hasSpottedPlayer()
 		y = self.player.box.y
 	};
 
-	self.soundEffects.spotted:rewind();
-	self.soundEffects.spotted:play();
-
 	if self:hasCalledPolice() then
 		self.state = "spotted";
 	else
@@ -274,11 +277,6 @@ function Monster_Burglar:followPath(dt, speed)
     local col = cols[i];
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" then
 			col.other.active = false;
-
-			self.soundEffects.monsterBite:rewind();
-			self.soundEffects.playerDeathYell:rewind();
-			self.soundEffects.monsterBite:play();
-			self.soundEffects.playerDeathYell:play();
 
 			self.parentManager.parentStateGame:loseGame();
 		end
