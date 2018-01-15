@@ -5,6 +5,7 @@ function State_Scenario_Select:init()
 	self.lockedImage = love.graphics.newImage("asset/image/screen/scenario-select-locked.png");
 	self.indicator = love.graphics.newImage("asset/image/screen/scenario-select-indicator.png");
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
+	self.scenarioDescriptionFont = love.graphics.newFont(32);
 
 	self.soundSelectionChange = love.audio.newSource("asset/sound/menu-option-change.wav", "static");
 	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav", "static");
@@ -201,7 +202,12 @@ function State_Scenario_Select:draw()
 		end
 
 		love.graphics.print("?", 770, 315);
-		love.graphics.printf(self.scenarioDescription, 0, 650, SCREEN_WIDTH, "center");
+		love.graphics.printf(self.scenarioDescription, 0, 605, SCREEN_WIDTH, "center");
+
+		if self.scenarioDescription ~= "LOCKED" and self.scenarioDescription ~= "Random" then
+			love.graphics.setFont(self.scenarioDescriptionFont);
+			love.graphics.printf(SCENARIO_DESCRIPTION[self.scenarioDescription], 400, 720, 800, "left");
+		end
 
 		if self.indicatorVisible then
 			love.graphics.setColor(255, 255, 255);

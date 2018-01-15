@@ -200,6 +200,19 @@ INVENTORY_MAP = {
 	}
 };
 
+SCENARIO_ITEMS = {
+  ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+  ["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+  ["burglar"] = {"taser", "cellphone_dead", "cellphone_battery"},
+  ["arson"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
+  ["killer"] = {"taser", "cellphone_dead", "cellphone_battery", "fuse"},
+  ["vampire"] = {"book", "stake", "knife", "cross"},
+  ["ghost"] = {"book"},
+  ["alien"] = {"music_box", "battery", "foil"},
+  ["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
+  ["elder_god"] = {"crystal", "scroll"}
+};
+
 SCENARIO_SELECTION = {
   {"wolf", "panther", "burglar", "arson"},
   {"killer", "random", "vampire"},
@@ -214,15 +227,16 @@ SCENARIO_COMPLETED = {
   ["burglar"] = true
 };
 
-SCENARIO_ITEMS = {
-  ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
-  ["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
-  ["burglar"] = {"taser", "cellphone_dead", "cellphone_battery"},
-  ["arson"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
-  ["killer"] = {"taser", "cellphone_dead", "cellphone_battery", "fuse"},
-  ["vampire"] = {"book", "stake", "knife", "cross"},
-  ["ghost"] = {"book"},
-  ["alien"] = {"music_box", "battery", "foil"},
-  ["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
-  ["elder_god"] = {"crystal", "scroll"}
-};
+SCENARIO_DESCRIPTION = {
+  ["Wolf"] = "Three wolves are looking for a snack. They like meat and have keen ears. Stay quiet if you want to survive.",
+  ["Panther"] = "A panther is looking for a midnight meal. It likes meat and can hunt by smell. Stay quiet and keep moving or else it'll catch up with you.",
+  ["Burglar"] = "Someone has broken in to your house looking for valuables. They won't hesitate to kill anyone in their way. Call the cops and hold out until they arrive.",
+  ["Arson"] = "",
+  ["Killer"] = "",
+  ["Vampire"] = "",
+  ["Ghost"] = "",
+  ["Alien"] = "",
+  ["Zombie"] = "",
+  ["Elder God"] = "",
+  ["Random"] = ""
+}
