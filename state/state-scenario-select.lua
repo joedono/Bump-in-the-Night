@@ -194,14 +194,7 @@ function State_Scenario_Select:draw()
 		for lockedY, row in pairs(SCENARIO_SELECTION) do
 			for lockedX, scenarioDescription in pairs(row) do
 				if scenarioDescription ~= "random" and not SCENARIO_COMPLETED[scenarioDescription] then
-					local drawLockedX = 499;
-					local drawLockedY = 147 + (lockedY-1) * 151;
-					if lockedY == 2 then
-						drawLockedX = 571;
-					end
-					drawLockedX = drawLockedX + (lockedX-1) * 151;
-
-
+					local drawLockedX, drawLockedY = self:getDrawLocation(lockedX, lockedY);
 					love.graphics.draw(self.lockedImage, drawLockedX, drawLockedY);
 				end
 			end
@@ -213,17 +206,22 @@ function State_Scenario_Select:draw()
 
 		if self.indicatorVisible then
 			love.graphics.setColor(255, 255, 255);
-			local indicatorX = 499;
-			local indicatorY = 147 + (self.selection.y-1) * 151;
-			if self.selection.y == 2 then
-				indicatorX = 571;
-			end
-			indicatorX = indicatorX + (self.selection.x-1) * 151;
-
+			local indicatorX, indicatorY = self:getDrawLocation(self.selection.x, self.selection.y);
 			love.graphics.draw(self.indicator, indicatorX, indicatorY);
 		end
   end);
 
   love.graphics.setColor(255, 255, 255);
   love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+end
+
+function State_Scenario_Select:getDrawLocation(x, y)
+	local drawX = 499;
+	local drawY = 147 + (y-1) * 151;
+	if y == 2 then
+		drawX = 571;
+	end
+	drawX = drawX + (x-1) * 151;
+
+	return drawX, drawY;
 end
