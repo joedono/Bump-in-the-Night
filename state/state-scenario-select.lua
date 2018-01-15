@@ -201,7 +201,6 @@ function State_Scenario_Select:draw()
 		end
 
 		love.graphics.print("?", 770, 315);
-
 		love.graphics.printf(self.scenarioDescription, 0, 650, SCREEN_WIDTH, "center");
 
 		if self.indicatorVisible then
