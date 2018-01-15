@@ -61,6 +61,7 @@ function State_Game:init()
 	self.soundEffects.policeSiren:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
+	self.policeTimerFont = love.graphics.newFont(24)
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -731,6 +732,7 @@ function State_Game:drawHUD()
 
 	if self.calledPolice then
 		love.graphics.setColor(255, 255, 255);
-		love.graphics.print("Police will arrive in " .. math.floor(self.policeTime * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 2, 2);
+		love.graphics.setFont(self.policeTimerFont);
+		love.graphics.print("Police will arrive in " .. math.floor(self.policeTime * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 1, 1);
 	end
 end
