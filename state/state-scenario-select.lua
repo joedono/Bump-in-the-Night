@@ -2,6 +2,7 @@ State_Scenario_Select = {};
 
 function State_Scenario_Select:init()
 	self.background = love.graphics.newImage("asset/image/screen/scenario-select.png");
+	self.lockedImage = love.graphics.newImage("asset/image/screen/scenario-select-locked.png");
 	self.indicator = love.graphics.newImage("asset/image/screen/scenario-select-indicator.png");
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 50);
 
@@ -132,15 +133,8 @@ function State_Scenario_Select:updateSelection(x, y, pressed)
 	end
 
 	local scenarioDescription = SCENARIO_SELECTION[y][x];
-	local unlocked = false;
 
-	for index, scenario in pairs(SCENARIO_COMPLETED) do
-		if scenario == scenarioDescription then
-			unlocked = true;
-		end
-	end
-
-	if scenarioDescription == "random" or unlocked then
+	if scenarioDescription == "random" or SCENARIO_COMPLETED[scenarioDescription] then
 		scenarioDescription = scenarioDescription:gsub("_", " ");
 		scenarioDescription = scenarioDescription:gsub("(%l)(%w*)", function(a,b) return string.upper(a) .. b end);
 	else
@@ -159,17 +153,9 @@ end
 function State_Scenario_Select:selectScenario()
 	local scenarioDescription = SCENARIO_SELECTION[self.selection.y][self.selection.x];
 
-	local unlocked = false;
-
-	for index, scenario in pairs(SCENARIO_COMPLETED) do
-		if scenario == scenarioDescription then
-			unlocked = true;
-		end
-	end
-
 	if scenarioDescription == "random" then
 		scenarioDescription = self:chooseRandomLockedScenario();
-	elseif not unlocked then
+	elseif not SCENARIO_COMPLETED[scenarioDescription] then
 		-- TODO Play locked noise or something
 		return;
 	end
@@ -183,14 +169,7 @@ function State_Scenario_Select:chooseRandomLockedScenario()
 	local lockedScenarios = {};
 
 	for index, availableScenario in pairs(SCENARIO_ALL) do
-		local locked = true;
-		for index2, completedScenario in pairs(SCENARIO_COMPLETED) do
-			if availableScenario == completedScenario then
-				locked = false;
-			end
-		end
-
-		if locked then
+		if SCENARIO_COMPLETED[availableScenario] then
 			table.insert(lockedScenarios, availableScenario);
 		end
 	end
@@ -212,20 +191,36 @@ function State_Scenario_Select:draw()
 		love.graphics.setFont(self.titleFont);
 		love.graphics.printf("Choose Your Threat", 0, 15, SCREEN_WIDTH, "center");
 
+		for lockedY, row in pairs(SCENARIO_SELECTION) do
+			for lockedX, scenarioDescription in pairs(row) do
+				if scenarioDescription ~= "random" and not SCENARIO_COMPLETED[scenarioDescription] then
+					local drawLockedX = 499;
+					local drawLockedY = 147 + (lockedY-1) * 151;
+					if lockedY == 2 then
+						drawLockedX = 571;
+					end
+					drawLockedX = drawLockedX + (lockedX-1) * 151;
+
+
+					love.graphics.draw(self.lockedImage, drawLockedX, drawLockedY);
+				end
+			end
+		end
+
 		love.graphics.print("?", 770, 315);
 
 		love.graphics.printf(self.scenarioDescription, 0, 650, SCREEN_WIDTH, "center");
 
 		if self.indicatorVisible then
 			love.graphics.setColor(255, 255, 255);
-			local x = 499;
-			local y = 147 + (self.selection.y-1) * 151;
+			local indicatorX = 499;
+			local indicatorY = 147 + (self.selection.y-1) * 151;
 			if self.selection.y == 2 then
-				x = 571;
+				indicatorX = 571;
 			end
-			x = x + (self.selection.x-1) * 151;
+			indicatorX = indicatorX + (self.selection.x-1) * 151;
 
-			love.graphics.draw(self.indicator, x, y);
+			love.graphics.draw(self.indicator, indicatorX, indicatorY);
 		end
   end);
 

@@ -632,15 +632,8 @@ function State_Game:callPolice()
 end
 
 function State_Game:winGame()
-	local alreadyCompleted = false;
-	for index, completedScenario in pairs(SCENARIO_COMPLETED) do
-		if self.scenarioId == completedScenario then
-			alreadyCompleted = true;
-		end
-	end
-
-	if not alreadyCompleted then
-		table.insert(SCENARIO_COMPLETED, self.scenarioId);
+	if not SCENARIO_COMPLETED[self.scenarioId] then
+		SCENARIO_COMPLETED[self.scenarioId] = true;
 		saveGame();
 	end
 

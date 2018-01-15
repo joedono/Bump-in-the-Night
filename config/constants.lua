@@ -208,7 +208,11 @@ SCENARIO_SELECTION = {
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
 SCENARIO_ALL = {"wolf", "panther", "burglar"};
-SCENARIO_COMPLETED = {"wolf", "panther", "burglar"};
+SCENARIO_COMPLETED = {
+  ["wolf"] = true,
+  ["panther"] = true,
+  ["burglar"] = true
+};
 
 SCENARIO_ITEMS = {
   ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
