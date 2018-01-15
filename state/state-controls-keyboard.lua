@@ -3,7 +3,7 @@ State_Controls_Keyboard = {};
 function State_Controls_Keyboard:init()
 	self.image = love.graphics.newImage("asset/image/screen/controls-keyboard.png");
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 30);
-	self.controlsFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
+	self.controlsFont = love.graphics.newFont("asset/font/Fiendish.ttf", 20);
 end
 
 function State_Controls_Keyboard:enter()
@@ -31,7 +31,7 @@ function State_Controls_Keyboard:draw()
 
 		love.graphics.setFont(self.controlsFont);
     love.graphics.print("Walk", 280, 390);
-    love.graphics.print("Flashlight", 660, 390);
+    love.graphics.print("Flashlight", 650, 390);
     love.graphics.print("Confirm/Pause", 1290, 320);
     love.graphics.print("Quit", 1290, 410);
     love.graphics.print("Previous Item", 300, 575);

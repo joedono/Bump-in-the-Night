@@ -3,7 +3,7 @@ State_Controls_Controller = {};
 function State_Controls_Controller:init()
 	self.image = love.graphics.newImage("asset/image/screen/controls-controller.png");
 	self.titleFont = love.graphics.newFont("asset/font/Fiendish.ttf", 30);
-	self.controlsFont = love.graphics.newFont("asset/font/Fiendish.ttf", 16);
+	self.controlsFont = love.graphics.newFont("asset/font/Fiendish.ttf", 20);
 end
 
 function State_Controls_Controller:enter()
@@ -35,7 +35,7 @@ function State_Controls_Controller:draw()
 		love.graphics.print("Start - Pause", 800, 175);
 		love.graphics.print("R1/RB - Next Item", 1315, 195);
 		love.graphics.print("R2/RT - Run", 1315, 105);
-		love.graphics.print("DPad/L Joystick - Walk", 210, 725);
+		love.graphics.print("DPad/L Joystick - Walk", 140, 725);
 		love.graphics.print("R Joystick - Flashlight", 1040, 725);
 		love.graphics.print("Use Item", 1275, 455);
 
