@@ -12,7 +12,7 @@ Hunts by sight and sound. Only one spawns. Randomly catches the player's scent a
 ## Burglar
 Stun the burglar and call the police
 Required Items: Taser, Cell Phone (dead), Cell Phone Charger
-Hunts by sight and moves randomly. Can be seen without the flashlight. Must be stunned by the taser. Call the police while the burglar is stunned ti win.
+Hunts by sight and moves randomly. Can be seen without the flashlight. Must be stunned by the taser. Call the police while the burglar is stunned to win.
 
 ## Arsonist
 Stun the arsonist, call the police, and put out the fire
