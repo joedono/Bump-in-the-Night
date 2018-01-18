@@ -1,4 +1,4 @@
--- Thrown on fire to put it out during an arson attack
+-- Thrown on fire to put it out during an arsonist attack
 Bucket_Water = Class {
 	init = function(self)
 

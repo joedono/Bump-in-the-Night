@@ -141,6 +141,9 @@ MONSTER_BURGLAR_SIGHT_DISTANCE = 600;
 MONSTER_BURGLAR_SIGHT_CONE = math.pi * 1/4;
 MONSTER_BURGLAR_TURN_SPEED = 5;
 
+MONSTER_ARSONIST_WIDTH = 32 * MONSTER_SCALE;
+MONSTER_ARSONIST_HEIGHT = 32 * MONSTER_SCALE;
+
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
 
@@ -204,7 +207,7 @@ SCENARIO_ITEMS = {
   ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
   ["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
   ["burglar"] = {"taser", "cellphone_dead", "cellphone_battery"},
-  ["arson"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
+  ["arsonist"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
   ["killer"] = {"taser", "cellphone_dead", "cellphone_battery", "fuse"},
   ["vampire"] = {"book", "stake", "knife", "cross"},
   ["ghost"] = {"book"},
@@ -214,25 +217,25 @@ SCENARIO_ITEMS = {
 };
 
 SCENARIO_SELECTION = {
-  {"wolf", "panther", "burglar", "arson"},
+  {"wolf", "panther", "burglar", "arsonist"},
   {"killer", "random", "vampire"},
   {"ghost", "alien", "zombie", "elder_god"}
 };
 
---SCENARIO_ALL = {"wolf", "panther", "burglar", "arson", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arson"};
+--SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist"};
 SCENARIO_COMPLETED = {
   ["wolf"] = true,
   ["panther"] = true,
   ["burglar"] = true,
-  ["arson"] = true
+  ["arsonist"] = true
 };
 
 SCENARIO_DESCRIPTION = {
   ["Wolf"] = "Three wolves are looking for a snack. They like meat and have keen ears. Stay quiet if you want to survive.",
   ["Panther"] = "A panther is looking for a midnight meal. It likes meat and can hunt by smell. Stay quiet and keep moving or else it'll catch up with you.",
   ["Burglar"] = "Someone has broken in to your house looking for valuables. They won't hesitate to kill anyone in their way. Call the cops and hold out until they arrive.",
-  ["Arson"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
+  ["Arsonist"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
   ["Killer"] = "",
   ["Vampire"] = "",
   ["Ghost"] = "",

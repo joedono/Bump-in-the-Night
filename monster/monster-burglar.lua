@@ -1,7 +1,8 @@
 --[[
 Hunts by sight and moves randomly.
 Attacks with a knife for an instant melee kill. Can be stunned temporarily with the taser.
-The cell phone must be used while he is stunned in order to win.
+Immediately knows where the player is upon using the cell phone and will continuously pursue them.
+Use the taser to last until the cops arrive
 
 States:
 Idle - Hasn't seen player and player hasn't called police. Randomly walk around investigating things

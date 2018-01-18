@@ -4,6 +4,7 @@ require "monster/base-monster"
 require "monster/monster-wolf";
 require "monster/monster-panther";
 require "monster/monster-burglar";
+require "monster/monster-arsonist";
 
 Manager_Monster = Class {
 	init = function(self, parentStateGame, pathNodes, player, soundEffects)
@@ -28,6 +29,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	elseif scenarioId == "burglar" then
 		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "arson" then
+		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "killer" then
 	elseif scenarioId == "vampire" then
 	elseif scenarioId == "ghost" then
