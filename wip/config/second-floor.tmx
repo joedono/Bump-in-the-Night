@@ -211,18 +211,17 @@
  <objectgroup color="#820082" name="Item">
   <object id="133" x="608" y="96" width="32" height="32"/>
   <object id="134" x="864" y="224" width="32" height="32"/>
-  <object id="135" x="800" y="544" width="32" height="32"/>
+  <object id="135" x="784" y="624" width="32" height="32"/>
   <object id="136" x="832" y="768" width="32" height="32"/>
   <object id="137" x="320" y="576" width="32" height="32"/>
   <object id="138" x="160" y="768" width="32" height="32"/>
-  <object id="139" x="416" y="96" width="32" height="32"/>
+  <object id="139" x="208" y="80" width="32" height="32"/>
   <object id="140" x="96" y="1408" width="32" height="32"/>
   <object id="141" x="480" y="1152" width="32" height="32"/>
   <object id="142" x="1440" y="1408" width="32" height="32"/>
-  <object id="143" x="1952" y="704" width="32" height="32"/>
-  <object id="144" x="1376" y="768" width="32" height="32"/>
+  <object id="143" x="1840" y="784" width="32" height="32"/>
+  <object id="144" x="1488" y="720" width="32" height="32"/>
   <object id="145" x="1376" y="256" width="32" height="32"/>
-  <object id="146" x="1856" y="256" width="32" height="32"/>
   <object id="147" x="2048" y="288" width="32" height="32"/>
   <object id="149" x="2016" y="1152" width="32" height="32"/>
   <object id="326" x="1664" y="256" width="32" height="32"/>
