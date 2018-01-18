@@ -9,8 +9,7 @@ Idle - Hasn't seen player and player hasn't called police. Randomly walk around 
 Walk - Moving randomly around the level
 Spotted - Sees the player. Alert for a little bit, then give chase
 Active Chase - Is giving chase and can still see the player. Constantly pathfind to the node closest to the player. If the player is within range, attack the player
-Called Police - Move randomly around the level faster. Randomly head directly towards the player.
-Called Police Pursue - Heading directly for the player
+Panicked - Player has called the police. Continuously pursue the player directly.
 Stunned - Stunned by the player
 ]]
 
