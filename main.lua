@@ -55,7 +55,7 @@ function love.load()
 	loadGame();
 
 	GameState.registerEvents();
-	GameState.switch(State_Title);
+	GameState.switch(State_Game);
 end
 
 function love.keypressed(key, unicode)
