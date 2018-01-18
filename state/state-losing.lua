@@ -12,6 +12,7 @@ function State_Losing:enter(from)
 	Timer.clear();
 	Timer.script(function(wait)
 		wait(0.1);
+		self.color.r = 100;
 		self.color.g = 0;
 		self.color.b = 0;
 		self.color.a = 0;

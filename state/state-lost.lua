@@ -9,7 +9,7 @@ function State_Lost:init()
 end
 
 function State_Lost:enter()
-	love.graphics.setBackgroundColor(255, 0, 0);
+	love.graphics.setBackgroundColor(100, 0, 0);
 	self.inputEnabled = false;
 	self.alphas = {
 		titleAlpha = 0,
