@@ -93,7 +93,7 @@ function Monster_Arsonist:updateIdle(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		self.randomlySetFire();
+		self:randomlySetFire();
 		self.state = "walk";
 	end
 end
@@ -109,6 +109,18 @@ function Monster_Arsonist:updateWalk(dt)
 		local finalPathNode = self.parentManager:randomPathNode();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
+
+		if #self.path > MONSTER_ARSONIST_MAX_PATH then
+			local newPath = {};
+			for index, pathNode in pairs(self.path) do
+				if index <= MONSTER_ARSONIST_MAX_PATH then
+					table.insert(newPath, pathNode);
+				end
+			end
+
+			self.path = newPath;
+		end
+
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	else
 		self:followPath(dt, MONSTER_ARSONIST_WALK_SPEED);
@@ -203,7 +215,7 @@ function Monster_Arsonist:followPath(dt, speed)
 
 	for i = 1, len do
     local col = cols[i];
-		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" and not self.panicked then
+		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" and self.panicked then
 			col.other.active = false;
 
 			self.soundEffects.knifeStab:rewind();

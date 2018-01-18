@@ -33,7 +33,7 @@ function Monster:hasCalledPolice()
 	return self.parentManager.parentStateGame:hasPlayerCalledPolice();
 end
 
-function Monster_Arsonist:canSeePlayer(baseSightCone, baseSightDistance)
+function Monster:canSeePlayer(baseSightCone, baseSightDistance)
 	local facingAngle = math.deg(math.angle(0, 0, self.facing.y, self.facing.x));
 	local targetAngle = math.deg(math.angle(self.box.y, self.box.x, self.player.box.y, self.player.box.x));
 	local sightCone = math.deg(baseSightCone / 2);

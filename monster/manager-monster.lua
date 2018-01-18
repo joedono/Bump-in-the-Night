@@ -28,7 +28,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "burglar" then
 		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
-	elseif scenarioId == "arson" then
+	elseif scenarioId == "arsonist" then
 		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "killer" then
 	elseif scenarioId == "vampire" then
