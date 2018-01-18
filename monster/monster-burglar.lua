@@ -83,7 +83,7 @@ function Monster_Burglar:update(dt)
 end
 
 function Monster_Burglar:updateIdle(dt)
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_BURGLAR_SIGHT_CONE, MONSTER_BURGLAR_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -95,7 +95,7 @@ function Monster_Burglar:updateIdle(dt)
 end
 
 function Monster_Burglar:updateWalk(dt)
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_BURGLAR_SIGHT_CONE, MONSTER_BURGLAR_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -112,7 +112,7 @@ function Monster_Burglar:updateWalk(dt)
 end
 
 function Monster_Burglar:updateSpotted(dt)
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_BURGLAR_SIGHT_CONE, MONSTER_BURGLAR_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
 			y = self.player.box.y
@@ -129,7 +129,7 @@ end
 
 function Monster_Burglar:updateActiveChase(dt)
 	local seeTarget = false;
-	if self:canSeePlayer() or self.path == nil then
+	if self:canSeePlayer(MONSTER_BURGLAR_SIGHT_CONE, MONSTER_BURGLAR_SIGHT_DISTANCE) or self.path == nil then
 		seeTarget = true;
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -170,21 +170,6 @@ function Monster_Burglar:updateStunned(dt)
 	end
 end
 
-function Monster_Burglar:canSeePlayer()
-	local facingAngle = math.deg(math.angle(0, 0, self.facing.y, self.facing.x));
-	local targetAngle = math.deg(math.angle(self.box.y, self.box.x, self.player.box.y, self.player.box.x));
-	local sightCone = math.deg(MONSTER_BURGLAR_SIGHT_CONE / 2);
-	local angleDiff = (math.abs(facingAngle - targetAngle) + 180 + 360) % 360 - 180;
-	local distToPlayer = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
-	local items, len = BumpWorld:querySegment(self.box.x, self.box.y, self.player.box.x, self.player.box.y, canSeeFilter);
-
-	if distToPlayer < MONSTER_BURGLAR_SIGHT_DISTANCE and len == 0 and angleDiff <= sightCone and angleDiff >= -sightCone then
-		return true;
-	end
-
-	return false;
-end
-
 function Monster_Burglar:hasSpottedPlayer()
 	self.visualTarget = {
 		x = self.player.box.x,
@@ -200,10 +185,6 @@ function Monster_Burglar:hasSpottedPlayer()
 	end
 
 	self.stateTimer = 1;
-end
-
-function Monster_Burglar:hasCalledPolice()
-	return self.parentManager.parentStateGame:hasPlayerCalledPolice();
 end
 
 function Monster_Burglar:panic()

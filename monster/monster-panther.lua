@@ -92,7 +92,7 @@ function Monster_Panther:updateIdle(dt)
 		return;
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -117,7 +117,7 @@ function Monster_Panther:updateWalk(dt)
 		return;
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -153,7 +153,7 @@ function Monster_Panther:updateInvestigating(dt)
 		};
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -176,7 +176,7 @@ function Monster_Panther:updateSpotted(dt)
 		};
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
 			y = self.player.box.y
@@ -190,7 +190,7 @@ function Monster_Panther:updateSpotted(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		if self:canSeePlayer() then
+		if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 			self.soundEffects.monsterPantherRoar:rewind();
 			self.soundEffects.monsterPantherRoar:play();
 			self.state = "active-chase";
@@ -204,7 +204,7 @@ end
 function Monster_Panther:updateActiveChase(dt)
 	local seeTarget = false;
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 		seeTarget = true;
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -232,7 +232,7 @@ end
 -- Is giving chase and cannot see the player. Stop at node closest to last known player location. Downgrade to Alert when node is reached.
 function Monster_Panther:updatePassiveChase(dt)
 	local hearTarget = false;
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
 			y = self.player.box.y
@@ -311,21 +311,6 @@ function Monster_Panther:canHearPlayer()
 	local dist = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
 
 	if dist < MONSTER_PANTHER_RUN_HEAR_DISTANCE and self.player.runPressed and  (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
-		return true;
-	end
-
-	return false;
-end
-
-function Monster_Panther:canSeePlayer()
-	local facingAngle = math.deg(math.angle(0, 0, self.facing.y, self.facing.x));
-	local targetAngle = math.deg(math.angle(self.box.y, self.box.x, self.player.box.y, self.player.box.x));
-	local sightCone = math.deg(MONSTER_PANTHER_SIGHT_CONE / 2);
-	local angleDiff = (math.abs(facingAngle - targetAngle) + 180 + 360) % 360 - 180;
-	local distToPlayer = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
-	local items, len = BumpWorld:querySegment(self.box.x, self.box.y, self.player.box.x, self.player.box.y, canSeeFilter);
-
-	if distToPlayer < MONSTER_PANTHER_SIGHT_DISTANCE and len == 0 and angleDiff <= sightCone and angleDiff >= -sightCone then
 		return true;
 	end
 

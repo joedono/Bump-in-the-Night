@@ -94,7 +94,7 @@ function Monster_Wolf:updateIdle(dt)
 		return;
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -112,7 +112,7 @@ function Monster_Wolf:updateWalk(dt)
 		return;
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -148,7 +148,7 @@ function Monster_Wolf:updateInvestigating(dt)
 		};
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
@@ -171,7 +171,7 @@ function Monster_Wolf:updateSpotted(dt)
 		};
 	end
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
 			y = self.player.box.y
@@ -185,7 +185,7 @@ function Monster_Wolf:updateSpotted(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		if self:canSeePlayer() then
+		if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 			self.soundEffects.monsterWolfRoar:rewind();
 			self.soundEffects.monsterWolfRoar:play();
 			self.state = "active-chase";
@@ -199,7 +199,7 @@ end
 function Monster_Wolf:updateActiveChase(dt)
 	local seeTarget = false;
 
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 		seeTarget = true;
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -227,7 +227,7 @@ end
 -- Is giving chase and cannot see the player. Stop at node closest to last known player location. Downgrade to Alert when node is reached.
 function Monster_Wolf:updatePassiveChase(dt)
 	local hearTarget = false;
-	if self:canSeePlayer() then
+	if self:canSeePlayer(MONSTER_WOLF_SIGHT_CONE, MONSTER_WOLF_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
 			y = self.player.box.y
@@ -295,21 +295,6 @@ function Monster_Wolf:canHearPlayer()
 	local dist = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
 
 	if dist < MONSTER_WOLF_RUN_HEAR_DISTANCE and self.player.runPressed and  (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
-		return true;
-	end
-
-	return false;
-end
-
-function Monster_Wolf:canSeePlayer()
-	local facingAngle = math.deg(math.angle(0, 0, self.facing.y, self.facing.x));
-	local targetAngle = math.deg(math.angle(self.box.y, self.box.x, self.player.box.y, self.player.box.x));
-	local sightCone = math.deg(MONSTER_WOLF_SIGHT_CONE / 2);
-	local angleDiff = (math.abs(facingAngle - targetAngle) + 180 + 360) % 360 - 180;
-	local distToPlayer = math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y);
-	local items, len = BumpWorld:querySegment(self.box.x, self.box.y, self.player.box.x, self.player.box.y, canSeeFilter);
-
-	if distToPlayer < MONSTER_WOLF_SIGHT_DISTANCE and len == 0 and angleDiff <= sightCone and angleDiff >= -sightCone then
 		return true;
 	end
 
