@@ -1,6 +1,6 @@
 Player = Class {
-  init = function (self, parent, spawnPoint, spawnOffset, soundEffects)
-    self.parent = parent;
+  init = function (self, parentStateGame, spawnPoint, spawnOffset, soundEffects)
+    self.parentStateGame = parentStateGame;
     self.image = love.graphics.newImage("asset/image/player.png");
 
     self.box = {
@@ -31,8 +31,7 @@ Player = Class {
 		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 200);
 		self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
-    self.soundWalk = soundEffects.footstepsWalk;
-    self.soundRun = soundEffects.footstepsRun;
+    self.soundEffects = soundEffects;
 
     self:resetKeys();
 
@@ -106,15 +105,15 @@ function Player:updateVelocity()
     vx, vy = math.normalize(vx, vy);
 
     if self.runPressed then
-      self.soundRun:play();
-      self.soundWalk:stop();
+      self.soundEffects.footstepsRun:play();
+      self.soundEffects.footstepsWalk:stop();
     else
-      self.soundRun:stop();
-      self.soundWalk:play();
+      self.soundEffects.footstepsRun:stop();
+      self.soundEffects.footstepsWalk:play();
     end
   else
-    self.soundRun:stop();
-    self.soundWalk:stop();
+    self.soundEffects.footstepsRun:stop();
+    self.soundEffects.footstepsWalk:stop();
   end
 
   if self.runPressed then
@@ -155,7 +154,17 @@ function Player:updatePosition(dt)
     end
 
     if col.other.type == "item" then
-      self.parent:pickupItem(col.other);
+      self.parentStateGame:pickupItem(col.other);
+    end
+
+    if col.other.type == "fire" and KILL_PLAYER then
+      self.active = false;
+      self.soundEffects.monsterBite:rewind();
+      self.soundEffects.playerDeathYell:rewind();
+      self.soundEffects.monsterBite:play();
+      self.soundEffects.playerDeathYell:play();
+
+      self.parentStateGame:loseGame();
     end
   end
 
@@ -205,7 +214,7 @@ end
 function Player:moveThroughPortal(portal)
   local dx = portal.properties.dx;
   local dy = portal.properties.dy;
-  local room = self.parent.floors[portal.properties.room]
+  local room = self.parentStateGame.floors[portal.properties.room]
 
   dx = dx + room.origin.x;
   dy = dy + room.origin.y;
