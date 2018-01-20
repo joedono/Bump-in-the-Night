@@ -9,7 +9,7 @@ Manager_Fire = Class {
 
 		self.image = love.graphics.newImage("asset/image/fire.png");
 		local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
-		self.animation = Anim8.newAnimation(grid("1-3", "1-3"), 0.1);
+		self.animation = Anim8.newAnimation(grid("1-3", 1), 0.1);
 
 		self.fireSpreadTimer = love.math.random(FIRE_SPREAD_TIMER_MIN, FIRE_SPREAD_TIMER_MAX);
 	end
@@ -65,9 +65,9 @@ end
 
 function Manager_Fire:draw()
 	love.graphics.setColor(255, 255, 255);
-	
+
 	for index, fire in pairs(self.fires) do
-		self.animation:draw(self.image, fire.box.x, fire.box.y);
+		self.animation:draw(self.image, fire.box.x - 8, fire.box.y - 16, 0, 1.5, 1.5);
 		if DRAW_BOXES then
 			love.graphics.rectangle("line", fire.box.x, fire.box.y, fire.box.w, fire.box.h);
 		end
