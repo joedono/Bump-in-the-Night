@@ -84,6 +84,13 @@ function State_Game:enter(previous, scenarioId)
 	self.selectedItemIndex = 1;
 	self.floors = self:loadFloors();
 
+	local limits = {};
+	for index, floor in pairs(self.floors) do
+		table.imsert(limits, floor:getLimits());
+	end
+
+	self.fireManager = Manager_Fire(self, limits);
+
 	local playerStartFloor = self.floors[2];
 	local playerSpawnPoint = playerStartFloor.spawns[love.math.random(#playerStartFloor.spawns)];
 
@@ -91,7 +98,6 @@ function State_Game:enter(previous, scenarioId)
 
 	self.items = self:spawnItems(scenarioId);
 	self.pathNodes = self:loadPathfinding();
-	self.fireManager = Manager_Fire(self);
 	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player, self.soundEffects);
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
@@ -111,10 +117,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua", 0, 0, self.soundEffects));
-	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua", FLOOR_WIDTH + FLOOR_GAP, 0, self.soundEffects));
-	table.insert(floors, Floor("asset/config/floor-layout/basement.lua", 0, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
-	table.insert(floors, Floor("asset/config/floor-layout/attic.lua", FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua", 1, 0, 0, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
+	table.insert(floors, Floor("asset/config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
 
 	return floors;
 end
@@ -262,6 +268,15 @@ function State_Game:keypressed(key, unicode)
 	if key == KEY_LIGHT_DOWN then
     self.player.downLightPressed = true;
   end
+
+	if key == "b" then
+		local curFloorIndex = self:getPlayerFloor().index;
+		self:setFire(
+			self.player.box.x + self.player.box.w / 2,
+			self.player.box.y + self.player.box.h / 2,
+			curFloorIndex
+		);
+	end
 end
 
 function State_Game:keyreleased(key, unicode)
@@ -638,8 +653,8 @@ function State_Game:callPolice()
 	end);
 end
 
-function State_Game:setFire(centerX, centerY)
-	self.fireManager:setFire(centerX, centerY);
+function State_Game:setFire(centerX, centerY, curFloor)
+	self.fireManager:setFire(centerX, centerY, curFloor);
 end
 
 function State_Game:winGame()

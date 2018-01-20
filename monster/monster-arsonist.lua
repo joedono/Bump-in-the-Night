@@ -322,7 +322,11 @@ function Monster_Arsonist:randomlySetFire()
 end
 
 function Monster_Arsonist:setFire()
-	self.parentManager.parentStateGame:setFire(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+	self.parentManager.parentStateGame:setFire(
+		self.box.x + self.box.w / 2,
+		self.box.y + self.box.h / 2,
+		self.curFloor
+	);
 end
 
 function Monster_Arsonist:draw()

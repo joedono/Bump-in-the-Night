@@ -1,7 +1,7 @@
 require "house/door";
 
 Floor = Class {
-  init = function (self, layoutFile, originX, originY, soundEffects)
+  init = function (self, layoutFile, index, originX, originY, soundEffects)
     self.origin = {
       x = originX,
       y = originY
@@ -16,6 +16,7 @@ Floor = Class {
       tileset.tilesetImage = love.graphics.newImage(imageFilename);
     end
 
+    self.index = index;
     self.tiles = {};
     self.walls = {};
     self.doors = {};
@@ -77,6 +78,15 @@ function Floor:addPortals(layer)
     portal.y = portal.y + self.origin.y;
     BumpWorld:add(portal, portal.x, portal.y, portal.width, portal.height);
   end
+end
+
+function Floor:getLimits()
+  return {
+    x1 = self.origin.x,
+    y1 = self.origin.y,
+    x2 = self.origin.x + self.source.width * self.source.tilewidth,
+    y2 = self.origin.h + self.source.height * self.source.tileheight,
+  };
 end
 
 function Floor:update(dt)
