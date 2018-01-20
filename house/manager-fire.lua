@@ -21,7 +21,7 @@ function Manager_Fire:setFire(targetX, targetY, floorIndex)
 	local alreadyLit = false;
 
 	for index, fire in pairs(self.fires) do
-		if fire.box.x == tileX and file.box.y == tileY and fire.active then
+		if fire.box.x == tileX and fire.box.y == tileY and fire.active then
 			alreadyLit = true;
 		end
 	end

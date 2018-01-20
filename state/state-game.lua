@@ -76,7 +76,7 @@ function State_Game:enter(previous, scenarioId)
 	LightWorld:clearBodies();
 
 	if scenarioId == nil then
-		scenarioId = "killer";
+		scenarioId = "arsonist";
 	end
 
 	self.scenarioId = scenarioId;
@@ -86,7 +86,7 @@ function State_Game:enter(previous, scenarioId)
 
 	local limits = {};
 	for index, floor in pairs(self.floors) do
-		table.imsert(limits, floor:getLimits());
+		table.insert(limits, floor:getLimits());
 	end
 
 	self.fireManager = Manager_Fire(self, limits);
