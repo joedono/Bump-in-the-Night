@@ -64,7 +64,12 @@ function Manager_Fire:update(dt)
 end
 
 function Manager_Fire:draw()
+	love.graphics.setColor(255, 255, 255);
+	
 	for index, fire in pairs(self.fires) do
 		self.animation:draw(self.image, fire.box.x, fire.box.y);
+		if DRAW_BOXES then
+			love.graphics.rectangle("line", fire.box.x, fire.box.y, fire.box.w, fire.box.h);
+		end
 	end
 end
