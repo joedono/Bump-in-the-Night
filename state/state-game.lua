@@ -611,6 +611,7 @@ function State_Game:useItem()
 			newItem:pickup();
 			table.insert(newInventory, newItem);
 			self.inventory = newInventory;
+			self.selectedItemIndex = 1;
 		end
 	elseif selectedItem.itemType == "bucket" then
 	elseif selectedItem.itemType == "fuse" then
