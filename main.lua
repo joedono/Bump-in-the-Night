@@ -1,3 +1,4 @@
+Anim8 = require "lib/anim8";
 Camera = require "lib/hump/camera";
 Class = require "lib/hump/class";
 GameState = require "lib/hump/gamestate";

@@ -85,7 +85,7 @@ function Floor:getLimits()
     x1 = self.origin.x,
     y1 = self.origin.y,
     x2 = self.origin.x + self.source.width * self.source.tilewidth,
-    y2 = self.origin.h + self.source.height * self.source.tileheight,
+    y2 = self.origin.y + self.source.height * self.source.tileheight,
   };
 end
 
