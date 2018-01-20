@@ -52,7 +52,7 @@ function Door:update(dt)
 		self.openTimer = self.openTimer - dt;
 
 		if self.openTimer < 0 then
-			local cols, len = BumpWorld:queryRect(self.x, self.y, self.w, self.h);
+			local cols, len = BumpWorld:queryRect(self.x, self.y, self.w, self.h, doorFilter);
 
 			if len <= 1 then
 				self.isOpen = false;

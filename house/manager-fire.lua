@@ -33,7 +33,135 @@ function Manager_Fire:setFire(targetX, targetY, floorIndex)
 end
 
 function Manager_Fire:spreadFire()
-	print("spreading fire");
+	local spreadableFires = {};
+
+	for index, fire in pairs(self.fires) do
+		local numFilled = 9;
+		local limit = self.limits[fire.floorIndex];
+
+		-- Get all adjacent fires
+		local adjacentFires, len = BumpWorld:queryRect(
+			fire.box.x - TILE_SIZE,
+			fire.box.y - TILE_SIZE,
+			fire.box.w * 3,
+			fire.box.h * 3,
+			fireFilter
+		);
+
+		-- Figure out what number of fires would be "full"
+		if fire.box.y - TILE_SIZE < limit.y1 then
+			if fire.box.x - TILE_SIZE < limit.x1 or fire.box.x + TILE_SIZE >= limit.x2 then
+				-- NE or NW corner
+				numFilled = 4;
+			else
+				-- N side
+				numFilled = 6;
+			end
+		elseif fire.box.y + TILE_SIZE >= limit.y2 then
+			if fire.box.x - TILE_SIZE < limit.x1 or fire.box.x + TILE_SIZE >= limit.x2 then
+				-- SE or SW corner
+				numFilled = 4;
+			else
+				-- S side
+				numFilled = 6;
+			end
+		end
+
+		if len < numFilled then
+			table.insert(spreadableFires, fire);
+		end
+	end
+
+	local sourceFire = spreadableFires[love.math.random(#spreadableFires)];
+	local floorIndex = sourceFire.floorIndex;
+	local limit = self.limits[floorIndex];
+	local possibilities = {
+		{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y - TILE_SIZE },
+		{ x = sourceFire.box.x, y = sourceFire.box.y - TILE_SIZE },
+		{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y - TILE_SIZE },
+		{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y },
+		{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y },
+		{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y + TILE_SIZE },
+		{ x = sourceFire.box.x, y = sourceFire.box.y + TILE_SIZE },
+		{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y + TILE_SIZE },
+	};
+
+	if sourceFire.box.y - TILE_SIZE < limit.y1 then
+		if sourceFire.box.x - TILE_SIZE < limit.x1 then
+			-- NW Corner
+			possibilities = {
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y },
+				{ x = sourceFire.box.x, y = sourceFire.box.y + TILE_SIZE },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y + TILE_SIZE }
+			};
+		elseif sourceFire.box.x + TILE_SIZE >= limit.x2 then
+			-- NE corner
+			possibilities = {
+				{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y },
+				{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y + TILE_SIZE },
+				{ x = sourceFire.box.x, y = sourceFire.box.y + TILE_SIZE }
+			};
+		else
+			-- N side
+			possibilities = {
+				{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y },
+				{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y + TILE_SIZE },
+				{ x = sourceFire.box.x, y = sourceFire.box.y + TILE_SIZE },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y + TILE_SIZE }
+			};
+		end
+	elseif sourceFire.box.y + TILE_SIZE >= limit.y2 then
+		if sourceFire.box.x - TILE_SIZE < limit.x1 then
+			-- SW Corner
+			possibilities = {
+				{ x = sourceFire.box.x, y = sourceFire.box.y - TILE_SIZE },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y - TILE_SIZE },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y }
+			};
+			elseif sourceFire.box.x + TILE_SIZE >= limit.x2 then
+				-- SE Corner
+				possibilities = {
+					{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y - TILE_SIZE },
+					{ x = sourceFire.box.x, y = sourceFire.box.y - TILE_SIZE },
+					{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y }
+				};
+		else
+			-- S side
+			possibilities = {
+				{ x = fire.box.x - TILE_SIZE, y = fire.box.y - TILE_SIZE },
+				{ x = fire.box.x, y = fire.box.y - TILE_SIZE },
+				{ x = fire.box.x + TILE_SIZE, y = fire.box.y - TILE_SIZE },
+				{ x = fire.box.x - TILE_SIZE, y = fire.box.y },
+				{ x = fire.box.x + TILE_SIZE, y = fire.box.y }
+			};
+		end
+	end
+
+	local emptyPossibilities = {};
+	local adjacentFires, len = BumpWorld:queryRect(
+		sourceFire.box.x - TILE_SIZE,
+		sourceFire.box.y - TILE_SIZE,
+		sourceFire.box.w * 3,
+		sourceFire.box.h * 3,
+		fireFilter
+	);
+
+	for index, possibility in pairs(possibilities) do
+		local empty = true;
+		for index2, adjacentFire in pairs(adjacentFires) do
+			if possibility.x == adjacentFire.box.x and possibility.y == adjacentFire.box.y then
+				empty = false;
+			end
+		end
+
+		if empty then
+			table.insert(emptyPossibilities, possibility);
+		end
+	end
+
+	local finalDestination = emptyPossibilities[love.math.random(#emptyPossibilities)];
+	self:setFire(finalDestination.x, finalDestination.y, floorIndex);
 end
 
 function Manager_Fire:update(dt)

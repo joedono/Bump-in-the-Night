@@ -91,3 +91,19 @@ canSeeFilter = function(other)
 
   return false;
 end
+
+doorFilter = function(other)
+  if other.type == "fire" then
+    return false;
+  end
+
+  return true;
+end
+
+fireFilter = function(other)
+  if other.type == "fire" and other.active then
+    return true;
+  end
+
+  return false;
+end
