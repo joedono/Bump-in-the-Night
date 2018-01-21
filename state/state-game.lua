@@ -62,7 +62,8 @@ function State_Game:init()
 		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
-		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static")
+		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static"),
+		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
@@ -612,8 +613,8 @@ function State_Game:useItem()
 			self.selectedItemIndex = 1;
 		end
 	elseif selectedItem.itemType == "bucket" then
-		-- self.soundEffects.waterSplash:rewind();
-		-- self.soundEffects.waterSplash:play();
+		self.soundEffects.waterSplash:rewind();
+		self.soundEffects.waterSplash:play();
 		table.insert(
 			self.usedItems,
 			Bucket_Water(
