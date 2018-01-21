@@ -3,7 +3,7 @@ Taser_Blast = Class {
 		local dirVector = Vector(dirX, dirY);
 		dirVector:normalizeInplace();
 
-		offsetVector = dirVector * (PLAYER_WIDTH / 2 - 7);
+		local offsetVector = dirVector * (PLAYER_WIDTH / 2 - 7);
 		local insideVector = Vector(originX, originY) + offsetVector;
 		local outsideVector = insideVector + (dirVector * TASER_RANGE) + offsetVector;
 

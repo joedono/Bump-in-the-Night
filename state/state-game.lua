@@ -41,7 +41,7 @@ function State_Game:init()
 	local waterSplashGrid = Anim8.newGrid(61, 32, self.usedItemImages.waterSplash:getWidth(), self.usedItemImages.waterSplash:getHeight());
 
 	self.usedItemAnimations = {
-		waterSplash = Anim8.newAnimation(waterSplashGrid("1-4", 1, "1-3", 2), 0.3)
+		waterSplash = Anim8.newAnimation(waterSplashGrid("1-4", "1-2"), 0.05)
 	};
 
 	self.soundEffects = {
@@ -277,11 +277,14 @@ function State_Game:keypressed(key, unicode)
   end
 
 	if key == "b" then
-		local curFloorIndex = self:getPlayerFloor().index;
-		self:setFire(
-			self.player.box.x + self.player.box.w / 2,
-			self.player.box.y + self.player.box.h / 2,
-			curFloorIndex
+		table.insert(
+			self.usedItems,
+			Bucket_Water(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y,
+				self.usedItemImages.waterSplash,
+				self.usedItemAnimations.waterSplash:clone()
+			)
 		);
 	end
 end
