@@ -107,3 +107,11 @@ fireFilter = function(other)
 
   return false;
 end
+
+fireProofFilter = function(other)
+  if other.type == "fire-proof" then
+    return true;
+  end
+
+  return false;
+end

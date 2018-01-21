@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="561">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="48" tilewidth="32" tileheight="32" nextobjectid="564">
  <tileset firstgid="1" source="base-layout.tsx"/>
  <tileset firstgid="118" source="decorations.tsx"/>
  <layer name="Floor" width="70" height="48">
@@ -1110,5 +1110,10 @@
     <property name="dirY" type="int" value="0"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup color="#ff5500" name="FireProof">
+  <object id="561" type="fire-proof" x="224" y="320" width="160" height="96"/>
+  <object id="562" type="fire-proof" x="960" y="1152" width="320" height="160"/>
+  <object id="563" type="fire-proof" x="1920" y="1312" width="256" height="160"/>
  </objectgroup>
 </map>

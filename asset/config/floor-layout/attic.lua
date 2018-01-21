@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 307,
+  nextobjectid = 308,
   properties = {},
   tilesets = {
     {
@@ -3803,6 +3803,31 @@ return {
           properties = {
             ["connections"] = "99,301,302"
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "FireProof",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 307,
+          name = "",
+          type = "fire-proof",
+          shape = "rectangle",
+          x = 64,
+          y = 288,
+          width = 224,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     }

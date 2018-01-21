@@ -8,7 +8,7 @@ return {
   height = 48,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 561,
+  nextobjectid = 564,
   properties = {},
   tilesets = {
     {
@@ -4102,6 +4102,57 @@ return {
             ["dirX"] = 1,
             ["dirY"] = 0
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "FireProof",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 561,
+          name = "",
+          type = "fire-proof",
+          shape = "rectangle",
+          x = 224,
+          y = 320,
+          width = 160,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 562,
+          name = "",
+          type = "fire-proof",
+          shape = "rectangle",
+          x = 960,
+          y = 1152,
+          width = 320,
+          height = 160,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 563,
+          name = "",
+          type = "fire-proof",
+          shape = "rectangle",
+          x = 1920,
+          y = 1312,
+          width = 256,
+          height = 160,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     }

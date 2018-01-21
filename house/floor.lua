@@ -42,6 +42,8 @@ Floor = Class {
         self.sourceNodes = layer.objects;
       elseif layer.name == "Spawn" then
         self.spawns = layer.objects;
+      elseif layer.name == "FireProof" then
+        self:addFireProofing(layer);
       end
     end
   end
@@ -77,6 +79,12 @@ function Floor:addPortals(layer)
     portal.x = portal.x + self.origin.x;
     portal.y = portal.y + self.origin.y;
     BumpWorld:add(portal, portal.x, portal.y, portal.width, portal.height);
+  end
+end
+
+function Floor:addFireProofing(layer)
+  for index, object in pairs(layer.objects) do
+    BumpWorld:add(object, object.x + self.origin.x, object.y + self.origin.y, object.width, object.height);
   end
 end
 

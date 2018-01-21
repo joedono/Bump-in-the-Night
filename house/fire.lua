@@ -15,5 +15,11 @@ Fire = Class {
 
 		self.type = "fire";
 		self.active = true;
+
+		local items, len = BumpWorld:queryRect(self.box.x, self.box.y, self.box.w, self.box.h, fireProofFilter);
+
+		if len > 0 then
+			self.active = false;
+		end
 	end
 };
