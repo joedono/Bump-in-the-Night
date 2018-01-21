@@ -4,6 +4,7 @@ https://opengameart.org/content/lpc-house-interior-and-decorations
 https://opengameart.org/content/top-down-house-atlas
 https://opengameart.org/content/home-objects
 https://opengameart.org/content/9-frame-fire-animation-16x-32x-64x
+https://opengameart.org/content/water-splash
 
 # Fonts
 https://www.dafont.com/riffic.font
