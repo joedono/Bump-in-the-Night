@@ -85,8 +85,8 @@ function Taser_Blast:draw()
 		self.box.x + self.box.w / 2,
 		self.box.y + self.box.h / 2,
 		self.rotation,
-    1,
-    1,
+    TASER_SCALE,
+    TASER_SCALE,
 		self.imageData.w / 2,
 		self.imageData.h / 2
 	);

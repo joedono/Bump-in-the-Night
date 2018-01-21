@@ -107,7 +107,8 @@ function State_Game:enter(previous, scenarioId)
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
 	self.calledPolice = false;
-	self.policeTime = POLICE_TIMER;
+	self.policeTimer = POLICE_TIMER;
+	self.taserTimer = 0;
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
@@ -420,10 +421,14 @@ function State_Game:update(dt)
 
 	if self.calledPolice then
 		self.callPoliceSoundTimer:update(dt);
-		self.policeTime = self.policeTime - dt;
-		if self.policeTime <= 0 then
+		self.policeTimer = self.policeTimer - dt;
+		if self.policeTimer <= 0 then
 			self:winGame();
 		end
+	end
+
+	if self.taserTimer > 0 then
+		self.taserTimer = self.taserTimer - dt;
 	end
 
 	for index, floor in pairs(self.floors) do
@@ -568,16 +573,19 @@ function State_Game:useItem()
 			end
 		end
 	elseif selectedItem.itemType == "taser" then
-		self.soundEffects.taser:rewind();
-		self.soundEffects.taser:play();
-		table.insert(
-			self.usedItems,
-			Taser_Blast(
-				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
-				self.player.facing.x, self.player.facing.y,
-				self.usedItemImages.taserBlast
-			)
-		);
+		if self.taserTimer <= 0 then
+			self.taserTimer = TASER_TIMER;
+			self.soundEffects.taser:rewind();
+			self.soundEffects.taser:play();
+			table.insert(
+				self.usedItems,
+				Taser_Blast(
+					self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+					self.player.facing.x, self.player.facing.y,
+					self.usedItemImages.taserBlast
+				)
+			);
+		end
 	elseif selectedItem.itemType == "cellphone_dead" then
 		-- Do nothing
 	elseif selectedItem.itemType == "cellphone_live" then
@@ -748,7 +756,16 @@ function State_Game:drawHUD()
 
 	local y = SCREEN_HEIGHT - HUD_HEIGHT + 20;
 	for index, item in pairs(self.inventory) do
-		item:drawInventory((index-1) * 100 + 30, y);
+		local x = (index-1) * 100 + 30;
+		item:drawInventory(x, y);
+
+		if item.itemType == "taser" then
+			love.graphics.setColor(255, 255, 255);
+			love.graphics.rectangle("fill", x, y - 10, 60, 6);
+			love.graphics.setColor(0, 0, 0);
+			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (TASER_TIMER - self.taserTimer) / TASER_TIMER, 4);
+		end
+
 		if self.selectedItemIndex == index then
 			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("line", (index-1) * 100 + 30, y, INVENTORY_ITEM_WIDTH, INVENTORY_ITEM_HEIGHT);
@@ -758,6 +775,6 @@ function State_Game:drawHUD()
 	if self.calledPolice then
 		love.graphics.setColor(255, 255, 255);
 		love.graphics.setFont(self.policeTimerFont);
-		love.graphics.print("Police will arrive in " .. math.floor(self.policeTime * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 1, 1);
+		love.graphics.print("Police will arrive in " .. math.floor(self.policeTimer * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 1, 1);
 	end
 end
