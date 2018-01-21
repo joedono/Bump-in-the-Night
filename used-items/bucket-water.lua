@@ -12,23 +12,23 @@ Bucket_Water = Class {
 
 		if angle >= math.pi * 7/4 or angle <= math.pi * 1/4 then
 			-- Facing Right
-			dx = PLAYER_WIDTH / 2 + 62 / 2;
+			dx = PLAYER_WIDTH / 2 + WATER_SPLASH_WIDTH / 2;
 		elseif angle >= math.pi * 1/4 and angle <= math.pi * 3/4 then
 			-- Facing Down
-			dy = PLAYER_HEIGHT / 2 + 32 / 2;
+			dy = PLAYER_HEIGHT / 2 + WATER_SPLASH_HEIGHT / 2;
 		elseif angle >= math.pi * 3/4 and angle <= math.pi * 5/4 then
 			-- Facing Left
-			dx = -PLAYER_WIDTH / 2 - 62 / 2;
+			dx = -PLAYER_WIDTH / 2 - WATER_SPLASH_WIDTH / 2;
 		elseif angle >= math.pi * 5/4 and angle <= math.pi * 7/4 then
 			-- Facing Up
-			dy = -PLAYER_HEIGHT / 2 - 32 / 2;
+			dy = -PLAYER_HEIGHT / 2 - WATER_SPLASH_HEIGHT / 2;
 		end
 
 		self.box = {
-			x = originX + dx - 62 / 2,
-			y = originY + dy - 32 / 2,
-			w = 62,
-			h = 32
+			x = originX + dx - WATER_SPLASH_WIDTH / 2,
+			y = originY + dy - WATER_SPLASH_HEIGHT / 2,
+			w = WATER_SPLASH_WIDTH,
+			h = WATER_SPLASH_HEIGHT
 		};
 
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
@@ -68,5 +68,5 @@ function Bucket_Water:draw()
   end
 
 	love.graphics.setColor(255, 255, 255);
-	self.animation:draw(self.image, self.box.x, self.box.y);
+	self.animation:draw(self.image, self.box.x, self.box.y, 0, WATER_SPLASH_SCALE, WATER_SPLASH_SCALE);
 end
