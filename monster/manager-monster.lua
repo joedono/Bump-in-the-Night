@@ -1,5 +1,7 @@
 require "lib/pathfinding";
 
+require "house/manager-fire";
+
 require "monster/base-monster"
 require "monster/monster-wolf";
 require "monster/monster-panther";
@@ -7,11 +9,12 @@ require "monster/monster-burglar";
 require "monster/monster-arsonist";
 
 Manager_Monster = Class {
-	init = function(self, parentStateGame, pathNodes, player, soundEffects)
+	init = function(self, parentStateGame, pathNodes, floorLimits, player, soundEffects)
 		self.parentStateGame = parentStateGame;
 		self.monsters = {};
 		self.pathNodes = pathNodes;
 		self.numPathNodes = #pathNodes;
+		self.floorLimits = floorLimits;
 		self.player = player;
 		self.soundEffects = soundEffects;
 	end
@@ -29,7 +32,8 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	elseif scenarioId == "burglar" then
 		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "arsonist" then
-		-- table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		self.fireManager = Manager_Fire(self.floorLimits);
+		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "killer" then
 	elseif scenarioId == "vampire" then
 	elseif scenarioId == "ghost" then
@@ -57,6 +61,10 @@ function Manager_Monster:areEnemiesDown()
 	return allEnemiesDown;
 end
 
+function Manager_Monster:setFire(centerX, centerY, curFloor)
+	self.fireManager:setFire(centerX, centerY, curFloor);
+end
+
 function Manager_Monster:update(dt)
 	for index, monster in pairs(self.monsters) do
 		monster:update(dt);
@@ -66,6 +74,8 @@ function Manager_Monster:update(dt)
 		self:updateWolfSpecial(dt);
 	elseif self.scenarioId == "panther" then
 		self:updatePantherSpecial(dt);
+	elseif self.scenarioId == "arsonist" then
+		self:updateArsonistSpecial(dt);
 	end
 end
 
@@ -151,8 +161,16 @@ function Manager_Monster:updatePantherSpecial(dt)
 	end
 end
 
+function Manager_Monster:updateArsonistSpecial(dt)
+	self.fireManager:update(dt);
+end
+
 function Manager_Monster:draw()
 	for index, monster in pairs(self.monsters) do
 		monster:draw();
+	end
+
+	if self.scenarioId == "arsonist" then
+		self.fireManager:draw();
 	end
 end

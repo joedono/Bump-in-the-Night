@@ -1,8 +1,7 @@
 require "house/fire";
 
 Manager_Fire = Class {
-	init = function(self, parentStateGame, limits)
-		self.parentStateGame = parentStateGame;
+	init = function(self, limits)
 		self.limits = limits;
 		self.fires = {};
 		self.numFires = 0;
@@ -129,11 +128,11 @@ function Manager_Fire:spreadFire()
 		else
 			-- S side
 			possibilities = {
-				{ x = fire.box.x - TILE_SIZE, y = fire.box.y - TILE_SIZE },
-				{ x = fire.box.x, y = fire.box.y - TILE_SIZE },
-				{ x = fire.box.x + TILE_SIZE, y = fire.box.y - TILE_SIZE },
-				{ x = fire.box.x - TILE_SIZE, y = fire.box.y },
-				{ x = fire.box.x + TILE_SIZE, y = fire.box.y }
+				{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y - TILE_SIZE },
+				{ x = sourceFire.box.x, y = sourceFire.box.y - TILE_SIZE },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y - TILE_SIZE },
+				{ x = sourceFire.box.x - TILE_SIZE, y = sourceFire.box.y },
+				{ x = sourceFire.box.x + TILE_SIZE, y = sourceFire.box.y }
 			};
 		end
 	end

@@ -4,7 +4,6 @@ require "monster/manager-monster";
 require "house/floor";
 require "house/item";
 require "house/path-node";
-require "house/manager-fire";
 
 require "used-items/axe";
 require "used-items/blood-pool";
@@ -97,8 +96,6 @@ function State_Game:enter(previous, scenarioId)
 		table.insert(limits, floor:getLimits());
 	end
 
-	self.fireManager = Manager_Fire(self, limits);
-
 	local playerStartFloor = self.floors[2];
 	local playerSpawnPoint = playerStartFloor.spawns[love.math.random(#playerStartFloor.spawns)];
 
@@ -106,7 +103,7 @@ function State_Game:enter(previous, scenarioId)
 
 	self.items = self:spawnItems(scenarioId);
 	self.pathNodes = self:loadPathfinding();
-	self.monsterManager = Manager_Monster(self, self.pathNodes, self.player, self.soundEffects);
+	self.monsterManager = Manager_Monster(self, self.pathNodes, limits, self.player, self.soundEffects);
 	self.monsterManager:spawnMonsters(scenarioId);
 	self.usedItems = {};
 	self.calledPolice = false;
@@ -437,10 +434,6 @@ function State_Game:update(dt)
 		item:update(dt);
 	end
 
-	if self.scenarioId == "arsonist" then
-		self.fireManager:update(dt);
-	end
-
 	local activeUsedItems = {};
 	for index, usedItem in pairs(self.usedItems) do
 		usedItem:update(dt);
@@ -664,10 +657,6 @@ function State_Game:callPolice()
 	end);
 end
 
-function State_Game:setFire(centerX, centerY, curFloor)
-	self.fireManager:setFire(centerX, centerY, curFloor);
-end
-
 function State_Game:winGame()
 	if not SCENARIO_COMPLETED[self.scenarioId] then
 		SCENARIO_COMPLETED[self.scenarioId] = true;
@@ -735,10 +724,6 @@ function State_Game:drawGame()
 		if placedItem.belowPlayer then
 			placedItem:draw();
 		end
-	end
-
-	if self.scenarioId == "arsonist" then
-		self.fireManager:draw();
 	end
 
 	if DRAW_PATHS then
