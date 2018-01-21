@@ -66,7 +66,7 @@ weaponBlastCollision = function(shotgunBlast, other)
   return nil;
 end
 
-waterCollision = function(water, other)
+waterSplashCollision = function(water, other)
   if other.type == "fire" then
     return "cross";
   end

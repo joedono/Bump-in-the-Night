@@ -34,7 +34,14 @@ function State_Game:init()
 
 	self.usedItemImages = {
 		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
-		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png")
+		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png"),
+		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png")
+	};
+
+	local waterSplashGrid = Anim8.newGrid(61, 32, self.usedItemImages.waterSplash:getWidth(), self.usedItemImages.waterSplash:getHeight());
+
+	self.usedItemAnimations = {
+		waterSplash = Anim8.newAnimation(waterSplashGrid("1-4", 1, "1-3", 2), 0.3)
 	};
 
 	self.soundEffects = {
@@ -614,6 +621,17 @@ function State_Game:useItem()
 			self.selectedItemIndex = 1;
 		end
 	elseif selectedItem.itemType == "bucket" then
+		-- self.soundEffects.waterSplash:rewind();
+		-- self.soundEffects.waterSplash:play();
+		table.insert(
+			self.usedItems,
+			Bucket_Water(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y,
+				self.usedItemImages.waterSplash,
+				self.usedItemAnimations.waterSplash:clone()
+			)
+		);
 	elseif selectedItem.itemType == "fuse" then
 	elseif selectedItem.itemType == "book" then
 	elseif selectedItem.itemType == "cross" then
