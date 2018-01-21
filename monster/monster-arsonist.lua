@@ -41,6 +41,11 @@ Monster_Arsonist = Class {__includes = Monster,
 		self.sightLight:setDirection(0);
 		self.sightLight:setAngle(MONSTER_ARSONIST_SIGHT_CONE);
 
+		self.panickedFireTimer = Timer.new();
+		self.panickedFireTimer:every(1, function()
+			self:setFire();
+		end);
+
 		self.panicked = false;
 		self.state = "idle";
 		self.stateTimer = 5;
@@ -156,6 +161,8 @@ function Monster_Arsonist:updateFleeing(dt)
 end
 
 function Monster_Arsonist:updatePanicked(dt)
+	self.panickedFireTimer:update(dt);
+
 	if self.targetPathNode == nil then
 		self:hasSpottedPlayer();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
