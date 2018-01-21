@@ -275,18 +275,6 @@ function State_Game:keypressed(key, unicode)
 	if key == KEY_LIGHT_DOWN then
     self.player.downLightPressed = true;
   end
-
-	if key == "b" then
-		table.insert(
-			self.usedItems,
-			Bucket_Water(
-				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
-				self.player.facing.x, self.player.facing.y,
-				self.usedItemImages.waterSplash,
-				self.usedItemAnimations.waterSplash:clone()
-			)
-		);
-	end
 end
 
 function State_Game:keyreleased(key, unicode)
