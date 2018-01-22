@@ -5,8 +5,8 @@ Player = Class {
     self.box = {
       x = spawnPoint.x + spawnOffset.x,
       y = spawnPoint.y + spawnOffset.y,
-      w = PLAYER_INITIAL_DIMENSIONS.w,
-      h = PLAYER_INITIAL_DIMENSIONS.h
+      w = PLAYER_WIDTH,
+      h = PLAYER_HEIGHT
     };
 
     self.velocity = { x = 0, y = 0 };
@@ -25,20 +25,22 @@ Player = Class {
 
     self.image = love.graphics.newImage("asset/image/player.png");
     local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
+    local walkDuration = 0.2;
+    local runDuration = 0.1;
     self.animations = {
-      ["walk-left"] = Anim8.newAnimation(grid("1-2", 1), 0.1),
-      ["run-left"] =  Anim8.newAnimation(grid("1-2", 1), 0.05),
-      ["walk-down"] = Anim8.newAnimation(grid("3-4", 1), 0.1),
-      ["run-down"] = Anim8.newAnimation(grid("3-4", 1), 0.05),
-      ["walk-up"] = Anim8.newAnimation(grid("5-6", 1), 0.1),
-      ["run-up"] = Anim8.newAnimation(grid("5-6", 1), 0.05),
-      ["walk-right"] = Anim8.newAnimation(grid("7-8", 1), 0.1),
-      ["run-right"] = Anim8.newAnimation(grid("7-8", 1), 0.05),
-      ["death"] = Anim8.newAnimation(grid(1, 2), 0.1),
-      ["use-item-right"] = Anim8.newAnimation(grid(2, 2), 0.1),
-      ["use-item-up"] = Anim8.newAnimation(grid(3, 2), 0.1),
-      ["use-item-left"] = Anim8.newAnimation(grid(4, 2), 0.1),
-      ["use-item-down"] = Anim8.newAnimation(grid(5, 2), 0.1)
+      ["walk-left"] = Anim8.newAnimation(grid("1-2", 1), walkDuration),
+      ["run-left"] =  Anim8.newAnimation(grid("1-2", 1), runDuration),
+      ["walk-down"] = Anim8.newAnimation(grid("3-4", 1), walkDuration),
+      ["run-down"] = Anim8.newAnimation(grid("3-4", 1), runDuration),
+      ["walk-up"] = Anim8.newAnimation(grid("5-6", 1), walkDuration),
+      ["run-up"] = Anim8.newAnimation(grid("5-6", 1), runDuration),
+      ["walk-right"] = Anim8.newAnimation(grid("7-8", 1), walkDuration),
+      ["run-right"] = Anim8.newAnimation(grid("7-8", 1), runDuration),
+      ["death"] = Anim8.newAnimation(grid(1, 2), 1),
+      ["use-item-right"] = Anim8.newAnimation(grid(2, 2), 1),
+      ["use-item-up"] = Anim8.newAnimation(grid(3, 2), 1),
+      ["use-item-left"] = Anim8.newAnimation(grid(4, 2), 1),
+      ["use-item-down"] = Anim8.newAnimation(grid(5, 2), 1)
     };
     self.curAnimation = self.animations["walk-left"];
     self.useItemAnimationTimer = 0;
