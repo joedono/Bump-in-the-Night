@@ -83,7 +83,7 @@ function State_Game:enter(previous, scenarioId)
 	LightWorld:clearBodies();
 
 	if scenarioId == nil then
-		scenarioId = "wolf";
+		scenarioId = "arsonist";
 	end
 
 	self.scenarioId = scenarioId;
