@@ -25,7 +25,7 @@ function State_Game:init()
 		shadowBlur = 0.0
 	});
 
-	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE^2, SCREEN_HEIGHT * CANVAS_SCALE^2);
+	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
 	LightWorld:setScale(CANVAS_SCALE);
 
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
@@ -83,7 +83,7 @@ function State_Game:enter(previous, scenarioId)
 	LightWorld:clearBodies();
 
 	if scenarioId == nil then
-		scenarioId = "arsonist";
+		scenarioId = "wolf";
 	end
 
 	self.scenarioId = scenarioId;
