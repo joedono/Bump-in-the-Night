@@ -424,6 +424,10 @@ function Monster_Panther:followPath(dt, speed)
 			BumpWorld:update(self, self.box.x, self.box.y);
 			warped = true;
 
+			if self.targetPathNode.multifloor then
+				self.targetPathNode.light:setVisible(false);
+			end
+
 			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
 			self.targetPathNode = self.path[self.targetPathNodeIndex];
 
@@ -456,7 +460,9 @@ function Monster_Panther:followPath(dt, speed)
 	end
 end
 
-function Monster_Panther:updateLights()
+function Monster_Panther:updateLights(dt)
+	self:updatePathLights(dt);
+
 	if self.state == "dead" then
 		if self.eyeLights ~= nil then
 			LightWorld:remove(self.eyeLights[1]);

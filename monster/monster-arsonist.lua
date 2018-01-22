@@ -251,6 +251,10 @@ function Monster_Arsonist:followPath(dt, speed)
 			BumpWorld:update(self, self.box.x, self.box.y);
 			warped = true;
 
+			if self.targetPathNode.multifloor then
+				self.targetPathNode.light:setVisible(false);
+			end
+			
 			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
 			self.targetPathNode = self.path[self.targetPathNodeIndex];
 
@@ -293,7 +297,9 @@ function Monster_Arsonist:followPath(dt, speed)
 	end
 end
 
-function Monster_Arsonist:updateLights()
+function Monster_Arsonist:updateLights(dt)
+	self:updatePathLights(dt);
+
 	if self.state == "stunned" then
 		self.eyeLights[1]:setVisible(false);
 		self.eyeLights[2]:setVisible(false);

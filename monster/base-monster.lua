@@ -23,7 +23,35 @@ function Monster:updatePosition(dt)
 	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
 
+function Monster:updatePathLights(dt)
+  if self.path == nil then
+    return;
+  end
+
+  local previousMultifloor = false;
+  for index = self.targetPathNodeIndex, self.targetPathNodeIndex + 4 do
+    if self.path[index] ~= nil then
+      if self.path[index].multifloor then
+        if previousMultifloor then
+          self.path[index].light:setVisible(true);
+          previousMultifloor = false;
+        else
+          previousMultifloor = true;
+        end
+      end
+    end
+  end
+end
+
 function Monster:resetPath()
+  if self.path ~= nil then
+    for index, pathNode in pairs(self.path) do
+      if pathNode.multifloor then
+        pathNode.light:setVisible(false);
+      end
+    end
+  end
+
 	self.path = nil;
 	self.targetPathNodeIndex = 1;
 	self.targetPathNode = nil;

@@ -3,10 +3,18 @@ PathNode = Class {
     self.id = sourceNode.id;
     self.sourceNode = sourceNode;
     self.floorIndex = floorIndex;
+    self.multifloor = sourceNode.properties["multifloor"];
     self.origin = {
       x = sourceNode.x + floor.origin.x,
       y = sourceNode.y + floor.origin.y
     };
+    self.light = {};
+
+    if sourceNode.properties["multifloor"] then
+      local light = LightWorld:newLight(self.origin.x + TILE_SIZE / 2, self.origin.y + TILE_SIZE / 2, 160, 0, 0, 80);
+      light:setVisible(false);
+      self.light = light;
+    end
 
     self.connections = {};
     self.type = "path";
