@@ -258,13 +258,10 @@ function Player:updateAnimation(dt)
   end
 
   if self.useItemAnimationTimer > 0 then
-    self.curAnimation:update(dt);
     self.useItemAnimationTimer = self.useItemAnimationTimer - dt;
     curAnimation = "use-item-" .. curAnimation;
     self.curAnimation = self.animations[curAnimation];
   elseif self.velocity.x ~= 0 or self.velocity.y ~= 0 then
-    self.curAnimation:update(dt);
-
     if self.runPressed then
       curAnimation = "run-" .. curAnimation;
     else
@@ -272,7 +269,10 @@ function Player:updateAnimation(dt)
     end
 
     self.curAnimation = self.animations[curAnimation];
+    self.curAnimation:update(dt);
   else
+    curAnimation = "walk-" .. curAnimation;
+    self.curAnimation = self.animations[curAnimation];
     self.curAnimation:gotoFrame(1);
   end
 end
