@@ -542,17 +542,20 @@ function State_Game:useItem()
 		end
 
 		table.insert(self.usedItems, Meat(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
+		self.player:useItem();
 	elseif selectedItem.itemType == "trap" then
 		local placedMeat = self:getPlacedItem("placed-trap");
 		if placedMeat ~= nil then
 			placedMeat.active = false;
 		end
 
+		self.player:useItem();
 		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
 			self.soundEffects.gunshot:rewind();
 			self.soundEffects.gunshot:play();
+			self.player:useItem();
 			table.insert(
 				self.usedItems,
 				Shotgun_Blast(
@@ -577,6 +580,7 @@ function State_Game:useItem()
 			self.taserTimer = TASER_TIMER;
 			self.soundEffects.taser:rewind();
 			self.soundEffects.taser:play();
+			self.player:useItem();
 			table.insert(
 				self.usedItems,
 				Taser_Blast(
@@ -616,6 +620,7 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "bucket" then
 		self.soundEffects.waterSplash:rewind();
 		self.soundEffects.waterSplash:play();
+		self.player:useItem();
 		table.insert(
 			self.usedItems,
 			Bucket_Water(

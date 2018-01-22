@@ -1,7 +1,6 @@
 Player = Class {
   init = function (self, parentStateGame, spawnPoint, spawnOffset, soundEffects)
     self.parentStateGame = parentStateGame;
-    self.image = love.graphics.newImage("asset/image/player.png");
 
     self.box = {
       x = spawnPoint.x + spawnOffset.x,
@@ -9,18 +8,40 @@ Player = Class {
       w = PLAYER_INITIAL_DIMENSIONS.w,
       h = PLAYER_INITIAL_DIMENSIONS.h
     };
+
     self.velocity = { x = 0, y = 0 };
     self.gamepadVelocity = { x = 0, y = 0 };
     self.facing = {
       x = spawnPoint.properties.dirX,
       y = spawnPoint.properties.dirY,
     };
+
     self.flashlightFacing = {
       x = self.facing.x,
       y = self.facing.y
     };
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
+
+    self.image = love.graphics.newImage("asset/image/player.png");
+    local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
+    self.animations = {
+      ["walk-left"] = Anim8.newAnimation(grid("1-2", 1), 0.1),
+      ["run-left"] =  Anim8.newAnimation(grid("1-2", 1), 0.05),
+      ["walk-down"] = Anim8.newAnimation(grid("3-4", 1), 0.1),
+      ["run-down"] = Anim8.newAnimation(grid("3-4", 1), 0.05),
+      ["walk-up"] = Anim8.newAnimation(grid("5-6", 1), 0.1),
+      ["run-up"] = Anim8.newAnimation(grid("5-6", 1), 0.05),
+      ["walk-right"] = Anim8.newAnimation(grid("7-8", 1), 0.1),
+      ["run-right"] = Anim8.newAnimation(grid("7-8", 1), 0.05),
+      ["death"] = Anim8.newAnimation(grid(1, 2), 0.1),
+      ["use-item-right"] = Anim8.newAnimation(grid(2, 2), 0.1),
+      ["use-item-up"] = Anim8.newAnimation(grid(3, 2), 0.1),
+      ["use-item-left"] = Anim8.newAnimation(grid(4, 2), 0.1),
+      ["use-item-down"] = Anim8.newAnimation(grid(5, 2), 0.1)
+    };
+    self.curAnimation = self.animations["walk-left"];
+    self.useItemAnimationTimer = 0;
 
     self.flashLight = LightWorld:newLight(0, 0, 255, 255, 255, 400);
 		self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
@@ -62,6 +83,7 @@ end
 
 function Player:update(dt)
   if not self.active then
+    self.curAnimation = self.animations["death"];
     return;
   end
 
@@ -69,6 +91,11 @@ function Player:update(dt)
   self:updateRotation();
   self:updatePosition(dt);
   self:updateLights(dt);
+  self:updateAnimation(dt);
+end
+
+function Player:useItem()
+  self.useItemAnimationTimer = 0.1;
 end
 
 function Player:updateVelocity()
@@ -211,6 +238,43 @@ function Player:updateLights(dt)
   self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 end
 
+function Player:updateAnimation(dt)
+  local curAnimation = "left";
+  local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+  if facing < 0 then
+    facing = facing + math.pi * 2;
+  end
+
+  if facing >= math.pi * 7/4 or facing <= math.pi * 1/4 then
+    curAnimation = "right";
+  elseif facing >= math.pi * 1/4 and facing <= math.pi * 3/4 then
+    curAnimation = "down";
+  elseif facing >= math.pi * 3/4 and facing <= math.pi * 5/4 then
+    curAnimation = "left";
+  elseif facing >= math.pi * 5/4 and facing <= math.pi * 7/4 then
+    curAnimation = "up";
+  end
+
+  if self.useItemAnimationTimer > 0 then
+    self.curAnimation:update(dt);
+    self.useItemAnimationTimer = self.useItemAnimationTimer - dt;
+    curAnimation = "use-item-" .. curAnimation;
+    self.curAnimation = self.animations[curAnimation];
+  elseif self.velocity.x ~= 0 or self.velocity.y ~= 0 then
+    self.curAnimation:update(dt);
+
+    if self.runPressed then
+      curAnimation = "run-" .. curAnimation;
+    else
+      curAnimation = "walk-" .. curAnimation;
+    end
+
+    self.curAnimation = self.animations[curAnimation];
+  else
+    self.curAnimation:gotoFrame(1);
+  end
+end
+
 function Player:moveThroughPortal(portal)
   local dx = portal.properties.dx;
   local dy = portal.properties.dy;
@@ -226,20 +290,5 @@ end
 
 function Player:draw()
   love.graphics.setColor(255, 255, 255);
-
-  local facing = math.angle(0, 0, self.facing.y, self.facing.x);
-  if facing < 0 then
-    facing = facing + math.pi * 2;
-  end
-
-	love.graphics.draw(
-		self.image,
-		self.box.x + self.box.w / 2,
-		self.box.y + self.box.h / 2,
-		facing,
-    PLAYER_SCALE,
-    PLAYER_SCALE,
-		PLAYER_IMAGE_WIDTH / 2,
-		PLAYER_IMAGE_HEIGHT / 2
-	);
+  self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, PLAYER_SCALE, PLAYER_SCALE);
 end
