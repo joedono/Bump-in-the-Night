@@ -25,7 +25,7 @@ function State_Game:init()
 		shadowBlur = 0.0
 	});
 
-	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE^2, SCREEN_HEIGHT * CANVAS_SCALE^2);
+	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE, SCREEN_HEIGHT * CANVAS_SCALE);
 	LightWorld:setScale(CANVAS_SCALE);
 
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
