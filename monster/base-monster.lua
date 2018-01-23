@@ -77,7 +77,9 @@ function Monster:canSeePlayer(baseSightCone, baseSightDistance)
 end
 
 function Monster:stun()
-  self:resetPath();
-  self.state = "stunned";
-  self.stateTimer = 5;
+  if not self.armored then
+    self:resetPath();
+    self.state = "stunned";
+    self.stateTimer = 5;
+  end
 end

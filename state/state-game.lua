@@ -83,7 +83,7 @@ function State_Game:enter(previous, scenarioId)
 	LightWorld:clearBodies();
 
 	if scenarioId == nil then
-		scenarioId = "arsonist";
+		scenarioId = "killer";
 	end
 
 	self.scenarioId = scenarioId;
@@ -108,6 +108,7 @@ function State_Game:enter(previous, scenarioId)
 	self.usedItems = {};
 	self.calledPolice = false;
 	self.policeTimer = POLICE_TIMER;
+	self.heatTurnedOn = false;
 	self.taserTimer = 0;
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
@@ -632,6 +633,7 @@ function State_Game:useItem()
 			)
 		);
 	elseif selectedItem.itemType == "fuse" then
+		-- TODO
 	elseif selectedItem.itemType == "book" then
 	elseif selectedItem.itemType == "cross" then
 	elseif selectedItem.itemType == "stake" then

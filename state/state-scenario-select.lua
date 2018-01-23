@@ -206,7 +206,7 @@ function State_Scenario_Select:draw()
 
 		if self.scenarioDescription ~= "LOCKED" and self.scenarioDescription ~= "Random" then
 			love.graphics.setFont(self.scenarioDescriptionFont);
-			love.graphics.printf(SCENARIO_DESCRIPTION[self.scenarioDescription], 400, 720, 800, "left");
+			love.graphics.printf(SCENARIO_DESCRIPTION[self.scenarioDescription], 350, 720, 900, "left");
 		end
 
 		if self.indicatorVisible then

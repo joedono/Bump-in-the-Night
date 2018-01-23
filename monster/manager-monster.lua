@@ -7,6 +7,7 @@ require "monster/monster-wolf";
 require "monster/monster-panther";
 require "monster/monster-burglar";
 require "monster/monster-arsonist";
+require "monster/monster-killer";
 
 Manager_Monster = Class {
 	init = function(self, parentStateGame, pathNodes, floorLimits, player, soundEffects)
@@ -35,6 +36,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 		self.fireManager = Manager_Fire(self.floorLimits);
 		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "killer" then
+		table.insert(self.monsters, Monster_Killer(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "vampire" then
 	elseif scenarioId == "ghost" then
 	elseif scenarioId == "alien" then
@@ -76,6 +78,8 @@ function Manager_Monster:update(dt)
 		self:updatePantherSpecial(dt);
 	elseif self.scenarioId == "arsonist" then
 		self:updateArsonistSpecial(dt);
+	elseif self.scenarioId == "killer" then
+		self:updateKillerSpecial(dt);
 	end
 end
 
@@ -163,6 +167,12 @@ end
 
 function Manager_Monster:updateArsonistSpecial(dt)
 	self.fireManager:update(dt);
+end
+
+function Manager_Monster:updateKillerSpecial(dt)
+	if self.parentStateGame.heatTurnedOn and self.monsters[1].armored then
+		self.monsters[1].takeOffArmor();
+	end
 end
 
 function Manager_Monster:draw()

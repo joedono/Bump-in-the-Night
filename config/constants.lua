@@ -146,6 +146,15 @@ MONSTER_ARSONIST_CALM_FIRE_SETTING = 3;
 MONSTER_ARSONIST_PANIC_FIRE_SETTING = 3;
 MONSTER_ARSONIST_MAX_PATH = 15;
 
+MONSTER_KILLER_WIDTH = 32 * MONSTER_SCALE;
+MONSTER_KILLER_HEIGHT = 32 * MONSTER_SCALE;
+MONSTER_KILLER_WALK_SPEED = 150;
+MONSTER_KILLER_CHASE_SPEED = 500;
+MONSTER_KILLER_PANIC_CHASE_SPEED = 600;
+MONSTER_KILLER_SIGHT_DISTANCE = 200;
+MONSTER_KILLER_SIGHT_CONE = math.pi * 1/4;
+MONSTER_KILLER_TURN_SPEED = 5;
+
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
 
@@ -232,12 +241,13 @@ SCENARIO_SELECTION = {
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer"};
 SCENARIO_COMPLETED = {
   ["wolf"] = true,
   ["panther"] = true,
   ["burglar"] = true,
-  ["arsonist"] = true
+  ["arsonist"] = true,
+	["killer"] = true
 };
 
 SCENARIO_DESCRIPTION = {
@@ -245,7 +255,7 @@ SCENARIO_DESCRIPTION = {
   ["Panther"] = "A panther is looking for a midnight meal. It likes meat and can hunt by smell. Stay quiet and keep moving or else it'll catch up with you.",
   ["Burglar"] = "Someone has broken in to your house looking for valuables. They won't hesitate to kill anyone in their way. Call the cops and hold out until they arrive.",
   ["Arsonist"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
-  ["Killer"] = "",
+  ["Killer"] = "A seriel killer has chosen you for his next victim. He has come prepared with heavy weapons and body armor. His armor is not good at keeping him cool. Call the cops and hold out until they arrive.",
   ["Vampire"] = "",
   ["Ghost"] = "",
   ["Alien"] = "",
