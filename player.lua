@@ -204,37 +204,11 @@ function Player:updatePosition(dt)
 end
 
 function Player:updateLights(dt)
-  if self.leftLightPressed or self.rightLightPressed or self.upLightPressed or self.downLightPressed then
-    local lx = 0;
-    local ly = 0;
+  local curFacing = self.flashLight.direction;
+  local goalFacing = math.angle(0, 0, self.facing.y, self.facing.x);
+  local nextFacing = gradualTurn(curFacing, goalFacing, PLAYER_TURN_SPEED, dt);
 
-    if self.leftLightPressed then
-      lx = lx - 1;
-    end
-
-    if self.rightLightPressed then
-      lx = lx + 1;
-    end
-
-    if self.upLightPressed then
-      ly = ly - 1;
-    end
-
-    if self.downLightPressed then
-      ly = ly + 1;
-    end
-
-    self.flashlightFacing.x = lx;
-    self.flashlightFacing.y = ly;
-  end
-
-  if (self.flashlightFacing.x ~= 0 or self.flashlightFacing.y ~= 0) and math.dist(0, 0, self.flashlightFacing.x, self.flashlightFacing.y) > GAMEPAD_DEADZONE then
-    local curFacing = self.flashLight.direction;
-    local goalFacing = math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x);
-    local nextFacing = gradualTurn(curFacing, goalFacing, PLAYER_TURN_SPEED, dt);
-
-    self.flashLight:setDirection(nextFacing);
-  end
+  self.flashLight:setDirection(nextFacing);
 
   self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
   self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
