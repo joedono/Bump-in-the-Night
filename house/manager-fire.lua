@@ -10,7 +10,7 @@ Manager_Fire = Class {
 		local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
 		self.animation = Anim8.newAnimation(grid("1-3", 1), 0.1);
 
-		self.fireSpreadTimer = love.math.random(FIRE_SPREAD_TIMER_MIN, FIRE_SPREAD_TIMER_MAX);
+		self.fireSpreadTimer = 0;
 	end
 };
 
@@ -186,7 +186,7 @@ function Manager_Fire:update(dt)
 		self.fireSpreadTimer = self.fireSpreadTimer - dt;
 		if self.fireSpreadTimer < 0 then
 			self:spreadFire();
-			self.fireSpreadTimer = love.math.random(FIRE_SPREAD_TIMER_MIN, FIRE_SPREAD_TIMER_MAX);
+			self.fireSpreadTimer = FIRE_SPREAD_TIMER;
 		end
 	end
 end

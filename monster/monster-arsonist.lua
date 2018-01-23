@@ -41,8 +41,8 @@ Monster_Arsonist = Class {__includes = Monster,
 		self.sightLight:setDirection(0);
 		self.sightLight:setAngle(MONSTER_ARSONIST_SIGHT_CONE);
 
-		self.panickedFireTimer = Timer.new();
-		self.panickedFireTimer:every(1, function()
+		self.fireTimer = Timer.new();
+		self.fireTimer:every(MONSTER_ARSONIST_CALM_FIRE_SETTING, function()
 			self:setFire();
 		end);
 
@@ -104,12 +104,13 @@ function Monster_Arsonist:updateIdle(dt)
 end
 
 function Monster_Arsonist:updateWalk(dt)
+	self.fireTimer:update(dt);
+
 	if self:canSeePlayer(MONSTER_ARSONIST_SIGHT_CONE, MONSTER_ARSONIST_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
 
-	-- Nothing interesting is happening. Amble around
 	if self.targetPathNode == nil then
 		local finalPathNode = self.parentManager:randomPathNode();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
@@ -161,7 +162,7 @@ function Monster_Arsonist:updateFleeing(dt)
 end
 
 function Monster_Arsonist:updatePanicked(dt)
-	self.panickedFireTimer:update(dt);
+	self.fireTimer:update(dt);
 
 	if self.targetPathNode == nil then
 		self:hasSpottedPlayer();
@@ -205,6 +206,12 @@ end
 function Monster_Arsonist:panic()
 	self.panicked = true;
 	self.state = "panicked";
+
+	self.fireTimer:clear();
+	self.fireTimer:every(MONSTER_ARSONIST_PANIC_FIRE_SETTING, function()
+		self:setFire();
+	end);
+
 	self.soundEffects.humanAttackYell:rewind();
 	self.soundEffects.humanAttackYell:play();
 end
@@ -254,7 +261,7 @@ function Monster_Arsonist:followPath(dt, speed)
 			if self.targetPathNode.multifloor then
 				self.targetPathNode.light:setVisible(false);
 			end
-			
+
 			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
 			self.targetPathNode = self.path[self.targetPathNodeIndex];
 
