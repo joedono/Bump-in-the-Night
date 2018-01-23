@@ -423,6 +423,7 @@ function State_Game:update(dt)
 		self.callPoliceSoundTimer:update(dt);
 		self.policeTimer = self.policeTimer - dt;
 		if self.policeTimer <= 0 then
+			self.policeTimer = 0;
 			self:winGame();
 		end
 	end
@@ -764,7 +765,7 @@ function State_Game:drawHUD()
 		local x = (index-1) * 100 + 30;
 		item:drawInventory(x, y);
 
-		if item.itemType == "taser" then
+		if item.itemType == "taser" and self.taserTimer > 0 then
 			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("fill", x, y - 10, 60, 6);
 			love.graphics.setColor(0, 0, 0);
@@ -780,6 +781,6 @@ function State_Game:drawHUD()
 	if self.calledPolice then
 		love.graphics.setColor(255, 255, 255);
 		love.graphics.setFont(self.policeTimerFont);
-		love.graphics.print("Police will arrive in " .. math.floor(self.policeTimer * 100) / 100, SCREEN_WIDTH - 350, y + 15, 0, 1, 1);
+		love.graphics.print("Police will arrive in " .. string.format("%.2f", self.policeTimer), SCREEN_WIDTH - 350, y + 15, 0, 1, 1);
 	end
 end
