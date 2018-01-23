@@ -8,6 +8,7 @@ function State_Title:init()
 	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav", "static");
 
 	self.music = love.audio.newSource("asset/music/title.ogg", "stream");
+	self.music:setLooping(true);
 end
 
 function State_Title:enter(previous, animate)
