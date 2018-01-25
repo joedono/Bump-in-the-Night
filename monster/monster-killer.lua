@@ -1,16 +1,18 @@
 --[[
 Hunts by sight. Moves randomly. Can shoot the player from long range with his gun.
-Cannot be stunned with the taser while wearing his body armor.
-Player must replace a fuse in the basement and turn the heat in the house up so he takes his body armor off.
-Then he can be stunned and the police can be called.
+After the police are called, becomes panicked.
+When panicked, moves randomly at increased speed. Will randomly home in on the player location using "killer instinct", similar to the Panther "catching the scent".
+When panicked, shoots the player on sight.
 
 States:
 Idle - Hasn't seen player and player hasn't called police. Randomly walk around investigating things
 Walk - Moving randomly around the level
-Spotted - Sees the player. Alert for a little bit, then give chase
-Active Chase - Is giving chase and can still see the player. Constantly pathfind to the node closest to the player. If the player is within range, shoot the player
-Panicked - Player has called the police. Continuously pursue the player directly.
-Stunned - Stunned by the player
+Spotted - Sees the player. Alert for a little bit, then either shoot player or give chase
+Shooting - Has alerted and can still see the player. Shoot them.
+Active Chase - Keep the player's location for a set time and continuously pursue them. Shoot them if they can be seen.
+Panicked Walk - Player has called the police. Move randomly around the level. Randomly switch to Panicked Pursue
+Panicked Pursue - Player has called the police. Home in on the player's last location
+Panicked Shooting - Player has called the police and can be seen. Shoot with reduced accuracy
 ]]
 
 Monster_Killer = Class {__includes = Monster,
