@@ -40,11 +40,17 @@ Monster_Killer = Class {__includes = Monster,
 		self.sightLight:setDirection(0);
 		self.sightLight:setAngle(MONSTER_KILLER_SIGHT_CONE);
 
-		self.armored = true;
+		self.shotgunBlastImage = love.graphics.newImage("asset/image/used-items/shotgun-blast.png");
+		self.shotgunBlastImageData = {
+			w = self.shotgunBlastImage:getWidth(),
+			h = self.shotgunBlastImage:getHeight();
+		};
+
 		self.panicked = false;
 		self.state = "idle";
 		self.stateTimer = 5;
 		self.reloadTimer = 0;
+		self.shootDrawTimer = 0;
 		self.monsterType = "killer";
 		self.type = "monster";
 		self.active = true;
@@ -66,6 +72,10 @@ function Monster_Killer:update(dt)
 
 	if self.reloadTimer > 0 then
 		self.reloadTimer = self.reloadTimer - dt;
+	end
+
+	if self.shootDrawTimer > 0 then
+		self.shootDrawTimer = self.shootDrawTimer - dt;
 	end
 
 	if self.state == "idle" then
@@ -287,9 +297,62 @@ function Monster_Killer:shootPlayer()
 		self.soundEffects.gunshot:rewind();
 		self.soundEffects.gunshot:play();
 
-		-- TODO Actually shoot the player
+		local originX = self.box.x + self.box.w / 2;
+		local originY = self.box.y + self.box.h / 2;
+		local dirX = self.player.box.x - self.box.x;
+		local dirY = self.player.box.y - self.box.y;
+		local dirVector = Vector(dirX, dirY);
+		dirVector:normalizeInplace();
+
+		offsetVector = dirVector * (PLAYER_WIDTH / 2 - 7);
+		local insideVector = Vector(originX, originY) + offsetVector;
+		local outsideVector = insideVector + (dirVector * SHOTGUN_RANGE) + offsetVector;
+
+		-- Get outside points of the shotgun bounded box
+		local x1 = math.min(insideVector.x, outsideVector.x);
+		local y1 = math.min(insideVector.y, outsideVector.y);
+		local x2 = math.max(insideVector.x, outsideVector.x);
+		local y2 = math.max(insideVector.y, outsideVector.y);
+
+		local w = x2 - x1;
+		local h = y2 - y1;
+
+		-- Box is too small. Stretch it to the min size
+		if w < SHOTGUN_MIN_SIZE then
+			local diffX = SHOTGUN_MIN_SIZE - w;
+			w = SHOTGUN_MIN_SIZE;
+			x1 = x1 - diffX / 2;
+		end
+
+		if h < SHOTGUN_MIN_SIZE then
+			local diffY = SHOTGUN_MIN_SIZE - h;
+			h = SHOTGUN_MIN_SIZE;
+			y1 = y1 - diffY / 2;
+		end
+
+		local rotation = math.angle(0, 0, dirY, dirX);
+		if rotation < 0 then
+	    rotation = rotation + math.pi * 2;
+	  end
 
 		self.reloadTimer = MONSTER_KILLER_RELOAD_TIMER;
+		self.shootDrawTimer = 0.3;
+		self.shootBox = {
+			x = x1 - originX,
+			y = y1 - originY,
+			w = w,
+			h = h,
+			r = rotation
+		};
+
+		if KILL_PLAYER then
+			local hitChance = love.math.random(100);
+			print(hitChance);
+			if hitChance < MONSTER_KILLER_CALM_HIT_CHANCE or (self.panicked and hitChance < MONSTER_KILLER_PANICKED_HIT_CHANCE) then
+				self.player.active = false;
+				self.parentManager.parentStateGame:loseGame();
+			end
+		end
 	end
 end
 
@@ -421,6 +484,20 @@ function Monster_Killer:draw()
 	love.graphics.setColor(255, 0, 0);
 	love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
 	love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
+
+	if self.shootDrawTimer > 0 then
+		love.graphics.setColor(255, 255, 255);
+		love.graphics.draw(
+			self.shotgunBlastImage,
+			self.shootBox.x + self.shootBox.w / 2 + self.box.x + self.box.w / 2,
+			self.shootBox.y + self.shootBox.h / 2 + self.box.y + self.box.h / 2,
+			self.shootBox.r,
+	    1,
+	    1,
+			self.shotgunBlastImageData.w / 2,
+			self.shotgunBlastImageData.h / 2
+		);
+	end
 
 	if DRAW_MONSTER_PATH then
 		if self.path ~= nil then
