@@ -15,6 +15,8 @@ function State_Won:enter()
 		helpAlpha = 0
 	};
 
+	self.music:setVolume(MASTER_VOLUME);
+
 	Timer.clear();
 	Timer.script(function(wait)
 		Timer.tween(4, self.alphas, {titleAlpha = 255}, "in-linear");

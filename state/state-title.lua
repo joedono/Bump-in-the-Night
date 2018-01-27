@@ -19,6 +19,10 @@ function State_Title:enter(previous, animate)
 	self.showMenu = false;
 	self.menuSelection = 1;
 
+	self.soundSelectionChange:setVolume(MASTER_VOLUME);
+	self.soundSelect:setVolume(MASTER_VOLUME);
+	self.music:setVolume(MASTER_VOLUME);
+
 	Timer.clear();
 
 	if animate == nil then

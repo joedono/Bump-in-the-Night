@@ -36,6 +36,8 @@ KEY_LIGHT_RIGHT = "right";
 KEY_LIGHT_UP = "up";
 KEY_LIGHT_DOWN = "down";
 
+MASTER_VOLUME = 1;
+
 GAMEPAD_LEFT = "dpleft";
 GAMEPAD_RIGHT = "dpright";
 GAMEPAD_UP = "dpup";

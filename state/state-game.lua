@@ -82,6 +82,10 @@ function State_Game:enter(previous, scenarioId)
 	LightWorld:clearLights();
 	LightWorld:clearBodies();
 
+	for index, sound in pairs(self.soundEffects) do
+		sound:setVolume(MASTER_VOLUME);
+	end
+
 	if scenarioId == nil then
 		scenarioId = "killer";
 	end

@@ -14,6 +14,8 @@ end
 function State_Scenario_Select:enter(previous)
 	self.previous = previous;
 	love.graphics.setBackgroundColor(0, 0, 0);
+	self.soundSelectionChange:setVolume(MASTER_VOLUME);
+	self.soundSelect:setVolume(MASTER_VOLUME);
 	self.indicatorVisible = true;
 	self.scenarioDescription = "Random";
 	self.selection = {
