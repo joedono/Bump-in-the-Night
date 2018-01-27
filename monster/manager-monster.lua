@@ -78,8 +78,6 @@ function Manager_Monster:update(dt)
 		self:updatePantherSpecial(dt);
 	elseif self.scenarioId == "arsonist" then
 		self:updateArsonistSpecial(dt);
-	elseif self.scenarioId == "killer" then
-		self:updateKillerSpecial(dt);
 	end
 end
 
@@ -167,12 +165,6 @@ end
 
 function Manager_Monster:updateArsonistSpecial(dt)
 	self.fireManager:update(dt);
-end
-
-function Manager_Monster:updateKillerSpecial(dt)
-	if self.parentStateGame.heatTurnedOn and self.monsters[1].armored then
-		self.monsters[1].takeOffArmor();
-	end
 end
 
 function Manager_Monster:draw()

@@ -69,12 +69,18 @@ function Monster_Killer:update(dt)
 		self:updateWalk(dt);
 	elseif self.state == "spotted" then
 		self:updateSpotted(dt);
+	elseif self.state == "shooting" then
+		self:updateShooting(dt);
 	elseif self.state == "active-chase" then
 		self:updateActiveChase(dt);
 	elseif self.state == "panicked" then
 		self:updatePanicked(dt);
-	elseif self.state == "stunned" then
-		self:updateStunned(dt);
+	elseif self.state == "panicked-walk" then
+		self:updatePanickedWalk(dt);
+	elseif self.state == "panicked-pursue" then
+		self:updatePanickedPursue(dt);
+	elseif self.state == "panicked-shooting" then
+		self:updatePanickedShooting(dt);
 	elseif self.state == "test" then
 
 	else
@@ -124,10 +130,18 @@ function Monster_Killer:updateSpotted(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		self.soundEffects.humanAttackYell:rewind();
-		self.soundEffects.humanAttackYell:play();
-		self.state = "active-chase";
+		if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+			self.state = "shooting";
+		else
+			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:play();
+			self.state = "active-chase";
+			self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
+		end
 	end
+end
+
+function Monster_Killer:updateShooting(dt)
 end
 
 function Monster_Killer:updateActiveChase(dt)
@@ -151,27 +165,15 @@ function Monster_Killer:updateActiveChase(dt)
 end
 
 function Monster_Killer:updatePanicked(dt)
-	if self.targetPathNode == nil then
-		self:hasSpottedPlayer();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
-		self.targetPathNodeIndex = 1;
-		self.targetPathNode = self.path[self.targetPathNodeIndex];
-	else
-		self:followPath(dt, MONSTER_KILLER_PANIC_CHASE_SPEED);
-	end
 end
 
-function Monster_Killer:updateStunned(dt)
-	if self.stateTimer <= 0 then
-		self:resetPath();
-		if self.panicked then
-			self.soundEffects.humanAttackYell:rewind();
-			self.soundEffects.humanAttackYell:play();
-			self.state = "panicked";
-		else
-			self.state = "idle";
-		end
-	end
+function Monster_Killer:updatePanickedWalk(dt)
+end
+
+function Monster_Killer:updatePanickedPursue(dt)
+end
+
+function Monster_Killer:updatePanickedShooting(dt)
 end
 
 function Monster_Killer:hasSpottedPlayer()
@@ -189,10 +191,6 @@ function Monster_Killer:hasSpottedPlayer()
 	end
 
 	self.stateTimer = 1;
-end
-
-function Monster_Killer:takeOffArmor()
-	self.armored = false;
 end
 
 function Monster_Killer:shootPlayer()
@@ -219,7 +217,7 @@ function Monster_Killer:followPath(dt, speed)
 
 	for i = 1, len do
     local col = cols[i];
-		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" then
+		if KILL_PLAYER and col.other.type == "player" and col.other.active then
 			col.other.active = false;
 
 			self.soundEffects.knifeStab:rewind();
@@ -319,7 +317,7 @@ function Monster_Killer:updateLights(dt)
 
 		if self.state == "idle" or self.state == "walk" then
 			self.sightLight:setColor(150, 150, 150);
-		elseif self.state == "spotted" or self.state == "active-chase" or self.state == "panicked" then
+		elseif self.state == "spotted" or self.state == "active-chase" or self.panicked then
 			self.sightLight:setColor(150, 0, 0);
 		end
 	end
@@ -334,13 +332,11 @@ function Monster_Killer:draw()
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
 	-- Draw eyes
-	if self.state ~= "stunned" then
-		love.graphics.setColor(255, 0, 0);
-		love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
-		love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
-	end
+	love.graphics.setColor(255, 0, 0);
+	love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
+	love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
 
-	if DRAW_MONSTER_PATH and self.state ~= "stunned" then
+	if DRAW_MONSTER_PATH then
 		if self.path ~= nil then
 			love.graphics.setColor(255, 0, 0);
 			for index, path in pairs(self.path) do
@@ -349,7 +345,7 @@ function Monster_Killer:draw()
 		end
 	end
 
-	if DRAW_MONSTER_SENSES and self.state ~= "stunned" then
+	if DRAW_MONSTER_SENSES then
 		love.graphics.setColor(255, 255, 255, 150);
 		local facingAngle = math.angle(0, 0, self.facing.y, self.facing.x);
 		love.graphics.arc("fill",
