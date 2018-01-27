@@ -80,6 +80,8 @@ function Monster_Killer:update(dt)
 		self:updateActiveChase(dt);
 	elseif self.state == "panicked" then
 		self:updatePanicked(dt);
+	elseif self.state == "panicked-spotted" then
+		self:updatePanickedSpotted(dt);
 	elseif self.state == "panicked-walk" then
 		self:updatePanickedWalk(dt);
 	elseif self.state == "panicked-pursue" then
@@ -114,7 +116,6 @@ function Monster_Killer:updateWalk(dt)
 		return;
 	end
 
-	-- Nothing interesting is happening. Amble around
 	if self.targetPathNode == nil then
 		local finalPathNode = self.parentManager:randomPathNode();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
@@ -196,13 +197,33 @@ function Monster_Killer:updatePanicked(dt)
 	end
 end
 
+function Monster_Killer:updatePanickedSpotted(dt)
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+		self.visualTarget = {
+			x = self.player.box.x,
+			y = self.player.box.y
+		};
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+			self.state = "panicked-shooting";
+		else
+			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:play();
+			self.state = "panicked-pursue";
+			self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
+		end
+	end
+end
+
 function Monster_Killer:updatePanickedWalk(dt)
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
 	end
 
-	-- Nothing interesting is happening. Amble around
 	if self.targetPathNode == nil then
 		local finalPathNode = self.parentManager:randomPathNode();
 		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
@@ -214,14 +235,12 @@ function Monster_Killer:updatePanickedWalk(dt)
 end
 
 function Monster_Killer:updatePanickedPursue(dt)
-	if self.visualTarget == nil then
-		self.visualTarget = {
-			x = self.player.box.x,
-			y = self.player.box.y
-		};
-	end
+	self.visualTarget = {
+		x = self.player.box.x,
+		y = self.player.box.y
+	};
 
-	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) or self.path == nil then
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
 		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
 	end
@@ -253,19 +272,23 @@ function Monster_Killer:hasSpottedPlayer()
 	};
 
 	if self.panicked then
-		self.state = "panicked";
+		self.stateTimer = 0.5;
+		self.state = "panicked-spotted";
 	else
 		self.soundEffects.spotted:rewind();
 		self.soundEffects.spotted:play();
+		self.stateTimer = 1;
 		self.state = "spotted";
 	end
-
-	self.stateTimer = 1;
 end
 
 function Monster_Killer:shootPlayer()
 	if self.reloadTimer <= 0 then
-		print("Shooting player");
+		self.soundEffects.gunshot:rewind();
+		self.soundEffects.gunshot:play();
+
+		-- TODO Actually shoot the player
+
 		self.reloadTimer = MONSTER_KILLER_RELOAD_TIMER;
 	end
 end
@@ -337,11 +360,12 @@ function Monster_Killer:followPath(dt, speed)
 			-- Reached end of path
 			if self.targetPathNode == nil then
 				self:resetPath();
-				self.stateTimer = love.math.random(2, 5);
 
 				if self.panicked then
+					self.stateTimer = 1;
 					self.state = "panicked";
 				else
+					self.stateTimer = love.math.random(2, 5);
 					self.state = "idle";
 				end
 			end
@@ -355,11 +379,11 @@ function Monster_Killer:followPath(dt, speed)
 
 	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
 		self:resetPath();
-		self.stateTimer = love.math.random(2, 5);
-
 		if self.panicked then
+			self.stateTimer = 1;
 			self.state = "panicked";
 		else
+			self.stateTimer = love.math.random(2, 5);
 			self.state = "idle";
 		end
 	end
@@ -394,7 +418,6 @@ function Monster_Killer:draw()
 	love.graphics.setColor(0, 255, 0);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
-	-- Draw eyes
 	love.graphics.setColor(255, 0, 0);
 	love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
 	love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
