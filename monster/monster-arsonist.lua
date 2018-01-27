@@ -354,7 +354,7 @@ function Monster_Arsonist:draw()
 		return;
 	end
 
-	love.graphics.setColor(0, 150, 255);
+	love.graphics.setColor(255, 50, 0);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
 	-- Draw eyes

@@ -478,7 +478,7 @@ function Monster_Killer:draw()
 		return;
 	end
 
-	love.graphics.setColor(0, 255, 0);
+	love.graphics.setColor(255, 150, 0);
 	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
 
 	love.graphics.setColor(255, 0, 0);
