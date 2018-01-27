@@ -44,6 +44,7 @@ Monster_Killer = Class {__includes = Monster,
 		self.panicked = false;
 		self.state = "idle";
 		self.stateTimer = 5;
+		self.reloadTimer = 0;
 		self.monsterType = "killer";
 		self.type = "monster";
 		self.active = true;
@@ -61,6 +62,10 @@ function Monster_Killer:update(dt)
 
 	if self.stateTimer > 0 then
 		self.stateTimer = self.stateTimer - dt;
+	end
+
+	if self.reloadTimer > 0 then
+		self.reloadTimer = self.reloadTimer - dt;
 	end
 
 	if self.state == "idle" then
@@ -142,20 +147,28 @@ function Monster_Killer:updateSpotted(dt)
 end
 
 function Monster_Killer:updateShooting(dt)
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+		self:shootPlayer();
+	else
+		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:play();
+		self.state = "active-chase";
+		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
+	end
 end
 
 function Monster_Killer:updateActiveChase(dt)
-	local seeTarget = false;
-	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) or self.path == nil then
+	self.visualTarget = {
+		x = self.player.box.x,
+		y = self.player.box.y
+	};
+
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
-		seeTarget = true;
-		self.visualTarget = {
-			x = self.player.box.x,
-			y = self.player.box.y
-		};
+		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
 	end
 
-	if seeTarget or self.path == nil then
+	if self.stateTimer > 0 or self.path == nil then
 		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
@@ -165,15 +178,72 @@ function Monster_Killer:updateActiveChase(dt)
 end
 
 function Monster_Killer:updatePanicked(dt)
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+		self:hasSpottedPlayer();
+		return;
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetPath();
+
+		local randomHunt = love.math.random(100);
+		if randomHunt < MONSTER_KILLER_HUNT_CHANCE then
+			self:hasSpottedPlayer();
+			self.state = "panicked-pursue";
+		else
+			self.state = "panicked-walk";
+		end
+	end
 end
 
 function Monster_Killer:updatePanickedWalk(dt)
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+		self:hasSpottedPlayer();
+		return;
+	end
+
+	-- Nothing interesting is happening. Amble around
+	if self.targetPathNode == nil then
+		local finalPathNode = self.parentManager:randomPathNode();
+		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	else
+		self:followPath(dt, MONSTER_KILLER_PANIC_WALK_SPEED);
+	end
 end
 
 function Monster_Killer:updatePanickedPursue(dt)
+	if self.visualTarget == nil then
+		self.visualTarget = {
+			x = self.player.box.x,
+			y = self.player.box.y
+		};
+	end
+
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) or self.path == nil then
+		self:shootPlayer();
+		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
+	end
+
+	if self.stateTimer > 0 or self.path == nil then
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	end
+
+	self:followPath(dt, MONSTER_KILLER_PANIC_CHASE_SPEED);
 end
 
 function Monster_Killer:updatePanickedShooting(dt)
+	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
+		self:shootPlayer();
+	else
+		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:play();
+		self.state = "panicked-pursue";
+		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
+	end
 end
 
 function Monster_Killer:hasSpottedPlayer()
@@ -194,7 +264,10 @@ function Monster_Killer:hasSpottedPlayer()
 end
 
 function Monster_Killer:shootPlayer()
-	-- TODO
+	if self.reloadTimer <= 0 then
+		print("Shooting player");
+		self.reloadTimer = MONSTER_KILLER_RELOAD_TIMER;
+	end
 end
 
 function Monster_Killer:panic()
@@ -295,31 +368,21 @@ end
 function Monster_Killer:updateLights(dt)
 	self:updatePathLights(dt);
 
-	if self.state == "stunned" then
-		self.eyeLights[1]:setVisible(false);
-		self.eyeLights[2]:setVisible(false);
-		self.sightLight:setVisible(false);
-	else
-		self.eyeLights[1]:setVisible(true);
-		self.eyeLights[2]:setVisible(true);
-		self.sightLight:setVisible(true);
+	self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
+	self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
-		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
-		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+	local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+  if facing < 0 then
+    facing = facing + math.pi * 2;
+  end
 
-		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
-    if facing < 0 then
-      facing = facing + math.pi * 2;
-    end
+  self.sightLight:setDirection(facing);
+	self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
-    self.sightLight:setDirection(facing);
-		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
-
-		if self.state == "idle" or self.state == "walk" then
-			self.sightLight:setColor(150, 150, 150);
-		elseif self.state == "spotted" or self.state == "active-chase" or self.panicked then
-			self.sightLight:setColor(150, 0, 0);
-		end
+	if self.state == "idle" or self.state == "walk" then
+		self.sightLight:setColor(150, 150, 150);
+	elseif self.state == "spotted" or self.state == "active-chase" or self.panicked then
+		self.sightLight:setColor(150, 0, 0);
 	end
 end
 
