@@ -56,7 +56,7 @@ function State_Title:keypressed(key, unicode)
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection - 1;
 		if self.menuSelection < 1 then
-			self.menuSelection = 3;
+			self.menuSelection = 4;
 		end
 	end
 
@@ -64,7 +64,7 @@ function State_Title:keypressed(key, unicode)
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection + 1;
-		if self.menuSelection > 3 then
+		if self.menuSelection > 4 then
 			self.menuSelection = 1;
 		end
 	end
@@ -87,7 +87,7 @@ function State_Title:gamepadpressed(joystick, button)
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection - 1;
 		if self.menuSelection < 1 then
-			self.menuSelection = 3;
+			self.menuSelection = 4;
 		end
 	end
 
@@ -95,7 +95,7 @@ function State_Title:gamepadpressed(joystick, button)
 		self.soundSelectionChange:rewind();
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection + 1;
-		if self.menuSelection > 3 then
+		if self.menuSelection > 4 then
 			self.menuSelection = 1;
 		end
 	end
@@ -111,8 +111,10 @@ function State_Title:makeSelection()
 		self.soundSelect:play();
 		GameState.switch(State_Scenario_Select);
 	elseif self.menuSelection == 2 then
-		GameState.switch(State_Options);
+		GameState.switch(State_Controls_Controller);
 	elseif self.menuSelection == 3 then
+		GameState.switch(State_Controls_Keyboard);
+	elseif self.menuSelection == 4 then
 		love.event.quit();
 	end
 end
@@ -144,14 +146,21 @@ function State_Title:draw()
 			else
 				love.graphics.setColor(255, 255, 255);
 			end
-			love.graphics.printf("Options", 0, 630, SCREEN_WIDTH, "center");
+			love.graphics.printf("Controller", 0, 630, SCREEN_WIDTH, "center");
 
 			if self.menuSelection == 3 then
 				love.graphics.setColor(100, 0, 0);
 			else
 				love.graphics.setColor(255, 255, 255);
 			end
-			love.graphics.printf("Quit", 0, 710, SCREEN_WIDTH, "center");
+			love.graphics.printf("Keyboard", 0, 710, SCREEN_WIDTH, "center");
+
+			if self.menuSelection == 4 then
+				love.graphics.setColor(100, 0, 0);
+			else
+				love.graphics.setColor(255, 255, 255);
+			end
+			love.graphics.printf("Quit", 0, 790, SCREEN_WIDTH, "center");
 		end
   end);
 

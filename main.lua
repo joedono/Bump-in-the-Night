@@ -14,17 +14,16 @@ require "lib/pathfinding";
 require "config/collisions";
 require "config/constants";
 
-require "state/state-controls-controller";
-require "state/state-controls-keyboard";
-require "state/state-game";
-require "state/state-losing";
-require "state/state-lost";
-require "state/state-options";
-require "state/state-pause";
-require "state/state-scenario-select";
 require "state/state-splash-hive";
 require "state/state-splash-love";
 require "state/state-title";
+require "state/state-controls-controller";
+require "state/state-controls-keyboard";
+require "state/state-scenario-select";
+require "state/state-game";
+require "state/state-pause";
+require "state/state-losing";
+require "state/state-lost";
 require "state/state-winning";
 require "state/state-won";
 
