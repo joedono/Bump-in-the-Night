@@ -8,6 +8,7 @@ require "monster/monster-panther";
 require "monster/monster-burglar";
 require "monster/monster-arsonist";
 require "monster/monster-killer";
+require "monster/monster-vampire";
 
 Manager_Monster = Class {
 	init = function(self, parentStateGame, pathNodes, floorLimits, player, soundEffects)

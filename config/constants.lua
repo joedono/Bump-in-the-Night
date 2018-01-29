@@ -163,6 +163,16 @@ MONSTER_KILLER_RELOAD_TIMER = 3;
 MONSTER_KILLER_CALM_HIT_CHANCE = 60;
 MONSTER_KILLER_PANICKED_HIT_CHANCE = 30;
 
+MONSTER_VAMPIRE_WIDTH = 32 * MONSTER_SCALE;
+MONSTER_VAMPIRE_HEIGHT = 32 * MONSTER_SCALE;
+MONSTER_VAMPIRE_WALK_SPEED = 200;
+MONSTER_VAMPIRE_STALK_SPEED = 100;
+MONSTER_VAMPIRE_FREEZE_DISTANCE = 400;
+MONSTER_VAMPIRE_SIGHT_DISTANCE = 350;
+MONSTER_VAMPIRE_SIGHT_CONE = math.pi * 1/4;
+MONSTER_VAMPIRE_EYES_PLAYER_DISTANCE = 400;
+MONSTER_VAMPIRE_TURN_SPEED = 5;
+
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
 
@@ -249,13 +259,14 @@ SCENARIO_SELECTION = {
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire"};
 SCENARIO_COMPLETED = {
   ["wolf"] = true,
   ["panther"] = true,
   ["burglar"] = true,
   ["arsonist"] = true,
-	["killer"] = true
+	["killer"] = true,
+	["vampire"] = true
 };
 
 SCENARIO_DESCRIPTION = {

@@ -55,6 +55,8 @@ function State_Game:init()
 		monsterBite = love.audio.newSource("asset/sound/monster-bite.wav", "static"),
 		monsterWolfRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
 		monsterPantherRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
+		monsterVampireLaugh = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"), -- TODO Replace this
+		monsterVampireFreeze = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"), -- TODO Replace this
 		phoneRing = love.audio.newSource("asset/sound/phone-ring.wav", "static"),
 		playerDeathYell = love.audio.newSource("asset/sound/player-death-yell.wav", "static"),
 		policeSiren = love.audio.newSource("asset/sound/police-siren.wav", "static"),
@@ -636,8 +638,6 @@ function State_Game:useItem()
 				self.usedItemAnimations.waterSplash:clone()
 			)
 		);
-	elseif selectedItem.itemType == "fuse" then
-		-- TODO
 	elseif selectedItem.itemType == "book" then
 	elseif selectedItem.itemType == "cross" then
 	elseif selectedItem.itemType == "stake" then
