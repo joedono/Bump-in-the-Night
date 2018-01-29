@@ -1,11 +1,3 @@
---[[
-Volume Control
-Keyboard bindings
-Gamepad bindings
-Brightness?
-Fullscreen
-]]
-
 State_Options = {};
 
 function State_Options:init()
