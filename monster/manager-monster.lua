@@ -39,6 +39,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	elseif scenarioId == "killer" then
 		table.insert(self.monsters, Monster_Killer(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "vampire" then
+		table.insert(self.monsters, Monster_Vampire(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "ghost" then
 	elseif scenarioId == "alien" then
 	elseif scenarioId == "zombie" then
@@ -175,5 +176,11 @@ function Manager_Monster:draw()
 
 	if self.scenarioId == "arsonist" then
 		self.fireManager:draw();
+	end
+end
+
+function Manager_Monster:drawSpecial()
+	if self.scenarioId == "vampire" then
+		self.monsters[1]:drawAura();
 	end
 end

@@ -38,7 +38,27 @@ Monster_Vampire = Class {__includes = Monster,
 		self.eyeLights[1]:setVisible(false);
 		self.eyeLights[2]:setVisible(false);
 
-		-- TODO Add aura light for freezing effect
+		self.freezeAura = love.graphics.newImage("asset/image/noise.png");
+		self.freezeAuraData = {
+			w = self.freezeAura:getWidth(),
+			h = self.freezeAura:getHeight()
+		}
+		self.freezeAuraTimer = Timer.new();
+		self.freezeAuraRepeatTimer = Timer.new();
+		self.freezeAuraEffect = {
+			scale = 0,
+			alpha = 255
+		};
+
+		self.freezeAuraRepeatTimer:every(5, function()
+			self.freezeAuraTimer:clear();
+			self.freezeAuraEffect = {
+				scale = 0,
+				alpha = 255
+			};
+
+			self.freezeAuraTimer:tween(5, self.freezeAuraEffect, {scale = 4, alpha = 0});
+		end);
 
 		self.freezeTarget = {};
 		self.hasFrozenPlayer = false;
@@ -77,6 +97,8 @@ function Monster_Vampire:update(dt)
 
 	self:updateFacing(dt, MONSTER_VAMPIRE_TURN_SPEED);
 	self:updateLights(dt);
+	self.freezeAuraTimer:update(dt);
+	self.freezeAuraRepeatTimer:update(dt);
 end
 
 function Monster_Vampire:updateIdle(dt)
@@ -214,5 +236,19 @@ function Monster_Vampire:draw()
 			MONSTER_VAMPIRE_SIGHT_DISTANCE,
 			facingAngle - MONSTER_VAMPIRE_SIGHT_CONE / 2, facingAngle + MONSTER_VAMPIRE_SIGHT_CONE / 2
 		);
+	end
+end
+
+function Monster_Vampire:drawAura()
+	love.graphics.setColor(0, 255, 255, self.freezeAuraEffect.alpha);
+	love.graphics.draw(self.freezeAura,
+		self.box.x + self.box.w / 2 - self.freezeAuraData.w * self.freezeAuraEffect.scale / 2,
+		self.box.y + self.box.h / 2 - self.freezeAuraData.h * self.freezeAuraEffect.scale / 2,
+		0,
+		self.freezeAuraEffect.scale, self.freezeAuraEffect.scale);
+
+	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
+		love.graphics.setColor(0, 255, 255);
+		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_VAMPIRE_FREEZE_DISTANCE);
 	end
 end

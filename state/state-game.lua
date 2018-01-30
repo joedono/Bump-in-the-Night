@@ -93,7 +93,7 @@ function State_Game:enter(previous, scenarioId)
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
-		scenarioId = "killer";
+		scenarioId = "vampire";
 	end
 
 	self.scenarioId = scenarioId;
@@ -774,9 +774,12 @@ function State_Game:draw()
 			self:drawGame();
 		end
 
+		self:drawSpecial();
+
 		if not DRAW_ENTIRE_HOUSE then
 			self.camera:detach();
 		end
+
 		self:drawHUD();
   end);
 
@@ -813,6 +816,10 @@ function State_Game:drawGame()
 			placedItem:draw();
 		end
 	end
+end
+
+function State_Game:drawSpecial()
+	self.monsterManager:drawSpecial();
 end
 
 function State_Game:drawHUD()
