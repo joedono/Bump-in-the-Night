@@ -169,13 +169,10 @@ end
 
 function Monster_Vampire:hasSensedPlayer()
 	if not self.hasFrozenPlayer then
-		self.soundEffects.monsterVampireFreeze:rewind();
-		self.soundEffects.monsterVampireFreeze:play();
-
 		self.freezeTarget.x = self.player.box.x;
 		self.freezeTarget.y = self.player.box.y;
 
-		self.player:freeze();
+		self.parentManager.parentStateGame:freezePlayer();
 		self.hasFrozenPlayer = true;
 		self.stateTimer = 3;
 		self.state = "spotted";

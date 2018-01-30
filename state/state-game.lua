@@ -55,10 +55,11 @@ function State_Game:init()
 		monsterBite = love.audio.newSource("asset/sound/monster-bite.wav", "static"),
 		monsterWolfRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
 		monsterPantherRoar = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"),
-		monsterVampireLaugh = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"), -- TODO Replace this
-		monsterVampireFreeze = love.audio.newSource("asset/sound/monster-wolf-roar.wav", "static"), -- TODO Replace this
+		monsterVampireLaugh = love.audio.newSource("asset/sound/evil-laugh.wav", "static"),
 		phoneRing = love.audio.newSource("asset/sound/phone-ring.wav", "static"),
 		playerDeathYell = love.audio.newSource("asset/sound/player-death-yell.wav", "static"),
+		playerFreeze = love.audio.newSource("asset/sound/player-freeze.wav", "static"),
+		playerFrozen = love.audio.newSource("asset/sound/white-noise.wav", "static"),
 		policeSiren = love.audio.newSource("asset/sound/police-siren.wav", "static"),
 		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
@@ -69,6 +70,7 @@ function State_Game:init()
 
 	self.soundEffects.phoneRing:setLooping(true);
 	self.soundEffects.policeSiren:setLooping(true);
+	self.soundEffects.playerFrozen:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
 	self.policeTimerFont = love.graphics.newFont(24)
@@ -89,7 +91,7 @@ function State_Game:enter(previous, scenarioId)
 	end
 
 	if scenarioId == nil then
-		scenarioId = "killer";
+		scenarioId = "vampire";
 	end
 
 	self.scenarioId = scenarioId;
@@ -105,6 +107,7 @@ function State_Game:enter(previous, scenarioId)
 	local playerStartFloor = self.floors[2];
 	local playerSpawnPoint = playerStartFloor.spawns[love.math.random(#playerStartFloor.spawns)];
 
+	self.playerFrozen = 0;
 	self.player = Player(self, playerSpawnPoint, playerStartFloor.origin, self.soundEffects);
 
 	self.items = self:spawnItems(scenarioId);
@@ -226,21 +229,28 @@ function State_Game:keypressed(key, unicode)
     return;
   end
 
-	if key == KEY_LEFT then
-    self.player.leftPressed = true;
-  end
+	if self.playerFrozen > 0 then
+		-- Player has been frozen by a vampire
+		if key == KEY_LEFT or key == KEY_RIGHT or key == KEY_UP or key == KEY_DOWN then
+			self.playerFrozen = self.playerFrozen - 1;
+	  end
+	else
+		if key == KEY_LEFT then
+	    self.player.leftPressed = true;
+	  end
 
-  if key == KEY_RIGHT then
-    self.player.rightPressed = true;
-  end
+	  if key == KEY_RIGHT then
+	    self.player.rightPressed = true;
+	  end
 
-  if key == KEY_UP then
-    self.player.upPressed = true;
-  end
+	  if key == KEY_UP then
+	    self.player.upPressed = true;
+	  end
 
-  if key == KEY_DOWN then
-    self.player.downPressed = true;
-  end
+	  if key == KEY_DOWN then
+	    self.player.downPressed = true;
+	  end
+	end
 
 	if key == KEY_FLASHLIGHT then
     self.player:toggleFlashlight();
@@ -330,21 +340,28 @@ function State_Game:gamepadpressed(joystick, button)
     return;
   end
 
-	if button == GAMEPAD_LEFT then
-    self.player.leftPressed = true;
-  end
+	if self.playerFrozen > 0 then
+		-- Player has been frozen by a vampire
+		if button == GAMEPAD_LEFT or button == GAMEPAD_RIGHT or button == GAMEPAD_UP or button == GAMEPAD_DOWN then
+	    self.playerFrozen = self.playerFrozen - 1;
+	  end
+	else
+		if button == GAMEPAD_LEFT then
+	    self.player.leftPressed = true;
+	  end
 
-  if button == GAMEPAD_RIGHT then
-    self.player.rightPressed = true;
-  end
+	  if button == GAMEPAD_RIGHT then
+	    self.player.rightPressed = true;
+	  end
 
-  if button == GAMEPAD_UP then
-    self.player.upPressed = true;
-  end
+	  if button == GAMEPAD_UP then
+	    self.player.upPressed = true;
+	  end
 
-  if button == GAMEPAD_DOWN then
-    self.player.downPressed = true;
-  end
+	  if button == GAMEPAD_DOWN then
+	    self.player.downPressed = true;
+	  end
+	end
 
 	if button == GAMEPAD_FLASHLIGHT then
     self.player:toggleFlashlight();
@@ -398,21 +415,38 @@ function State_Game:gamepadreleased(joystick, button)
 end
 
 function State_Game:gamepadaxis(joystick, axis, value)
-	if axis == "leftx" then -- X Movement
-		self.player.gamepadVelocity.x = value;
-	elseif axis == "lefty" then -- Y Movement
-		self.player.gamepadVelocity.y = value;
-	elseif axis == "rightx" then -- X Flashlight
+	if self.playerFrozen > 0 then
+		-- Player has been frozen by a vampire
+		if axis == "leftx" or axis == "lefty" then
+			self.playerFrozen = self.playerFrozen - 1;
+		end
+	else
+		if axis == "leftx" then -- X Movement
+			self.player.gamepadVelocity.x = value;
+		end
+
+		if axis == "lefty" then -- Y Movement
+			self.player.gamepadVelocity.y = value;
+		end
+	end
+
+	if axis == "rightx" then -- X Flashlight
 		self.player.flashlightFacing.x = value;
-	elseif axis == "righty" then -- Y Flashlight
+	end
+
+	if axis == "righty" then -- Y Flashlight
 		self.player.flashlightFacing.y = value;
-	elseif axis == "triggerleft" then -- L2
+	end
+
+	if axis == "triggerleft" then -- L2
 		if value > GAMEPAD_DEADZONE then
 			self.player.runPressed = true;
 		elseif value == 0 then
 			self.player.runPressed = false;
 		end
-	elseif axis == "triggerright" then -- R2
+	end
+
+	if axis == "triggerright" then -- R2
 		if value > GAMEPAD_DEADZONE then
 			self.player.runPressed = true;
 		elseif value == 0 then
@@ -665,6 +699,14 @@ end
 
 function State_Game:hasPlayerCalledPolice()
 	return self.calledPolice;
+end
+
+function State_Game:freezePlayer()
+  self.soundEffects.playerFreeze:rewind();
+  self.soundEffects.playerFreeze:play();
+  self.soundEffects.playerFrozen:rewind();
+  self.soundEffects.playerFrozen:play();
+  self.playerFrozen = PLAYER_FROZEN_METER;
 end
 
 function State_Game:callPolice()
