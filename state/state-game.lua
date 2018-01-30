@@ -91,7 +91,7 @@ function State_Game:enter(previous, scenarioId)
 	end
 
 	if scenarioId == nil then
-		scenarioId = "vampire";
+		scenarioId = "killer";
 	end
 
 	self.scenarioId = scenarioId;
@@ -418,7 +418,7 @@ function State_Game:gamepadaxis(joystick, axis, value)
 	if self.playerFrozen > 0 then
 		-- Player has been frozen by a vampire
 		if axis == "leftx" or axis == "lefty" then
-			self.playerFrozen = self.playerFrozen - 1;
+			self.playerFrozen = self.playerFrozen - 0.1;
 		end
 	else
 		if axis == "leftx" then -- X Movement
