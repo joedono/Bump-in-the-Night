@@ -90,6 +90,8 @@ function State_Game:enter(previous, scenarioId)
 		sound:setVolume(MASTER_VOLUME);
 	end
 
+	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
+
 	if scenarioId == nil then
 		scenarioId = "killer";
 	end
@@ -235,6 +237,7 @@ function State_Game:keypressed(key, unicode)
 			self.playerFrozen = self.playerFrozen - 1;
 	  end
 	else
+		self:unfreezePlayer();
 		if key == KEY_LEFT then
 	    self.player.leftPressed = true;
 	  end
@@ -346,6 +349,7 @@ function State_Game:gamepadpressed(joystick, button)
 	    self.playerFrozen = self.playerFrozen - 1;
 	  end
 	else
+		self:unfreezePlayer();
 		if button == GAMEPAD_LEFT then
 	    self.player.leftPressed = true;
 	  end
@@ -421,6 +425,7 @@ function State_Game:gamepadaxis(joystick, axis, value)
 			self.playerFrozen = self.playerFrozen - 0.1;
 		end
 	else
+		self:unfreezePlayer();
 		if axis == "leftx" then -- X Movement
 			self.player.gamepadVelocity.x = value;
 		end
@@ -707,6 +712,12 @@ function State_Game:freezePlayer()
   self.soundEffects.playerFrozen:rewind();
   self.soundEffects.playerFrozen:play();
   self.playerFrozen = PLAYER_FROZEN_METER;
+end
+
+function State_Game:unfreezePlayer()
+	if self.soundEffects.playerFrozen:isPlaying() then
+		self.soundEffects.playerFrozen:stop();
+	end
 end
 
 function State_Game:callPolice()
