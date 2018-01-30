@@ -24,6 +24,7 @@ https://github.com/tanema/light_world.lua
 http://soundbible.com/1529-Dog-Bite.html
 http://soundbible.com/1869-Phone-Ringing-8x.html
 http://soundbible.com/700-Screaming.html
+http://soundbible.com/2055-Evil-Laugh-Male-6.html
 https://opengameart.org/content/electricity-sound-effects
 
 # Music
