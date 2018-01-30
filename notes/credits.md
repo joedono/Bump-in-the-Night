@@ -15,6 +15,7 @@ https://www.urbanfonts.com/fonts/Fiendish.font
 https://love2d.org/
 https://github.com/love2d-community/splashes
 https://github.com/vrld/hump
+https://github.com/vrld/SUIT
 https://github.com/kikito/anim8
 https://github.com/kikito/bump.lua
 https://github.com/kikito/inspect.lua
