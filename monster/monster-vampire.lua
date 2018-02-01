@@ -147,7 +147,83 @@ function Monster_Vampire:updateStalking(dt)
 end
 
 function Monster_Vampire:followPath(dt, speed)
-	-- TODO Vampire following the path
+	local warped = false;
+	self.velocity = {
+		x = self.targetPathNode.origin.x - self.box.x,
+		y = self.targetPathNode.origin.y - self.box.y
+	};
+	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+	self.speed = speed;
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+    local col = cols[i];
+		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "dead" then
+			col.other.active = false;
+
+			self.soundEffects.monsterBite:rewind();
+			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.monsterBite:play();
+			self.soundEffects.playerDeathYell:play();
+
+			self.parentManager.parentStateGame:loseGame();
+		end
+
+    if col.other.type == "door" then
+      if not col.other.isOpen then
+        col.other:open(self);
+      end
+    end
+	end
+
+	if self.targetPathNode ~= nil then
+		local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
+		local distanceToPath = math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y);
+
+		if distanceToPath < distanceTraveled or distanceToPath == 0 then
+			-- Reached target node. Go after next node
+			self.box.x = self.targetPathNode.origin.x;
+			self.box.y = self.targetPathNode.origin.y;
+			BumpWorld:update(self, self.box.x, self.box.y);
+			warped = true;
+
+			if self.targetPathNode.multifloor then
+				self.targetPathNode.light:setVisible(false);
+			end
+
+			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
+			self.targetPathNode = self.path[self.targetPathNodeIndex];
+
+			-- Move to other floor
+			if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+				self.box.x = self.targetPathNode.origin.x;
+				self.box.y = self.targetPathNode.origin.y;
+				self.curFloor = self.targetPathNode.floorIndex;
+				BumpWorld:update(self, self.box.x, self.box.y);
+			end
+
+			-- Reached end of path
+			if self.targetPathNode == nil then
+				self:resetPath();
+				self.hasFrozenPlayer = false;
+				self.state = "idle";
+				self.stateTimer = love.math.random(2, 5);
+			end
+		end
+	end
+
+	if not warped then
+		self.box.x = actualX;
+    self.box.y = actualY;
+	end
+
+	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
+		self:resetPath();
+		self.hasFrozenPlayer = false;
+		self.state = "idle";
+		self.stateTimer = love.math.random(2, 5);
+	end
 end
 
 function Monster_Vampire:updateLights(dt)
