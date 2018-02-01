@@ -102,8 +102,7 @@ function Monster_Vampire:update(dt)
 end
 
 function Monster_Vampire:updateIdle(dt)
-	if self:canSensePlayer() then
-		self:hasSensedPlayer();
+	if self:trySensePlayer() then
 		return;
 	end
 
@@ -114,8 +113,7 @@ function Monster_Vampire:updateIdle(dt)
 end
 
 function Monster_Vampire:updateWalk(dt)
-	if self:canSensePlayer() then
-		self:hasSensedPlayer();
+	if self:trySensePlayer() then
 		return;
 	end
 
@@ -179,26 +177,34 @@ function Monster_Vampire:updateLights(dt)
 	end
 end
 
-function Monster_Vampire:canSensePlayer()
-	if self:canSeePlayer(MONSTER_VAMPIRE_SIGHT_CONE, MONSTER_VAMPIRE_SIGHT_DISTANCE) then
-		return true;
-	end
-
-	if math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_VAMPIRE_FREEZE_DISTANCE and (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) then
-		return true;
-	end
-end
-
-function Monster_Vampire:hasSensedPlayer()
+function Monster_Vampire:trySensePlayer()
 	if not self.hasFrozenPlayer then
-		self.freezeTarget.x = self.player.box.x;
-		self.freezeTarget.y = self.player.box.y;
+		local freezePlayer = false;
 
-		self.parentManager.parentStateGame:freezePlayer();
-		self.hasFrozenPlayer = true;
-		self.stateTimer = 3;
-		self.state = "spotted";
+		if self:canSeePlayer(MONSTER_VAMPIRE_SIGHT_CONE, MONSTER_VAMPIRE_SIGHT_DISTANCE) then
+			freezePlayer = true;
+		end
+
+		if math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_VAMPIRE_FREEZE_DISTANCE and
+			(self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0)
+			and self.parentManager.parentStateGame:playerHasItem("cross") == nil then
+			freezePlayer = true;
+		end
+
+		if freezePlayer then
+			self.freezeTarget.x = self.player.box.x;
+			self.freezeTarget.y = self.player.box.y;
+
+			self.parentManager.parentStateGame:freezePlayer();
+			self.hasFrozenPlayer = true;
+			self.stateTimer = 3;
+			self.state = "spotted";
+
+			return true;
+		end
 	end
+
+	return false;
 end
 
 function Monster_Vampire:draw()

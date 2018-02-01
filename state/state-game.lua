@@ -614,13 +614,12 @@ function State_Game:useItem()
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
 		-- Load Shotgun
-		for index, item in pairs(self.inventory) do
-			if item.itemType == "shotgun" then
-				item.loaded = true;
-				table.remove(self.inventory, self.selectedItemIndex);
-				self.selectedItemIndex = 1;
-				return;
-			end
+		local item = self:playerHasItem("shotgun");
+		if item ~= nil then
+			item.loaded = true;
+			table.remove(self.inventory, self.selectedItemIndex);
+			self.selectedItemIndex = 1;
+			return;
 		end
 	elseif selectedItem.itemType == "taser" then
 		if self.taserTimer <= 0 then
@@ -643,20 +642,10 @@ function State_Game:useItem()
 		self:callPolice();
 	elseif selectedItem.itemType == "cellphone_battery" then
 		-- Replace battery in cell phone
-		local hasDeadPhone = false;
-		for index, item in pairs(self.inventory) do
-			if item.itemType == "cellphone_dead" then
-				hasDeadPhone = true;
-			end
-		end
-
-		if hasDeadPhone then
+		if self:playerHasItem("cellphone_dead") ~= nil then
 			local newInventory = {};
-			for index, item in pairs(self.inventory) do
-				if item.itemType ~= "cellphone_dead" and item.itemType ~= "cellphone_battery" then
-					table.insert(newInventory, item);
-				end
-			end
+			table.insert(newInventory, self:playerHasItem("cellphone_dead"));
+			table.insert(newInventory, self:playerHasItem("cellphone_battery"));
 
 			local newItem = Item(-1000, -1000, "cellphone_live", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet);
 			newItem:pickup();
@@ -690,6 +679,16 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "crystal" then
 	elseif selectedItem.itemType == "scroll" then
 	end
+end
+
+function State_Game:playerHasItem(itemType)
+	for index, item in pairs(self.inventory) do
+		if item.itemType == itemType then
+			return item;
+		end
+	end
+
+	return nil;
 end
 
 function State_Game:getPlacedItem(itemType)
