@@ -1,9 +1,9 @@
-require "player";
 require "monster/manager-monster";
 
 require "house/floor";
 require "house/item";
 require "house/path-node";
+require "house/player";
 
 require "used-items/axe";
 require "used-items/blood-pool";
