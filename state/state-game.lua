@@ -12,7 +12,7 @@ require "used-items/lighter";
 require "used-items/meat";
 require "used-items/salt";
 require "used-items/shotgun-blast";
-require "used-items/stake";
+require "used-items/stake-stab";
 require "used-items/taser-blast";
 require "used-items/trap";
 
@@ -34,7 +34,8 @@ function State_Game:init()
 	self.usedItemImages = {
 		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
 		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png"),
-		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png")
+		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png"),
+		stakeStab = love.graphics.newImage("asset/image/used-items/shotgun-blast.png") -- TODO Replace this with real image
 	};
 
 	local waterSplashGrid = Anim8.newGrid(61, 32, self.usedItemImages.waterSplash:getWidth(), self.usedItemImages.waterSplash:getHeight());
@@ -63,6 +64,7 @@ function State_Game:init()
 		policeSiren = love.audio.newSource("asset/sound/police-siren.wav", "static"),
 		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
+		stakeStab = love.audio.newSource("asset/sound/gunshot.wav", "static"), -- TODO replace with real SFX
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static"),
 		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static")
@@ -670,7 +672,17 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "cross" then
 		-- Do nothing
 	elseif selectedItem.itemType == "stake" then
-		-- TODO Use stake on vampire in front of you
+		self.soundEffects.stakeStab:rewind();
+		self.soundEffects.stakeStab:play();
+		self.player:useItem();
+		table.insert(
+			self.usedItems,
+			Stake_Stab(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y,
+				self.usedItemImages.stakeStab
+			)
+		);
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
 	elseif selectedItem.itemType == "battery" then
