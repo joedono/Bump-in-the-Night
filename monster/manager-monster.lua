@@ -66,6 +66,8 @@ function Manager_Monster:update(dt)
 		self:updatePantherSpecial(dt);
 	elseif self.scenarioId == "arsonist" then
 		self:updateArsonistSpecial(dt);
+	elseif self.secnarioId == "vampire" then
+		self:updateVampireSpecial(dt);
 	end
 end
 
@@ -153,6 +155,12 @@ end
 
 function Manager_Monster:updateArsonistSpecial(dt)
 	self.fireManager:update(dt);
+end
+
+function Manager_Monster:updateVampireSpecial(dt)
+	if not self.monsters[1].active then
+		self.parentStateGame:winGame();
+	end
 end
 
 function Manager_Monster:draw()
