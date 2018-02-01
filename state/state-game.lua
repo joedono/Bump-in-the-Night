@@ -613,7 +613,6 @@ function State_Game:useItem()
 			);
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
-		-- Load Shotgun
 		local item = self:playerHasItem("shotgun");
 		if item ~= nil then
 			item.loaded = true;
@@ -669,7 +668,9 @@ function State_Game:useItem()
 		);
 	elseif selectedItem.itemType == "book" then
 	elseif selectedItem.itemType == "cross" then
+		-- Do nothing
 	elseif selectedItem.itemType == "stake" then
+		-- TODO Use stake on vampire in front of you
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
 	elseif selectedItem.itemType == "battery" then
