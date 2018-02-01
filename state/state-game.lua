@@ -642,9 +642,10 @@ function State_Game:useItem()
 		self:callPolice();
 	elseif selectedItem.itemType == "cellphone_battery" then
 		-- Replace battery in cell phone
-		if self:playerHasItem("cellphone_dead") ~= nil then
+		local cellphoneDead = self:playerHasItem("cellphone_dead");
+		if cellphoneDead ~= nil then
 			local newInventory = {};
-			table.insert(newInventory, self:playerHasItem("cellphone_dead"));
+			table.insert(newInventory, cellphoneDead);
 			table.insert(newInventory, self:playerHasItem("cellphone_battery"));
 
 			local newItem = Item(-1000, -1000, "cellphone_live", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet);
