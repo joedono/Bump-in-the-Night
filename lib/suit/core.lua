@@ -9,7 +9,6 @@ suit.__index = suit
 
 function suit.new(theme)
 	return setmetatable({
-		-- TODO: deep copy/copy on write? better to let user handle => documentation?
 		theme = theme or default_theme,
 		mouse_x = 0, mouse_y = 0,
 		mouse_button_down = false,
