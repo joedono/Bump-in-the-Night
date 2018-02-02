@@ -122,8 +122,14 @@ function Monster_Vampire:updateWalk(dt)
 	end
 
 	if self.targetPathNode == nil then
-		local finalPathNode = self.parentManager:randomPathNode();
-		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
+		local randomHunt = love.math.random(100);
+		if randomHunt < MONSTER_VAMPIRE_HUNT_CHANCE then
+			self.path = pathfinding.findPath(self.box.x, self.box.y, self.player.box.x, self.player.box.y, self.parentManager.pathNodes);
+		else
+			local finalPathNode = self.parentManager:randomPathNode();
+			self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
+		end
+
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	else
