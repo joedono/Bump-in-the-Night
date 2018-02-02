@@ -64,7 +64,7 @@ function State_Game:init()
 		policeSiren = love.audio.newSource("asset/sound/police-siren.wav", "static"),
 		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
-		stakeStab = love.audio.newSource("asset/sound/gunshot.wav", "static"), -- TODO replace with real SFX
+		stakeStab = love.audio.newSource("asset/sound/stake-stab.wav", "static"),
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static"),
 		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static")
