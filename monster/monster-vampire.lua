@@ -40,6 +40,8 @@ Monster_Vampire = Class {__includes = Monster,
 
 		self.freezeAura = love.graphics.newImage("asset/image/noise.png");
 		self.freezeAuraData = {
+			x = self.box.x + self.box.w / 2,
+			y = self.box.y + self.box.h / 2,
 			w = self.freezeAura:getWidth(),
 			h = self.freezeAura:getHeight()
 		}
@@ -50,14 +52,16 @@ Monster_Vampire = Class {__includes = Monster,
 			alpha = 255
 		};
 
-		self.freezeAuraRepeatTimer:every(5, function()
+		self.freezeAuraRepeatTimer:every(1.5, function()
 			self.freezeAuraTimer:clear();
+			self.freezeAuraData.x = self.box.x + self.box.w / 2;
+			self.freezeAuraData.y = self.box.y + self.box.h / 2;
 			self.freezeAuraEffect = {
 				scale = 0,
 				alpha = 255
 			};
 
-			self.freezeAuraTimer:tween(5, self.freezeAuraEffect, {scale = 4, alpha = 0});
+			self.freezeAuraTimer:tween(1.5, self.freezeAuraEffect, {scale = 4, alpha = 0});
 		end);
 
 		self.freezeTarget = {};
@@ -324,8 +328,8 @@ end
 function Monster_Vampire:drawAura()
 	love.graphics.setColor(0, 255, 255, self.freezeAuraEffect.alpha);
 	love.graphics.draw(self.freezeAura,
-		self.box.x + self.box.w / 2 - self.freezeAuraData.w * self.freezeAuraEffect.scale / 2,
-		self.box.y + self.box.h / 2 - self.freezeAuraData.h * self.freezeAuraEffect.scale / 2,
+		self.freezeAuraData.x - self.freezeAuraData.w / 2 * self.freezeAuraEffect.scale,
+		self.freezeAuraData.y - self.freezeAuraData.h / 2 * self.freezeAuraEffect.scale,
 		0,
 		self.freezeAuraEffect.scale, self.freezeAuraEffect.scale);
 
