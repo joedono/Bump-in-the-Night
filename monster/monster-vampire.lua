@@ -273,7 +273,7 @@ function Monster_Vampire:trySensePlayer()
 
 			self.parentManager.parentStateGame:freezePlayer();
 			self.hasFrozenPlayer = true;
-			self.stateTimer = 3;
+			self.stateTimer = 1;
 			self.state = "spotted";
 
 			return true;
