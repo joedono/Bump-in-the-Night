@@ -35,7 +35,7 @@ function State_Game:init()
 		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
 		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png"),
 		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png"),
-		stakeStab = love.graphics.newImage("asset/image/used-items/shotgun-blast.png") -- TODO Replace this with real image
+		stakeStab = love.graphics.newImage("asset/image/used-items/stake-stab.png")
 	};
 
 	local waterSplashGrid = Anim8.newGrid(61, 32, self.usedItemImages.waterSplash:getWidth(), self.usedItemImages.waterSplash:getHeight());
