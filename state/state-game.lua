@@ -724,6 +724,7 @@ function State_Game:freezePlayer()
   self.soundEffects.playerFreeze:play();
   self.soundEffects.playerFrozen:rewind();
   self.soundEffects.playerFrozen:play();
+	self.player:resetKeys();
   self.playerFrozen = PLAYER_FROZEN_METER;
 end
 
@@ -760,7 +761,7 @@ end
 
 function State_Game:stopAllSounds()
 	for index, sound in pairs(self.soundEffects) do
-		if index ~= "monsterBite" and index ~= "knifeStab" and index ~= "playerDeathYell" and index ~= "gunshot" then
+		if index ~= "monsterBite" and index ~= "knifeStab" and index ~= "playerDeathYell" and index ~= "gunshot" and index ~= "stakeStab" then
 			sound:stop();
 		end
 	end

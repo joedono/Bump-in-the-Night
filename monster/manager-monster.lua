@@ -66,7 +66,7 @@ function Manager_Monster:update(dt)
 		self:updatePantherSpecial(dt);
 	elseif self.scenarioId == "arsonist" then
 		self:updateArsonistSpecial(dt);
-	elseif self.secnarioId == "vampire" then
+	elseif self.scenarioId == "vampire" then
 		self:updateVampireSpecial(dt);
 	end
 end
@@ -158,7 +158,7 @@ function Manager_Monster:updateArsonistSpecial(dt)
 end
 
 function Manager_Monster:updateVampireSpecial(dt)
-	if not self.monsters[1].active then
+	if self.monsters[1].state == "dead" then
 		self.parentStateGame:winGame();
 	end
 end

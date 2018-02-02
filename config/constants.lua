@@ -8,10 +8,10 @@ FULLSCREEN = false;
 DRAW_BOXES = false;
 DRAW_PORTALS = true;
 DRAW_PATHS = false;
-DRAW_LIGHTS = true;
-KILL_PLAYER = false;
-DRAW_MONSTER_PATH = false;
-DRAW_MONSTER_SENSES = false;
+DRAW_LIGHTS = false;
+KILL_PLAYER = true;
+DRAW_MONSTER_PATH = true;
+DRAW_MONSTER_SENSES = true;
 DRAW_ENTIRE_HOUSE = false;
 LOAD_SAVE_ENABLED = false;
 
