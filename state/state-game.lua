@@ -776,11 +776,7 @@ function State_Game:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
 		if not DRAW_ENTIRE_HOUSE then
-			if DRAW_LIGHTS then
-				self.camera:attach(0, 0);
-			else
-				self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-			end
+			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		end
 
 		if DRAW_LIGHTS then

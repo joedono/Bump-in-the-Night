@@ -9,10 +9,10 @@ DRAW_BOXES = false;
 DRAW_PORTALS = true;
 DRAW_PATHS = false;
 DRAW_LIGHTS = true;
-KILL_PLAYER = false;
-FREEZE_PLAYER = false;
+KILL_PLAYER = true;
+FREEZE_PLAYER = true;
 DRAW_MONSTER_PATH = false;
-DRAW_MONSTER_SENSES = true;
+DRAW_MONSTER_SENSES = false;
 DRAW_ENTIRE_HOUSE = false;
 LOAD_SAVE_ENABLED = false;
 
