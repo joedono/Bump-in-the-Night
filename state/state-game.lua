@@ -724,8 +724,11 @@ function State_Game:freezePlayer()
   self.soundEffects.playerFreeze:play();
   self.soundEffects.playerFrozen:rewind();
   self.soundEffects.playerFrozen:play();
-	self.player:resetKeys();
-  self.playerFrozen = PLAYER_FROZEN_METER;
+
+	if FREEZE_PLAYER then
+		self.player:resetKeys();
+		self.playerFrozen = PLAYER_FROZEN_METER;
+	end
 end
 
 function State_Game:unfreezePlayer()

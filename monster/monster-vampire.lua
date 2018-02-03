@@ -333,14 +333,16 @@ end
 
 function Monster_Vampire:drawAura()
 	love.graphics.setColor(0, 255, 255, self.freezeAuraEffect.alpha);
+	local fax = self.freezeAuraData.x - (self.freezeAuraData.w / 2 * self.freezeAuraEffect.scale) - 160;
+	local fay = self.freezeAuraData.y - (self.freezeAuraData.h / 2 * self.freezeAuraEffect.scale) - 80;
+
 	love.graphics.draw(self.freezeAura,
-		self.freezeAuraData.x - self.freezeAuraData.w / 2 * self.freezeAuraEffect.scale,
-		self.freezeAuraData.y - self.freezeAuraData.h / 2 * self.freezeAuraEffect.scale,
+		fax, fay,
 		0,
 		self.freezeAuraEffect.scale, self.freezeAuraEffect.scale);
 
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
 		love.graphics.setColor(0, 255, 255);
-		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_VAMPIRE_FREEZE_DISTANCE);
+		love.graphics.circle("line", self.box.x + self.box.w / 2 - 160, self.box.y + self.box.h / 2 - 80, MONSTER_VAMPIRE_FREEZE_DISTANCE);
 	end
 end
