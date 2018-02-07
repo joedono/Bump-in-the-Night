@@ -81,9 +81,9 @@ end
 function State_Game:enter(previous, scenarioId)
 	love.graphics.setBackgroundColor(0, 0, 0);
 	local items = BumpWorld:getItems();
-  for index, item in pairs(items) do
-    BumpWorld:remove(item);
-  end
+	for index, item in pairs(items) do
+		BumpWorld:remove(item);
+	end
 
 	LightWorld:clearLights();
 	LightWorld:clearBodies();
@@ -221,61 +221,61 @@ function State_Game:loadPathfinding()
 end
 
 function State_Game:focus(focused)
-  if focused then
-    self.active = true;
-  else
-    self.active = false;
-  end
+	if focused then
+		self.active = true;
+	else
+		self.active = false;
+	end
 end
 
 function State_Game:keypressed(key, unicode)
 	if not self.active then
-    return;
-  end
+		return;
+	end
 
 	if self.playerFrozen > 0 then
 		-- Player has been frozen by a vampire
 		if key == KEY_LEFT or key == KEY_RIGHT or key == KEY_UP or key == KEY_DOWN then
 			self.playerFrozen = self.playerFrozen - 1;
-	  end
+		end
 	else
 		self:unfreezePlayer();
 		if key == KEY_LEFT then
-	    self.player.leftPressed = true;
-	  end
+			self.player.leftPressed = true;
+		end
 
-	  if key == KEY_RIGHT then
-	    self.player.rightPressed = true;
-	  end
+		if key == KEY_RIGHT then
+			self.player.rightPressed = true;
+		end
 
-	  if key == KEY_UP then
-	    self.player.upPressed = true;
-	  end
+		if key == KEY_UP then
+			self.player.upPressed = true;
+		end
 
-	  if key == KEY_DOWN then
-	    self.player.downPressed = true;
-	  end
+		if key == KEY_DOWN then
+			self.player.downPressed = true;
+		end
 	end
 
 	if key == KEY_FLASHLIGHT then
-    self.player:toggleFlashlight();
-  end
+		self.player:toggleFlashlight();
+	end
 
 	if key == KEY_RUN then
-    self.player.runPressed = true;
-  end
+		self.player.runPressed = true;
+	end
 
 	if key == KEY_ITEM_LEFT then
 		self:selectItem(-1);
-  end
+	end
 
 	if key == KEY_ITEM_RIGHT then
-    self:selectItem(1);
-  end
+		self:selectItem(1);
+	end
 
 	if key == KEY_ITEM_USE then
-    self:useItem();
-  end
+		self:useItem();
+	end
 
 	if key == KEY_PAUSE then
 		GameState.push(State_Pause);
@@ -290,38 +290,38 @@ function State_Game:keypressed(key, unicode)
 	end
 
 	if key == KEY_LIGHT_UP then
-    self.player.upLightPressed = true;
-  end
+		self.player.upLightPressed = true;
+	end
 
 	if key == KEY_LIGHT_DOWN then
-    self.player.downLightPressed = true;
-  end
+		self.player.downLightPressed = true;
+	end
 end
 
 function State_Game:keyreleased(key, unicode)
 	if not self.active then
-    return;
-  end
+		return;
+	end
 
 	if key == KEY_LEFT then
-    self.player.leftPressed = false;
-  end
+		self.player.leftPressed = false;
+	end
 
-  if key == KEY_RIGHT then
-    self.player.rightPressed = false;
-  end
+	if key == KEY_RIGHT then
+		self.player.rightPressed = false;
+	end
 
-  if key == KEY_UP then
-    self.player.upPressed = false;
-  end
+	if key == KEY_UP then
+		self.player.upPressed = false;
+	end
 
-  if key == KEY_DOWN then
-    self.player.downPressed = false;
-  end
+	if key == KEY_DOWN then
+		self.player.downPressed = false;
+	end
 
 	if key == KEY_RUN then
-    self.player.runPressed = false;
-  end
+		self.player.runPressed = false;
+	end
 
 	if key == KEY_LIGHT_LEFT then
 		self.player.leftLightPressed = false;
@@ -332,92 +332,92 @@ function State_Game:keyreleased(key, unicode)
 	end
 
 	if key == KEY_LIGHT_UP then
-    self.player.upLightPressed = false;
-  end
+		self.player.upLightPressed = false;
+	end
 
 	if key == KEY_LIGHT_DOWN then
-    self.player.downLightPressed = false;
-  end
+		self.player.downLightPressed = false;
+	end
 end
 
 function State_Game:gamepadpressed(joystick, button)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	if self.playerFrozen > 0 then
 		-- Player has been frozen by a vampire
 		if button == GAMEPAD_LEFT or button == GAMEPAD_RIGHT or button == GAMEPAD_UP or button == GAMEPAD_DOWN then
-	    self.playerFrozen = self.playerFrozen - 1;
-	  end
+			self.playerFrozen = self.playerFrozen - 1;
+		end
 	else
 		self:unfreezePlayer();
 		if button == GAMEPAD_LEFT then
-	    self.player.leftPressed = true;
-	  end
+			self.player.leftPressed = true;
+		end
 
-	  if button == GAMEPAD_RIGHT then
-	    self.player.rightPressed = true;
-	  end
+		if button == GAMEPAD_RIGHT then
+			self.player.rightPressed = true;
+		end
 
-	  if button == GAMEPAD_UP then
-	    self.player.upPressed = true;
-	  end
+		if button == GAMEPAD_UP then
+			self.player.upPressed = true;
+		end
 
-	  if button == GAMEPAD_DOWN then
-	    self.player.downPressed = true;
-	  end
+		if button == GAMEPAD_DOWN then
+			self.player.downPressed = true;
+		end
 	end
 
 	if button == GAMEPAD_FLASHLIGHT then
-    self.player:toggleFlashlight();
-  end
+		self.player:toggleFlashlight();
+	end
 
-  if button == GAMEPAD_RUN then
-    self.player.runPressed = true;
-  end
+	if button == GAMEPAD_RUN then
+		self.player.runPressed = true;
+	end
 
 	if button == GAMEPAD_ITEM_LEFT then
 		self:selectItem(-1);
-  end
+	end
 
 	if button == GAMEPAD_ITEM_RIGHT then
-    self:selectItem(1);
-  end
+		self:selectItem(1);
+	end
 
 	if button == GAMEPAD_ITEM_USE then
-    self:useItem();
-  end
+		self:useItem();
+	end
 
-  if button == GAMEPAD_START then
+	if button == GAMEPAD_START then
 		GameState.push(State_Pause);
-  end
+	end
 end
 
 function State_Game:gamepadreleased(joystick, button)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	if button == GAMEPAD_LEFT then
-    self.player.leftPressed = false;
-  end
+		self.player.leftPressed = false;
+	end
 
-  if button == GAMEPAD_RIGHT then
-    self.player.rightPressed = false;
-  end
+	if button == GAMEPAD_RIGHT then
+		self.player.rightPressed = false;
+	end
 
-  if button == GAMEPAD_UP then
-    self.player.upPressed = false;
-  end
+	if button == GAMEPAD_UP then
+		self.player.upPressed = false;
+	end
 
-  if button == GAMEPAD_DOWN then
-    self.player.downPressed = false;
-  end
+	if button == GAMEPAD_DOWN then
+		self.player.downPressed = false;
+	end
 
-  if button == GAMEPAD_RUN then
-    self.player.runPressed = false;
-  end
+	if button == GAMEPAD_RUN then
+		self.player.runPressed = false;
+	end
 end
 
 function State_Game:gamepadaxis(joystick, axis, value)
@@ -464,8 +464,8 @@ end
 
 function State_Game:update(dt)
 	if not self.active then
-    return;
-  end
+		return;
+	end
 
 	if self.calledPolice then
 		self.callPoliceSoundTimer:update(dt);
@@ -720,10 +720,10 @@ function State_Game:hasPlayerCalledPolice()
 end
 
 function State_Game:freezePlayer()
-  self.soundEffects.playerFreeze:rewind();
-  self.soundEffects.playerFreeze:play();
-  self.soundEffects.playerFrozen:rewind();
-  self.soundEffects.playerFrozen:play();
+	self.soundEffects.playerFreeze:rewind();
+	self.soundEffects.playerFreeze:play();
+	self.soundEffects.playerFrozen:rewind();
+	self.soundEffects.playerFrozen:play();
 
 	if FREEZE_PLAYER then
 		self.player:resetKeys();
@@ -794,10 +794,10 @@ function State_Game:draw()
 		end
 
 		self:drawHUD();
-  end);
+	end);
 
-  love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
 
 function State_Game:drawGame()

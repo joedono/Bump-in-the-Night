@@ -45,8 +45,8 @@ Bucket_Water = Class {
 
 function Bucket_Water:update(dt)
 	if not self.active then
-    return;
-  end
+		return;
+	end
 
 	self.animation:update(dt);
 	local actualX, actualY, cols, len = BumpWorld:check(self, self.box.x, self.box.y, waterSplashCollision);
@@ -63,9 +63,9 @@ function Bucket_Water:update(dt)
 end
 
 function Bucket_Water:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	love.graphics.setColor(255, 255, 255);
 	self.animation:draw(self.image, self.box.x, self.box.y, 0, WATER_SPLASH_SCALE, WATER_SPLASH_SCALE);

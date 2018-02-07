@@ -246,45 +246,45 @@ INVENTORY_MAP = {
 };
 
 SCENARIO_ITEMS = {
-  ["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
-  ["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
-  ["burglar"] = {"taser", "cellphone_dead", "cellphone_battery"},
-  ["arsonist"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
-  ["killer"] = {"cellphone_dead", "cellphone_battery"},
-  ["vampire"] = {"stake", "cross"},
-  ["ghost"] = {"book"},
-  ["alien"] = {"music_box", "battery", "foil"},
-  ["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
-  ["elder_god"] = {"crystal", "scroll"}
+	["wolf"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+	["panther"] = {"meat", "trap", "shotgun", "shotgun_rounds"},
+	["burglar"] = {"taser", "cellphone_dead", "cellphone_battery"},
+	["arsonist"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
+	["killer"] = {"cellphone_dead", "cellphone_battery"},
+	["vampire"] = {"stake", "cross"},
+	["ghost"] = {"book"},
+	["alien"] = {"music_box", "battery", "foil"},
+	["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
+	["elder_god"] = {"crystal", "scroll"}
 };
 
 SCENARIO_SELECTION = {
-  {"wolf", "panther", "burglar", "arsonist"},
-  {"killer", "random", "vampire"},
-  {"ghost", "alien", "zombie", "elder_god"}
+	{"wolf", "panther", "burglar", "arsonist"},
+	{"killer", "random", "vampire"},
+	{"ghost", "alien", "zombie", "elder_god"}
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
 SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire"};
 SCENARIO_COMPLETED = {
-  ["wolf"] = true,
-  ["panther"] = true,
-  ["burglar"] = true,
-  ["arsonist"] = true,
+	["wolf"] = true,
+	["panther"] = true,
+	["burglar"] = true,
+	["arsonist"] = true,
 	["killer"] = true,
 	["vampire"] = true
 };
 
 SCENARIO_DESCRIPTION = {
-  ["Wolf"] = "Three wolves are looking for a snack. They like meat and have keen ears. Stay quiet if you want to survive.",
-  ["Panther"] = "A panther is looking for a midnight meal. It likes meat and can hunt by smell. Stay quiet and keep moving or else it'll catch up with you.",
-  ["Burglar"] = "Someone has broken in to your house looking for valuables. They won't hesitate to kill anyone in their way. Call the cops and hold out until they arrive.",
-  ["Arsonist"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
-  ["Killer"] = "A serial killer has chosen you for his next victim. After removing any means for his prey to fight back, he stalks them with his gun until he can end them. Keep your cool and call the cops.",
-  ["Vampire"] = "Your house has become home to a hungry vampire. He can freeze you with a look or if you get too close. Find some divine protection before driving a stake through his heart.",
-  ["Ghost"] = "",
-  ["Alien"] = "",
-  ["Zombie"] = "",
-  ["Elder God"] = "",
-  ["Random"] = ""
+	["Wolf"] = "Three wolves are looking for a snack. They like meat and have keen ears. Stay quiet if you want to survive.",
+	["Panther"] = "A panther is looking for a midnight meal. It likes meat and can hunt by smell. Stay quiet and keep moving or else it'll catch up with you.",
+	["Burglar"] = "Someone has broken in to your house looking for valuables. They won't hesitate to kill anyone in their way. Call the cops and hold out until they arrive.",
+	["Arsonist"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
+	["Killer"] = "A serial killer has chosen you for his next victim. After removing any means for his prey to fight back, he stalks them with his gun until he can end them. Keep your cool and call the cops.",
+	["Vampire"] = "Your house has become home to a hungry vampire. He can freeze you with a look or if you get too close. Find some divine protection before driving a stake through his heart.",
+	["Ghost"] = "",
+	["Alien"] = "",
+	["Zombie"] = "",
+	["Elder God"] = "",
+	["Random"] = ""
 }

@@ -228,7 +228,7 @@ function Monster_Arsonist:followPath(dt, speed)
 	local actualX, actualY, cols, len = self:updatePosition(dt);
 
 	for i = 1, len do
-    local col = cols[i];
+		local col = cols[i];
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" and self.panicked then
 			col.other.active = false;
 
@@ -240,11 +240,11 @@ function Monster_Arsonist:followPath(dt, speed)
 			self.parentManager.parentStateGame:loseGame();
 		end
 
-    if col.other.type == "door" then
-      if not col.other.isOpen then
-        col.other:open(self);
-      end
-    end
+		if col.other.type == "door" then
+			if not col.other.isOpen then
+				col.other:open(self);
+			end
+		end
 	end
 
 	if self.targetPathNode ~= nil then
@@ -289,7 +289,7 @@ function Monster_Arsonist:followPath(dt, speed)
 
 	if not warped then
 		self.box.x = actualX;
-    self.box.y = actualY;
+		self.box.y = actualY;
 	end
 
 	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
@@ -320,11 +320,11 @@ function Monster_Arsonist:updateLights(dt)
 		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
 		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
-    if facing < 0 then
-      facing = facing + math.pi * 2;
-    end
+		if facing < 0 then
+			facing = facing + math.pi * 2;
+		end
 
-    self.sightLight:setDirection(facing);
+		self.sightLight:setDirection(facing);
 		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
 		if self.state == "idle" or self.state == "walk" then

@@ -6,15 +6,15 @@ Lighter = Class {
 }
 
 function Lighter:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end
 
 function Lighter:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end

@@ -1,17 +1,17 @@
 Item = Class {
 	init = function(self, x, y, itemType, worldSpritesheet, heldSpritesheet)
-    self.box = {
-      x = x,
-      y = y,
-      w = ITEM_WIDTH,
-      h = ITEM_HEIGHT
-    };
+		self.box = {
+			x = x,
+			y = y,
+			w = ITEM_WIDTH,
+			h = ITEM_HEIGHT
+		};
 
-    BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
+		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
-    self.itemType = itemType;
+		self.itemType = itemType;
 
-    local wix = INVENTORY_MAP.world[itemType].x;
+		local wix = INVENTORY_MAP.world[itemType].x;
 		local wiy = INVENTORY_MAP.world[itemType].y;
 		local hix = INVENTORY_MAP.held[itemType].x;
 		local hiy = INVENTORY_MAP.held[itemType].y;
@@ -44,8 +44,8 @@ Item = Class {
 		self.glowStrength = 0;
 		self.glowChange = ITEM_GLOW_RATE;
 
-    self.type = "item";
-    self.active = true;
+		self.type = "item";
+		self.active = true;
 	end
 }
 
@@ -56,9 +56,9 @@ function Item:pickup()
 end
 
 function Item:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	self.glowStrength = self.glowStrength + self.glowChange * dt;
 
@@ -76,15 +76,15 @@ function Item:update(dt)
 end
 
 function Item:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
-  love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(self.worldImage, self.box.x, self.box.y, 0, ITEM_WORLD_SCALE, ITEM_WORLD_SCALE);
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.draw(self.worldImage, self.box.x, self.box.y, 0, ITEM_WORLD_SCALE, ITEM_WORLD_SCALE);
 end
 
 function Item:drawInventory(x, y)
 	love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(self.heldImage, x, y);
+	love.graphics.draw(self.heldImage, x, y);
 end

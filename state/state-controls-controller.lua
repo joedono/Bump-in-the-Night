@@ -23,7 +23,7 @@ end
 
 function State_Controls_Controller:draw()
 	CANVAS:renderTo(function()
-    love.graphics.clear();
+		love.graphics.clear();
 		love.graphics.setColor(255, 0, 0);
 		love.graphics.draw(self.image, 0, 0);
 		love.graphics.setFont(self.titleFont);
@@ -40,8 +40,8 @@ function State_Controls_Controller:draw()
 		love.graphics.print("Use Item", 1275, 455);
 
 		love.graphics.printf("Press any button to go back", 0, 840, SCREEN_WIDTH, "center");
-  end);
+	end);
 
-  love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end

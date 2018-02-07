@@ -12,7 +12,7 @@ function State_Winning:enter(from)
 	Timer.clear();
 	Timer.script(function(wait)
 		Timer.tween(4, self.color, {a = 255}, "in-linear");
-    wait(4);
+		wait(4);
 		self:onDone();
 	end);
 end

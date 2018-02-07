@@ -6,15 +6,15 @@ Axe = Class {
 }
 
 function Axe:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end
 
 function Axe:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end

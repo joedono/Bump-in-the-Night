@@ -186,7 +186,7 @@ end
 
 function State_Scenario_Select:draw()
 	CANVAS:renderTo(function()
-    love.graphics.clear();
+		love.graphics.clear();
 
 		love.graphics.setColor(255, 255, 255);
 		love.graphics.draw(self.background, 0, 0);
@@ -216,10 +216,10 @@ function State_Scenario_Select:draw()
 			local indicatorX, indicatorY = self:getDrawLocation(self.selection.x, self.selection.y);
 			love.graphics.draw(self.indicator, indicatorX, indicatorY);
 		end
-  end);
+	end);
 
-  love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
 
 function State_Scenario_Select:getDrawLocation(x, y)

@@ -6,15 +6,15 @@ Salt = Class {
 }
 
 function Salt:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end
 
 function Salt:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end

@@ -36,16 +36,16 @@ Meat = Class {
 }
 
 function Meat:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 end
 
 function Meat:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
-  love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(self.image, self.box.x, self.box.y);
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.draw(self.image, self.box.x, self.box.y);
 end

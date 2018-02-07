@@ -31,18 +31,18 @@ Trap = Class {
 }
 
 function Trap:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 
 end
 
 function Trap:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(self.image, self.box.x, self.box.y);
+	love.graphics.draw(self.image, self.box.x, self.box.y);
 end

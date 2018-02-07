@@ -40,8 +40,8 @@ Taser_Blast = Class {
 
 		self.rotation = math.angle(0, 0, dirY, dirX);
 		if self.rotation < 0 then
-	    self.rotation = self.rotation + math.pi * 2;
-	  end
+			self.rotation = self.rotation + math.pi * 2;
+		end
 
 		self.image = image;
 		self.imageData = {
@@ -57,9 +57,9 @@ Taser_Blast = Class {
 }
 
 function Taser_Blast:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	local actualX, actualY, cols, len = BumpWorld:check(self, self.box.x, self.box.y, weaponBlastCollision);
 
@@ -75,9 +75,9 @@ function Taser_Blast:update(dt)
 end
 
 function Taser_Blast:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 	love.graphics.setColor(255, 255, 255);
 	love.graphics.draw(
@@ -85,8 +85,8 @@ function Taser_Blast:draw()
 		self.box.x + self.box.w / 2,
 		self.box.y + self.box.h / 2,
 		self.rotation,
-    TASER_SCALE,
-    TASER_SCALE,
+		TASER_SCALE,
+		TASER_SCALE,
 		self.imageData.w / 2,
 		self.imageData.h / 2
 	);

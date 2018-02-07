@@ -31,10 +31,10 @@ function State_Title:enter(previous, animate)
 
 	if animate then
 		Timer.script(function(wait)
-	    Timer.tween(5, self.alphas, {titleAlpha = 255}, "in-linear");
-	    wait(5);
+			Timer.tween(5, self.alphas, {titleAlpha = 255}, "in-linear");
+			wait(5);
 			self.showMenu = true;
-	  end);
+		end);
 	else
 		self.alphas.titleAlpha = 255;
 		self.showMenu = true;
@@ -125,10 +125,10 @@ end
 
 function State_Title:draw()
 	CANVAS:renderTo(function()
-    love.graphics.clear();
+		love.graphics.clear();
 		love.graphics.setFont(self.titleFont);
 		love.graphics.setColor(255, 0, 0, self.alphas.titleAlpha);
-    love.graphics.printf("Bump in the Night", 0, 200, SCREEN_WIDTH, "center");
+		love.graphics.printf("Bump in the Night", 0, 200, SCREEN_WIDTH, "center");
 		love.graphics.setColor(255, 255, 255, 255);
 
 		if self.showMenu then
@@ -162,8 +162,8 @@ function State_Title:draw()
 			end
 			love.graphics.printf("Quit", 0, 790, SCREEN_WIDTH, "center");
 		end
-  end);
+	end);
 
-  love.graphics.setColor(255, 255, 255);
-  love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
+	love.graphics.setColor(255, 255, 255);
+	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end

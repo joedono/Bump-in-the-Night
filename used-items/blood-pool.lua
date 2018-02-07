@@ -6,15 +6,15 @@ Blood_Pool = Class {
 }
 
 function Blood_Pool:update(dt)
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end
 
 function Blood_Pool:draw()
-  if not self.active then
-    return;
-  end
+	if not self.active then
+		return;
+	end
 
 end

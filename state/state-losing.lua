@@ -17,7 +17,7 @@ function State_Losing:enter(from)
 		self.color.b = 0;
 		self.color.a = 0;
 		Timer.tween(4, self.color, {a = 255}, "in-linear");
-    wait(4);
+		wait(4);
 		self:onDone();
 	end);
 end
