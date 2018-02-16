@@ -137,10 +137,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("asset/config/floor-layout/main-floor.lua", 1, 0, 0, self.soundEffects));
-	table.insert(floors, Floor("asset/config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.soundEffects));
-	table.insert(floors, Floor("asset/config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
-	table.insert(floors, Floor("asset/config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
+	table.insert(floors, Floor("config/floor-layout/main-floor.lua", 1, 0, 0, self.soundEffects));
+	table.insert(floors, Floor("config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.soundEffects));
+	table.insert(floors, Floor("config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
+	table.insert(floors, Floor("config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
 
 	return floors;
 end
