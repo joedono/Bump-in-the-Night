@@ -237,6 +237,22 @@ function State_Game:keypressed(key, unicode)
 		-- Player has been frozen by a vampire
 		if key == KEY_LEFT or key == KEY_RIGHT or key == KEY_UP or key == KEY_DOWN then
 			self.playerFrozen = self.playerFrozen - 1;
+
+			if key == KEY_LEFT then
+				self.player.facing.x = -1;
+			end
+
+			if key == KEY_RIGHT then
+				self.player.facing.x = 1;
+			end
+
+			if key == KEY_UP then
+				self.player.facing.y = -1;
+			end
+
+			if key == KEY_DOWN then
+				self.player.facing.y = 1;
+			end
 		end
 	else
 		self:unfreezePlayer();
@@ -349,6 +365,22 @@ function State_Game:gamepadpressed(joystick, button)
 		-- Player has been frozen by a vampire
 		if button == GAMEPAD_LEFT or button == GAMEPAD_RIGHT or button == GAMEPAD_UP or button == GAMEPAD_DOWN then
 			self.playerFrozen = self.playerFrozen - 1;
+
+			if button == GAMEPAD_LEFT then
+				self.player.facing.x = -1;
+			end
+
+			if button == GAMEPAD_RIGHT then
+				self.player.facing.x = 1;
+			end
+
+			if button == GAMEPAD_UP then
+				self.player.facing.y = -1;
+			end
+
+			if button == GAMEPAD_DOWN then
+				self.player.facing.y = 1;
+			end
 		end
 	else
 		self:unfreezePlayer();
@@ -425,6 +457,14 @@ function State_Game:gamepadaxis(joystick, axis, value)
 		-- Player has been frozen by a vampire
 		if axis == "leftx" or axis == "lefty" then
 			self.playerFrozen = self.playerFrozen - 0.1;
+
+			if axis == "leftx" then -- X Movement
+				self.player.facing.x = value;
+			end
+
+			if axis == "lefty" then -- Y Movement
+				self.player.facing.y = value;
+			end
 		end
 	else
 		self:unfreezePlayer();
