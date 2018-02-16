@@ -14,8 +14,8 @@ Stunned - Stunned by the player
 ]]
 
 Monster_Burglar = Class {__includes = Monster,
-	init = function(self, parentManager, soundEffects, player, curFloor, x, y)
-		Monster.init(self);
+	init = function(self, parentManager, soundEffects, image, player, curFloor, x, y)
+		Monster.init(self, image);
 		self.parentManager = parentManager;
 		self.soundEffects = soundEffects;
 		self.player = player;
@@ -37,6 +37,21 @@ Monster_Burglar = Class {__includes = Monster,
 		self.sightLight = LightWorld:newLight(0, 0, 150, 150, 150, MONSTER_BURGLAR_SIGHT_DISTANCE);
 		self.sightLight:setDirection(0);
 		self.sightLight:setAngle(MONSTER_BURGLAR_SIGHT_CONE);
+
+		local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
+		local walkDuration = 0.2;
+		local runDuration = 0.1;
+		self.animations = {
+			["walk-left"] = Anim8.newAnimation(grid("1-2", 1), walkDuration),
+			["run-left"] =  Anim8.newAnimation(grid("1-2", 1), runDuration),
+			["walk-down"] = Anim8.newAnimation(grid("3-4", 1), walkDuration),
+			["run-down"] = Anim8.newAnimation(grid("3-4", 1), runDuration),
+			["walk-up"] = Anim8.newAnimation(grid("5-6", 1), walkDuration),
+			["run-up"] = Anim8.newAnimation(grid("5-6", 1), runDuration),
+			["walk-right"] = Anim8.newAnimation(grid("7-8", 1), walkDuration),
+			["run-right"] = Anim8.newAnimation(grid("7-8", 1), runDuration)
+		};
+		self.curAnimation = self.animations["walk-left"];
 
 		self.panicked = false;
 		self.state = "idle";
@@ -80,6 +95,7 @@ function Monster_Burglar:update(dt)
 
 	self:updateFacing(dt, MONSTER_BURGLAR_TURN_SPEED);
 	self:updateLights(dt);
+	self:updateAnimation(dt);
 end
 
 function Monster_Burglar:updateIdle(dt)
@@ -290,6 +306,8 @@ function Monster_Burglar:updateLights(dt)
 		self.eyeLights[2]:setVisible(false);
 		self.sightLight:setVisible(false);
 	else
+		-- TODO hide/show lights depending on facing direction
+
 		self.eyeLights[1]:setVisible(true);
 		self.eyeLights[2]:setVisible(true);
 		self.sightLight:setVisible(true);
@@ -313,20 +331,31 @@ function Monster_Burglar:updateLights(dt)
 	end
 end
 
+function Monster_Burglar:updateAnimation(dt)
+	local curAnimation = self.curFacing;
+
+	if self.velocity.x ~= 0 or self.velocity.y ~= 0 then
+		if self.state == "active-chase" or self.state == "panicked" then
+			curAnimation = "run-" .. curAnimation;
+		else
+			curAnimation = "walk-" .. curAnimation;
+		end
+
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:update(dt);
+	else
+		curAnimation = "walk-" .. curAnimation;
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:gotoFrame(1);
+	end
+end
+
 function Monster_Burglar:draw()
 	if not self.active then
 		return;
 	end
 
-	love.graphics.setColor(0, 255, 0);
-	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
-
-	-- Draw eyes
-	if self.state ~= "stunned" then
-		love.graphics.setColor(255, 0, 0);
-		love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
-		love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
-	end
+	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
 
 	if DRAW_MONSTER_PATH and self.state ~= "stunned" then
 		if self.path ~= nil then

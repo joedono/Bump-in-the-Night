@@ -19,6 +19,8 @@ Manager_Monster = Class {
 		self.floorLimits = floorLimits;
 		self.player = player;
 		self.soundEffects = soundEffects;
+
+		self.enemyImage = love.graphics.newImage("asset/image/enemy/enemy.png");
 	end
 };
 
@@ -26,20 +28,20 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	self.scenarioId = scenarioId;
 
 	if scenarioId == "wolf" then
-		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
-		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
-		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "panther" then
-		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "burglar" then
-		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "arsonist" then
 		self.fireManager = Manager_Fire(self.floorLimits);
-		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "killer" then
-		table.insert(self.monsters, Monster_Killer(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Killer(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "vampire" then
-		table.insert(self.monsters, Monster_Vampire(self, self.soundEffects, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Vampire(self, self.soundEffects, self.enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "ghost" then
 	elseif scenarioId == "alien" then
 	elseif scenarioId == "zombie" then

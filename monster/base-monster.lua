@@ -1,8 +1,10 @@
 Monster = Class {
-	init = function(self)
+	init = function(self, image)
+		self.image = image;
 		self.velocity = { x = 0, y = 0 };
 		self.speed = 0;
 		self.facing = { x = 0, y = 0 };
+		self.curFacing = "left";
 	end
 };
 
@@ -14,6 +16,24 @@ function Monster:updateFacing(dt, turnSpeed)
 
 		self.facing.x = math.cos(nextFacing);
 		self.facing.y = math.sin(nextFacing);
+
+		local curFacing = "left";
+		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+		if facing < 0 then
+			facing = facing + math.pi * 2;
+		end
+
+		if facing >= math.pi * 7/4 or facing <= math.pi * 1/4 then
+			curFacing = "right";
+		elseif facing >= math.pi * 1/4 and facing <= math.pi * 3/4 then
+			curFacing = "down";
+		elseif facing >= math.pi * 3/4 and facing <= math.pi * 5/4 then
+			curFacing = "left";
+		elseif facing >= math.pi * 5/4 and facing <= math.pi * 7/4 then
+			curFacing = "up";
+		end
+
+		self.curFacing = curFacing;
 	end
 end
 

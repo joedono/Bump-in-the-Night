@@ -15,8 +15,8 @@ Dead - Shot by player. Dead
 ]]
 
 Monster_Vampire = Class {__includes = Monster,
-	init = function(self, parentManager, soundEffects, player, curFloor, x, y)
-		Monster.init(self);
+	init = function(self, parentManager, soundEffects, image, player, curFloor, x, y)
+		Monster.init(self, image);
 		self.parentManager = parentManager;
 		self.soundEffects = soundEffects;
 		self.player = player;
@@ -64,6 +64,16 @@ Monster_Vampire = Class {__includes = Monster,
 			self.freezeAuraTimer:tween(1.5, self.freezeAuraEffect, {scale = 4, alpha = 0});
 		end);
 
+		local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
+		local walkDuration = 0.2;
+		self.animations = {
+			["walk-left"] = Anim8.newAnimation(grid("1-2", 1), walkDuration),
+			["walk-down"] = Anim8.newAnimation(grid("3-4", 1), walkDuration),
+			["walk-up"] = Anim8.newAnimation(grid("5-6", 1), walkDuration),
+			["walk-right"] = Anim8.newAnimation(grid("7-8", 1), walkDuration),
+		};
+		self.curAnimation = self.animations["walk-left"];
+
 		self.freezeTarget = {};
 		self.hasFrozenPlayer = false;
 		self.state = "idle";
@@ -101,6 +111,7 @@ function Monster_Vampire:update(dt)
 
 	self:updateFacing(dt, MONSTER_VAMPIRE_TURN_SPEED);
 	self:updateLights(dt);
+	self:updateAnimation(dt);
 	self.freezeAuraTimer:update(dt);
 	self.freezeAuraRepeatTimer:update(dt);
 end
@@ -249,6 +260,8 @@ function Monster_Vampire:updateLights(dt)
 
 		return;
 	else
+		-- TODO hide/show lights depending on facing direction
+
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
@@ -260,6 +273,19 @@ function Monster_Vampire:updateLights(dt)
 			self.eyeLights[1]:setVisible(false);
 			self.eyeLights[2]:setVisible(false);
 		end
+	end
+end
+
+function Monster_Vampire:updateAnimation(dt)
+	local curAnimation = self.curFacing;
+	curAnimation = "walk-" .. curAnimation;
+
+	if self.velocity.x ~= 0 or self.velocity.y ~= 0 then
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:update(dt);
+	else
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:gotoFrame(1);
 	end
 end
 
@@ -298,15 +324,8 @@ function Monster_Vampire:draw()
 		return;
 	end
 
-	love.graphics.setColor(100, 30, 30);
-	love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.h, self.box.w);
-
-	-- Draw eyes
-	if self.state ~= "dead" then
-		love.graphics.setColor(255, 0, 0);
-		love.graphics.circle("fill", self.box.x + self.box.w / 4, self.box.y + 10, 5, 5);
-		love.graphics.circle("fill", self.box.x + self.box.w * 3/4, self.box.y + 10, 5, 5);
-	end
+	love.graphics.setColor(255, 255, 255);
+	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
 
 	if DRAW_MONSTER_PATH and self.state ~= "dead" then
 		if self.path ~= nil then
