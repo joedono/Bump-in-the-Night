@@ -22,7 +22,7 @@ function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
 	LightWorld = Light({
 		ambient = {0, 0, 0},
-		shadowBlur = 5.0
+		shadowBlur = 3.0
 	});
 
 	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
