@@ -63,6 +63,11 @@ function Monster:updatePathLights(dt)
 	end
 end
 
+function Monster:resetVelocity()
+	self.velocity.x = 0;
+	self.velocity.y = 0;
+end
+
 function Monster:resetPath()
 	if self.path ~= nil then
 		for index, pathNode in pairs(self.path) do

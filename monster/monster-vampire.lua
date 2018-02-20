@@ -117,6 +117,7 @@ function Monster_Vampire:update(dt)
 end
 
 function Monster_Vampire:updateIdle(dt)
+	self:resetVelocity();
 	if self:trySensePlayer() then
 		return;
 	end
@@ -149,6 +150,8 @@ function Monster_Vampire:updateWalk(dt)
 end
 
 function Monster_Vampire:updateSpotted(dt)
+	self:resetVelocity();
+	
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.soundEffects.monsterVampireLaugh:rewind();

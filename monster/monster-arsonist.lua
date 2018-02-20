@@ -107,6 +107,8 @@ function Monster_Arsonist:update(dt)
 end
 
 function Monster_Arsonist:updateIdle(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_ARSONIST_SIGHT_CONE, MONSTER_ARSONIST_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
@@ -150,6 +152,8 @@ function Monster_Arsonist:updateWalk(dt)
 end
 
 function Monster_Arsonist:updateSpotted(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_ARSONIST_SIGHT_CONE, MONSTER_ARSONIST_SIGHT_DISTANCE) then
 		self.avoidTarget = {
 			x = self.player.box.x,
@@ -191,6 +195,8 @@ function Monster_Arsonist:updatePanicked(dt)
 end
 
 function Monster_Arsonist:updateStunned(dt)
+	self:resetVelocity();
+	
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self.panicked then

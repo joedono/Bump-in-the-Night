@@ -99,6 +99,8 @@ function Monster_Burglar:update(dt)
 end
 
 function Monster_Burglar:updateIdle(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_BURGLAR_SIGHT_CONE, MONSTER_BURGLAR_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
@@ -128,6 +130,8 @@ function Monster_Burglar:updateWalk(dt)
 end
 
 function Monster_Burglar:updateSpotted(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_BURGLAR_SIGHT_CONE, MONSTER_BURGLAR_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -174,6 +178,8 @@ function Monster_Burglar:updatePanicked(dt)
 end
 
 function Monster_Burglar:updateStunned(dt)
+	self:resetVelocity();
+	
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self.panicked then

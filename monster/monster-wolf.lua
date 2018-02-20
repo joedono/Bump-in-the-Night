@@ -105,6 +105,8 @@ end
 
 -- Hasn't seen or heard player and player hasn't dropped meat. Sit for a while
 function Monster_Wolf:updateIdle(dt)
+	self:resetVelocity();
+
 	if self:canHearPlayer() then
 		self:hasHeardPlayer();
 		return;
@@ -146,6 +148,8 @@ end
 
 -- Has heard the player. Look towards sound. If can't see player for some time, switch to alert
 function Monster_Wolf:updateHeardPlayer(dt)
+	self:resetVelocity();
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "investigating";
@@ -180,6 +184,8 @@ end
 
 -- Sees the player. Alert for a little bit, then give chase
 function Monster_Wolf:updateSpotted(dt)
+	self:resetVelocity();
+
 	if self:canHearPlayer() then
 		self.audioTarget = {
 			x = self.player.box.x,
@@ -293,14 +299,18 @@ end
 
 -- Reached meat that isn't in a trap. Consume meat for a time.
 function Monster_Wolf:updateEating(dt)
+	self:resetVelocity();
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "idle";
 	end
 end
 
--- Has walked into a trap. Whimper and try to free seld
+-- Has walked into a trap. Whimper and try to free self
 function Monster_Wolf:updateTrapped(dt)
+	self:resetVelocity();
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "idle";

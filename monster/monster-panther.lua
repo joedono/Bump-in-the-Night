@@ -103,6 +103,8 @@ function Monster_Panther:update(dt)
 end
 
 function Monster_Panther:updateIdle(dt)
+	self:resetVelocity();
+
 	if self:canHearPlayer() then
 		self:hasHeardPlayer();
 		return;
@@ -151,6 +153,8 @@ end
 
 -- Has heard the player. Look towards sound. If can't see player for some time, switch to alert
 function Monster_Panther:updateHeardPlayer(dt)
+	self:resetVelocity();
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "investigating";
@@ -185,6 +189,8 @@ end
 
 -- Sees the player. Alert for a little bit, then give chase
 function Monster_Panther:updateSpotted(dt)
+	self:resetVelocity();
+
 	if self:canHearPlayer() then
 		self.audioTarget = {
 			x = self.player.box.x,
@@ -298,6 +304,8 @@ end
 
 -- Reached meat that isn't in a trap. Consume meat for a time.
 function Monster_Panther:updateEating(dt)
+	self:resetVelocity();
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self.state = "idle";
@@ -490,7 +498,7 @@ function Monster_Panther:updateLights(dt)
 		return;
 	else
 		-- TODO hide/show lights depending on facing direction
-		
+
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 

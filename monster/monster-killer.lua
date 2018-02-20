@@ -125,6 +125,8 @@ function Monster_Killer:update(dt)
 end
 
 function Monster_Killer:updateIdle(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
@@ -153,6 +155,8 @@ function Monster_Killer:updateWalk(dt)
 end
 
 function Monster_Killer:updateSpotted(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -174,6 +178,8 @@ function Monster_Killer:updateSpotted(dt)
 end
 
 function Monster_Killer:updateShooting(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
 	else
@@ -205,6 +211,8 @@ function Monster_Killer:updateActiveChase(dt)
 end
 
 function Monster_Killer:updatePanicked(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
 		return;
@@ -224,6 +232,8 @@ function Monster_Killer:updatePanicked(dt)
 end
 
 function Monster_Killer:updatePanickedSpotted(dt)
+	self:resetVelocity();
+
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self.visualTarget = {
 			x = self.player.box.x,
@@ -281,6 +291,8 @@ function Monster_Killer:updatePanickedPursue(dt)
 end
 
 function Monster_Killer:updatePanickedShooting(dt)
+	self:resetVelocity();
+	
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
 	else
