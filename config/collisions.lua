@@ -58,6 +58,14 @@ monsterCollision = function(monster, other)
 	return nil;
 end
 
+ghostCollision = function(ghost, other)
+	if other.type == "player" and KILL_PLAYER then
+		return "cross";
+	end
+
+	return nil;
+end
+
 weaponBlastCollision = function(shotgunBlast, other)
 	if other.type == "monster" then
 		return "cross";

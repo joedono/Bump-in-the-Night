@@ -82,6 +82,10 @@ function Monster:resetPath()
 	self.targetPathNode = nil;
 end
 
+function Monster:resetTarget()
+	self.target = nil;
+end
+
 function Monster:hasCalledPolice()
 	return self.parentManager.parentStateGame:hasPlayerCalledPolice();
 end

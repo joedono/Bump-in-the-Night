@@ -102,19 +102,110 @@ function Monster_Ghost:update(dt)
 end
 
 function Monster_Ghost:updateIdle(dt)
-	-- TODO
+	self:resetVelocity();
+
+	if self:canSensePlayer() then
+		self:hasSensedPlayer();
+		return;
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetTarget();
+
+		local randomHunt = love.math.random(100);
+		if randomHunt < MONSTER_GHOST_HUNT_CHANCE then
+			self:hasSensedPlayer();
+			self.state = "active-chase";
+		else
+			self.state = "walk";
+		end
+	end
 end
 
 function Monster_Ghost:updateWalk(dt)
-	-- TODO
+	if self:canSensePlayer() then
+		self:hasSensedPlayer();
+		return;
+	end
+
+	if self.target == nil then
+		local targetNode = self.parentManager:randomPathNode();
+		self.target = {
+			x = targetNode.origin.x,
+			y = targetNode.origin.y
+		};
+	end
+
+	self:moveTowardsTarget(dt, MONSTER_GHOST_WALK_SPEED);
 end
 
 function Monster_Ghost:updateActiveChase(dt)
-	-- TODO
+	if self:canSensePlayer() then
+		self:hasSensedPlayer();
+	end
+
+	self:moveTowardsTarget(dt, MONSTER_GHOST_CHASE_SPEED);
 end
 
 function Monster_Ghost:updatePatrolling(dt)
-	-- TODO
+	if self:canSensePlayer() then
+		self:hasSensedPlayer();
+		return;
+	end
+
+	-- TODO Move randomly in small area
+
+	if self.stateTimer <= 0 then
+		self:resetTarget();
+		self.state = "walk";
+	end
+end
+
+function Monster_Ghost:moveTowardsTarget(dt, speed)
+	self.velocity = {
+		x = self.target.x - self.box.x,
+		y = self.target.y - self.box.y
+	};
+	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+	self.speed = speed;
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+		local col = cols[i];
+		if KILL_PLAYER and col.other.type == "player" and col.other.active
+			and (col.other.flashLightVisible or col.other.velocity.x ~= 0 or col.other.velocity.y ~= 0) then
+			col.other.active = false;
+			self.parentManager.parentStateGame:loseGame();
+		end
+	end
+
+	if self.target ~= nil then
+		local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
+		local distanceToPath = math.dist(self.box.x, self.box.y, self.target.x, self.target.y);
+
+		if distanceToPath < distanceTraveled or distanceToPath == 0 then
+			-- Reached target
+			self:resetTarget();
+
+			if self.state == "active-chase" then
+				self.state = "patrolling";
+				self.stateTimer = love.math.random(4, 6);
+			else
+				self.state = "idle";
+				self.stateTimer = love.math.random(2, 5);
+			end
+		end
+	end
+
+	self.box.x = actualX;
+	self.box.y = actualY;
+end
+
+function Monster_Ghost:updatePosition(dt)
+	local dx = self.box.x + self.velocity.x * self.speed * dt;
+	local dy = self.box.y + self.velocity.y * self.speed * dt;
+	return BumpWorld:move(self, dx, dy, ghostCollision);
 end
 
 function Monster_Ghost:updateLights(dt)
@@ -146,6 +237,18 @@ function Monster_Ghost:updateAnimation(dt)
 	end
 end
 
+function Monster_Ghost:canSensePlayer()
+	-- TODO Detect player
+end
+
+function Monster_Ghost:hasSensedPlayer()
+	self.state = "active-chase";
+	self.target = {
+		x = self.player.box.x,
+		y = self.player.box.y
+	};
+end
+
 function Monster_Ghost:draw()
 	if not self.active then
 		return;
@@ -153,6 +256,13 @@ function Monster_Ghost:draw()
 
 	love.graphics.setColor(255, 255, 255);
 	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
+
+	if DRAW_MONSTER_PATH then
+		if self.target ~= nil then
+			love.graphics.setColor(255, 0, 0);
+			love.graphics.rectangle("fill", self.target.x, self.target.y, 32, 32);
+		end
+	end
 
 	if DRAW_MONSTER_SENSES then
 		love.graphics.setColor(255, 255, 255, 150);
