@@ -67,12 +67,14 @@ function State_Game:init()
 		stakeStab = love.audio.newSource("asset/sound/stake-stab.wav", "static"),
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static"),
-		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static")
+		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static"),
+		bookRead = love.audio.newSource("asset/sound/book-reading.wav", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
 	self.soundEffects.policeSiren:setLooping(true);
 	self.soundEffects.playerFrozen:setLooping(true);
+	self.soundEffects.bookRead:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
 	self.policeTimerFont = love.graphics.newFont(24)
@@ -727,6 +729,7 @@ function State_Game:useItem()
 		);
 	elseif selectedItem.itemType == "book" then
 		self.isPlayerReadingBook = true;
+		self.soundEffects.bookRead:play();
 	elseif selectedItem.itemType == "cross" then
 		-- Do nothing
 	elseif selectedItem.itemType == "stake" then
@@ -755,6 +758,7 @@ end
 
 function State_Game:stopUsingItem()
 	self.isPlayerReadingBook = false;
+	self.soundEffects.bookRead:stop();
 end
 
 function State_Game:isPlayerUsingItem(item)
