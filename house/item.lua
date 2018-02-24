@@ -64,9 +64,9 @@ function Item:resetLightTimers()
 	self.lightTweenTimer:clear();
 
 	self.lightScriptTimer:script(function(wait)
-		self.lightTweenTimer:tween(ITEM_GLOW_RATE, self.lightColor, { color = 50 }, "linear");
+		self.lightTweenTimer:tween(ITEM_GLOW_RATE, self.lightColor, { color = 100 }, "in-quad");
 		wait(ITEM_GLOW_RATE);
-		self.lightTweenTimer:tween(ITEM_GLOW_RATE, self.lightColor, { color = 255 }, "linear");
+		self.lightTweenTimer:tween(ITEM_GLOW_RATE, self.lightColor, { color = 255 }, "out-quad");
 		wait(ITEM_GLOW_RATE);
 	end);
 end
@@ -85,8 +85,6 @@ function Item:update(dt)
 	self.lightRepeatTimer:update(dt);
 	self.lightScriptTimer:update(dt);
 	self.lightTweenTimer:update(dt);
-
-	print(self.lightColor.color);
 
 	self.light:setColor(self.lightColor.color, self.lightColor.color, self.lightColor.color);
 end
