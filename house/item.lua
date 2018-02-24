@@ -40,9 +40,9 @@ Item = Class {
 		self.heldImage = love.graphics.newImage(heldImageData);
 		self.worldImage = love.graphics.newImage(worldImageData);
 
-		self.light = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 255, 255, 255);
-		self.glowStrength = 0;
-		self.glowChange = ITEM_GLOW_RATE;
+		self.light = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 255, 255, 255, ITEM_WIDTH * 2/3);
+		self.lightGlowTimer = 0;
+		self.lightIncreasing = true;
 
 		self.type = "item";
 		self.active = true;
@@ -60,19 +60,23 @@ function Item:update(dt)
 		return;
 	end
 
-	self.glowStrength = self.glowStrength + self.glowChange * dt;
-
-	if self.glowStrength <= ITEM_WIDTH / 2 then
-		self.glowStrength = ITEM_WIDTH / 2;
-		self.glowChange = ITEM_GLOW_RATE;
+	self.lightGlowTimer = self.lightGlowTimer + dt;
+	local glowColor = 0;
+	if self.lightIncreasing then
+		glowColor = lerp(50, 255, self.lightGlowTimer / ITEM_GLOW_RATE);
+	else
+		glowColor = lerp(255, 50, self.lightGlowTimer / ITEM_GLOW_RATE);
 	end
 
-	if self.glowStrength >= ITEM_WIDTH * 2/3 then
-		self.glowStrength = ITEM_WIDTH * 2/3;
-		self.glowChange = -ITEM_GLOW_RATE;
+	if glowColor <= 50 then
+		self.lightIncreasing = true;
+		self.lightGlowTimer = 0;
+	elseif glowColor >= 255 then
+		self.lightIncreasing = false;
+		self.lightGlowTimer = 0;
 	end
 
-	self.light:setRange(self.glowStrength);
+	self.light:setColor(glowColor, glowColor, glowColor);
 end
 
 function Item:draw()
