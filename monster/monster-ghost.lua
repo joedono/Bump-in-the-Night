@@ -275,6 +275,10 @@ function Monster_Ghost:canSensePlayer()
 		return true;
 	end
 
+	if self.parentManager.parentStateGame:isPlayerUsingItem("book") then
+		return true;
+	end
+
 	return false;
 end
 

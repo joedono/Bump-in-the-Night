@@ -123,10 +123,12 @@ function State_Game:enter(previous, scenarioId)
 	self.policeTimer = POLICE_TIMER;
 	self.heatTurnedOn = false;
 	self.taserTimer = 0;
+	self.bookBanishmentTimer = BOOK_BANISHMENT_TIMER;
 
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
 
+	self.isPlayerReadingBook = false;
 	self.active = true;
 end
 
@@ -354,6 +356,10 @@ function State_Game:keyreleased(key, unicode)
 	if key == KEY_LIGHT_DOWN then
 		self.player.downLightPressed = false;
 	end
+
+	if key == KEY_ITEM_USE then
+		self:stopUsingItem();
+	end
 end
 
 function State_Game:gamepadpressed(joystick, button)
@@ -450,6 +456,10 @@ function State_Game:gamepadreleased(joystick, button)
 	if button == GAMEPAD_RUN then
 		self.player.runPressed = false;
 	end
+
+	if button == GAMEPAD_ITEM_USE then
+		self:stopUsingItem();
+	end
 end
 
 function State_Game:gamepadaxis(joystick, axis, value)
@@ -518,6 +528,13 @@ function State_Game:update(dt)
 
 	if self.taserTimer > 0 then
 		self.taserTimer = self.taserTimer - dt;
+	end
+
+	if self.isPlayerReadingBook then
+		self.bookBanishmentTimer = self.bookBanishmentTimer - dt;
+		if self.bookBanishmentTimer <= 0 then
+			self:winGame();
+		end
 	end
 
 	for index, floor in pairs(self.floors) do
@@ -709,6 +726,7 @@ function State_Game:useItem()
 			)
 		);
 	elseif selectedItem.itemType == "book" then
+		self.isPlayerReadingBook = true;
 	elseif selectedItem.itemType == "cross" then
 		-- Do nothing
 	elseif selectedItem.itemType == "stake" then
@@ -733,6 +751,18 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "crystal" then
 	elseif selectedItem.itemType == "scroll" then
 	end
+end
+
+function State_Game:stopUsingItem()
+	self.isPlayerReadingBook = false;
+end
+
+function State_Game:isPlayerUsingItem(item)
+	if item == "book" then
+		return self.isPlayerReadingBook;
+	end
+
+	return false;
 end
 
 function State_Game:playerHasItem(itemType)
@@ -889,6 +919,13 @@ function State_Game:drawHUD()
 			love.graphics.rectangle("fill", x, y - 10, 60, 6);
 			love.graphics.setColor(0, 0, 0);
 			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (TASER_TIMER - self.taserTimer) / TASER_TIMER, 4);
+		end
+
+		if item.itemType == "book" and self.bookBanishmentTimer < BOOK_BANISHMENT_TIMER then
+			love.graphics.setColor(255, 255, 255);
+			love.graphics.rectangle("fill", x, y - 10, 60, 6);
+			love.graphics.setColor(0, 0, 0);
+			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (BOOK_BANISHMENT_TIMER - self.bookBanishmentTimer) / BOOK_BANISHMENT_TIMER, 4);
 		end
 
 		if self.selectedItemIndex == index then
