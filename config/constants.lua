@@ -176,6 +176,9 @@ MONSTER_VAMPIRE_EYES_PLAYER_DISTANCE = 400;
 MONSTER_VAMPIRE_HUNT_CHANCE = 50;
 MONSTER_VAMPIRE_TURN_SPEED = 5;
 
+MONSTER_GHOST_WIDTH = 32 * MONSTER_SCALE;
+MONSTER_GHOST_HEIGHT = 32 * MONSTER_SCALE;
+
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
 
@@ -265,14 +268,15 @@ SCENARIO_SELECTION = {
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost"};
 SCENARIO_COMPLETED = {
 	["wolf"] = true,
 	["panther"] = true,
 	["burglar"] = true,
 	["arsonist"] = true,
 	["killer"] = true,
-	["vampire"] = true
+	["vampire"] = true,
+	["ghost"] = true
 };
 
 SCENARIO_DESCRIPTION = {
@@ -282,7 +286,7 @@ SCENARIO_DESCRIPTION = {
 	["Arsonist"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
 	["Killer"] = "A serial killer has chosen you for his next victim. After removing any means for his prey to fight back, he stalks them with his gun until he can end them. Keep your cool and call the cops.",
 	["Vampire"] = "Your house has become home to a hungry vampire. He can freeze you with a look or if you get too close. Find some divine protection before driving a stake through his heart.",
-	["Ghost"] = "",
+	["Ghost"] = "The spirit of your house has awoken. It can't see you in the dark, but it can hear you. Find the book of rituals and read the spell to banish it back to the netherworld.",
 	["Alien"] = "",
 	["Zombie"] = "",
 	["Elder God"] = "",
