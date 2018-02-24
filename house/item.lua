@@ -41,6 +41,16 @@ Item = Class {
 		self.worldImage = love.graphics.newImage(worldImageData);
 
 		self.light = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 255, 255, 255, ITEM_WIDTH * 2/3);
+		self.lightColor = { color = 255 };
+		self.lightRepeatTimer = Timer.new();
+		self.lightScriptTimer = Timer.new();
+		self.lightTweenTimer = Timer.new();
+
+		self.lightRepeatTimer:every(ITEM_GLOW_RATE * 2, function()
+			self:resetLightTimers();
+		end);
+		self:resetLightTimers();
+
 		self.lightGlowTimer = 0;
 		self.lightIncreasing = true;
 
@@ -48,6 +58,18 @@ Item = Class {
 		self.active = true;
 	end
 }
+
+function Item:resetLightTimers()
+	self.lightScriptTimer:clear();
+	self.lightTweenTimer:clear();
+
+	self.lightScriptTimer:script(function(wait)
+		self.lightTweenTimer:tween(ITEM_GLOW_RATE, self.lightColor, { color = 50 }, "linear");
+		wait(ITEM_GLOW_RATE);
+		self.lightTweenTimer:tween(ITEM_GLOW_RATE, self.lightColor, { color = 255 }, "linear");
+		wait(ITEM_GLOW_RATE);
+	end);
+end
 
 function Item:pickup()
 	self.active = false;
@@ -60,23 +82,13 @@ function Item:update(dt)
 		return;
 	end
 
-	self.lightGlowTimer = self.lightGlowTimer + dt;
-	local glowColor = 0;
-	if self.lightIncreasing then
-		glowColor = lerp(50, 255, self.lightGlowTimer / ITEM_GLOW_RATE);
-	else
-		glowColor = lerp(255, 50, self.lightGlowTimer / ITEM_GLOW_RATE);
-	end
+	self.lightRepeatTimer:update(dt);
+	self.lightScriptTimer:update(dt);
+	self.lightTweenTimer:update(dt);
 
-	if glowColor <= 50 then
-		self.lightIncreasing = true;
-		self.lightGlowTimer = 0;
-	elseif glowColor >= 255 then
-		self.lightIncreasing = false;
-		self.lightGlowTimer = 0;
-	end
+	print(self.lightColor.color);
 
-	self.light:setColor(glowColor, glowColor, glowColor);
+	self.light:setColor(self.lightColor.color, self.lightColor.color, self.lightColor.color);
 end
 
 function Item:draw()
