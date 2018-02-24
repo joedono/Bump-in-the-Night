@@ -53,6 +53,7 @@ Monster_Ghost = Class {__includes = Monster,
 		};
 		self.curAnimation = self.animations["walk-left"];
 
+		self.patrolTimer = 0;
 		self.state = "idle";
 		self.stateTimer = 5;
 		self.monsterType = "ghost";
@@ -153,7 +154,34 @@ function Monster_Ghost:updatePatrolling(dt)
 		return;
 	end
 
-	-- TODO Move randomly in small area
+	self.patrolTimer = self.patrolTimer - dt;
+
+	if self.patrolTimer <= 0 then
+		local vx = love.math.random() * 2 - 1;
+		local vy = love.math.random() * 2 - 1;
+
+		vx, vy = math.normalize(vx, vy);
+
+		self.velocity.x = vx;
+		self.velocity.y = vy;
+		self.speed = MONSTER_GHOST_WALK_SPEED;
+
+		self.patrolTimer = love.math.random(1, 2);
+	end
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+		local col = cols[i];
+		if KILL_PLAYER and col.other.type == "player" and col.other.active
+			and (col.other.flashLightVisible or col.other.velocity.x ~= 0 or col.other.velocity.y ~= 0) then
+			col.other.active = false;
+			self.parentManager.parentStateGame:loseGame();
+		end
+	end
+
+	self.box.x = actualX;
+	self.box.y = actualY;
 
 	if self.stateTimer <= 0 then
 		self:resetTarget();
@@ -238,7 +266,16 @@ function Monster_Ghost:updateAnimation(dt)
 end
 
 function Monster_Ghost:canSensePlayer()
-	-- TODO Detect player
+	if self.player.flashLightVisible and math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_GHOST_LIGHT_SENSE_DISTANCE then
+		return true;
+	end
+
+	if (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) and
+		math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_GHOST_MOVEMENT_SENSE_DISTANCE then
+		return true;
+	end
+
+	return false;
 end
 
 function Monster_Ghost:hasSensedPlayer()
