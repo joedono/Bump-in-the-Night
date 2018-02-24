@@ -51,7 +51,7 @@ Player = Class {
 		self.flashLight:setDirection(math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x));
 		self.flashLightVisible = true;
 
-		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 200);
+		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 50);
 		self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
 		self.soundEffects = soundEffects;
