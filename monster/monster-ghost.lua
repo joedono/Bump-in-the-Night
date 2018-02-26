@@ -203,6 +203,14 @@ function Monster_Ghost:moveTowardsTarget(dt, speed)
 		local col = cols[i];
 		if KILL_PLAYER and col.other.type == "player" and col.other.active
 			and (col.other.flashLightVisible or col.other.velocity.x ~= 0 or col.other.velocity.y ~= 0) then
+
+			-- TODO Add player kill noises
+			-- self.soundEffects.ghostKill:rewind();
+			-- self.soundEffects.ghostKill:play();
+
+			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.playerDeathYell:play();
+
 			col.other.active = false;
 			self.parentManager.parentStateGame:loseGame();
 		end
@@ -213,7 +221,6 @@ function Monster_Ghost:moveTowardsTarget(dt, speed)
 		local distanceToPath = math.dist(self.box.x, self.box.y, self.target.x, self.target.y);
 
 		if distanceToPath < distanceTraveled or distanceToPath == 0 then
-			-- Reached target
 			self:resetTarget();
 
 			if self.state == "active-chase" then
@@ -266,8 +273,12 @@ function Monster_Ghost:updateAnimation(dt)
 end
 
 function Monster_Ghost:canSensePlayer()
-	if self.player.flashLightVisible and math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_GHOST_LIGHT_SENSE_DISTANCE then
-		return true;
+	if math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_GHOST_LIGHT_SENSE_DISTANCE then
+		-- TODO Play "ghost is close" sound effect
+
+		if self.player.flashLightVisible then
+			return true;
+		end
 	end
 
 	if (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) and
