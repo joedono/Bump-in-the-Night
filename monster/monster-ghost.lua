@@ -53,6 +53,7 @@ Monster_Ghost = Class {__includes = Monster,
 		};
 		self.curAnimation = self.animations["walk-left"];
 
+		self.playSounds = true;
 		self.patrolTimer = 0;
 		self.state = "idle";
 		self.stateTimer = 5;
@@ -272,8 +273,10 @@ end
 
 function Monster_Ghost:canSensePlayer()
 	if math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_GHOST_LIGHT_SENSE_DISTANCE then
-		self.soundEffects.ghostApproach:setLooping(true);
-		self.soundEffects.ghostApproach:play();
+		if self.playSounds then
+			self.soundEffects.ghostApproach:setLooping(true);
+			self.soundEffects.ghostApproach:play();
+		end
 
 		if self.player.flashLightVisible then
 			return true;
@@ -300,6 +303,11 @@ function Monster_Ghost:hasSensedPlayer()
 		x = self.player.box.x,
 		y = self.player.box.y
 	};
+end
+
+function Monster_Ghost:stopAllSounds()
+	self.playSounds = false;
+	self.soundEffects.ghostApproach:stop();
 end
 
 function Monster_Ghost:draw()

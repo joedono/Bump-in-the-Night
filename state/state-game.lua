@@ -848,7 +848,7 @@ function State_Game:stopAllSounds()
 		["ghostKill"] = true
 	};
 
-	self.soundEffects.ghostApproach:setLooping(false);
+	self.monsterManager:stopAllSounds();
 
 	for index, sound in pairs(self.soundEffects) do
 		if not continuousSounds[index] then

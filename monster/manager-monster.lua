@@ -59,6 +59,12 @@ function Manager_Monster:setFire(centerX, centerY, curFloor)
 	self.fireManager:setFire(centerX, centerY, curFloor);
 end
 
+function Manager_Monster:stopAllSounds()
+	if self.scenarioId == "ghost" then
+		self.monsters[1]:stopAllSounds();
+	end
+end
+
 function Manager_Monster:update(dt)
 	for index, monster in pairs(self.monsters) do
 		monster:update(dt);
