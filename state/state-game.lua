@@ -68,13 +68,16 @@ function State_Game:init()
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
 		trapSpring = love.audio.newSource("asset/sound/trap-spring.wav", "static"),
 		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static"),
-		bookRead = love.audio.newSource("asset/sound/book-reading.wav", "static")
+		bookRead = love.audio.newSource("asset/sound/book-reading.wav", "static"),
+		ghostKill = love.audio.newSource("asset/sound/ghost-kill.wav", "static"),
+		ghostApproach = love.audio.newSource("asset/sound/ghost-approach.wav", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
 	self.soundEffects.policeSiren:setLooping(true);
 	self.soundEffects.playerFrozen:setLooping(true);
 	self.soundEffects.bookRead:setLooping(true);
+	self.soundEffects.ghostApproach:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
 	self.policeTimerFont = love.graphics.newFont(24)
