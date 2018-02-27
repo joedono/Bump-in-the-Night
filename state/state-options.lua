@@ -50,7 +50,6 @@ function State_Options:update(dt)
   Suit.Label("Help Text", x, y, w, h);
   Suit.Checkbox(self.helpTextCheckbox, x + w + 50, y, w, h);
 
-
   -- Keybindings
   -- Controller settings
 end
