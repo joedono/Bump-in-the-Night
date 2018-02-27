@@ -53,10 +53,6 @@ Monster_Ghost = Class {__includes = Monster,
 		};
 		self.curAnimation = self.animations["walk-left"];
 
-		self.playerDeathYell = soundEffects.playerDeathYell;
-		self.ghostKillSound = soundEffects.ghostKill;
-		self.ghostApproachSound = soundEffects.ghostApproach;
-
 		self.patrolTimer = 0;
 		self.state = "idle";
 		self.stateTimer = 5;
@@ -208,9 +204,9 @@ function Monster_Ghost:moveTowardsTarget(dt, speed)
 		if KILL_PLAYER and col.other.type == "player" and col.other.active
 			and (col.other.flashLightVisible or col.other.velocity.x ~= 0 or col.other.velocity.y ~= 0) then
 
-			self.soundEffects.ghostKillSound:rewind();
+			self.soundEffects.ghostKill:rewind();
 			self.soundEffects.playerDeathYell:rewind();
-			self.soundEffects.ghostKillSound:play();
+			self.soundEffects.ghostKill:play();
 			self.soundEffects.playerDeathYell:play();
 
 			col.other.active = false;
@@ -276,13 +272,14 @@ end
 
 function Monster_Ghost:canSensePlayer()
 	if math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_GHOST_LIGHT_SENSE_DISTANCE then
-		self.ghostApproachSound:play();
+		self.soundEffects.ghostApproach:setLooping(true);
+		self.soundEffects.ghostApproach:play();
 
 		if self.player.flashLightVisible then
 			return true;
 		end
 	else
-		self.ghostApproachSound:stop();
+		self.soundEffects.ghostApproach:setLooping(false);
 	end
 
 	if (self.player.velocity.x ~= 0 or self.player.velocity.y ~= 0) and

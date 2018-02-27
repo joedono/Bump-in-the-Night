@@ -77,7 +77,6 @@ function State_Game:init()
 	self.soundEffects.policeSiren:setLooping(true);
 	self.soundEffects.playerFrozen:setLooping(true);
 	self.soundEffects.bookRead:setLooping(true);
-	self.soundEffects.ghostApproach:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
 	self.policeTimerFont = love.graphics.newFont(24)
@@ -840,8 +839,17 @@ function State_Game:loseGame()
 end
 
 function State_Game:stopAllSounds()
+	local continuedSounds = {
+		["monsterBite"] = true,
+		["knifeStab"] = true,
+		["playerDeathYell"] = true,
+		["gunshot"] = true,
+		["stakeStab"] = true,
+		["ghostKill"] = true
+	};
+
 	for index, sound in pairs(self.soundEffects) do
-		if index ~= "monsterBite" and index ~= "knifeStab" and index ~= "playerDeathYell" and index ~= "gunshot" and index ~= "stakeStab" then
+		if not continuedSounds[index] then
 			sound:stop();
 		end
 	end
