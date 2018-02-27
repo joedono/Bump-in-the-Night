@@ -25,9 +25,6 @@ function State_Game:init()
 		shadowBlur = 3.0
 	});
 
-	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
-	LightWorld:setScale(CANVAS_SCALE);
-
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
@@ -84,6 +81,9 @@ end
 
 function State_Game:enter(previous, scenarioId)
 	love.graphics.setBackgroundColor(0, 0, 0);
+	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
+	LightWorld:setScale(CANVAS_SCALE);
+
 	local items = BumpWorld:getItems();
 	for index, item in pairs(items) do
 		BumpWorld:remove(item);
