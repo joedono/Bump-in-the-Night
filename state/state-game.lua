@@ -839,7 +839,7 @@ function State_Game:loseGame()
 end
 
 function State_Game:stopAllSounds()
-	local continuedSounds = {
+	local continuousSounds = {
 		["monsterBite"] = true,
 		["knifeStab"] = true,
 		["playerDeathYell"] = true,
@@ -848,8 +848,10 @@ function State_Game:stopAllSounds()
 		["ghostKill"] = true
 	};
 
+	self.soundEffects.ghostApproach:setLooping(false);
+
 	for index, sound in pairs(self.soundEffects) do
-		if not continuedSounds[index] then
+		if not continuousSounds[index] then
 			sound:stop();
 		end
 	end
