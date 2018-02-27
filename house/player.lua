@@ -40,7 +40,8 @@ Player = Class {
 			["use-item-right"] = Anim8.newAnimation(grid(2, 2), 1),
 			["use-item-up"] = Anim8.newAnimation(grid(3, 2), 1),
 			["use-item-left"] = Anim8.newAnimation(grid(4, 2), 1),
-			["use-item-down"] = Anim8.newAnimation(grid(5, 2), 1)
+			["use-item-down"] = Anim8.newAnimation(grid(5, 2), 1),
+			["read-book"] = Anim8.newAnimation(grid("6-7", 2), 0.5),
 		};
 		self.curAnimation = self.animations["walk-left"];
 		self.useItemAnimationTimer = 0;
@@ -163,6 +164,10 @@ function Player:updateRotation()
 end
 
 function Player:updatePosition(dt)
+	if self.parentStateGame.isPlayerReadingBook then
+		return;
+	end
+
 	local warped = false;
 	local dx = self.box.x + self.velocity.x * dt;
 	local dy = self.box.y + self.velocity.y * dt;
@@ -261,6 +266,10 @@ function Player:updateAnimation(dt)
 		self.useItemAnimationTimer = self.useItemAnimationTimer - dt;
 		curAnimation = "use-item-" .. curAnimation;
 		self.curAnimation = self.animations[curAnimation];
+	elseif self.parentStateGame.isPlayerReadingBook then
+		curAnimation = "read-book";
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:update(dt);
 	elseif self.velocity.x ~= 0 or self.velocity.y ~= 0 then
 		if self.runPressed then
 			curAnimation = "run-" .. curAnimation;
