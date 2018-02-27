@@ -41,7 +41,7 @@ Player = Class {
 			["use-item-up"] = Anim8.newAnimation(grid(3, 2), 1),
 			["use-item-left"] = Anim8.newAnimation(grid(4, 2), 1),
 			["use-item-down"] = Anim8.newAnimation(grid(5, 2), 1),
-			["read-book"] = Anim8.newAnimation(grid("6-7", 2), 0.5),
+			["read-book"] = Anim8.newAnimation(grid("6-7", 2), 1),
 		};
 		self.curAnimation = self.animations["walk-left"];
 		self.useItemAnimationTimer = 0;
