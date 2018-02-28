@@ -15,6 +15,7 @@ DRAW_MONSTER_PATH = false;
 DRAW_MONSTER_SENSES = false;
 DRAW_ENTIRE_HOUSE = false;
 LOAD_SAVE_ENABLED = false;
+HELP_TEXT_ENABLED = false;
 
 KEY_LEFT = "a";
 KEY_RIGHT = "d";
@@ -38,6 +39,7 @@ KEY_LIGHT_UP = "up";
 KEY_LIGHT_DOWN = "down";
 
 MASTER_VOLUME = 1;
+MASTER_BRIGHTNESS = 0;
 
 GAMEPAD_LEFT = "dpleft";
 GAMEPAD_RIGHT = "dpright";

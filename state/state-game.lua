@@ -21,7 +21,7 @@ State_Game = {};
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
 	LightWorld = Light({
-		ambient = {0, 0, 0},
+		ambient = { MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS },
 		shadowBlur = 3.0
 	});
 
