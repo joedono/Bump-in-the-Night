@@ -92,38 +92,38 @@ function State_Options:update(dt)
 
   love.graphics.setFont(self.defaultFont);
   local offset = 1;
-  Suit.Input(self.keyTextLeft, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextLeft, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextLeft, { id = "keyTextLeft" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextLeft, { id = "gamepadTextLeft" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextRight, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextRight, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextRight, { id = "keyTextRight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextRight, { id = "gamepadTextRight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextUp, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextUp, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextUp, { id = "keyTextUp" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextUp, { id = "gamepadTextUp" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextDown, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextDown, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextDown, { id = "keyTextDown" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextDown, { id = "gamepadTextDown" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextRun, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextRun, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextRun, { id = "keyTextRun" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextRun, { id = "gamepadTextRun" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextLeftItem, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextLeftItem, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextLeftItem, { id = "keyTextLeftItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextLeftItem, { id = "gamepadTextLeftItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextRightItem, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextRightItem, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextRightItem, { id = "keyTextRightItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextRightItem, { id = "gamepadTextRightItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextUseItem, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextUseItem, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextUseItem, { id = "keyTextUseItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextUseItem, { id = "gamepadTextUseItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextFlashlight, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextFlashlight, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyTextFlashlight, { id = "keyTextFlashlight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadTextFlashlight, { id = "gamepadTextFlashlight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
 
   if Suit.Button("Apply", 700, 810, 100, 30).hit then
     self:save();
   end
 
-  if Suit.Button("Cancel", 810, 810, 100, 30).hit then
+  if Suit.Button("Close", 810, 810, 100, 30).hit then
     GameState.switch(State_Title, false);
   end
 end
