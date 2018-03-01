@@ -38,6 +38,8 @@ function State_Options:enter(previous, animate)
     ["gamepadTextUseItem"] = { text = GAMEPAD_ITEM_USE },
     ["gamepadTextFlashlight"] = { text = GAMEPAD_FLASHLIGHT }
   };
+
+  self.appliedTimer = 0;
 end
 
 function State_Options:leave()
@@ -56,7 +58,7 @@ end
 
 function State_Options:gamepadpressed(joystick, button)
   for id, gamepadInput in pairs(self.gamepadInputs) do
-    if Suit.hasKeyboardFocus(id) then
+    if id ~= "gamepadTextRun" and Suit.hasKeyboardFocus(id) then
       gamepadInput.text = button;
     elseif gamepadInput.text == button then
       gamepadInput.text = "";
@@ -65,6 +67,10 @@ function State_Options:gamepadpressed(joystick, button)
 end
 
 function State_Options:update(dt)
+  if self.appliedTimer > 0 then
+    self.appliedTimer = self.appliedTimer - dt;
+  end
+
   Suit.layout:reset(SCREEN_WIDTH / 4 - 50, SCREEN_HEIGHT / 4 - 30, 20, 30);
 
   local w = SCREEN_WIDTH / 4;
@@ -131,7 +137,7 @@ function State_Options:update(dt)
   Suit.Input(self.keyboardInputs["keyTextFlashlight"], { id = "keyTextFlashlight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
   Suit.Input(self.gamepadInputs["gamepadTextFlashlight"], { id = "gamepadTextFlashlight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
 
-  if Suit.Button("Apply", 700, 810, 100, 30).hit then
+  if Suit.Button("Save", 700, 810, 100, 30).hit then
     self:save();
   end
 
@@ -141,7 +147,37 @@ function State_Options:update(dt)
 end
 
 function State_Options:save()
-  -- TODO Save options to constants.lua and to save file
+  if self.fullScreenCheckbox.checked ~= FULLSCREEN then
+    FULLSCREEN = self.fullScreenCheckbox.checked;
+    setFullscreen(FULLSCREEN);
+  end
+
+  MASTER_BRIGHTNESS = self.brightnessSlider.value;
+  MASTER_VOLUME = self.volumeSlider.value;
+  HELP_TEXT_ENABLED = self.helpTextCheckbox.checked;
+
+  KEY_LEFT = self.keyboardInputs["keyTextLeft"].text;
+  KEY_RIGHT = self.keyboardInputs["keyTextRight"].text;
+  KEY_UP = self.keyboardInputs["keyTextUp"].text;
+  KEY_DOWN = self.keyboardInputs["keyTextDown"].text;
+  KEY_RUN = self.keyboardInputs["keyTextRun"].text;
+  KEY_ITEM_LEFT = self.keyboardInputs["keyTextLeftItem"].text;
+  KEY_ITEM_RIGHT = self.keyboardInputs["keyTextRightItem"].text;
+  KEY_ITEM_USE = self.keyboardInputs["keyTextUseItem"].text;
+  KEY_FLASHLIGHT = self.keyboardInputs["keyTextFlashlight"].text;
+
+  GAMEPAD_LEFT = self.gamepadInputs["gamepadTextLeft"].text;
+  GAMEPAD_RIGHT = self.gamepadInputs["gamepadTextRight"].text;
+  GAMEPAD_UP = self.gamepadInputs["gamepadTextUp"].text;
+  GAMEPAD_DOWN = self.gamepadInputs["gamepadTextDown"].text;
+  GAMEPAD_ITEM_LEFT = self.gamepadInputs["gamepadTextLeftItem"].text;
+  GAMEPAD_ITEM_RIGHT = self.gamepadInputs["gamepadTextRightItem"].text;
+  GAMEPAD_ITEM_USE = self.gamepadInputs["gamepadTextUseItem"].text;
+  GAMEPAD_FLASHLIGHT = self.gamepadInputs["gamepadTextFlashlight"].text;
+
+  saveGame();
+
+  self.appliedTimer = 5;
 end
 
 function State_Options:draw()
@@ -155,6 +191,11 @@ function State_Options:draw()
 
     love.graphics.setFont(self.menuFont);
     Suit.draw();
+
+    if self.appliedTimer > 0 then
+      love.graphics.setColor(255, 255, 255, 255 * self.appliedTimer / 5);
+      love.graphics.print("Saved", 765, 845);
+    end
 
     -- love.graphics.setFont(self.defaultFont);
     -- local mx, my = love.mouse.getPosition();
