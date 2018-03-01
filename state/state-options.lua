@@ -187,9 +187,16 @@ function State_Options:draw()
 		love.graphics.setColor(255, 0, 0);
 		love.graphics.printf("Options", 0, 10, SCREEN_WIDTH, "center");
 		love.graphics.setColor(255, 255, 255, 255);
-    love.graphics.rectangle("line", 480, 420, 710, 370)
+    love.graphics.rectangle("line", 480, 420, 710, 370);
 
     love.graphics.setFont(self.menuFont);
+    love.graphics.setColor(255, 255, 255);
+    love.graphics.rectangle("line", 995, 250, 175, 40);
+    love.graphics.setColor(255, 0, 0);
+    love.graphics.printf("BUMP", 995, 253, 175, "center");
+    -- love.graphics.rectangle("fill", 995, 250, 175, 40);
+    love.graphics.setColor(0, 0, 0, 255 - self.brightnessSlider.value);
+    love.graphics.rectangle("fill", 995, 250, 175, 40);
     Suit.draw();
 
     if self.appliedTimer > 0 then
