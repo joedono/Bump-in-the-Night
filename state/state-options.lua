@@ -15,25 +15,29 @@ function State_Options:enter(previous, animate)
   self.volumeSlider = { value = MASTER_VOLUME, min = 0, max = 1 };
   self.helpTextCheckbox = { checked = HELP_TEXT_ENABLED };
 
-  self.keyTextLeft = { text = KEY_LEFT};
-  self.keyTextRight = { text = KEY_RIGHT};
-  self.keyTextUp = { text = KEY_UP };
-  self.keyTextDown = { text = KEY_DOWN };
-  self.keyTextRun = { text = KEY_RUN };
-  self.keyTextLeftItem = { text = KEY_ITEM_LEFT };
-  self.keyTextRightItem = { text = KEY_ITEM_RIGHT};
-  self.keyTextUseItem = { text = KEY_ITEM_USE};
-  self.keyTextFlashlight = { text = KEY_FLASHLIGHT };
+  self.keyboardInputs = {
+    ["keyTextLeft"] = { text = KEY_LEFT },
+    ["keyTextRight"] = { text = KEY_RIGHT },
+    ["keyTextUp"] = { text = KEY_UP },
+    ["keyTextDown"] = { text = KEY_DOWN },
+    ["keyTextRun"] = { text = KEY_RUN },
+    ["keyTextLeftItem"] = { text = KEY_ITEM_LEFT },
+    ["keyTextRightItem"] = { text = KEY_ITEM_RIGHT },
+    ["keyTextUseItem"] = { text = KEY_ITEM_USE },
+    ["keyTextFlashlight"] = { text = KEY_FLASHLIGHT }
+  };
 
-  self.gamepadTextLeft = { text = GAMEPAD_LEFT};
-  self.gamepadTextRight = { text = GAMEPAD_RIGHT};
-  self.gamepadTextUp = { text = GAMEPAD_UP};
-  self.gamepadTextDown = { text = GAMEPAD_DOWN};
-  self.gamepadTextRun = { text = "N/A" };
-  self.gamepadTextLeftItem = { text = GAMEPAD_ITEM_LEFT};
-  self.gamepadTextRightItem = { text = GAMEPAD_ITEM_RIGHT};
-  self.gamepadTextUseItem = { text = GAMEPAD_ITEM_USE};
-  self.gamepadTextFlashlight = { text = GAMEPAD_FLASHLIGHT };
+  self.gamepadInputs = {
+    ["gamepadTextLeft"] = { text = GAMEPAD_LEFT },
+    ["gamepadTextRight"] = { text = GAMEPAD_RIGHT },
+    ["gamepadTextUp"] = { text = GAMEPAD_UP },
+    ["gamepadTextDown"] = { text = GAMEPAD_DOWN },
+    ["gamepadTextRun"] = { text = "N/A" },
+    ["gamepadTextLeftItem"] = { text = GAMEPAD_ITEM_LEFT },
+    ["gamepadTextRightItem"] = { text = GAMEPAD_ITEM_RIGHT },
+    ["gamepadTextUseItem"] = { text = GAMEPAD_ITEM_USE },
+    ["gamepadTextFlashlight"] = { text = GAMEPAD_FLASHLIGHT }
+  };
 end
 
 function State_Options:leave()
@@ -41,15 +45,23 @@ function State_Options:leave()
 end
 
 function State_Options:keypressed(key, unicode)
-  Suit.keypressed(key);
-end
-
-function State_Options:textinput(t)
-  Suit.textinput(t);
+  for id, textInput in pairs(self.keyboardInputs) do
+    if Suit.hasKeyboardFocus(id) then
+      textInput.text = key;
+    elseif textInput.text == key then
+      textInput.text = "";
+    end
+  end
 end
 
 function State_Options:gamepadpressed(joystick, button)
-  GameState.switch(State_Title, false);
+  for id, gamepadInput in pairs(self.gamepadInputs) do
+    if Suit.hasKeyboardFocus(id) then
+      gamepadInput.text = button;
+    elseif gamepadInput.text == button then
+      gamepadInput.text = "";
+    end
+  end
 end
 
 function State_Options:update(dt)
@@ -92,32 +104,32 @@ function State_Options:update(dt)
 
   love.graphics.setFont(self.defaultFont);
   local offset = 1;
-  Suit.Input(self.keyTextLeft, { id = "keyTextLeft" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextLeft, { id = "gamepadTextLeft" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextLeft"], { id = "keyTextLeft" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextLeft"], { id = "gamepadTextLeft" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextRight, { id = "keyTextRight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextRight, { id = "gamepadTextRight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextRight"], { id = "keyTextRight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextRight"], { id = "gamepadTextRight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextUp, { id = "keyTextUp" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextUp, { id = "gamepadTextUp" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextUp"], { id = "keyTextUp" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextUp"], { id = "gamepadTextUp" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextDown, { id = "keyTextDown" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextDown, { id = "gamepadTextDown" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextDown"], { id = "keyTextDown" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextDown"], { id = "gamepadTextDown" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextRun, { id = "keyTextRun" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextRun, { id = "gamepadTextRun" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextRun"], { id = "keyTextRun" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextRun"], { id = "gamepadTextRun" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextLeftItem, { id = "keyTextLeftItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextLeftItem, { id = "gamepadTextLeftItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextLeftItem"], { id = "keyTextLeftItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextLeftItem"], { id = "gamepadTextLeftItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextRightItem, { id = "keyTextRightItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextRightItem, { id = "gamepadTextRightItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextRightItem"], { id = "keyTextRightItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextRightItem"], { id = "gamepadTextRightItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextUseItem, { id = "keyTextUseItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextUseItem, { id = "gamepadTextUseItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextUseItem"], { id = "keyTextUseItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextUseItem"], { id = "gamepadTextUseItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyTextFlashlight, { id = "keyTextFlashlight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadTextFlashlight, { id = "gamepadTextFlashlight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  Suit.Input(self.keyboardInputs["keyTextFlashlight"], { id = "keyTextFlashlight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  Suit.Input(self.gamepadInputs["gamepadTextFlashlight"], { id = "gamepadTextFlashlight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
 
   if Suit.Button("Apply", 700, 810, 100, 30).hit then
     self:save();
@@ -130,7 +142,6 @@ end
 
 function State_Options:save()
   -- TODO Save options to constants.lua and to save file
-  print("saving");
 end
 
 function State_Options:draw()
