@@ -37,7 +37,7 @@ function love.load()
 	loadGame();
 
 	GameState.registerEvents();
-	GameState.switch(State_Options);
+	GameState.switch(State_Title);
 end
 
 function love.keypressed(key, unicode)
@@ -86,6 +86,8 @@ function saveGame()
 	file:open("w");
 	file:write("return " .. Inspect(SCENARIO_COMPLETED));
 	file:close();
+
+	-- TODO Save options
 end
 
 function loadGame()
@@ -98,4 +100,6 @@ function loadGame()
 	if data ~= nil then
 		SCENARIO_COMPLETED = data();
 	end
+
+	-- TODO Load options
 end

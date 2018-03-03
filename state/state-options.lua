@@ -6,7 +6,8 @@ function State_Options:init()
   self.defaultFont = love.graphics.newFont(16);
 end
 
-function State_Options:enter(previous, animate)
+function State_Options:enter(previous)
+  self.previous = previous;
 	love.graphics.setBackgroundColor(0, 0, 0);
   love.mouse.setVisible(true);
 
@@ -14,6 +15,8 @@ function State_Options:enter(previous, animate)
   self.brightnessSlider = { value = MASTER_BRIGHTNESS, min = 0, max = 255 };
   self.volumeSlider = { value = MASTER_VOLUME, min = 0, max = 1 };
   self.helpTextCheckbox = { checked = HELP_TEXT_ENABLED };
+
+  self.inputs = Suit.new();
 
   self.keyboardInputs = {
     ["keyTextLeft"] = { text = KEY_LEFT },
@@ -40,6 +43,8 @@ function State_Options:enter(previous, animate)
   };
 
   self.appliedTimer = 0;
+
+  print(CANVAS_OFFSET_X .. ", " .. CANVAS_OFFSET_Y .. ", " .. CANVAS_SCALE);
 end
 
 function State_Options:leave()
@@ -48,7 +53,7 @@ end
 
 function State_Options:keypressed(key, unicode)
   for id, textInput in pairs(self.keyboardInputs) do
-    if Suit.hasKeyboardFocus(id) then
+    if self.inputs:hasKeyboardFocus(id) then
       textInput.text = key;
     elseif textInput.text == key then
       textInput.text = "";
@@ -58,7 +63,7 @@ end
 
 function State_Options:gamepadpressed(joystick, button)
   for id, gamepadInput in pairs(self.gamepadInputs) do
-    if id ~= "gamepadTextRun" and Suit.hasKeyboardFocus(id) then
+    if id ~= "gamepadTextRun" and self.inputs:hasKeyboardFocus(id) then
       gamepadInput.text = button;
     elseif gamepadInput.text == button then
       gamepadInput.text = "";
@@ -71,77 +76,80 @@ function State_Options:update(dt)
     self.appliedTimer = self.appliedTimer - dt;
   end
 
-  Suit.layout:reset(SCREEN_WIDTH / 4 - 50, SCREEN_HEIGHT / 4 - 30, 20, 30);
+  self.inputs:updateMouse(love.mouse.getX() / CANVAS_SCALE, love.mouse.getY() / CANVAS_SCALE, love.mouse.isDown(1));
+
+  self.inputs.layout:reset(SCREEN_WIDTH / 4 - 50, SCREEN_HEIGHT / 4 - 30, 20, 30);
 
   local w = SCREEN_WIDTH / 4;
   local h = 30;
-  Suit.Label("Fullscreen", Suit.layout:row(w, h));
-  Suit.Checkbox(self.fullScreenCheckbox, Suit.layout:col(w, h));
+  self.inputs:Label("Fullscreen", self.inputs.layout:row(w, h));
+  self.inputs:Checkbox(self.fullScreenCheckbox, self.inputs.layout:col(w, h));
 
-  Suit.layout:row(w, h);
-  Suit.Label("Brightness", Suit.layout:left(w, h));
-  Suit.Slider(self.brightnessSlider, Suit.layout:col(w / 2, h));
+  self.inputs.layout:row(w, h);
+  self.inputs:Label("Brightness", self.inputs.layout:left(w, h));
+  self.inputs:Slider(self.brightnessSlider, self.inputs.layout:col(w / 2, h));
 
-  Suit.layout:row(w, h);
-  Suit.Label("Volume", Suit.layout:left(w, h));
-  Suit.Slider(self.volumeSlider, Suit.layout:col(w, h));
+  self.inputs.layout:row(w, h);
+  self.inputs:Label("Volume", self.inputs.layout:left(w, h));
+  self.inputs:Slider(self.volumeSlider, self.inputs.layout:col(w, h));
 
-  Suit.layout:row(w, h);
-  Suit.Label("Help Text", Suit.layout:left(w, h));
-  Suit.Checkbox(self.helpTextCheckbox, Suit.layout:col(w, h));
+  self.inputs.layout:row(w, h);
+  self.inputs:Label("Help Text", self.inputs.layout:left(w, h));
+  self.inputs:Checkbox(self.helpTextCheckbox, self.inputs.layout:col(w, h));
 
-  Suit.layout:row(w, h);
-  Suit.Label("Controls", Suit.layout:left(w, h));
+  self.inputs.layout:row(w, h);
+  self.inputs:Label("Controls", self.inputs.layout:left(w, h));
   w = w / 3 + 15;
-  local x, y, w, h = Suit.layout:col(w, h);
+  local x, y, w, h = self.inputs.layout:col(w, h);
   local padding = 5;
   x = x - 50;
-  Suit.Label("Keyboard", x + w, y, w, h);
-  Suit.Label("Controller", x + (w * 2), y, w, h);
-  Suit.Label("Left", x + (w + padding) * 0, y + (h + padding) * 1, w, h);
-  Suit.Label("Right", x + (w + padding) * 0, y + (h + padding) * 2, w, h);
-  Suit.Label("Up", x + (w + padding) * 0, y + (h + padding) * 3, w, h);
-  Suit.Label("Down", x + (w + padding) * 0, y + (h + padding) * 4, w, h);
-  Suit.Label("Run", x + (w + padding) * 0, y + (h + padding) * 5, w, h);
-  Suit.Label("Left Item", x + (w + padding) * 0, y + (h + padding) * 6, w, h);
-  Suit.Label("Right Item", x + (w + padding) * 0, y + (h + padding) * 7, w, h);
-  Suit.Label("Use Item", x + (w + padding) * 0, y + (h + padding) * 8, w, h);
-  Suit.Label("Flashlight", x + (w + padding) * 0, y + (h + padding) * 9, w, h);
+  self.inputs:Label("Keyboard", x + w, y, w, h);
+  self.inputs:Label("Controller", x + (w * 2), y, w, h);
+  self.inputs:Label("Left", x + (w + padding) * 0, y + (h + padding) * 1, w, h);
+  self.inputs:Label("Right", x + (w + padding) * 0, y + (h + padding) * 2, w, h);
+  self.inputs:Label("Up", x + (w + padding) * 0, y + (h + padding) * 3, w, h);
+  self.inputs:Label("Down", x + (w + padding) * 0, y + (h + padding) * 4, w, h);
+  self.inputs:Label("Run", x + (w + padding) * 0, y + (h + padding) * 5, w, h);
+  self.inputs:Label("Left Item", x + (w + padding) * 0, y + (h + padding) * 6, w, h);
+  self.inputs:Label("Right Item", x + (w + padding) * 0, y + (h + padding) * 7, w, h);
+  self.inputs:Label("Use Item", x + (w + padding) * 0, y + (h + padding) * 8, w, h);
+  self.inputs:Label("Flashlight", x + (w + padding) * 0, y + (h + padding) * 9, w, h);
 
   love.graphics.setFont(self.defaultFont);
   local offset = 1;
-  Suit.Input(self.keyboardInputs["keyTextLeft"], { id = "keyTextLeft" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextLeft"], { id = "gamepadTextLeft" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextLeft"], { id = "keyTextLeft" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextLeft"], { id = "gamepadTextLeft" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextRight"], { id = "keyTextRight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextRight"], { id = "gamepadTextRight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextRight"], { id = "keyTextRight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextRight"], { id = "gamepadTextRight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextUp"], { id = "keyTextUp" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextUp"], { id = "gamepadTextUp" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextUp"], { id = "keyTextUp" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextUp"], { id = "gamepadTextUp" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextDown"], { id = "keyTextDown" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextDown"], { id = "gamepadTextDown" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextDown"], { id = "keyTextDown" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextDown"], { id = "gamepadTextDown" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextRun"], { id = "keyTextRun" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextRun"], { id = "gamepadTextRun" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextRun"], { id = "keyTextRun" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextRun"], { id = "gamepadTextRun" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextLeftItem"], { id = "keyTextLeftItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextLeftItem"], { id = "gamepadTextLeftItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextLeftItem"], { id = "keyTextLeftItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextLeftItem"], { id = "gamepadTextLeftItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextRightItem"], { id = "keyTextRightItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextRightItem"], { id = "gamepadTextRightItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextRightItem"], { id = "keyTextRightItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextRightItem"], { id = "gamepadTextRightItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextUseItem"], { id = "keyTextUseItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextUseItem"], { id = "gamepadTextUseItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextUseItem"], { id = "keyTextUseItem" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextUseItem"], { id = "gamepadTextUseItem" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
   offset = offset + 1;
-  Suit.Input(self.keyboardInputs["keyTextFlashlight"], { id = "keyTextFlashlight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
-  Suit.Input(self.gamepadInputs["gamepadTextFlashlight"], { id = "gamepadTextFlashlight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.keyboardInputs["keyTextFlashlight"], { id = "keyTextFlashlight" }, x + (w + padding) * 1, y + (h + padding) * offset, w, h);
+  self.inputs:Input(self.gamepadInputs["gamepadTextFlashlight"], { id = "gamepadTextFlashlight" }, x + (w + padding) * 2, y + (h + padding) * offset, w, h);
 
-  if Suit.Button("Save", 700, 810, 100, 30).hit then
+  if self.inputs:Button("Save", 700, 810, 100, 30).hit then
     self:save();
   end
 
-  if Suit.Button("Close", 810, 810, 100, 30).hit then
+  if self.inputs:Button("Close", 810, 810, 100, 30).hit then
+    print("switching");
     GameState.switch(State_Title, false);
   end
 end
@@ -155,6 +163,10 @@ function State_Options:save()
   MASTER_BRIGHTNESS = self.brightnessSlider.value;
   MASTER_VOLUME = self.volumeSlider.value;
   HELP_TEXT_ENABLED = self.helpTextCheckbox.checked;
+
+  self.previous.soundSelectionChange:setVolume(MASTER_VOLUME);
+	self.previous.soundSelect:setVolume(MASTER_VOLUME);
+	self.previous.music:setVolume(MASTER_VOLUME);
 
   KEY_LEFT = self.keyboardInputs["keyTextLeft"].text;
   KEY_RIGHT = self.keyboardInputs["keyTextRight"].text;
@@ -197,16 +209,12 @@ function State_Options:draw()
     -- love.graphics.rectangle("fill", 995, 250, 175, 40);
     love.graphics.setColor(0, 0, 0, 255 - self.brightnessSlider.value);
     love.graphics.rectangle("fill", 995, 250, 175, 40);
-    Suit.draw();
+    self.inputs:draw();
 
     if self.appliedTimer > 0 then
       love.graphics.setColor(255, 255, 255, 255 * self.appliedTimer / 5);
       love.graphics.print("Saved", 765, 845);
     end
-
-    -- love.graphics.setFont(self.defaultFont);
-    -- local mx, my = love.mouse.getPosition();
-    -- love.graphics.print(mx .. ", " .. my, 0, 0);
 	end);
 
 	love.graphics.setColor(255, 255, 255);
