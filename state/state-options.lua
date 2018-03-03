@@ -60,12 +60,26 @@ function State_Options:keypressed(key, unicode)
 end
 
 function State_Options:gamepadpressed(joystick, button)
+  local setGamepad = false;
   for id, gamepadInput in pairs(self.gamepadInputs) do
     if id ~= "gamepadTextRun" and self.inputs:hasKeyboardFocus(id) then
       gamepadInput.text = button;
-    elseif gamepadInput.text == button then
-      gamepadInput.text = "";
+      setGamepad = true;
     end
+  end
+
+  if setGamepad then
+    for id, gamepadInput in pairs(self.gamepadInputs) do
+      if id == "gamepadTextRun" or not self.inputs:hasKeyboardFocus(id) then
+        gamepadInput.text = "";
+      end
+    end
+
+    return;
+  end
+
+  if button == "b" then
+    GameState.switch(State_Title, false);
   end
 end
 
