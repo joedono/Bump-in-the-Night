@@ -99,7 +99,7 @@ function State_Game:enter(previous, scenarioId)
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
-		scenarioId = "alien";
+		scenarioId = "burglar";
 	end
 
 	self.scenarioId = scenarioId;
@@ -707,12 +707,17 @@ function State_Game:useItem()
 		local cellphoneDead = self:playerHasItem("cellphone_dead");
 		if cellphoneDead ~= nil then
 			local newInventory = {};
-			table.insert(newInventory, cellphoneDead);
-			table.insert(newInventory, self:playerHasItem("cellphone_battery"));
-
 			local newItem = Item(-1000, -1000, "cellphone_live", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet);
 			newItem:pickup();
 			table.insert(newInventory, newItem);
+
+			-- Delete the dead cellphone and the battery from inventory
+			for index, item in pairs(self.inventory) do
+				if item.itemType ~= "cellphone_battery" and item.itemType ~= "cellphone_dead" then
+					table.insert(newInventory, item);
+				end
+			end
+
 			self.inventory = newInventory;
 			self.selectedItemIndex = 1;
 		end
