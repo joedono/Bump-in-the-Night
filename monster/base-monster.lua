@@ -43,6 +43,33 @@ function Monster:updatePosition(dt)
 	return BumpWorld:move(self, dx, dy, monsterCollision);
 end
 
+function Monster:updateEyeLights(facing)
+	if facing >= math.pi * 5/4 and facing <= math.pi * 7/4 then
+		-- Up
+		self.eyeLights[1]:setColor(150, 0, 0);
+		self.eyeLights[2]:setColor(150, 0, 0);
+		self.eyeLights[1]:setVisible(true);
+		self.eyeLights[2]:setVisible(true);
+	else
+		self.eyeLights[1]:setColor(255, 0, 0);
+		self.eyeLights[2]:setColor(255, 0, 0);
+
+		if facing >= math.pi * 7/4 or facing <= math.pi * 1/4 then
+			-- Right
+			self.eyeLights[1]:setVisible(false);
+			self.eyeLights[2]:setVisible(true);
+		elseif facing >= math.pi * 1/4 and facing <= math.pi * 3/4 then
+			-- Down
+			self.eyeLights[1]:setVisible(true);
+			self.eyeLights[2]:setVisible(true);
+		elseif facing >= math.pi * 3/4 and facing <= math.pi * 5/4 then
+			-- Left
+			self.eyeLights[1]:setVisible(true);
+			self.eyeLights[2]:setVisible(false);
+		end
+	end
+end
+
 function Monster:updatePathLights(dt)
 	if self.path == nil then
 		return;

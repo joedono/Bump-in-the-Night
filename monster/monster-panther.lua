@@ -497,16 +497,19 @@ function Monster_Panther:updateLights(dt)
 
 		return;
 	else
-		-- TODO hide/show lights depending on facing direction
-
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
 		if self.state == "heard-player" or self.state == "investigating" or self.state == "spotted"
 			or self.state == "active-chase" or self.state == "passive-chase" or self.state == "trapped"
 			or math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_PANTHER_EYES_PLAYER_DISTANCE then
-			self.eyeLights[1]:setVisible(true);
-			self.eyeLights[2]:setVisible(true);
+
+			local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+			if facing < 0 then
+				facing = facing + math.pi * 2;
+			end
+
+			self:updateEyeLights(facing);
 		else
 			self.eyeLights[1]:setVisible(false);
 			self.eyeLights[2]:setVisible(false);

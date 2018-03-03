@@ -179,7 +179,7 @@ end
 
 function Monster_Burglar:updateStunned(dt)
 	self:resetVelocity();
-	
+
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self.panicked then
@@ -312,10 +312,12 @@ function Monster_Burglar:updateLights(dt)
 		self.eyeLights[2]:setVisible(false);
 		self.sightLight:setVisible(false);
 	else
-		-- TODO hide/show lights depending on facing direction
+		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+		if facing < 0 then
+			facing = facing + math.pi * 2;
+		end
 
-		self.eyeLights[1]:setVisible(true);
-		self.eyeLights[2]:setVisible(true);
+		self:updateEyeLights(facing);
 		self.sightLight:setVisible(true);
 
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);

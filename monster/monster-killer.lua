@@ -292,7 +292,7 @@ end
 
 function Monster_Killer:updatePanickedShooting(dt)
 	self:resetVelocity();
-	
+
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
 	else
@@ -483,7 +483,12 @@ end
 function Monster_Killer:updateLights(dt)
 	self:updatePathLights(dt);
 
-	-- TODO hide/show lights depending on facing direction
+	local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+	if facing < 0 then
+		facing = facing + math.pi * 2;
+	end
+
+	self:updateEyeLights(facing);
 
 	self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 	self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);

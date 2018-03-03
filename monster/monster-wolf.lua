@@ -484,8 +484,6 @@ function Monster_Wolf:updateLights(dt)
 
 		return;
 	else
-		-- TODO hide/show lights depending on facing direction
-
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
@@ -494,6 +492,7 @@ function Monster_Wolf:updateLights(dt)
 			facing = facing + math.pi * 2;
 		end
 
+		self:updateEyeLights(facing);
 		self.sightLight:setDirection(facing);
 		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
 
