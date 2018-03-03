@@ -279,7 +279,7 @@ SCENARIO_SELECTION = {
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien"};
 SCENARIO_COMPLETED = {
 	["wolf"] = true,
 	["panther"] = true,
@@ -287,7 +287,8 @@ SCENARIO_COMPLETED = {
 	["arsonist"] = true,
 	["killer"] = true,
 	["vampire"] = true,
-	["ghost"] = true
+	["ghost"] = true,
+	["alien"] = true
 };
 
 SCENARIO_DESCRIPTION = {
