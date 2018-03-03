@@ -43,8 +43,6 @@ function State_Options:enter(previous)
   };
 
   self.appliedTimer = 0;
-
-  print(CANVAS_OFFSET_X .. ", " .. CANVAS_OFFSET_Y .. ", " .. CANVAS_SCALE);
 end
 
 function State_Options:leave()
@@ -149,7 +147,6 @@ function State_Options:update(dt)
   end
 
   if self.inputs:Button("Close", 810, 810, 100, 30).hit then
-    print("switching");
     GameState.switch(State_Title, false);
   end
 end
