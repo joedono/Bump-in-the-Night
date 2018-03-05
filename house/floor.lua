@@ -9,10 +9,11 @@ Floor = Class {
 
 		self.source = love.filesystem.load(layoutFile)();
 		self.soundEffects = soundEffects;
+		self.defaultFont = love.graphics.newFont(12);
 
 		self.tilesets = self.source.tilesets;
 		for index, tileset in pairs(self.tilesets) do
-			local imageFilename = string.gsub(tileset.image, "%.%./%.%.", "asset");
+			local imageFilename = string.gsub(tileset.image, "%.%./%.%./", "");
 			tileset.tilesetImage = love.graphics.newImage(imageFilename);
 		end
 
@@ -122,9 +123,14 @@ function Floor:draw(camera)
 	end
 
 	if DRAW_PORTALS then
-		love.graphics.setColor(255, 255, 0);
 		for index, portal in pairs(self.portals) do
-			love.graphics.rectangle("fill", portal.x, portal.y, portal.width, portal.height);
+			if portal.visible then
+				love.graphics.setFont(self.defaultFont);
+				love.graphics.setColor(255, 255, 0);
+				love.graphics.rectangle("fill", portal.x, portal.y, portal.width, portal.height);
+				love.graphics.setColor(0, 0, 0);
+				love.graphics.printf("Stairs", portal.x, portal.y + portal.height / 2 - 8, portal.width, "center");
+			end
 		end
 	end
 end

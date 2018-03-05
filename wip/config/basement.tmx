@@ -188,7 +188,7 @@
     <property name="room" type="int" value="1"/>
    </properties>
   </object>
-  <object id="110" name="Shute Exit" x="608" y="448" width="96" height="96">
+  <object id="110" name="Shute Exit" x="608" y="448" width="96" height="96" visible="0">
    <properties>
     <property name="dx" type="int" value="0"/>
     <property name="dy" type="int" value="0"/>
