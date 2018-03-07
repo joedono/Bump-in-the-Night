@@ -99,7 +99,7 @@ function State_Game:enter(previous, scenarioId)
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
-		scenarioId = "alien";
+		scenarioId = "ghost";
 	end
 
 	self.scenarioId = scenarioId;
