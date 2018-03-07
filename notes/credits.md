@@ -5,6 +5,7 @@ https://opengameart.org/content/top-down-house-atlas
 https://opengameart.org/content/home-objects
 https://opengameart.org/content/9-frame-fire-animation-16x-32x-64x
 https://opengameart.org/content/water-splash
+https://opengameart.org/content/lpc-submissions-merged
 https://www.spriters-resource.com/game_boy_gbc/thelegendofzeldalinksawakeningdx/sheet/9436/
 
 # Fonts
