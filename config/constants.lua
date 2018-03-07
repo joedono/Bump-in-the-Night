@@ -6,7 +6,7 @@ FULLSCREEN = false;
 
 -- Debug Variables
 DRAW_BOXES = false;
-DRAW_PORTALS = true;
+DRAW_PORTALS = false;
 DRAW_PATHS = false;
 DRAW_LIGHTS = true;
 KILL_PLAYER = true;
