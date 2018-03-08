@@ -751,6 +751,7 @@ function State_Game:useItem()
 				self.usedItemImages.stakeStab
 			)
 		);
+	elseif selectedItem.itemType == "shovel" then
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
 	elseif selectedItem.itemType == "battery" then

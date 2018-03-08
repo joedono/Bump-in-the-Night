@@ -231,7 +231,8 @@ INVENTORY_MAP = {
 		["gasoline"] = {x = 0, y = 96},
 		["lighter"] = {x = 32, y = 96},
 		["crystal"] = {x = 64, y = 96},
-		["scroll"] = {x = 96, y = 96}
+		["scroll"] = {x = 96, y = 96},
+		["shovel"] = {x = 128, y = 96}
 	},
 	held = {
 		["meat"] = {x = 0, y = 0},
@@ -255,7 +256,8 @@ INVENTORY_MAP = {
 		["gasoline"] = {x = 0, y = 180},
 		["lighter"] = {x = 60, y = 180},
 		["crystal"] = {x = 120, y = 180},
-		["scroll"] = {x = 180, y = 180}
+		["scroll"] = {x = 180, y = 180},
+		["shovel"] = {x = 240, y = 180}
 	}
 };
 
@@ -266,7 +268,7 @@ SCENARIO_ITEMS = {
 	["arsonist"] = {"taser", "cellphone_dead", "cellphone_battery", "bucket"},
 	["killer"] = {"cellphone_dead", "cellphone_battery"},
 	["vampire"] = {"stake", "cross"},
-	["ghost"] = {"book"},
+	["ghost"] = {"shovel", "lighter"},
 	["alien"] = {"music_box", "battery", "foil"},
 	["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
 	["elder_god"] = {"crystal", "scroll"}
