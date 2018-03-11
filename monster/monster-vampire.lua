@@ -123,6 +123,7 @@ function Monster_Vampire:updateIdle(dt)
 	end
 
 	if self.stateTimer <= 0 then
+		self.hasFrozenPlayer = false;
 		self:resetPath();
 		self.state = "walk";
 	end
@@ -230,7 +231,6 @@ function Monster_Vampire:followPath(dt, speed)
 			-- Reached end of path
 			if self.targetPathNode == nil then
 				self:resetPath();
-				self.hasFrozenPlayer = false;
 				self.state = "idle";
 				self.stateTimer = love.math.random(2, 5);
 			end
@@ -244,7 +244,6 @@ function Monster_Vampire:followPath(dt, speed)
 
 	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
 		self:resetPath();
-		self.hasFrozenPlayer = false;
 		self.state = "idle";
 		self.stateTimer = love.math.random(2, 5);
 	end

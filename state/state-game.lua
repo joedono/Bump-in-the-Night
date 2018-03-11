@@ -99,7 +99,7 @@ function State_Game:enter(previous, scenarioId)
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
-		scenarioId = "ghost";
+		scenarioId = "vampire";
 	end
 
 	self.scenarioId = scenarioId;
@@ -470,7 +470,7 @@ function State_Game:gamepadaxis(joystick, axis, value)
 	if self.playerFrozen > 0 then
 		-- Player has been frozen by a vampire
 		if axis == "leftx" or axis == "lefty" then
-			self.playerFrozen = self.playerFrozen - 0.1;
+			self.playerFrozen = self.playerFrozen - 0.3;
 
 			if axis == "leftx" then -- X Movement
 				self.player.facing.x = value;
