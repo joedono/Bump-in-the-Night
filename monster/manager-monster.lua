@@ -55,14 +55,22 @@ function Manager_Monster:randomPathNode()
 	return self.pathNodes[love.math.random(self.numPathNodes)];
 end
 
-function Manager_Monster:setFire(centerX, centerY, curFloor)
-	self.fireManager:setFire(centerX, centerY, curFloor);
+function Manager_Monster:randomPathNodeInRange(x, y, range)
+	local eligibleNodes = {};
+	local numEligibleNodes = 0;
+
+	for index, pathNode in pairs(self.pathNodes) do
+		if math.dist(x, y, pathNode.origin.x, pathNode.origin.y) <= range then
+			table.insert(eligibleNodes, pathNode);
+			numEligibleNodes = numEligibleNodes + 1;
+		end
+	end
+
+	return eligibleNodes[love.math.random(numEligibleNodes)];
 end
 
-function Manager_Monster:stopAllSounds()
-	if self.scenarioId == "ghost" then
-		self.monsters[1]:stopAllSounds();
-	end
+function Manager_Monster:setFire(centerX, centerY, curFloor)
+	self.fireManager:setFire(centerX, centerY, curFloor);
 end
 
 function Manager_Monster:update(dt)

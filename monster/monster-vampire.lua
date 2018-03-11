@@ -272,7 +272,7 @@ function Monster_Vampire:updateLights(dt)
 				facing = facing + math.pi * 2;
 			end
 
-			self:updateEyeLights(facing);
+			self:updateEyeLights(facing, 255);
 		else
 			self.eyeLights[1]:setVisible(false);
 			self.eyeLights[2]:setVisible(false);

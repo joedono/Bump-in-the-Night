@@ -488,7 +488,7 @@ function Monster_Killer:updateLights(dt)
 		facing = facing + math.pi * 2;
 	end
 
-	self:updateEyeLights(facing);
+	self:updateEyeLights(facing, 255);
 
 	self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
 	self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);

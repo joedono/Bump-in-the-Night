@@ -43,6 +43,14 @@ Monster_Ghost = Class {__includes = Monster,
 		};
 		self.curAnimation = self.animations["walk-left"];
 
+		self.eyeLights = {
+			LightWorld:newLight(0, 0, 0, 0, 0, 15),
+			LightWorld:newLight(0, 0, 0, 0, 0, 15)
+		};
+
+		self.eyeLights[1]:setVisible(false);
+		self.eyeLights[2]:setVisible(false);
+
 		self.fadeTimer = Timer.new();
 		self.fadeTable = { alpha = 0, eyeLight = 0, volume = 1 };
 
@@ -142,7 +150,20 @@ function Monster_Ghost:updatePosition(dt)
 end
 
 function Monster_Ghost:updateLights(dt)
-	-- TODO
+	self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
+	self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+
+	if self.state == "fading-in" or self.state == "chasing"or self.state == "fading-out" then
+		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+		if facing < 0 then
+			facing = facing + math.pi * 2;
+		end
+
+		self:updateEyeLights(facing, self.fadeTable.eyeLight);
+	else
+		self.eyeLights[1]:setVisible(false);
+		self.eyeLights[2]:setVisible(false);
+	end
 end
 
 function Monster_Ghost:updateAnimation(dt)
@@ -168,7 +189,10 @@ function Monster_Ghost:startFadeIn()
 	local px = self.player.box.x;
 	local py = self.player.box.y;
 
-	-- TODO Set location to somewhere close to player
+	local spawnPathNode = self.parentManager:randomPathNodeInRange(px, py, MONSTER_GHOST_SPAWN_RANGE);
+	self.box.x = spawnPathNode.origin.x;
+	self.box.y = spawnPathNode.origin.y;
+	BumpWorld:update(self, self.box.x, self.box.y);
 
 	self.fadeTimer:tween(MONSTER_GHOST_FADEIN_TIMER, self.fadeTable, { alpha = 255, eyeLight = 255 }, "linear", function()
 		self.stateTimer = MONSTER_GHOST_CHASE_TIMER;
@@ -179,13 +203,20 @@ end
 function Monster_Ghost:startFadeOut()
 	self.state = "fading-out";
 
-	self.fadeTimer:tween(MONSTER_GHOST_FADEOUT_TIMER, self.fadeTable, { alpha = 0, eyeLight = 0, volume = 0 }, "linear", function()
-		self.soundEffects.ghostApproach:stop();
-		self.stateTimer = love.math.random(10, 20);
-		self.state = "idle";
-	end);
+	self.fadeTimer:tween(MONSTER_GHOST_FADEOUT_TIMER, self.fadeTable, { alpha = 0, eyeLight = 0, volume = 0 }, "linear",
+		function()
+			self.soundEffects.ghostApproach:stop();
+			self.stateTimer = love.math.random(10, 20);
+			self.state = "idle";
+		end
+	);
 end
 
 function Monster_Ghost:draw()
-	-- TODO
+	if not self.active or self.state == "idle" then
+		return;
+	end
+
+	love.graphics.setColor(255, 255, 255, self.fadeTable.alpha);
+	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
 end

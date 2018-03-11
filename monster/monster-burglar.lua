@@ -317,7 +317,7 @@ function Monster_Burglar:updateLights(dt)
 			facing = facing + math.pi * 2;
 		end
 
-		self:updateEyeLights(facing);
+		self:updateEyeLights(facing, 255);
 		self.sightLight:setVisible(true);
 
 		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);

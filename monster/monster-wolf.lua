@@ -492,7 +492,7 @@ function Monster_Wolf:updateLights(dt)
 			facing = facing + math.pi * 2;
 		end
 
-		self:updateEyeLights(facing);
+		self:updateEyeLights(facing, 255);
 		self.sightLight:setDirection(facing);
 		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
 
