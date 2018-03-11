@@ -74,6 +74,7 @@ function State_Game:init()
 	self.soundEffects.policeSiren:setLooping(true);
 	self.soundEffects.playerFrozen:setLooping(true);
 	self.soundEffects.bookRead:setLooping(true);
+	self.soundEffects.ghostApproach:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
 	self.policeTimerFont = love.graphics.newFont(24)
@@ -99,7 +100,7 @@ function State_Game:enter(previous, scenarioId)
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
-		scenarioId = "vampire";
+		scenarioId = "ghost";
 	end
 
 	self.scenarioId = scenarioId;

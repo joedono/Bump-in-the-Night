@@ -43,6 +43,9 @@ Monster_Ghost = Class {__includes = Monster,
 		};
 		self.curAnimation = self.animations["walk-left"];
 
+		self.fadeTimer = Timer.new();
+		self.fadeTable = { alpha = 0, eyeLight = 0, volume = 1 };
+
 		self.state = "idle";
 		self.stateTimer = 5;
 		self.monsterType = "ghost";
@@ -52,7 +55,137 @@ Monster_Ghost = Class {__includes = Monster,
 };
 
 function Monster_Ghost:update(dt)
+	if not self.active then
+		return;
+	end
+
+	if self.stateTimer > 0 then
+		self.stateTimer = self.stateTimer - dt;
+	end
+
+	if self.state == "idle" then
+		self:updateIdle(dt);
+	elseif self.state == "fading-in" then
+		self:updateFadingIn(dt);
+	elseif self.state == "chasing" then
+		self:updateChasing(dt);
+	elseif self.state == "fading-out" then
+		self:updateFadingOut(dt);
+	elseif self.state == "test" then
+
+	else
+		error("Invalid State " .. self.state);
+	end
+
+	self:updateFacing(dt, MONSTER_GHOST_TURN_SPEED);
+	self:updateLights(dt);
+	self:updateAnimation(dt);
+end
+
+function Monster_Ghost:updateIdle(dt)
+	self:resetVelocity();
+
+	if self.stateTimer <= 0 then
+		self:startFadeIn();
+	end
+end
+
+function Monster_Ghost:updateFadingIn(dt)
+	self.fadeTimer:update(dt);
+end
+
+function Monster_Ghost:updateChasing(dt)
+	if self.stateTimer <= 0 then
+		self:startFadeOut();
+	end
+
+	self:chasePlayer(dt, MONSTER_GHOST_CHASE_SPEED);
+end
+
+function Monster_Ghost:updateFadingOut(dt)
+	self.fadeTimer:update(dt);
+	self.soundEffects.ghostApproach:setVolume(self.fadeTable.volume);
+	self:chasePlayer(dt, MONSTER_GHOST_CHASE_SPEED);
+end
+
+function Monster_Ghost:chasePlayer(dt, speed)
+	self.velocity = {
+		x = self.player.box.x - self.box.x,
+		y = self.player.box.y - self.box.y
+	};
+	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+	self.speed = speed;
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+		local col = cols[i];
+		if KILL_PLAYER and col.other.type == "player" and col.other.active then
+			self.soundEffects.ghostKill:rewind();
+			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.ghostKill:play();
+			self.soundEffects.playerDeathYell:play();
+
+			col.other.active = false;
+			self.parentManager.parentStateGame:loseGame();
+		end
+	end
+
+	self.box.x = actualX;
+	self.box.y = actualY;
+end
+
+function Monster_Ghost:updatePosition(dt)
+	local dx = self.box.x + self.velocity.x * self.speed * dt;
+	local dy = self.box.y + self.velocity.y * self.speed * dt;
+	return BumpWorld:move(self, dx, dy, ghostCollision);
+end
+
+function Monster_Ghost:updateLights(dt)
+	-- TODO
+end
+
+function Monster_Ghost:updateAnimation(dt)
+	local curAnimation = self.curFacing;
+	curAnimation = "walk-" .. curAnimation;
+
+	if self.velocity.x ~= 0 or self.velocity.y ~= 0 then
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:update(dt);
+	else
+		self.curAnimation = self.animations[curAnimation];
+		self.curAnimation:gotoFrame(1);
+	end
+end
+
+function Monster_Ghost:startFadeIn()
+	self.state = "fading-in";
+	self.fadeTable.volume = 1;
+	self.soundEffects.ghostApproach:setVolume(1);
+	self.soundEffects.ghostApproach:rewind();
+	self.soundEffects.ghostApproach:play();
+
+	local px = self.player.box.x;
+	local py = self.player.box.y;
+
+	-- TODO Set location to somewhere close to player
+
+	self.fadeTimer:tween(MONSTER_GHOST_FADEIN_TIMER, self.fadeTable, { alpha = 255, eyeLight = 255 }, "linear", function()
+		self.stateTimer = MONSTER_GHOST_CHASE_TIMER;
+		self.state = "chasing";
+	end);
+end
+
+function Monster_Ghost:startFadeOut()
+	self.state = "fading-out";
+
+	self.fadeTimer:tween(MONSTER_GHOST_FADEOUT_TIMER, self.fadeTable, { alpha = 0, eyeLight = 0, volume = 0 }, "linear", function()
+		self.soundEffects.ghostApproach:stop();
+		self.stateTimer = love.math.random(10, 20);
+		self.state = "idle";
+	end);
 end
 
 function Monster_Ghost:draw()
+	-- TODO
 end
