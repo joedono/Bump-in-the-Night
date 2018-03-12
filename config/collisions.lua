@@ -82,6 +82,22 @@ waterSplashCollision = function(water, other)
 	return nil;
 end
 
+shovelDigCollision = function(shovel, other)
+	if other.type == "grave" then
+		return "cross";
+	end
+
+	return nil;
+end
+
+lighterCollision = function(shovel, other)
+	if other.type == "grave" then
+		return "cross";
+	end
+
+	return nil;
+end
+
 -- Says which objects should be considered when asked "Can I move from here to there?"
 canMoveFilter = function(other)
 	if other.type == "wall" then

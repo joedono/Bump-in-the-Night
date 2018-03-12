@@ -12,6 +12,7 @@ require "used-items/lighter";
 require "used-items/meat";
 require "used-items/salt";
 require "used-items/shotgun-blast";
+require "used-items/shovel-dig";
 require "used-items/stake-stab";
 require "used-items/taser-blast";
 require "used-items/trap";
@@ -67,7 +68,9 @@ function State_Game:init()
 		waterSplash = love.audio.newSource("asset/sound/water-splash.wav", "static"),
 		bookRead = love.audio.newSource("asset/sound/book-reading.wav", "static"),
 		ghostKill = love.audio.newSource("asset/sound/ghost-kill.wav", "static"),
-		ghostApproach = love.audio.newSource("asset/sound/ghost-approach.wav", "static")
+		ghostApproach = love.audio.newSource("asset/sound/ghost-approach.wav", "static"),
+		shovelDig = love.audio.newSource("asset/sound/ghost-approach.wav", "static"), -- TODO replace this with actual sound
+		useLighter = love.audio.newSource("asset/sound/ghost-approach.wav", "static") -- TODO replace this with actual sound
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
@@ -75,6 +78,7 @@ function State_Game:init()
 	self.soundEffects.playerFrozen:setLooping(true);
 	self.soundEffects.bookRead:setLooping(true);
 	self.soundEffects.ghostApproach:setLooping(true);
+	self.soundEffects.shovelDig:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
 	self.policeTimerFont = love.graphics.newFont(24)
@@ -134,6 +138,8 @@ function State_Game:enter(previous, scenarioId)
 	self:updateCamera(self.player.box.x, self.player.box.y);
 
 	self.isPlayerReadingBook = false;
+	self.isPlayerShovelling = false;
+
 	self.active = true;
 end
 
@@ -753,6 +759,17 @@ function State_Game:useItem()
 			)
 		);
 	elseif selectedItem.itemType == "shovel" then
+		self.isPlayerShovelling = true;
+		self.soundEffects.shovelDig:rewind();
+		self.soundEffects.shovelDig:play();
+		self.player:useItem();
+		table.insert(
+			self.usedItems,
+			Shovel_Dig(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y
+			)
+		);
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
 	elseif selectedItem.itemType == "battery" then
@@ -760,6 +777,16 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "axe" then
 	elseif selectedItem.itemType == "gasoline" then
 	elseif selectedItem.itemType == "lighter" then
+		self.soundEffects.useLighter:rewind();
+		self.soundEffects.useLighter:play();
+		self.player:useItem();
+		table.insert(
+			self.usedItems,
+			Lighter(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y
+			)
+		);
 	elseif selectedItem.itemType == "crystal" then
 	elseif selectedItem.itemType == "scroll" then
 	end
@@ -768,11 +795,23 @@ end
 function State_Game:stopUsingItem()
 	self.isPlayerReadingBook = false;
 	self.soundEffects.bookRead:stop();
+
+	self.isPlayerShovelling = false;
+	self.soundEffects.shovelDig:stop();
+	for index, item in pairs(self.usedItems) do
+		if item.type == "placed-shovel-dig" then
+			item.active = false;
+		end
+	end
 end
 
 function State_Game:isPlayerUsingItem(item)
 	if item == "book" then
 		return self.isPlayerReadingBook;
+	end
+
+	if item == "shovel" then
+		return self.isPlayerShovelling;
 	end
 
 	return false;

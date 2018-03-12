@@ -164,7 +164,7 @@ function Player:updateRotation()
 end
 
 function Player:updatePosition(dt)
-	if self.parentStateGame.isPlayerReadingBook then
+	if self.parentStateGame.isPlayerReadingBook or self.parentStateGame.isPlayerShovelling then
 		return;
 	end
 
@@ -264,6 +264,9 @@ function Player:updateAnimation(dt)
 
 	if self.useItemAnimationTimer > 0 then
 		self.useItemAnimationTimer = self.useItemAnimationTimer - dt;
+		curAnimation = "use-item-" .. curAnimation;
+		self.curAnimation = self.animations[curAnimation];
+	elseif self.parentStateGame.isPlayerShovelling then
 		curAnimation = "use-item-" .. curAnimation;
 		self.curAnimation = self.animations[curAnimation];
 	elseif self.parentStateGame.isPlayerReadingBook then
