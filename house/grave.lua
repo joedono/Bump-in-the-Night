@@ -12,7 +12,7 @@ Grave = Class {
 
     BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
-    self.dugTimer = GRAVE_DUG_TIMER;
+    self.digTimer = GRAVE_DIG_TIMER;
     self.burnTimer = GRAVE_BURN_TIMER;
     self.hasCorpse = false;
     self.isBurning = false;
@@ -33,17 +33,17 @@ function Grave:update(dt)
 end
 
 function Grave:dig(dt)
-  if self.dugTimer > 0 then
-    self.dugTimer = self.dugTimer - dt;
+  if self.digTimer > 0 then
+    self.digTimer = self.digTimer - dt;
   end
 end
 
 function Grave:setFire()
-  if not self.hasCorpse or self.dugTimer > 0 then
+  if not self.hasCorpse or self.digTimer > 0 then
     return;
-  else
-    self.isBurning = true;
   end
+
+  self.isBurning = true;
 end
 
 function Grave:draw()
@@ -51,7 +51,7 @@ function Grave:draw()
 
   if self.isBurning then
     -- TODO draw fire animation
-  elseif self.dugTimer > 0 then
+  elseif self.digTimer > 0 then
     love.graphics.draw(self.buriedImage, self.box.x, self.box.y);
   elseif self.hasCorpse then
     love.graphics.draw(self.corpseImage, self.box.x, self.box.y);

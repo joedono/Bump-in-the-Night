@@ -210,7 +210,7 @@ SHOVEL_DIG_HEIGHT = 32 * SHOVEL_DIG_SCALE;
 GRAVE_SCALE = 1;
 GRAVE_WIDTH = 32 * GRAVE_SCALE;
 GRAVE_HEIGHT = 32 * GRAVE_SCALE;
-GRAVE_DUG_TIMER = 10;
+GRAVE_DIG_TIMER = 10;
 GRAVE_BURN_TIMER = 20;
 
 POLICE_TIMER = 45;
@@ -308,7 +308,7 @@ SCENARIO_DESCRIPTION = {
 	["Arsonist"] = "An arsonist has chosen to burn your house down. He won't mind killing you either. Call the cops and make sure your house is still standing when they arrive.",
 	["Killer"] = "A serial killer has chosen you for his next victim. After removing any means for his prey to fight back, he stalks them with his gun until he can end them. Keep your cool and call the cops.",
 	["Vampire"] = "Your house has become home to a hungry vampire. He can freeze you with a look or if you get too close. Find some divine protection before driving a stake through his heart.",
-	["Ghost"] = "The spirit of your house has awoken. It can't see you in the dark, but it can hear you. Find the book of rituals and read the spell to banish it back to the netherworld.",
+	["Ghost"] = "The spirit of your house has awoken. It can't materialize fully yet, but it can manage short bursts of murderous intent. Dig up and burn its corpse before it consumes your soul.",
 	["Alien"] = "",
 	["Zombie"] = "",
 	["Elder God"] = "",
