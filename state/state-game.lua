@@ -33,7 +33,10 @@ function State_Game:init()
 		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
 		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png"),
 		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png"),
-		stakeStab = love.graphics.newImage("asset/image/used-items/stake-stab.png")
+		stakeStab = love.graphics.newImage("asset/image/used-items/stake-stab.png"),
+		buriedGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png"), -- TODO replace with actual image
+		dugGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png"), -- TODO replace with actual image
+		corpseGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png") -- TODO replace with actual image
 	};
 
 	local waterSplashGrid = Anim8.newGrid(61, 32, self.usedItemImages.waterSplash:getWidth(), self.usedItemImages.waterSplash:getHeight());
@@ -134,6 +137,10 @@ function State_Game:enter(previous, scenarioId)
 	self.taserTimer = 0;
 	self.bookBanishmentTimer = BOOK_BANISHMENT_TIMER;
 
+	if self.scenarioId == "ghost" then
+		self:buryCorpse();
+	end
+
 	self.camera = Camera(CAMERA_START_X, CAMERA_START_Y);
 	self:updateCamera(self.player.box.x, self.player.box.y);
 
@@ -150,10 +157,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("config/floor-layout/main-floor.lua", 1, 0, 0, self.soundEffects));
-	table.insert(floors, Floor("config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.soundEffects));
-	table.insert(floors, Floor("config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
-	table.insert(floors, Floor("config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.soundEffects));
+	table.insert(floors, Floor("config/floor-layout/main-floor.lua", 1, 0, 0, self.scenarioId, self.soundEffects, self.usedImageImages));
+	table.insert(floors, Floor("config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.scenarioId, self.soundEffects, self.usedImageImages));
+	table.insert(floors, Floor("config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.usedImageImages));
+	table.insert(floors, Floor("config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.usedImageImages));
 
 	return floors;
 end
@@ -867,6 +874,19 @@ function State_Game:callPolice()
 		self.soundEffects.phoneRing:stop();
 		self.soundEffects.policeSiren:play();
 	end);
+end
+
+function State_Game:buryCorpse()
+	local graves = {};
+
+	for index, floor in pairs(self.floors) do
+		for index2, grave in paires(floor.graves) do
+			table.insert(graves, grave);
+		end
+	end
+
+	local occupiedGrave = graves[love.math.random(#graves)];
+	occupiedGrave.hasCorpse = true;
 end
 
 function State_Game:winGame()

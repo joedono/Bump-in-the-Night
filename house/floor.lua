@@ -1,7 +1,8 @@
 require "house/door";
+require "house/grave";
 
 Floor = Class {
-	init = function (self, layoutFile, index, originX, originY, soundEffects)
+	init = function (self, layoutFile, index, originX, originY, scenarioId, soundEffects, usedImageImages)
 		self.origin = {
 			x = originX,
 			y = originY
@@ -9,6 +10,7 @@ Floor = Class {
 
 		self.source = love.filesystem.load(layoutFile)();
 		self.soundEffects = soundEffects;
+		self.usedImageImages = usedImageImages;
 		self.defaultFont = love.graphics.newFont(12);
 
 		self.tilesets = self.source.tilesets;
@@ -25,6 +27,8 @@ Floor = Class {
 		self.itemLocations = {};
 		self.sourceNodes = {};
 		self.spawns = {};
+		self.graves = {};
+		self.scenarioId = scenarioId;
 
 		for index, layer in pairs(self.source.layers) do
 			if layer.type == "tilelayer" then
@@ -45,6 +49,8 @@ Floor = Class {
 				self.spawns = layer.objects;
 			elseif layer.name == "FireProof" then
 				self:addFireProofing(layer);
+			elseif layer.name == "Graves" and self.scenarioId == "ghost" then
+				self:addGraves(layer);
 			end
 		end
 	end
@@ -89,6 +95,12 @@ function Floor:addFireProofing(layer)
 	end
 end
 
+function Floor:addGraves(layer)
+	for index, grave in pairs(layer.objects) do
+		table.insert(self.graves, Grave(grave.x + self.origin.x, grave.y + self.origin.y, grave.width, grave.height, self.usedImageImages));
+	end
+end
+
 function Floor:getLimits()
 	return {
 		x1 = self.origin.x,
@@ -102,6 +114,10 @@ function Floor:update(dt)
 	for index, door in pairs(self.doors) do
 		door:update(dt);
 	end
+
+	for index, grave in pairs(self.graves) do
+		grave:update(dt);
+	end
 end
 
 function Floor:draw(camera)
@@ -113,6 +129,10 @@ function Floor:draw(camera)
 
 	for index, door in pairs(self.doors) do
 		door:draw();
+	end
+
+	for index, grave in pairs(self.graves) do
+		grave:draw();
 	end
 
 	if DRAW_BOXES then
