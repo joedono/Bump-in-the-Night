@@ -2,7 +2,7 @@ require "house/door";
 require "house/grave";
 
 Floor = Class {
-	init = function (self, layoutFile, index, originX, originY, scenarioId, soundEffects, usedImageImages)
+	init = function (self, layoutFile, index, originX, originY, scenarioId, soundEffects, imageStore)
 		self.origin = {
 			x = originX,
 			y = originY
@@ -10,7 +10,7 @@ Floor = Class {
 
 		self.source = love.filesystem.load(layoutFile)();
 		self.soundEffects = soundEffects;
-		self.usedImageImages = usedImageImages;
+		self.imageStore = imageStore;
 		self.defaultFont = love.graphics.newFont(12);
 
 		self.tilesets = self.source.tilesets;
@@ -97,7 +97,7 @@ end
 
 function Floor:addGraves(layer)
 	for index, grave in pairs(layer.objects) do
-		table.insert(self.graves, Grave(grave.x + self.origin.x, grave.y + self.origin.y, grave.width, grave.height, self.usedImageImages));
+		table.insert(self.graves, Grave(grave.x + self.origin.x, grave.y + self.origin.y, grave.width, grave.height, self.imageStore));
 	end
 end
 

@@ -29,17 +29,18 @@ function State_Game:init()
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
 
-	self.usedItemImages = {
+	self.imageStore = {
 		shotgunBlast = love.graphics.newImage("asset/image/used-items/shotgun-blast.png"),
 		taserBlast = love.graphics.newImage("asset/image/used-items/taser-blast.png"),
 		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png"),
 		stakeStab = love.graphics.newImage("asset/image/used-items/stake-stab.png"),
+		burningFire = love.graphics.newImage("asset/image/fire.png"),
 		buriedGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png"), -- TODO replace with actual image
 		dugGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png"), -- TODO replace with actual image
 		corpseGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png") -- TODO replace with actual image
 	};
 
-	local waterSplashGrid = Anim8.newGrid(61, 32, self.usedItemImages.waterSplash:getWidth(), self.usedItemImages.waterSplash:getHeight());
+	local waterSplashGrid = Anim8.newGrid(61, 32, self.imageStore.waterSplash:getWidth(), self.imageStore.waterSplash:getHeight());
 
 	self.usedItemAnimations = {
 		waterSplash = Anim8.newAnimation(waterSplashGrid("1-4", "1-2"), 0.05)
@@ -157,10 +158,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("config/floor-layout/main-floor.lua", 1, 0, 0, self.scenarioId, self.soundEffects, self.usedImageImages));
-	table.insert(floors, Floor("config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.scenarioId, self.soundEffects, self.usedImageImages));
-	table.insert(floors, Floor("config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.usedImageImages));
-	table.insert(floors, Floor("config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.usedImageImages));
+	table.insert(floors, Floor("config/floor-layout/main-floor.lua", 1, 0, 0, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor("config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor("config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor("config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.imageStore));
 
 	return floors;
 end
@@ -685,7 +686,7 @@ function State_Game:useItem()
 				Shotgun_Blast(
 					self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
 					self.player.facing.x, self.player.facing.y,
-					self.usedItemImages.shotgunBlast
+					self.imageStore.shotgunBlast
 				)
 			);
 		end
@@ -708,7 +709,7 @@ function State_Game:useItem()
 				Taser_Blast(
 					self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
 					self.player.facing.x, self.player.facing.y,
-					self.usedItemImages.taserBlast
+					self.imageStore.taserBlast
 				)
 			);
 		end
@@ -744,7 +745,7 @@ function State_Game:useItem()
 			Bucket_Water(
 				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
 				self.player.facing.x, self.player.facing.y,
-				self.usedItemImages.waterSplash,
+				self.imageStore.waterSplash,
 				self.usedItemAnimations.waterSplash:clone()
 			)
 		);
@@ -762,7 +763,7 @@ function State_Game:useItem()
 			Stake_Stab(
 				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
 				self.player.facing.x, self.player.facing.y,
-				self.usedItemImages.stakeStab
+				self.imageStore.stakeStab
 			)
 		);
 	elseif selectedItem.itemType == "shovel" then
@@ -880,7 +881,7 @@ function State_Game:buryCorpse()
 	local graves = {};
 
 	for index, floor in pairs(self.floors) do
-		for index2, grave in paires(floor.graves) do
+		for index2, grave in pairs(floor.graves) do
 			table.insert(graves, grave);
 		end
 	end

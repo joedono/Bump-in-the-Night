@@ -1,12 +1,12 @@
 require "house/fire";
 
 Manager_Fire = Class {
-	init = function(self, limits)
+	init = function(self, limits, imageStore)
 		self.limits = limits;
 		self.fires = {};
 		self.numFires = 0;
 
-		self.image = love.graphics.newImage("asset/image/fire.png");
+		self.image = imageStore.burningFire;
 		local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
 		self.animation = Anim8.newAnimation(grid("1-3", 1), 0.1);
 

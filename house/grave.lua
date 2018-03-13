@@ -1,8 +1,8 @@
 Grave = Class {
-  init = function(self, x, y, w, h, images)
-    self.buriedImage = images.buriedGrave;
-    self.dugImage = images.dugGrave;
-    self.corpseImage = images.corpseGrave;
+  init = function(self, x, y, w, h, imageStore)
+    self.buriedImage = imageStore.buriedGrave;
+    self.dugImage = imageStore.dugGrave;
+    self.corpseImage = imageStore.corpseGrave;
     self.box = {
       x = x,
       y = y,
