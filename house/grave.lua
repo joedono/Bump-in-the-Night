@@ -3,6 +3,11 @@ Grave = Class {
     self.buriedImage = imageStore.buriedGrave;
     self.dugImage = imageStore.dugGrave;
     self.corpseImage = imageStore.corpseGrave;
+    self.burningFireImage = imageStore.burningFire;
+
+    local grid = Anim8.newGrid(32, 32, self.burningFireImage:getWidth(), self.burningFireImage:getHeight());
+		self.burningFireAnimation = Anim8.newAnimation(grid("1-3", 1), 0.1);
+
     self.box = {
       x = x,
       y = y,
@@ -25,6 +30,7 @@ Grave = Class {
 function Grave:update(dt)
   if self.isBurning then
     self.burnTimer = self.burnTimer - dt;
+    self.burningFireAnimation:update(dt);
 
     if self.burnTimer <= 0 then
       -- TODO win game
@@ -50,7 +56,7 @@ function Grave:draw()
   love.graphics.setColor(255, 255, 255);
 
   if self.isBurning then
-    -- TODO draw fire animation
+    self.burningFireAnimation:draw(self.burningFireImage, self.box.x - 8, self.box.y - 16, 0, 1.5, 1.5);
   elseif self.digTimer > 0 then
     love.graphics.draw(self.buriedImage, self.box.x, self.box.y);
   elseif self.hasCorpse then
