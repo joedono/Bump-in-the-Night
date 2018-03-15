@@ -56,12 +56,18 @@ function Grave:draw()
   love.graphics.setColor(255, 255, 255);
 
   if self.isBurning then
+    love.graphics.draw(self.corpseImage, self.box.x + GRAVE_OFFSET_X, self.box.y + GRAVE_OFFSET_Y);
     self.burningFireAnimation:draw(self.burningFireImage, self.box.x - 8, self.box.y - 16, 0, 1.5, 1.5);
   elseif self.digTimer > 0 then
-    love.graphics.draw(self.buriedImage, self.box.x, self.box.y);
+    love.graphics.draw(self.buriedImage, self.box.x + GRAVE_OFFSET_X, self.box.y + GRAVE_OFFSET_Y);
   elseif self.hasCorpse then
-    love.graphics.draw(self.corpseImage, self.box.x, self.box.y);
+    love.graphics.draw(self.corpseImage, self.box.x + GRAVE_OFFSET_X, self.box.y + GRAVE_OFFSET_Y);
   else
-    love.graphics.draw(self.dugImage, self.box.x, self.box.y);
+    love.graphics.draw(self.dugImage, self.box.x + GRAVE_OFFSET_X, self.box.y + GRAVE_OFFSET_Y);
+  end
+
+  if DRAW_BOXES then
+    love.graphics.setColor(255, 0, 0, 150);
+    love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.w, self.box.h);
   end
 end
