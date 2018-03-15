@@ -35,9 +35,9 @@ function State_Game:init()
 		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png"),
 		stakeStab = love.graphics.newImage("asset/image/used-items/stake-stab.png"),
 		burningFire = love.graphics.newImage("asset/image/fire.png"),
-		buriedGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png"), -- TODO replace with actual image
-		dugGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png"), -- TODO replace with actual image
-		corpseGrave = love.graphics.newImage("asset/image/used-items/stake-stab.png") -- TODO replace with actual image
+		buriedGrave = love.graphics.newImage("asset/image/used-items/grave-buried.png"),
+		dugGrave = love.graphics.newImage("asset/image/used-items/grave-dug.png"),
+		corpseGrave = love.graphics.newImage("asset/image/used-items/grave-corpse.png")
 	};
 
 	local waterSplashGrid = Anim8.newGrid(61, 32, self.imageStore.waterSplash:getWidth(), self.imageStore.waterSplash:getHeight());
