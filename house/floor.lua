@@ -2,7 +2,8 @@ require "house/door";
 require "house/grave";
 
 Floor = Class {
-	init = function (self, layoutFile, index, originX, originY, scenarioId, soundEffects, imageStore)
+	init = function (self, parentStateGame, layoutFile, index, originX, originY, scenarioId, soundEffects, imageStore)
+		self.parentStateGame = parentStateGame;
 		self.origin = {
 			x = originX,
 			y = originY
@@ -97,7 +98,7 @@ end
 
 function Floor:addGraves(layer)
 	for index, grave in pairs(layer.objects) do
-		table.insert(self.graves, Grave(grave.x + self.origin.x, grave.y + self.origin.y, grave.width, grave.height, self.imageStore));
+		table.insert(self.graves, Grave(self.parentStateGame, grave.x + self.origin.x, grave.y + self.origin.y, grave.width, grave.height, self.imageStore));
 	end
 end
 

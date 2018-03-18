@@ -1,5 +1,6 @@
 Grave = Class {
-  init = function(self, x, y, w, h, imageStore)
+  init = function(self, parentStateGame, x, y, w, h, imageStore)
+    self.parentStateGame = parentStateGame;
     self.buriedImage = imageStore.buriedGrave;
     self.dugImage = imageStore.dugGrave;
     self.corpseImage = imageStore.corpseGrave;
@@ -21,6 +22,7 @@ Grave = Class {
     self.burnTimer = GRAVE_BURN_TIMER;
     self.hasCorpse = false;
     self.isBurning = false;
+    self.fireLight = {};
 
     self.type = "grave";
     self.active = true;
@@ -33,7 +35,7 @@ function Grave:update(dt)
     self.burningFireAnimation:update(dt);
 
     if self.burnTimer <= 0 then
-      -- TODO win game
+      self.parentStateGame:winGame();
     end
   end
 end
@@ -41,15 +43,19 @@ end
 function Grave:dig(dt)
   if self.digTimer > 0 then
     self.digTimer = self.digTimer - dt;
+    return true;
   end
+
+  return false;
 end
 
 function Grave:setFire()
-  if not self.hasCorpse or self.digTimer > 0 then
+  if not self.hasCorpse or self.digTimer > 0 or self.isBurning then
     return;
   end
 
   self.isBurning = true;
+  self.fireLight = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 255, 125, 50, 50);
 end
 
 function Grave:draw()

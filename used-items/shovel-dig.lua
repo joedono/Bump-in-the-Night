@@ -1,6 +1,7 @@
 -- Dig graves during ghost attach
 Shovel_Dig = Class {
-	init = function(self, originX, originY, dirX, dirY)
+	init = function(self, originX, originY, dirX, dirY, soundEffects)
+		self.soundEffects = soundEffects;
 		local dirVector = Vector(dirX, dirY);
 		local angle = dirVector:angleTo();
 		local dx = 0;
@@ -43,10 +44,21 @@ function Shovel_Dig:update(dt)
 		return;
 	end
 
+	local dug = false;
 	local actualX, actualY, cols, len = BumpWorld:check(self, self.box.x, self.box.y, shovelDigCollision);
 
 	for i = 1, len do
-    cols[i].other:dig(dt);
+    dug = cols[i].other:dig(dt);
+	end
+
+	if len > 0 then
+		if dug then
+			self.soundEffects.shovelDig:play();
+		else
+			self.soundEffects.shovelDig:stop();
+		end
+	else
+		self.soundEffects.shovelDigFail:play();
 	end
 end
 

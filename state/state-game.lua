@@ -35,9 +35,9 @@ function State_Game:init()
 		waterSplash = love.graphics.newImage("asset/image/used-items/water-splash.png"),
 		stakeStab = love.graphics.newImage("asset/image/used-items/stake-stab.png"),
 		burningFire = love.graphics.newImage("asset/image/fire.png"),
-		buriedGrave = love.graphics.newImage("asset/image/used-items/grave-buried.png"),
-		dugGrave = love.graphics.newImage("asset/image/used-items/grave-dug.png"),
-		corpseGrave = love.graphics.newImage("asset/image/used-items/grave-corpse.png")
+		buriedGrave = love.graphics.newImage("asset/image/grave/grave-buried.png"),
+		dugGrave = love.graphics.newImage("asset/image/grave/grave-dug.png"),
+		corpseGrave = love.graphics.newImage("asset/image/grave/grave-corpse.png")
 	};
 
 	local waterSplashGrid = Anim8.newGrid(61, 32, self.imageStore.waterSplash:getWidth(), self.imageStore.waterSplash:getHeight());
@@ -73,6 +73,7 @@ function State_Game:init()
 		bookRead = love.audio.newSource("asset/sound/book-reading.wav", "static"),
 		ghostKill = love.audio.newSource("asset/sound/ghost-kill.wav", "static"),
 		ghostApproach = love.audio.newSource("asset/sound/ghost-approach.wav", "static"),
+		shovelDigFail = love.audio.newSource("asset/sound/shovel-dig-fail.wav", "static"),
 		shovelDig = love.audio.newSource("asset/sound/shovel-dig.wav", "static"),
 		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static")
 	};
@@ -82,6 +83,7 @@ function State_Game:init()
 	self.soundEffects.playerFrozen:setLooping(true);
 	self.soundEffects.bookRead:setLooping(true);
 	self.soundEffects.ghostApproach:setLooping(true);
+	self.soundEffects.shovelDigFail:setLooping(true);
 	self.soundEffects.shovelDig:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
@@ -158,10 +160,10 @@ end
 function State_Game:loadFloors()
 	local floors = {};
 
-	table.insert(floors, Floor("config/floor-layout/main-floor.lua", 1, 0, 0, self.scenarioId, self.soundEffects, self.imageStore));
-	table.insert(floors, Floor("config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.scenarioId, self.soundEffects, self.imageStore));
-	table.insert(floors, Floor("config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.imageStore));
-	table.insert(floors, Floor("config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor(self, "config/floor-layout/main-floor.lua", 1, 0, 0, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor(self, "config/floor-layout/second-floor.lua", 2, FLOOR_WIDTH + FLOOR_GAP, 0, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor(self, "config/floor-layout/basement.lua", 3, 0, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.imageStore));
+	table.insert(floors, Floor(self, "config/floor-layout/attic.lua", 4, FLOOR_WIDTH + FLOOR_GAP, FLOOR_HEIGHT + FLOOR_GAP, self.scenarioId, self.soundEffects, self.imageStore));
 
 	return floors;
 end
@@ -768,14 +770,13 @@ function State_Game:useItem()
 		);
 	elseif selectedItem.itemType == "shovel" then
 		self.isPlayerShovelling = true;
-		self.soundEffects.shovelDig:rewind();
-		self.soundEffects.shovelDig:play();
 		self.player:useItem();
 		table.insert(
 			self.usedItems,
 			Shovel_Dig(
 				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
-				self.player.facing.x, self.player.facing.y
+				self.player.facing.x, self.player.facing.y,
+				self.soundEffects
 			)
 		);
 	elseif selectedItem.itemType == "knife" then
@@ -801,10 +802,13 @@ function State_Game:useItem()
 end
 
 function State_Game:stopUsingItem()
+	-- Book
 	self.isPlayerReadingBook = false;
 	self.soundEffects.bookRead:stop();
 
+	-- Shovel
 	self.isPlayerShovelling = false;
+	self.soundEffects.shovelDigFail:stop();
 	self.soundEffects.shovelDig:stop();
 	for index, item in pairs(self.usedItems) do
 		if item.type == "placed-shovel-dig" then

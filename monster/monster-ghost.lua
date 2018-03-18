@@ -55,7 +55,7 @@ Monster_Ghost = Class {__includes = Monster,
 		self.fadeTable = { alpha = 0, eyeLight = 0, volume = 1 };
 
 		self.state = "idle";
-		self.stateTimer = 5;
+		self.stateTimer = 20;
 		self.monsterType = "ghost";
 		self.type = "monster";
 		self.active = true;
