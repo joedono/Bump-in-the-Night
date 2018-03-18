@@ -43,13 +43,8 @@ Monster_Ghost = Class {__includes = Monster,
 		};
 		self.curAnimation = self.animations["walk-left"];
 
-		self.eyeLights = {
-			LightWorld:newLight(0, 0, 0, 0, 0, 15),
-			LightWorld:newLight(0, 0, 0, 0, 0, 15)
-		};
-
-		self.eyeLights[1]:setVisible(false);
-		self.eyeLights[2]:setVisible(false);
+		self.light = LightWorld:newLight(0, 0, 0, 0, 0, MONSTER_GHOST_LIGHT_DISTANCE);
+		self.light:setVisible(false);
 
 		self.fadeTimer = Timer.new();
 		self.fadeTable = { alpha = 0, eyeLight = 0, volume = 1 };
@@ -150,8 +145,7 @@ function Monster_Ghost:updatePosition(dt)
 end
 
 function Monster_Ghost:updateLights(dt)
-	self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
-	self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+	self.light:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
 	if self.state == "fading-in" or self.state == "chasing"or self.state == "fading-out" then
 		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
@@ -159,10 +153,10 @@ function Monster_Ghost:updateLights(dt)
 			facing = facing + math.pi * 2;
 		end
 
-		self:updateEyeLights(facing, self.fadeTable.eyeLight);
+		self.light:setVisible(true);
+		self.light:setColor(self.fadeTable.eyeLight * 5/8, 0, 0);
 	else
-		self.eyeLights[1]:setVisible(false);
-		self.eyeLights[2]:setVisible(false);
+		self.light:setVisible(false);
 	end
 end
 
