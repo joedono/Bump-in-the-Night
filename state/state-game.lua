@@ -73,8 +73,8 @@ function State_Game:init()
 		bookRead = love.audio.newSource("asset/sound/book-reading.wav", "static"),
 		ghostKill = love.audio.newSource("asset/sound/ghost-kill.wav", "static"),
 		ghostApproach = love.audio.newSource("asset/sound/ghost-approach.wav", "static"),
-		shovelDig = love.audio.newSource("asset/sound/ghost-approach.wav", "static"), -- TODO replace this with actual sound
-		useLighter = love.audio.newSource("asset/sound/ghost-approach.wav", "static") -- TODO replace this with actual sound
+		shovelDig = love.audio.newSource("asset/sound/shovel-dig.wav", "static"),
+		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
