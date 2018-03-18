@@ -107,6 +107,7 @@ function State_Game:enter(previous, scenarioId)
 		sound:setVolume(MASTER_VOLUME);
 	end
 
+	PLAY_SOUNDS = true;
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
@@ -910,6 +911,8 @@ function State_Game:loseGame()
 end
 
 function State_Game:stopAllSounds()
+	PLAY_SOUNDS = false;
+	
 	local continuousSounds = {
 		["monsterBite"] = true,
 		["knifeStab"] = true,

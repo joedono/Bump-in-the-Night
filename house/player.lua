@@ -134,12 +134,14 @@ function Player:updateVelocity()
 	if vx ~= 0 or vy ~= 0 then
 		vx, vy = math.normalize(vx, vy);
 
-		if self.runPressed then
-			self.soundEffects.footstepsRun:play();
-			self.soundEffects.footstepsWalk:stop();
-		else
-			self.soundEffects.footstepsRun:stop();
-			self.soundEffects.footstepsWalk:play();
+		if PLAY_SOUNDS then
+			if self.runPressed then
+				self.soundEffects.footstepsRun:play();
+				self.soundEffects.footstepsWalk:stop();
+			else
+				self.soundEffects.footstepsRun:stop();
+				self.soundEffects.footstepsWalk:play();
+			end
 		end
 	else
 		self.soundEffects.footstepsRun:stop();

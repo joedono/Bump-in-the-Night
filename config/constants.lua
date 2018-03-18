@@ -16,6 +16,7 @@ DRAW_MONSTER_SENSES = false;
 DRAW_ENTIRE_HOUSE = false;
 LOAD_SAVE_ENABLED = false;
 HELP_TEXT_ENABLED = false;
+PLAY_SOUNDS = true;
 
 KEY_LEFT = "a";
 KEY_RIGHT = "d";
