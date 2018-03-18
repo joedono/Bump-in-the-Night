@@ -6,6 +6,11 @@ end
 
 function State_Pause:enter(from)
 	self.from = from;
+	love.mouse.setVisible(true);
+end
+
+function State_Pause:leave()
+	love.mouse.setVisible(false);
 end
 
 function State_Pause:keypressed(key, scancode, isrepeat)
