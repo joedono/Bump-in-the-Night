@@ -50,7 +50,7 @@ Monster_Ghost = Class {__includes = Monster,
 		self.fadeTable = { alpha = 0, eyeLight = 0, volume = 1 };
 
 		self.state = "idle";
-		self.stateTimer = 20;
+		self.stateTimer = 60;
 		self.monsterType = "ghost";
 		self.type = "monster";
 		self.active = true;
@@ -123,7 +123,7 @@ function Monster_Ghost:chasePlayer(dt, speed)
 
 	for i = 1, len do
 		local col = cols[i];
-		if KILL_PLAYER and col.other.type == "player" and col.other.active then
+		if KILL_PLAYER and self.state == "chasing" and col.other.type == "player" and col.other.active then
 			self.soundEffects.ghostKill:rewind();
 			self.soundEffects.playerDeathYell:rewind();
 			self.soundEffects.ghostKill:play();
@@ -200,7 +200,8 @@ function Monster_Ghost:startFadeOut()
 	self.fadeTimer:tween(MONSTER_GHOST_FADEOUT_TIMER, self.fadeTable, { alpha = 0, eyeLight = 0, volume = 0 }, "linear",
 		function()
 			self.soundEffects.ghostApproach:stop();
-			self.stateTimer = love.math.random(10, 20);
+			self.stateTimer = love.math.random(10, 30);
+			self:resetVelocity();
 			self.state = "idle";
 		end
 	);
