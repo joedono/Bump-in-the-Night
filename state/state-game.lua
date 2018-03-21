@@ -87,7 +87,9 @@ function State_Game:init()
 	self.soundEffects.shovelDig:setLooping(true);
 
 	self.callPoliceSoundTimer = Timer.new();
-	self.policeTimerFont = love.graphics.newFont(24)
+	self.policeTimerFont = love.graphics.newFont(24);
+
+	self.alienShader = love.graphics.newShader("asset/shader/rainbow.glsl");
 end
 
 function State_Game:enter(previous, scenarioId)
@@ -111,7 +113,7 @@ function State_Game:enter(previous, scenarioId)
 	self.soundEffects.playerFrozen:setVolume(0.3 * MASTER_VOLUME);
 
 	if scenarioId == nil then
-		scenarioId = "ghost";
+		scenarioId = "alien";
 	end
 
 	self.scenarioId = scenarioId;
@@ -127,7 +129,9 @@ function State_Game:enter(previous, scenarioId)
 	local playerStartFloor = self.floors[2];
 	local playerSpawnPoint = playerStartFloor.spawns[love.math.random(#playerStartFloor.spawns)];
 
+	self.globalTime = 0;
 	self.playerFrozen = 0;
+	self.playerMindMuddled = 0;
 	self.player = Player(self, playerSpawnPoint, playerStartFloor.origin, self.soundEffects);
 
 	self.items = self:spawnItems(scenarioId);
@@ -539,6 +543,11 @@ function State_Game:update(dt)
 		return;
 	end
 
+	self.globalTime = self.globalTime + dt;
+	if self.globalTime > 500 then
+		self.globalTime = self.globalTime - 500;
+	end
+
 	if self.calledPolice then
 		self.callPoliceSoundTimer:update(dt);
 		self.policeTimer = self.policeTimer - dt;
@@ -557,6 +566,11 @@ function State_Game:update(dt)
 		if self.bookBanishmentTimer <= 0 then
 			self:winGame();
 		end
+	end
+
+	if self.playerMindMuddled > 0 then
+		self.playerMindMuddled = self.playerMindMuddled - dt;
+		self.alienShader:send("iGlobalTime", self.globalTime);
 	end
 
 	for index, floor in pairs(self.floors) do
@@ -862,7 +876,7 @@ function State_Game:freezePlayer()
 
 	if FREEZE_PLAYER then
 		self.player:resetKeys();
-		self.playerFrozen = PLAYER_FROZEN_METER;
+		self.playerFrozen = PLAYER_FREEZE_TIMER;
 	end
 end
 
@@ -870,6 +884,10 @@ function State_Game:unfreezePlayer()
 	if self.soundEffects.playerFrozen:isPlaying() then
 		self.soundEffects.playerFrozen:stop();
 	end
+end
+
+function State_Game:muddlePlayer()
+	self.playerMindMuddled = PLAYER_MIND_MUDDLE_TIMER;
 end
 
 function State_Game:callPolice()
@@ -912,7 +930,7 @@ end
 
 function State_Game:stopAllSounds()
 	PLAY_SOUNDS = false;
-	
+
 	local continuousSounds = {
 		["monsterBite"] = true,
 		["knifeStab"] = true,
@@ -938,12 +956,20 @@ function State_Game:draw()
 			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		end
 
+		if DRAW_RAINBOW_SHADER and self.playerMindMuddled > 0 then
+			love.graphics.setShader(self.alienShader);
+		end
+
 		if DRAW_LIGHTS then
 			LightWorld:draw(function()
 				self:drawGame();
 			end);
 		else
 			self:drawGame();
+		end
+
+		if DRAW_RAINBOW_SHADER and self.playerMindMuddled > 0 then
+			love.graphics.setShader();
 		end
 
 		self:drawSpecial();

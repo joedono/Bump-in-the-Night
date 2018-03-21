@@ -45,8 +45,8 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
   float s2 = snoise(uv + snoise(uv + s1) / 7.0);
   vec3 hsv = vec3(s1, 1.0, 1.0-s2);
   vec3 rgb = hsv2rgb(hsv);
-  rgb.r = rgb.r * pixel.r;
-  rgb.g = rgb.g * pixel.g;
-  rgb.b = rgb.b * pixel.b;
-  return vec4(rgb, 1.0);
+  pixel.r = (rgb.r / 4 + .75) * pixel.r;
+  pixel.g = (rgb.g / 4 + .75) * pixel.g;
+  pixel.b = (rgb.b / 4 + .75) * pixel.b;
+  return pixel;
 }

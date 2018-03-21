@@ -104,26 +104,31 @@ end
 function Player:updateVelocity()
 	local vx = 0;
 	local vy = 0;
+	local delta = 1;
+
+	if self.parentStateGame.playerMindMuddled > 0 then
+		delta = -1;
+	end
 
 	if self.leftPressed or self.rightPressed or self.upPressed or self.downPressed then
 		if self.leftPressed then
-			vx = vx - 1;
+			vx = vx - delta;
 		end
 
 		if self.rightPressed then
-			vx = vx + 1;
+			vx = vx + delta;
 		end
 
 		if self.upPressed then
-			vy = vy - 1;
+			vy = vy - delta;
 		end
 
 		if self.downPressed then
-			vy = vy + 1;
+			vy = vy + delta;
 		end
 	else
-		vx = self.gamepadVelocity.x;
-		vy = self.gamepadVelocity.y;
+		vx = self.gamepadVelocity.x * delta;
+		vy = self.gamepadVelocity.y * delta;
 
 		if math.dist(0, 0, vx, vy) < GAMEPAD_DEADZONE then
 			vx = 0;

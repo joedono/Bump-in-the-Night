@@ -8,9 +8,10 @@ FULLSCREEN = false;
 DRAW_BOXES = false;
 DRAW_PORTALS = false;
 DRAW_PATHS = false;
-DRAW_LIGHTS = true;
+DRAW_LIGHTS = false;
 KILL_PLAYER = true;
 FREEZE_PLAYER = true;
+DRAW_RAINBOW_SHADER = true;
 DRAW_MONSTER_PATH = false;
 DRAW_MONSTER_SENSES = false;
 DRAW_ENTIRE_HOUSE = false;
@@ -74,7 +75,8 @@ PLAYER_HEIGHT = 32 * PLAYER_SCALE;
 PLAYER_WALK_SPEED = 200;
 PLAYER_RUN_SPEED = 400;
 PLAYER_TURN_SPEED = 5;
-PLAYER_FROZEN_METER = 20;
+PLAYER_FREEZE_TIMER = 20;
+PLAYER_MIND_MUDDLE_TIMER = 15;
 
 DOOR_OPEN_TIMER = 0.3;
 DOOR_THICKNESS = 32;
@@ -305,7 +307,7 @@ SCENARIO_COMPLETED = {
 	["killer"] = true,
 	["vampire"] = true,
 	["ghost"] = true,
-	["alien"] = false
+	["alien"] = true
 };
 
 SCENARIO_DESCRIPTION = {
