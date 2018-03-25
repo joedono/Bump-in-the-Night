@@ -8,6 +8,7 @@ function State_Scenario_Select:init()
 	self.scenarioDescriptionFont = love.graphics.newFont(32);
 
 	self.soundSelectionChange = love.audio.newSource("asset/sound/menu-option-change.wav", "static");
+	self.soundLocked = love.audio.newSource("asset/sound/menu-locked.wav", "static");
 	self.soundSelect = love.audio.newSource("asset/sound/menu-select.wav", "static");
 end
 
@@ -159,7 +160,8 @@ function State_Scenario_Select:selectScenario()
 	if scenarioDescription == "random" then
 		scenarioDescription = self:chooseRandomLockedScenario();
 	elseif not SCENARIO_COMPLETED[scenarioDescription] then
-		-- TODO Play locked noise or something
+		self.soundLocked:rewind();
+		self.soundLocked:play();
 		return;
 	end
 
