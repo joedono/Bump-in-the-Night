@@ -1,6 +1,6 @@
 --[[
-Spawns a group of 3. Hunts by sight and moves randomly.
-Kills the player from long range with a ray gun.
+Spawns a group of 2. Hunts by sight and moves randomly.
+Kills the player from long range with a ray gun. Ray gun moves slowly, but takes up entire hallway
 Will randomly send out psychic waves that disrupt the player's vision and reverses their controls.
 Wearing the tin hat prevents this.
 Use the music box to fill the gauge and send them back to their dimension.

@@ -543,34 +543,12 @@ function State_Game:update(dt)
 		return;
 	end
 
-	self.globalTime = self.globalTime + dt;
-	if self.globalTime > 500 then
-		self.globalTime = self.globalTime - 500;
-	end
-
-	if self.calledPolice then
-		self.callPoliceSoundTimer:update(dt);
-		self.policeTimer = self.policeTimer - dt;
-		if self.policeTimer <= 0 then
-			self.policeTimer = 0;
-			self:winGame();
-		end
-	end
-
-	if self.taserTimer > 0 then
-		self.taserTimer = self.taserTimer - dt;
-	end
-
-	if self.isPlayerReadingBook then
-		self.bookBanishmentTimer = self.bookBanishmentTimer - dt;
-		if self.bookBanishmentTimer <= 0 then
-			self:winGame();
-		end
-	end
-
-	if self.playerMindMuddled > 0 then
-		self.playerMindMuddled = self.playerMindMuddled - dt;
-		self.alienShader:send("iGlobalTime", self.globalTime);
+	if self.scenarioId == "burglar" or self.scenarioId == "arsonist" or self.scenarioId == "killer" then
+		self:updateSpecialPolice(dt);
+	elseif self.scenarioId == "ghost" then
+		self:updateSpecialGhost(dt);
+	elseif self.scenarioId == "alien" then
+		self:updateSpecialAlien(dt);
 	end
 
 	for index, floor in pairs(self.floors) do
@@ -596,6 +574,42 @@ function State_Game:update(dt)
 	self.monsterManager:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
 	LightWorld:update(dt);
+end
+
+function State_Game:updateSpecialPolice(dt)
+	if self.calledPolice then
+		self.callPoliceSoundTimer:update(dt);
+		self.policeTimer = self.policeTimer - dt;
+		if self.policeTimer <= 0 then
+			self.policeTimer = 0;
+			self:winGame();
+		end
+	end
+
+	if self.taserTimer > 0 then
+		self.taserTimer = self.taserTimer - dt;
+	end
+end
+
+function State_Game:updateSpecialGhost(dt)
+	self.globalTime = self.globalTime + dt;
+	if self.globalTime > 500 then
+		self.globalTime = self.globalTime - 500;
+	end
+	
+	if self.isPlayerReadingBook then
+		self.bookBanishmentTimer = self.bookBanishmentTimer - dt;
+		if self.bookBanishmentTimer <= 0 then
+			self:winGame();
+		end
+	end
+end
+
+function State_Game:updateSpecialAlien(dt)
+	if self.playerMindMuddled > 0 then
+		self.playerMindMuddled = self.playerMindMuddled - dt;
+		self.alienShader:send("iGlobalTime", self.globalTime);
+	end
 end
 
 function State_Game:updateCamera(x, y)

@@ -10,6 +10,7 @@ require "monster/monster-arsonist";
 require "monster/monster-killer";
 require "monster/monster-vampire";
 require "monster/monster-ghost";
+require "monster/monster-alien";
 
 Manager_Monster = Class {
 	init = function(self, parentStateGame, pathNodes, floorLimits, player, soundEffects)
@@ -45,6 +46,8 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	elseif scenarioId == "ghost" then
 		table.insert(self.monsters, Monster_Ghost(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "alien" then
+		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "zombie" then
 	elseif scenarioId == "elder_god" then
 	end
