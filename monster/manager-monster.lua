@@ -26,29 +26,23 @@ Manager_Monster = Class {
 function Manager_Monster:spawnMonsters(scenarioId)
 	self.scenarioId = scenarioId;
 
+	local enemyImage = love.graphics.newImage("asset/image/enemy/" .. scenarioId .. ".png");
 	if scenarioId == "wolf" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/wolf.png");
 		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 		table.insert(self.monsters, Monster_Wolf(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "panther" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/panther.png");
 		table.insert(self.monsters, Monster_Panther(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "burglar" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/burglar.png");
 		table.insert(self.monsters, Monster_Burglar(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "arsonist" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/arsonist.png");
 		self.fireManager = Manager_Fire(self.floorLimits, self.parentStateGame.imageStore);
 		table.insert(self.monsters, Monster_Arsonist(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "killer" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/killer.png");
 		table.insert(self.monsters, Monster_Killer(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "vampire" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/vampire.png");
 		table.insert(self.monsters, Monster_Vampire(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "ghost" then
-		local enemyImage = love.graphics.newImage("asset/image/enemy/ghost.png");
 		table.insert(self.monsters, Monster_Ghost(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "alien" then
 	elseif scenarioId == "zombie" then
