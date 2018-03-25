@@ -106,7 +106,7 @@ function Player:updateVelocity()
 	local vy = 0;
 	local delta = 1;
 
-	if self.parentStateGame.playerMindMuddleTimer > 0 then
+	if self.parentStateGame.playerMindMuddled then
 		delta = -1;
 	end
 

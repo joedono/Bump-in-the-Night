@@ -131,8 +131,9 @@ function State_Game:enter(previous, scenarioId)
 
 	self.globalTime = 0;
 	self.playerFrozen = 0;
-	self.playerMindSaneTimer = PLAYER_MIND_SANE_TIMER;
-	self.playerMindMuddleTimer = 0;
+	self.playerMindTimer = PLAYER_MIND_SANE_TIMER;
+	self.playerMindMuddled = false;
+	self.playerMindMuddleEffect = false;
 	self.player = Player(self, playerSpawnPoint, playerStartFloor.origin, self.soundEffects);
 
 	self.items = self:spawnItems(scenarioId);
@@ -602,22 +603,30 @@ function State_Game:updateSpecialGhost(dt)
 end
 
 function State_Game:updateSpecialAlien(dt)
-	if self.playerMindMuddleTimer > 0 then
-		self.playerMindMuddleTimer = self.playerMindMuddleTimer - dt;
-		
-		self.globalTime = self.globalTime + dt;
-		if self.globalTime > 500 then
-			self.globalTime = self.globalTime - 500;
-		end
+	self.globalTime = self.globalTime + dt;
+	if self.globalTime > 500 then
+		self.globalTime = self.globalTime - 500;
+	end
 
-		self.alienShader:send("iGlobalTime", self.globalTime);
-	elseif self.playerMindSaneTimer > 0 then
-		self.playerMindSaneTimer = self.playerMindSaneTimer - dt;
-		if not self:playerHasItem("foil") and self.playerMindSaneTimer <= 0 then
-			self:muddlePlayer();
+	self.alienShader:send("iGlobalTime", self.globalTime);
+
+	if self.playerMindTimer > 0 then
+		self.playerMindTimer = self.playerMindTimer - dt;
+	elseif self.playerMindTimer <= 0 then
+		if self.playerMindMuddled or self.playerMindMuddleEffect then
+			-- Go from insane to sane
+			self.playerMindMuddled = false;
+			self.playerMindMuddleEffect = false;
+			self.playerMindTimer = PLAYER_MIND_SANE_TIMER;
+		else
+			-- Go from sane to insane
+			self.playerMindMuddleEffect = true;
+			self.playerMindTimer = PLAYER_MIND_MUDDLE_TIMER;
+
+			if not self:playerHasItem("foil") then
+				self.playerMindMuddled = true;
+			end
 		end
-	else
-		self.playerMindSaneTimer = PLAYER_MIND_SANE_TIMER;
 	end
 end
 
@@ -909,10 +918,6 @@ function State_Game:unfreezePlayer()
 	end
 end
 
-function State_Game:muddlePlayer()
-	self.playerMindMuddleTimer = PLAYER_MIND_MUDDLE_TIMER;
-end
-
 function State_Game:callPolice()
 	self.calledPolice = true;
 	self.callPoliceSoundTimer:script(function(wait)
@@ -979,7 +984,7 @@ function State_Game:draw()
 			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		end
 
-		if DRAW_RAINBOW_SHADER and self.playerMindMuddleTimer > 0 then
+		if DRAW_RAINBOW_SHADER and self.playerMindMuddleEffect then
 			love.graphics.setShader(self.alienShader);
 		end
 
@@ -991,7 +996,7 @@ function State_Game:draw()
 			self:drawGame();
 		end
 
-		if DRAW_RAINBOW_SHADER and self.playerMindMuddleTimer > 0 then
+		if DRAW_RAINBOW_SHADER and self.playerMindMuddleEffect then
 			love.graphics.setShader();
 		end
 
