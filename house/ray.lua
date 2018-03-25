@@ -2,7 +2,7 @@ Ray = Class {
 	init = function(self, parentManager, centerX, centerY, targetX, targetY)
     self.parentManager = parentManager;
 
-    -- TODO Snap position and direction to grid
+    -- TODO Snap position and direction to grid. Maybe set up two colliders, one for walls and doors, and the other for the player.
     self.box = {
       x = centerX,
       y = centerY,
