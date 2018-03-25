@@ -1,6 +1,7 @@
 require "lib/pathfinding";
 
 require "house/manager-fire";
+require "house/manager-ray-guns";
 
 require "monster/base-monster"
 require "monster/monster-wolf";
@@ -46,6 +47,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	elseif scenarioId == "ghost" then
 		table.insert(self.monsters, Monster_Ghost(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "alien" then
+		self.rayManager = Manager_Ray_Guns();
 		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "zombie" then
@@ -88,6 +90,8 @@ function Manager_Monster:update(dt)
 		self:updateArsonistSpecial(dt);
 	elseif self.scenarioId == "vampire" then
 		self:updateVampireSpecial(dt);
+	elseif self.scenarioId == "alien" then
+		self:updateAlienSpecial(dt);
 	end
 end
 
@@ -183,6 +187,10 @@ function Manager_Monster:updateVampireSpecial(dt)
 	end
 end
 
+function Manager_Monster:updateAlienSpecial(dt)
+	self.rayManager:update(dt);
+end
+
 function Manager_Monster:draw()
 	for index, monster in pairs(self.monsters) do
 		monster:draw();
@@ -190,6 +198,10 @@ function Manager_Monster:draw()
 
 	if self.scenarioId == "arsonist" then
 		self.fireManager:draw();
+	end
+
+	if self.scenarioId == "alien" then
+		self.rayManager:draw();
 	end
 end
 

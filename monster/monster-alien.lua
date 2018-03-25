@@ -81,6 +81,8 @@ function Monster_Alien:update(dt)
 		self:updateSpotted(dt);
 	elseif self.state == "shooting" then
 		self:updateShooting(dt);
+	elseif self.state == "reloading" then
+		self:updateReloading(dt);
 	elseif self.state == "test" then
 
 	else
@@ -143,8 +145,18 @@ function Monster_Alien:updateSpotted(dt)
 end
 
 function Monster_Alien:updateShooting(dt)
-	-- TODO Shoot the player
-	self.state = "idle";
+	self.parentManager.rayManager:shootRayGun(
+		self.box.x + self.box.w / 2, self.box.y + self.box.h / 2,
+		self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2
+	);
+	self.stateTimer = 3;
+	self.state = "reloading";
+end
+
+function Monster_Alien:updateReloading(dt)
+	if self.stateTimer <= 0 then
+		self.state = "idle";
+	end
 end
 
 function Monster_Alien:hasSpottedPlayer()
@@ -250,7 +262,7 @@ function Monster_Alien:updateLights(dt)
 
 	if self.state == "idle" or self.state == "walk" then
 		self.sightLight:setColor(150, 150, 150);
-	elseif self.state == "spotted" or self.state == "shooting" then
+	elseif self.state == "spotted" or self.state == "shooting" or self.state == "reloading" then
 		self.sightLight:setColor(150, 0, 0);
 	end
 end

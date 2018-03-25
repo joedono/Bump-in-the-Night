@@ -64,7 +64,6 @@ function State_Game:init()
 		playerFreeze = love.audio.newSource("asset/sound/player-freeze.wav", "static"),
 		playerFrozen = love.audio.newSource("asset/sound/white-noise.wav", "static"),
 		policeSiren = love.audio.newSource("asset/sound/police-siren.wav", "static"),
-		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		spotted = love.audio.newSource("asset/sound/spotted.wav", "static"),
 		stakeStab = love.audio.newSource("asset/sound/stake-stab.wav", "static"),
 		taser = love.audio.newSource("asset/sound/taser.wav", "static"),
@@ -75,7 +74,9 @@ function State_Game:init()
 		ghostApproach = love.audio.newSource("asset/sound/ghost-approach.wav", "static"),
 		shovelDigFail = love.audio.newSource("asset/sound/shovel-dig-fail.wav", "static"),
 		shovelDig = love.audio.newSource("asset/sound/shovel-dig.wav", "static"),
-		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static")
+		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static"),
+		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
+		rayGunImpact = love.audio.newSource("asset/sound/ray-gun-impact.wav", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
