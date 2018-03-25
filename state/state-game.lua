@@ -131,7 +131,8 @@ function State_Game:enter(previous, scenarioId)
 
 	self.globalTime = 0;
 	self.playerFrozen = 0;
-	self.playerMindMuddled = 0;
+	self.playerMindSaneTimer = PLAYER_MIND_SANE_TIMER;
+	self.playerMindMuddleTimer = 0;
 	self.player = Player(self, playerSpawnPoint, playerStartFloor.origin, self.soundEffects);
 
 	self.items = self:spawnItems(scenarioId);
@@ -592,11 +593,6 @@ function State_Game:updateSpecialPolice(dt)
 end
 
 function State_Game:updateSpecialGhost(dt)
-	self.globalTime = self.globalTime + dt;
-	if self.globalTime > 500 then
-		self.globalTime = self.globalTime - 500;
-	end
-	
 	if self.isPlayerReadingBook then
 		self.bookBanishmentTimer = self.bookBanishmentTimer - dt;
 		if self.bookBanishmentTimer <= 0 then
@@ -606,9 +602,22 @@ function State_Game:updateSpecialGhost(dt)
 end
 
 function State_Game:updateSpecialAlien(dt)
-	if self.playerMindMuddled > 0 then
-		self.playerMindMuddled = self.playerMindMuddled - dt;
+	if self.playerMindMuddleTimer > 0 then
+		self.playerMindMuddleTimer = self.playerMindMuddleTimer - dt;
+		
+		self.globalTime = self.globalTime + dt;
+		if self.globalTime > 500 then
+			self.globalTime = self.globalTime - 500;
+		end
+
 		self.alienShader:send("iGlobalTime", self.globalTime);
+	elseif self.playerMindSaneTimer > 0 then
+		self.playerMindSaneTimer = self.playerMindSaneTimer - dt;
+		if not self:playerHasItem("foil") and self.playerMindSaneTimer <= 0 then
+			self:muddlePlayer();
+		end
+	else
+		self.playerMindSaneTimer = PLAYER_MIND_SANE_TIMER;
 	end
 end
 
@@ -901,7 +910,7 @@ function State_Game:unfreezePlayer()
 end
 
 function State_Game:muddlePlayer()
-	self.playerMindMuddled = PLAYER_MIND_MUDDLE_TIMER;
+	self.playerMindMuddleTimer = PLAYER_MIND_MUDDLE_TIMER;
 end
 
 function State_Game:callPolice()
@@ -970,7 +979,7 @@ function State_Game:draw()
 			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		end
 
-		if DRAW_RAINBOW_SHADER and self.playerMindMuddled > 0 then
+		if DRAW_RAINBOW_SHADER and self.playerMindMuddleTimer > 0 then
 			love.graphics.setShader(self.alienShader);
 		end
 
@@ -982,7 +991,7 @@ function State_Game:draw()
 			self:drawGame();
 		end
 
-		if DRAW_RAINBOW_SHADER and self.playerMindMuddled > 0 then
+		if DRAW_RAINBOW_SHADER and self.playerMindMuddleTimer > 0 then
 			love.graphics.setShader();
 		end
 
