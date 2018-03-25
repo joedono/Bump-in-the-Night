@@ -828,8 +828,9 @@ function State_Game:useItem()
 		);
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
-	elseif selectedItem.itemType == "battery" then
+	elseif selectedItem.itemType == "music_box_battery" then
 	elseif selectedItem.itemType == "foil" then
+		-- Do nothing
 	elseif selectedItem.itemType == "axe" then
 	elseif selectedItem.itemType == "gasoline" then
 	elseif selectedItem.itemType == "lighter" then

@@ -192,6 +192,13 @@ MONSTER_GHOST_FADEOUT_TIMER = 4;
 MONSTER_GHOST_SPAWN_RANGE = 100;
 MONSTER_GHOST_LIGHT_DISTANCE = 32;
 
+MONSTER_ALIEN_WIDTH = 32 * MONSTER_SCALE;
+MONSTER_ALIEN_HEIGHT = 32 * MONSTER_SCALE;
+MONSTER_ALIEN_SIGHT_DISTANCE = 450;
+MONSTER_ALIEN_SIGHT_CONE = math.pi * 1/2;
+MONSTER_ALIEN_TURN_SPEED = 10;
+MONSTER_ALIEN_WALK_SPEED = 200;
+
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
 
@@ -243,7 +250,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 64},
 		["knife"] = {x = 32, y = 64},
 		["music_box"] = {x = 64, y = 64},
-		["battery"] = {x = 96, y = 64},
+		["music_box_battery"] = {x = 96, y = 64},
 		["foil"] = {x = 128, y = 64},
 		["axe"] = {x = 160, y = 64},
 		["gasoline"] = {x = 0, y = 96},
@@ -268,7 +275,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 120},
 		["knife"] = {x = 60, y = 120},
 		["music_box"] = {x = 120, y = 120},
-		["battery"] = {x = 180, y = 120},
+		["music_box_battery"] = {x = 180, y = 120},
 		["foil"] = {x = 240, y = 120},
 		["axe"] = {x = 300, y = 120},
 		["gasoline"] = {x = 0, y = 180},
@@ -287,7 +294,7 @@ SCENARIO_ITEMS = {
 	["killer"] = {"cellphone_dead", "cellphone_battery"},
 	["vampire"] = {"stake", "cross"},
 	["ghost"] = {"shovel", "lighter"},
-	["alien"] = {"music_box", "battery", "foil"},
+	["alien"] = {"music_box", "music_box_battery", "foil"},
 	["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
 	["elder_god"] = {"crystal", "scroll"}
 };
