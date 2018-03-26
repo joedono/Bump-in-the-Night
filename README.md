@@ -28,7 +28,11 @@ To run the game, head over to [Releases](https://github.com/joedono/Bump-in-the-
   * Stats: The vampire that lives in your house has awoken and is looking for a drink. Trying to move while within his range or being seen by him will cause him to freeze you and stalk slowly towards you. You must wiggle and thrash to break free. He will sometimes catch your scent and come straight for you. He cannot be seen except for the strange blue aura that represents the range of his ability.
   * Clear Condition: Find the stake and the cross. Having the cross in your inventory will make you immune to his freezing ability. He will still be able to freeze you if he sees you. Sneak up behind him and stab him with the stake.
 * Ghost
+  * Stats: The ghost of the poor person buried in your basement has awoken. Although it can't exist indefinitely, it can manifest for short bursts and chase you through walls.
+  * Clear Condition: Find the shovel and the lighter. Go to the basement where the graves are and dig them up until you find the one with the corpse in it. Use the lighter to burn the corpse.
 * Aliens
+  * Stats: Two aliens are exploring your house. Their ship is putting out waves that have a muddling effect on the human brain. This will cause your vision to warp and your controls to reverse in short intervals.
+  * Clear Condition: Find the tin hat to protect against the effects of their ship. Find the battery for the music box in order to play a tune that will activate the "retreat" subroutine in their ship.
 * Zombies
 * Elder God
 
