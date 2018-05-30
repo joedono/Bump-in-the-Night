@@ -98,16 +98,12 @@ lighterCollision = function(shovel, other)
 	return nil;
 end
 
-rayGunCollision = function(rayGun, other)
-	if other.type == "wall" or other.type == "door" then
-		return "cross";
-	end
-
+rayGunFilter = function(other)
 	if other.type == "player" then
-		return "cross";
+		return true;
 	end
 
-	return nil;
+	return false;
 end
 
 -- Says which objects should be considered when asked "Can I move from here to there?"

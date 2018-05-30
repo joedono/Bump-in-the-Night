@@ -47,7 +47,7 @@ function Manager_Monster:spawnMonsters(scenarioId)
 	elseif scenarioId == "ghost" then
 		table.insert(self.monsters, Monster_Ghost(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "alien" then
-		self.rayManager = Manager_Ray_Guns();
+		self.rayManager = Manager_Ray_Guns(self, self.soundEffects);
 		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "zombie" then
@@ -199,14 +199,14 @@ function Manager_Monster:draw()
 	if self.scenarioId == "arsonist" then
 		self.fireManager:draw();
 	end
-
-	if self.scenarioId == "alien" then
-		self.rayManager:draw();
-	end
 end
 
 function Manager_Monster:drawSpecial()
 	if self.scenarioId == "vampire" then
 		self.monsters[1]:drawAura();
+	end
+
+	if self.scenarioId == "alien" then
+		self.rayManager:drawSpecial();
 	end
 end
