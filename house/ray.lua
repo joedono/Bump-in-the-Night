@@ -104,7 +104,7 @@ function Ray:update(dt)
 	end
 end
 
-function Ray:drawSpecial()
+function Ray:draw()
 	if not self.active then
 		return;
 	end

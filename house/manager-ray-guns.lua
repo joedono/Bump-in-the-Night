@@ -32,8 +32,8 @@ function Manager_Ray_Guns:update(dt)
 	self.numRays = numRays;
 end
 
-function Manager_Ray_Guns:drawSpecial()
+function Manager_Ray_Guns:draw()
 	for index, ray in pairs(self.rays) do
-		ray:drawSpecial();
+		ray:draw();
 	end
 end

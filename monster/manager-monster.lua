@@ -207,6 +207,6 @@ function Manager_Monster:drawSpecial()
 	end
 
 	if self.scenarioId == "alien" then
-		self.rayManager:drawSpecial();
+		self.rayManager:draw();
 	end
 end
