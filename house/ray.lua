@@ -62,15 +62,12 @@ function Ray:update(dt)
 	if self.exploding then
 		self.explodeTimer:update(dt);
 
-		local cx = self.box.x + self.box.w / 2;
-		local cy = self.box.y + self.box.h / 2;
 		local w = self.explodeEffect.w * self.explodeEffect.scale;
 		local h = self.explodeEffect.h * self.explodeEffect.scale;
+		local x = self.box.x + self.box.w / 2 - w / 2;
+		local y = self.box.y + self.box.h / 2 - h / 2;
 
-		local originX = cx - w / 2;
-		local originY = cy - h / 2;
-
-		local players, len = BumpWorld:queryRect(originX, originY, w, h, rayGunFilter);
+		local players, len = BumpWorld:queryRect(x, y, w, h, rayGunFilter);
 		for i = 1, len do
 			local col = cols[i];
 			if KILL_PLAYER and col.other.type == "player" and col.other.active and self.active then
@@ -113,15 +110,12 @@ function Ray:draw()
 		if DRAW_BOXES then
 			love.graphics.setColor(135, 0, 255);
 
-			local cx = self.box.x + self.box.w / 2;
-			local cy = self.box.y + self.box.h / 2;
 			local w = self.explodeEffect.w * self.explodeEffect.scale;
 			local h = self.explodeEffect.h * self.explodeEffect.scale;
+			local x = self.box.x + self.box.w / 2 - w / 2;
+			local y = self.box.y + self.box.h / 2 - h / 2;
 
-			local originX = cx - w / 2;
-			local originY = cy - h / 2;
-
-			love.graphics.rectangle("line", originX, originY, w, h);
+			love.graphics.rectangle("line", x, y, w, h);
 		end
 
 		love.graphics.setColor(135, 0, 255, self.explodeEffect.alpha);
