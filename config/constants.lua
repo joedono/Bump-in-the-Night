@@ -254,6 +254,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 64},
 		["knife"] = {x = 32, y = 64},
 		["music_box"] = {x = 64, y = 64},
+		["music_box_dead"] = {x = 64, y = 64},
 		["music_box_battery"] = {x = 96, y = 64},
 		["foil"] = {x = 128, y = 64},
 		["axe"] = {x = 160, y = 64},
@@ -279,6 +280,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 120},
 		["knife"] = {x = 60, y = 120},
 		["music_box"] = {x = 120, y = 120},
+		["music_box_dead"] = {x = 120, y = 120},
 		["music_box_battery"] = {x = 180, y = 120},
 		["foil"] = {x = 240, y = 120},
 		["axe"] = {x = 300, y = 120},
@@ -298,7 +300,7 @@ SCENARIO_ITEMS = {
 	["killer"] = {"cellphone_dead", "cellphone_battery"},
 	["vampire"] = {"stake", "cross"},
 	["ghost"] = {"shovel", "lighter"},
-	["alien"] = {"music_box", "music_box_battery", "foil"},
+	["alien"] = {"music_box_dead", "music_box_battery", "foil"},
 	["zombie"] = {"axe", "shotgun", "shotgun_rounds", "gasoline", "lighter"},
 	["elder_god"] = {"crystal", "scroll"}
 };
@@ -310,7 +312,7 @@ SCENARIO_SELECTION = {
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien"};
 SCENARIO_COMPLETED = {
 	["wolf"] = true,
 	["panther"] = true,

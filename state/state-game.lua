@@ -829,7 +829,28 @@ function State_Game:useItem()
 		);
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
+		-- TODO
+	elseif selectedItem.itemType == "music_box_dead" then
+		-- Do nothing
 	elseif selectedItem.itemType == "music_box_battery" then
+		-- Replace battery in music box
+		local cellphoneDead = self:playerHasItem("music_box_dead");
+		if cellphoneDead ~= nil then
+			local newInventory = {};
+			local newItem = Item(-1000, -1000, "music_box", self.itemWorldSpriteSheet, self.itemHeldSpriteSheet);
+			newItem:pickup();
+			table.insert(newInventory, newItem);
+
+			-- Delete the dead music box and the battery from inventory
+			for index, item in pairs(self.inventory) do
+				if item.itemType ~= "music_box_battery" and item.itemType ~= "music_box_dead" then
+					table.insert(newInventory, item);
+				end
+			end
+
+			self.inventory = newInventory;
+			self.selectedItemIndex = 1;
+		end
 	elseif selectedItem.itemType == "foil" then
 		-- Do nothing
 	elseif selectedItem.itemType == "axe" then
