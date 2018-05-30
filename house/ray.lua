@@ -10,11 +10,9 @@ Ray = Class {
     self.parentManager = parentManager;
 		self.soundEffects = parentManager.soundEffects;
 
-    self.box = {
-      x = centerX - MONSTER_ALIEN_RAY_GUN_SIZE / 2,
-      y = centerY - MONSTER_ALIEN_RAY_GUN_SIZE / 2,
-      w = MONSTER_ALIEN_RAY_GUN_SIZE,
-      h = MONSTER_ALIEN_RAY_GUN_SIZE,
+    self.origin = {
+      x = centerX,
+      y = centerY,
     };
 
     self.target = {
@@ -22,7 +20,7 @@ Ray = Class {
       y = targetY
     };
 
-		self.light = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 135, 0, 255, MONSTER_ALIEN_RAY_GUN_RADIUS);
+		self.light = LightWorld:newLight(self.origin.x, self.origin.y, 135, 0, 255, MONSTER_ALIEN_RAY_GUN_RADIUS);
 
 		self.exploding = false;
 		self.explodeEffectImage = explodeEffectImage;
@@ -64,8 +62,8 @@ function Ray:update(dt)
 
 		local w = self.explodeEffect.w * self.explodeEffect.scale;
 		local h = self.explodeEffect.h * self.explodeEffect.scale;
-		local x = self.box.x + self.box.w / 2 - w / 2;
-		local y = self.box.y + self.box.h / 2 - h / 2;
+		local x = self.origin.x - w / 2;
+		local y = self.origin.y - h / 2;
 
 		local players, len = BumpWorld:queryRect(x, y, w, h, rayGunFilter);
 		for i = 1, len do
@@ -82,20 +80,20 @@ function Ray:update(dt)
 			end
 		end
 	else
-		local dx = self.target.x - self.box.x;
-		local dy = self.target.y - self.box.y;
+		local dx = self.target.x - self.origin.x;
+		local dy = self.target.y - self.origin.y;
 
 		dx, dy = math.normalize(dx, dy);
 
 		dx = dx * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 		dy = dy * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 
-	  self.box.x = self.box.x + dx;
-	  self.box.y = self.box.y + dy;
+	  self.origin.x = self.origin.x + dx;
+	  self.origin.y = self.origin.y + dy;
 
-	  self.light:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+	  self.light:setPosition(self.origin.x, self.origin.y);
 
-		if math.dist(self.box.x, self.box.y, self.target.x, self.target.y) < MONSTER_ALIEN_RAY_GUN_SPEED * dt then
+		if math.dist(self.origin.x, self.origin.y, self.target.x, self.target.y) < MONSTER_ALIEN_RAY_GUN_SPEED * dt then
 			self:explode();
 		end
 	end
@@ -112,15 +110,15 @@ function Ray:draw()
 
 			local w = self.explodeEffect.w * self.explodeEffect.scale;
 			local h = self.explodeEffect.h * self.explodeEffect.scale;
-			local x = self.box.x + self.box.w / 2 - w / 2;
-			local y = self.box.y + self.box.h / 2 - h / 2;
+			local x = self.origin.x - w / 2;
+			local y = self.origin.y - h / 2;
 
 			love.graphics.rectangle("line", x, y, w, h);
 		end
 
 		love.graphics.setColor(135, 0, 255, self.explodeEffect.alpha);
-		local fax = self.box.x + self.box.w / 2 - (self.explodeEffect.w / 2 * self.explodeEffect.scale);
-		local fay = self.box.y + self.box.h / 2 - (self.explodeEffect.h / 2 * self.explodeEffect.scale);
+		local fax = self.origin.x - (self.explodeEffect.w / 2 * self.explodeEffect.scale);
+		local fay = self.origin.y - (self.explodeEffect.h / 2 * self.explodeEffect.scale);
 
 		love.graphics.draw(self.explodeEffectImage,
 			fax, fay,
