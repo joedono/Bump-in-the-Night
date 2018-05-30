@@ -1,54 +1,74 @@
+--[[
+Ray gun functions more like a grenade. When traveling initially, it is harmless. Once it reaches it's target (hits the ground),
+it explodes in a shockwave that will kill the player if they touch it.
+This give the player a little time to run away and not get trapped,
+but will still make it difficult if the player is affected by the mind-muddling powers of the aliens.
+]]
+
 Ray = Class {
 	init = function(self, parentManager, centerX, centerY, targetX, targetY)
     self.parentManager = parentManager;
 
-    -- TODO Snap position and direction to grid. Maybe set up two colliders, one for walls and doors, and the other for the player.
     self.box = {
-      x = centerX,
-      y = centerY,
+      x = centerX - MONSTER_ALIEN_RAY_GUN_SIZE / 2,
+      y = centerY - MONSTER_ALIEN_RAY_GUN_SIZE / 2,
       w = MONSTER_ALIEN_RAY_GUN_SIZE,
       h = MONSTER_ALIEN_RAY_GUN_SIZE,
     };
 
-    self.velocity = {
+    self.target = {
       x = targetX,
       y = targetY
     };
 
-    BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 		self.light = LightWorld:newLight(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, 135, 0, 255, MONSTER_ALIEN_RAY_GUN_RADIUS);
 
+		self.exploding = false;
 		self.type = "ray-gun";
 		self.active = true;
 	end
 };
 
+function Ray:explode()
+	self.exploding = true;
+end
+
 function Ray:update(dt)
-  local dx = self.box.x + self.velocity.x * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
-	local dy = self.box.y + self.velocity.y * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
-	local actualX, actualY, cols, len =  BumpWorld:move(self, dx, dy, rayGunCollision);
+	if not self.active then
+		return;
+	end
 
-  for i = 1, len do
-		local col = cols[i];
+	if self.exploding then
+		-- TODO
+	else
+		local dx = self.target.x - self.box.x;
+		local dy = self.target.y - self.box.y;
 
-    if KILL_PLAYER and col.other.type == "player" and col.other.active then
-			col.other.active = false;
+		dx, dy = math.normalize(dx, dy);
 
-			self.soundEffects.rayGunImpact:rewind();
-			self.soundEffects.playerDeathYell:rewind();
-      self.soundEffects.rayGunImpact:play();
-			self.soundEffects.playerDeathYell:play();
+		dx = dx * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
+		dy = dy * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 
-			self.parentManager.parentStateGame:loseGame();
+	  self.box.x = self.box.x + dx;
+	  self.box.y = self.box.y + dy;
+
+	  self.light:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+
+		if math.dist(self.box.x, self.box.y, self.target.x, self.target.y) < MONSTER_ALIEN_RAY_GUN_SPEED * dt then
+			self:explode();
 		end
+	end
+end
 
-    if col.other.type == "wall" or col.other.type == "door" then
-      self.active = false;
-    end
-  end
+function Ray:draw()
+	if not self.active then
+		return;
+	end
 
-  self.box.x = actualX;
-  self.box.y = actualY;
-
-  self.light:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+	if self.exploding then
+		-- TODO
+	else
+		love.graphics.setColor(135, 0, 255);
+		love.graphics.circle("fill", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_ALIEN_RAY_GUN_SIZE / 2);
+	end
 end

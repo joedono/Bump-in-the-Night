@@ -35,7 +35,7 @@ function Manager_Ray_Guns:draw()
   if DRAW_BOXES then
     love.graphics.setColor(135, 0, 255);
     for index, ray in pairs(self.rays) do
-      love.graphics.circle("fill", ray.box.x + ray.box.w / 2, ray.box.y + ray.box.y / 2, MONSTER_ALIEN_RAY_GUN_RADIUS);
+			ray:draw();
     end
   end
 end
