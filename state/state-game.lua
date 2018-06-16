@@ -696,6 +696,12 @@ function State_Game:pickupItem(item)
 
 	self.soundEffects.itemPickup:rewind();
 	self.soundEffects.itemPickup:play();
+
+	if item.itemType == "foil" then
+		self.playerMindTimer = PLAYER_MIND_SANE_TIMER;
+		self.playerMindMuddled = false;
+		self.playerMindMuddleEffect = false;
+	end
 end
 
 function State_Game:selectItem(dir)
