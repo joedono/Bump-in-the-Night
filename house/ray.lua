@@ -60,12 +60,12 @@ function Ray:update(dt)
 	if self.exploding then
 		self.explodeTimer:update(dt);
 
-		local w = self.explodeEffect.w * self.explodeEffect.scale;
-		local h = self.explodeEffect.h * self.explodeEffect.scale;
+		local w = self.explodeEffect.w * self.explodeEffect.scale * 5/8;
+		local h = self.explodeEffect.h * self.explodeEffect.scale * 5/8;
 		local x = self.origin.x - w / 2;
 		local y = self.origin.y - h / 2;
 
-		local players, len = BumpWorld:queryRect(x, y, w, h, rayGunFilter);
+		local cols, len = BumpWorld:queryRect(x, y, w, h, rayGunFilter);
 		for i = 1, len do
 			local col = cols[i];
 			if KILL_PLAYER and col.other.type == "player" and col.other.active and self.active then
@@ -108,8 +108,8 @@ function Ray:draw()
 		if DRAW_BOXES then
 			love.graphics.setColor(135, 0, 255);
 
-			local w = self.explodeEffect.w * self.explodeEffect.scale;
-			local h = self.explodeEffect.h * self.explodeEffect.scale;
+			local w = self.explodeEffect.w * self.explodeEffect.scale * 5/8;
+			local h = self.explodeEffect.h * self.explodeEffect.scale * 5/8;
 			local x = self.origin.x - w / 2;
 			local y = self.origin.y - h / 2;
 
@@ -124,5 +124,8 @@ function Ray:draw()
 			fax, fay,
 			0,
 			self.explodeEffect.scale, self.explodeEffect.scale);
+	elseif not DRAW_LIGHTS then
+		love.graphics.setColor(135, 0, 255);
+		love.graphics.circle("fill", self.origin.x, self.origin.y, 5);
 	end
 end
