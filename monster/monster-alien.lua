@@ -115,7 +115,19 @@ function Monster_Alien:updateWalk(dt)
 	end
 
 	if self.targetPathNode == nil then
-		local finalPathNode = self.parentManager:randomPathNode();
+		local finalPathNode;
+
+		if self.parentManager.parentStateGame:isPlayerUsingItem("music_box") then
+			finalPathNode = {
+				origin = {
+					x = self.player.box.x,
+					y = self.player.box.y
+				}
+			};
+		else
+			finalPathNode = self.parentManager:randomPathNode();
+		end
+
 		self.path = pathfinding.findPath(self.box.x, self.box.y, finalPathNode.origin.x, finalPathNode.origin.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];

@@ -236,6 +236,7 @@ GRAVE_OFFSET_Y = -32;
 
 POLICE_TIMER = 45;
 BOOK_BANISHMENT_TIMER = 45;
+MUSIC_BOX_BANISHMENT_TIMER = 45;
 
 INVENTORY_MAP = {
 	world = {
@@ -254,7 +255,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 64},
 		["knife"] = {x = 32, y = 64},
 		["music_box"] = {x = 64, y = 64},
-		["music_box_dead"] = {x = 64, y = 64},
+		["music_box_dead"] = {x = 64, y = 64}, -- TODO Replace this
 		["music_box_battery"] = {x = 96, y = 64},
 		["foil"] = {x = 128, y = 64},
 		["axe"] = {x = 160, y = 64},

@@ -76,7 +76,8 @@ function State_Game:init()
 		shovelDig = love.audio.newSource("asset/sound/shovel-dig.wav", "static"),
 		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static"),
 		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
-		rayGunImpact = love.audio.newSource("asset/sound/ray-gun-impact.wav", "static")
+		rayGunImpact = love.audio.newSource("asset/sound/ray-gun-impact.wav", "static"),
+		musicBox = love.audio.newSource("asset/sound/book-reading.wav", "static") -- TODO Replace this
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);
@@ -147,6 +148,7 @@ function State_Game:enter(previous, scenarioId)
 	self.heatTurnedOn = false;
 	self.taserTimer = 0;
 	self.bookBanishmentTimer = BOOK_BANISHMENT_TIMER;
+	self.musicBoxBanishmentTimer = MUSIC_BOX_BANISHMENT_TIMER;
 
 	if self.scenarioId == "ghost" then
 		self:buryCorpse();
@@ -156,6 +158,7 @@ function State_Game:enter(previous, scenarioId)
 	self:updateCamera(self.player.box.x, self.player.box.y);
 
 	self.isPlayerReadingBook = false;
+	self.isPlayerPlayingMusicBox = false;
 	self.isPlayerShovelling = false;
 
 	self.active = true;
@@ -604,6 +607,13 @@ function State_Game:updateSpecialGhost(dt)
 end
 
 function State_Game:updateSpecialAlien(dt)
+	if self.isPlayerPlayingMusicBox then
+		self.musicBoxBanishmentTimer = self.musicBoxBanishmentTimer - dt;
+		if self.musicBoxBanishmentTimer <= 0 then
+			self:winGame();
+		end
+	end
+
 	self.globalTime = self.globalTime + dt;
 	if self.globalTime > 500 then
 		self.globalTime = self.globalTime - 500;
@@ -829,7 +839,8 @@ function State_Game:useItem()
 		);
 	elseif selectedItem.itemType == "knife" then
 	elseif selectedItem.itemType == "music_box" then
-		-- TODO
+		self.isPlayerPlayingMusicBox = true;
+		self.soundEffects.musicBox:play();
 	elseif selectedItem.itemType == "music_box_dead" then
 		-- Do nothing
 	elseif selectedItem.itemType == "music_box_battery" then
@@ -876,6 +887,10 @@ function State_Game:stopUsingItem()
 	self.isPlayerReadingBook = false;
 	self.soundEffects.bookRead:stop();
 
+	-- Music Box
+	self.isPlayerPlayingMusicBox = false;
+	self.soundEffects.musicBox:stop();
+
 	-- Shovel
 	self.isPlayerShovelling = false;
 	self.soundEffects.shovelDigFail:stop();
@@ -890,6 +905,10 @@ end
 function State_Game:isPlayerUsingItem(item)
 	if item == "book" then
 		return self.isPlayerReadingBook;
+	end
+
+	if item == "music_box" then
+		return self.isPlayerPlayingMusicBox;
 	end
 
 	if item == "shovel" then
