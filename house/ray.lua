@@ -50,6 +50,7 @@ Ray = Class {
 function Ray:explode()
 	self.exploding = true;
 	LightWorld:remove(self.light);
+	-- TODO Play ray gun explosion sound effect
 end
 
 function Ray:update(dt)
@@ -68,8 +69,8 @@ function Ray:update(dt)
 		local cols, len = BumpWorld:queryRect(x, y, w, h, rayGunFilter);
 		for i = 1, len do
 			local col = cols[i];
-			if KILL_PLAYER and col.other.type == "player" and col.other.active and self.active then
-				col.other.active = false;
+			if KILL_PLAYER and col.type == "player" and col.active and self.active then
+				col.active = false;
 
 				self.soundEffects.monsterBite:rewind();
 				self.soundEffects.playerDeathYell:rewind();

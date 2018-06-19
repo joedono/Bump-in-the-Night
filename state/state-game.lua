@@ -623,6 +623,10 @@ function State_Game:updateSpecialAlien(dt)
 
 	if self.playerMindTimer > 0 then
 		self.playerMindTimer = self.playerMindTimer - dt;
+
+		if self.playerMindTimer < PLAYER_MIND_MUDDLE_TIMER / 5 and not self.playerMindMuddled then
+			-- TODO Ramp up to becoming muddled
+		end
 	elseif self.playerMindTimer <= 0 then
 		if self.playerMindMuddled or self.playerMindMuddleEffect then
 			-- Go from insane to sane
