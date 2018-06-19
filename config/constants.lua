@@ -8,8 +8,8 @@ FULLSCREEN = false;
 DRAW_BOXES = false;
 DRAW_PORTALS = false;
 DRAW_PATHS = false;
-DRAW_LIGHTS = true;
-KILL_PLAYER = true;
+DRAW_LIGHTS = false;
+KILL_PLAYER = false;
 FREEZE_PLAYER = true;
 DRAW_RAINBOW_SHADER = true;
 DRAW_MONSTER_PATH = false;
@@ -201,7 +201,7 @@ MONSTER_ALIEN_WALK_SPEED = 200;
 MONSTER_ALIEN_RAY_GUN_SIZE = 5;
 MONSTER_ALIEN_RAY_GUN_RADIUS = 5;
 MONSTER_ALIEN_RAY_GUN_SPEED = 350;
-MONSTER_ALIEN_RAY_GUN_EXPLODE_TIME = 5;
+MONSTER_ALIEN_RAY_GUN_EXPLODE_TIME = 3;
 
 SHOTGUN_RANGE = 75;
 SHOTGUN_MIN_SIZE = 30;
@@ -255,7 +255,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 64},
 		["knife"] = {x = 32, y = 64},
 		["music_box"] = {x = 64, y = 64},
-		["music_box_dead"] = {x = 64, y = 64}, -- TODO Replace this
+		["music_box_dead"] = {x = 160, y = 96},
 		["music_box_battery"] = {x = 96, y = 64},
 		["foil"] = {x = 128, y = 64},
 		["axe"] = {x = 160, y = 64},
@@ -281,7 +281,7 @@ INVENTORY_MAP = {
 		["stake"] = {x = 0, y = 120},
 		["knife"] = {x = 60, y = 120},
 		["music_box"] = {x = 120, y = 120},
-		["music_box_dead"] = {x = 120, y = 120},
+		["music_box_dead"] = {x = 300, y = 180},
 		["music_box_battery"] = {x = 180, y = 120},
 		["foil"] = {x = 240, y = 120},
 		["axe"] = {x = 300, y = 120},

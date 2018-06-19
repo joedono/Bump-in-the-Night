@@ -105,7 +105,7 @@ function Ray:draw()
 	end
 
 	if self.exploding then
-		if DRAW_BOXES then
+		if DRAW_BOXES or not DRAW_LIGHTS then
 			love.graphics.setColor(135, 0, 255);
 
 			local w = self.explodeEffect.w * self.explodeEffect.scale * 5/8;
