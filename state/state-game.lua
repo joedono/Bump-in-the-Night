@@ -1119,6 +1119,13 @@ function State_Game:drawHUD()
 			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (BOOK_BANISHMENT_TIMER - self.bookBanishmentTimer) / BOOK_BANISHMENT_TIMER, 4);
 		end
 
+		if item.itemType == "music_box" and self.musicBoxBanishmentTimer < MUSIC_BOX_BANISHMENT_TIMER then
+			love.graphics.setColor(255, 255, 255);
+			love.graphics.rectangle("fill", x, y - 10, 60, 6);
+			love.graphics.setColor(0, 0, 0);
+			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (MUSIC_BOX_BANISHMENT_TIMER - self.musicBoxBanishmentTimer) / MUSIC_BOX_BANISHMENT_TIMER, 4);
+		end
+
 		if self.selectedItemIndex == index then
 			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("line", (index-1) * 100 + 30, y, INVENTORY_ITEM_WIDTH, INVENTORY_ITEM_HEIGHT);
