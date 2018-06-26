@@ -50,7 +50,7 @@ Ray = Class {
 function Ray:explode()
 	self.exploding = true;
 	LightWorld:remove(self.light);
-	-- TODO Play ray gun explosion sound effect
+	self.soundEffects.rayGunExplode:play();
 end
 
 function Ray:update(dt)

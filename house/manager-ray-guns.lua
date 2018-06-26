@@ -12,7 +12,7 @@ Manager_Ray_Guns = Class {
 
 function Manager_Ray_Guns:shootRayGun(x, y, targetX, targetY)
   table.insert(self.rays, Ray(self, x, y, targetX, targetY, self.rayExplodeImage));
-	-- TODO Play ray gun sound effect
+	self.soundEffects.rayGunShoot:play();
 end
 
 function Manager_Ray_Guns:update(dt)

@@ -75,8 +75,8 @@ function State_Game:init()
 		shovelDigFail = love.audio.newSource("asset/sound/shovel-dig-fail.wav", "static"),
 		shovelDig = love.audio.newSource("asset/sound/shovel-dig.wav", "static"),
 		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static"),
-		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
-		rayGunImpact = love.audio.newSource("asset/sound/ray-gun-impact.wav", "static"),
+		rayGunShoot = love.audio.newSource("asset/sound/ray-gun-shoot.wav", "static"),
+		rayGunExplode = love.audio.newSource("asset/sound/ray-gun-explode.wav", "static"),
 		musicBox = love.audio.newSource("asset/sound/music-box.ogg", "static")
 	};
 
