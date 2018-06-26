@@ -13,8 +13,14 @@ https://opengameart.org/content/skull
 https://www.dafont.com/riffic.font
 https://www.urbanfonts.com/fonts/Fiendish.font
 
-# Tech
+# Tools
 https://love2d.org/
+https://www.bfxr.net/
+https://www.mapeditor.org/
+https://www.audacityteam.org/
+https://www.gimp.org/
+
+# Libraries
 https://github.com/love2d-community/splashes
 https://github.com/vrld/hump
 https://github.com/vrld/SUIT
