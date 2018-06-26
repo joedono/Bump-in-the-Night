@@ -77,7 +77,7 @@ function State_Game:init()
 		useLighter = love.audio.newSource("asset/sound/lighter.wav", "static"),
 		rayGun = love.audio.newSource("asset/sound/ray-gun.wav", "static"),
 		rayGunImpact = love.audio.newSource("asset/sound/ray-gun-impact.wav", "static"),
-		musicBox = love.audio.newSource("asset/sound/book-reading.wav", "static") -- TODO Replace this
+		musicBox = love.audio.newSource("asset/sound/music-box.ogg", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);

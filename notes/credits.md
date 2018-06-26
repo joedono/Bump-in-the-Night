@@ -33,6 +33,7 @@ https://opengameart.org/content/electricity-sound-effects
 https://opengameart.org/content/ghost-breath
 https://opengameart.org/content/ghost
 https://www.youtube.com/watch?v=0Y8a2UZwOtg
+https://opengameart.org/content/somber-music-box
 
 # Music
 https://opengameart.org/content/oves-essential-game-audio-pack-collection-160-files-updated
