@@ -20,8 +20,6 @@ Ray = Class {
       y = targetY
     };
 
-		self.light = LightWorld:newLight(self.origin.x, self.origin.y, 135, 0, 255, MONSTER_ALIEN_RAY_GUN_RADIUS);
-
 		self.exploding = false;
 		self.explodeEffectImage = explodeEffectImage;
 		self.explodeTimer = Timer.new();
@@ -29,7 +27,7 @@ Ray = Class {
 			alpha = 255,
 			w = self.explodeEffectImage:getWidth(),
 			h = self.explodeEffectImage:getHeight(),
-			scale = 0
+			scale = 0.1
 		};
 
 		self.explodeTimer:tween(
@@ -49,7 +47,6 @@ Ray = Class {
 
 function Ray:explode()
 	self.exploding = true;
-	LightWorld:remove(self.light);
 	self.soundEffects.rayGunExplode:play();
 end
 
@@ -61,8 +58,8 @@ function Ray:update(dt)
 	if self.exploding then
 		self.explodeTimer:update(dt);
 
-		local w = self.explodeEffect.w * self.explodeEffect.scale * 5/8;
-		local h = self.explodeEffect.h * self.explodeEffect.scale * 5/8;
+		local w = self.explodeEffect.w * self.explodeEffect.scale * 3/8;
+		local h = self.explodeEffect.h * self.explodeEffect.scale * 3/8;
 		local x = self.origin.x - w / 2;
 		local y = self.origin.y - h / 2;
 
@@ -92,8 +89,6 @@ function Ray:update(dt)
 	  self.origin.x = self.origin.x + dx;
 	  self.origin.y = self.origin.y + dy;
 
-	  self.light:setPosition(self.origin.x, self.origin.y);
-
 		if math.dist(self.origin.x, self.origin.y, self.target.x, self.target.y) < MONSTER_ALIEN_RAY_GUN_SPEED * dt then
 			self:explode();
 		end
@@ -105,28 +100,23 @@ function Ray:draw()
 		return;
 	end
 
-	if self.exploding then
-		if DRAW_BOXES or not DRAW_LIGHTS then
-			love.graphics.setColor(135, 0, 255);
-
-			local w = self.explodeEffect.w * self.explodeEffect.scale * 5/8;
-			local h = self.explodeEffect.h * self.explodeEffect.scale * 5/8;
-			local x = self.origin.x - w / 2;
-			local y = self.origin.y - h / 2;
-
-			love.graphics.rectangle("line", x, y, w, h);
-		end
-
-		love.graphics.setColor(135, 0, 255, self.explodeEffect.alpha);
-		local fax = self.origin.x - (self.explodeEffect.w / 2 * self.explodeEffect.scale);
-		local fay = self.origin.y - (self.explodeEffect.h / 2 * self.explodeEffect.scale);
-
-		love.graphics.draw(self.explodeEffectImage,
-			fax, fay,
-			0,
-			self.explodeEffect.scale, self.explodeEffect.scale);
-	elseif not DRAW_LIGHTS then
+	if DRAW_BOXES then
 		love.graphics.setColor(135, 0, 255);
-		love.graphics.circle("fill", self.origin.x, self.origin.y, 5);
+
+		local w = self.explodeEffect.w * self.explodeEffect.scale * 3/8;
+		local h = self.explodeEffect.h * self.explodeEffect.scale * 3/8;
+		local x = self.origin.x - w / 2;
+		local y = self.origin.y - h / 2;
+
+		love.graphics.rectangle("line", x, y, w, h);
 	end
+
+	love.graphics.setColor(135, 0, 255, self.explodeEffect.alpha);
+	local fax = self.origin.x - (self.explodeEffect.w / 2 * self.explodeEffect.scale);
+	local fay = self.origin.y - (self.explodeEffect.h / 2 * self.explodeEffect.scale);
+
+	love.graphics.draw(self.explodeEffectImage,
+		fax, fay,
+		0,
+		self.explodeEffect.scale, self.explodeEffect.scale);
 end
