@@ -70,7 +70,7 @@ function State_Options:gamepadpressed(joystick, button)
 
   if setGamepad then
     for id, gamepadInput in pairs(self.gamepadInputs) do
-      if id == "gamepadTextRun" or not self.inputs:hasKeyboardFocus(id) then
+      if id ~= "gamepadTextRun" and not self.inputs:hasKeyboardFocus(id) and gamepadInput.text == button then
         gamepadInput.text = "";
       end
     end
