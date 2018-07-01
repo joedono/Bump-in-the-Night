@@ -1,4 +1,5 @@
 extern number iGlobalTime;
+extern number iPercentage;
 
 vec3 hsv2rgb(vec3 c) {
   vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);

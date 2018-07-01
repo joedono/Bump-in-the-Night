@@ -624,8 +624,13 @@ function State_Game:updateSpecialAlien(dt)
 	if self.playerMindTimer > 0 then
 		self.playerMindTimer = self.playerMindTimer - dt;
 
-		if self.playerMindTimer < PLAYER_MIND_MUDDLE_TIMER / 5 and not self.playerMindMuddled then
-			-- TODO Ramp up to becoming muddled
+		if self.playerMindTimer < PLAYER_MIND_MUDDLE_BUILDUP and not self.playerMindMuddleEffect then
+			local percentage = 1 - self.playerMindTimer / PLAYER_MIND_MUDDLE_BUILDUP;
+			if percentage > 1 then
+				percentage = 1;
+			end
+
+			self.alienShader:send("iPercentage", percentage);
 		end
 	elseif self.playerMindTimer <= 0 then
 		if self.playerMindMuddled or self.playerMindMuddleEffect then
@@ -1036,7 +1041,7 @@ function State_Game:draw()
 			self.camera:attach(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		end
 
-		if DRAW_RAINBOW_SHADER and self.playerMindMuddleEffect then
+		if DRAW_RAINBOW_SHADER and (self.playerMindMuddleEffect or self.playerMindTimer < PLAYER_MIND_MUDDLE_BUILDUP) then
 			love.graphics.setShader(self.alienShader);
 		end
 
@@ -1048,7 +1053,7 @@ function State_Game:draw()
 			self:drawGame();
 		end
 
-		if DRAW_RAINBOW_SHADER and self.playerMindMuddleEffect then
+		if DRAW_RAINBOW_SHADER and (self.playerMindMuddleEffect or self.playerMindTimer < PLAYER_MIND_MUDDLE_BUILDUP) then
 			love.graphics.setShader();
 		end
 
