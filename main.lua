@@ -32,7 +32,6 @@ require "state/state-won";
 function love.load()
 	setFullscreen(FULLSCREEN);
 	love.mouse.setVisible(false);
-	love.mouse.setVisible(true);
 	love.graphics.setDefaultFilter("nearest", "nearest");
 
 	loadGame();
