@@ -35,11 +35,11 @@ function State_Splash_Hive:enter()
 
 	Timer.clear();
 	Timer.script(function(wait)
-		Timer.tween(2, self.alphas, {imageAlpha = 255}, "in-linear");
+		Timer.tween(2, self.alphas, {imageAlpha = 1}, "in-linear");
 		wait(2);
-		Timer.tween(2, self.alphas, {eyeAlpha = 255}, "in-linear");
+		Timer.tween(2, self.alphas, {eyeAlpha = 1}, "in-linear");
 		wait(2);
-		Timer.tween(2, self.alphas, {wordAlpha = 255}, "in-linear");
+		Timer.tween(2, self.alphas, {wordAlpha = 1}, "in-linear");
 		wait(5);
 		Timer.tween(1, self.alphas, {imageAlpha = 0, eyeAlpha = 0, wordAlpha = 0}, "in-linear");
 		wait(1);
@@ -66,19 +66,19 @@ end
 function State_Splash_Hive:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
-		love.graphics.setColor(255, 255, 255, self.alphas.imageAlpha);
+		love.graphics.setColor(1, 1, 1, self.alphas.imageAlpha);
 		love.graphics.draw(self.hiveImage, self.imagePos.x, self.imagePos.y, 0, self.imageScale, self.imageScale);
 
-		love.graphics.setColor(255, 255, 255, self.alphas.eyeAlpha);
+		love.graphics.setColor(1, 1, 1, self.alphas.eyeAlpha);
 		love.graphics.circle("fill", self.eyePos.x1, self.eyePos.y, 5);
 		love.graphics.circle("fill", self.eyePos.x2, self.eyePos.y, 5);
 
 		love.graphics.setFont(self.font);
-		love.graphics.setColor(255, 255, 255, self.alphas.wordAlpha);
+		love.graphics.setColor(1, 1, 1, self.alphas.wordAlpha);
 		love.graphics.print("Developed by", self.wordPos.x1, self.wordPos.y1);
 		love.graphics.print("Little HIVE Studios", self.wordPos.x2, self.wordPos.y2);
 	end);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
