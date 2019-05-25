@@ -9,6 +9,7 @@ suit.__index = suit
 
 function suit.new(theme)
 	return setmetatable({
+		-- TODO: deep copy/copy on write? better to let user handle => documentation?
 		theme = theme or default_theme,
 		mouse_x = 0, mouse_y = 0,
 		mouse_button_down = false,
@@ -99,7 +100,7 @@ function suit:mouseInRect(x,y,w,h)
 end
 
 function suit:registerMouseHit(id, ul_x, ul_y, hit)
-	if hit(self.mouse_x - ul_x, self.mouse_y - ul_y) then
+	if not self.hovered and hit(self.mouse_x - ul_x, self.mouse_y - ul_y) then
 		self.hovered = id
 		if self.active == nil and self.mouse_button_down then
 			self.active = id

@@ -349,6 +349,8 @@ L:row()
 end
 --]]
 
+-- TODO: nesting a la rows{..., cols{...} } ?
+
 local instance = Layout.new()
 return setmetatable({
 	new     = Layout.new,

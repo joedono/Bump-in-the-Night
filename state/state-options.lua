@@ -12,7 +12,7 @@ function State_Options:enter(previous)
   love.mouse.setVisible(true);
 
   self.fullScreenCheckbox = { checked = FULLSCREEN };
-  self.brightnessSlider = { value = MASTER_BRIGHTNESS, min = 0, max = 255 };
+  self.brightnessSlider = { value = MASTER_BRIGHTNESS, min = 0, max = 1 };
   self.volumeSlider = { value = MASTER_VOLUME, min = 0, max = 1 };
   self.helpTextCheckbox = { checked = HELP_TEXT_ENABLED };
 
@@ -207,27 +207,27 @@ function State_Options:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
     love.graphics.setFont(self.titleFont);
-		love.graphics.setColor(255, 0, 0);
+		love.graphics.setColor(1, 0, 0);
 		love.graphics.printf("Options", 0, 10, SCREEN_WIDTH, "center");
-		love.graphics.setColor(255, 255, 255, 255);
+		love.graphics.setColor(1, 1, 1, 1);
     love.graphics.rectangle("line", 480, 420, 710, 370);
 
     love.graphics.setFont(self.menuFont);
-    love.graphics.setColor(255, 255, 255);
+    love.graphics.setColor(1, 1, 1);
     love.graphics.rectangle("line", 995, 250, 175, 40);
-    love.graphics.setColor(255, 0, 0);
+    love.graphics.setColor(1, 0, 0);
     love.graphics.printf("BUMP", 995, 253, 175, "center");
     -- love.graphics.rectangle("fill", 995, 250, 175, 40);
-    love.graphics.setColor(0, 0, 0, 255 - self.brightnessSlider.value);
+    love.graphics.setColor(0, 0, 0, 1 - self.brightnessSlider.value);
     love.graphics.rectangle("fill", 995, 250, 175, 40);
     self.inputs:draw();
 
     if self.appliedTimer > 0 then
-      love.graphics.setColor(255, 255, 255, 255 * self.appliedTimer / 5);
+      love.graphics.setColor(1, 1, 1, 1 * self.appliedTimer / 5);
       love.graphics.print("Saved", 765, 845);
     end
 	end);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
