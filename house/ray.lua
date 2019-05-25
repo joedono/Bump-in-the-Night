@@ -7,18 +7,18 @@ but will still make it difficult if the player is affected by the mind-muddling 
 
 Ray = Class {
 	init = function(self, parentManager, centerX, centerY, targetX, targetY, explodeEffectImage)
-    self.parentManager = parentManager;
+		self.parentManager = parentManager;
 		self.soundEffects = parentManager.soundEffects;
 
-    self.origin = {
-      x = centerX,
-      y = centerY,
-    };
+		self.origin = {
+			x = centerX,
+			y = centerY,
+		};
 
-    self.target = {
-      x = targetX,
-      y = targetY
-    };
+		self.target = {
+			x = targetX,
+			y = targetY
+		};
 
 		self.exploding = false;
 		self.explodeEffectImage = explodeEffectImage;
@@ -86,8 +86,8 @@ function Ray:update(dt)
 		dx = dx * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 		dy = dy * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 
-	  self.origin.x = self.origin.x + dx;
-	  self.origin.y = self.origin.y + dy;
+		self.origin.x = self.origin.x + dx;
+		self.origin.y = self.origin.y + dy;
 
 		if math.dist(self.origin.x, self.origin.y, self.target.x, self.target.y) < MONSTER_ALIEN_RAY_GUN_SPEED * dt then
 			self:explode();
@@ -101,7 +101,7 @@ function Ray:draw()
 	end
 
 	if DRAW_BOXES then
-		love.graphics.setColor(135, 0, 255);
+		love.graphics.setColor(0.5, 0, 1);
 
 		local w = self.explodeEffect.w * self.explodeEffect.scale * 3/8;
 		local h = self.explodeEffect.h * self.explodeEffect.scale * 3/8;
@@ -111,7 +111,7 @@ function Ray:draw()
 		love.graphics.rectangle("line", x, y, w, h);
 	end
 
-	love.graphics.setColor(135, 0, 255, self.explodeEffect.alpha);
+	love.graphics.setColor(0.5, 0, 1, self.explodeEffect.alpha);
 	local fax = self.origin.x - (self.explodeEffect.w / 2 * self.explodeEffect.scale);
 	local fay = self.origin.y - (self.explodeEffect.h / 2 * self.explodeEffect.scale);
 

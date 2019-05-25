@@ -22,11 +22,6 @@ Door = Class {
 		self.isOpen = false;
 		self.openTimer = 0;
 
-		local lightBody = LightWorld:newRectangle(self.x + self.w / 2, self.y + self.h / 2, self.w, self.h);
-		lightBody:setColor(255, 255, 255);
-		lightBody:setAlpha(255 * 0.2);
-		self.lightBody = lightBody;
-
 		self.soundOpen = soundEffects.doorOpen;
 		self.soundClose = soundEffects.doorClose;
 
@@ -38,7 +33,6 @@ Door = Class {
 function Door:open(other)
 	self.isOpen = true;
 	self.openTimer = DOOR_OPEN_TIMER;
-	self.lightBody:setShadow(false);
 
 	if other.type == "player" then
 		self.soundOpen:seek(0);
@@ -56,7 +50,6 @@ function Door:update(dt)
 
 			if len <= 1 then
 				self.isOpen = false;
-				self.lightBody:setShadow(true);
 
 				if self.openedByPlayer then
 					self.soundClose:seek(0);
@@ -71,7 +64,7 @@ end
 
 function Door:draw()
 	if not self.isOpen then
-		love.graphics.setColor(128, 64, 0);
+		love.graphics.setColor(0.5, 0.25, 0);
 		love.graphics.rectangle("fill", self.x, self.y, self.w, self.h);
 	end
 end
