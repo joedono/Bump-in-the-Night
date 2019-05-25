@@ -24,7 +24,7 @@ end
 function State_Controls_Keyboard:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
-		love.graphics.setColor(255, 0, 0);
+		love.graphics.setColor(1, 0, 0);
 		love.graphics.draw(self.image, 0, 0);
 		love.graphics.setFont(self.titleFont);
 		love.graphics.printf("Keyboard", 0, 12, SCREEN_WIDTH, "center");
@@ -42,6 +42,6 @@ function State_Controls_Keyboard:draw()
 		love.graphics.printf("Press any key to go back", 0, 840, SCREEN_WIDTH, "center");
 	end);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
