@@ -141,7 +141,7 @@ function Monster_Burglar:updateSpotted(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:seek(0);
 		self.soundEffects.humanAttackYell:play();
 		self.state = "active-chase";
 	end
@@ -183,7 +183,7 @@ function Monster_Burglar:updateStunned(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self.panicked then
-			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:seek(0);
 			self.soundEffects.humanAttackYell:play();
 			self.state = "panicked";
 		else
@@ -201,7 +201,7 @@ function Monster_Burglar:hasSpottedPlayer()
 	if self.panicked then
 		self.state = "panicked";
 	else
-		self.soundEffects.spotted:rewind();
+		self.soundEffects.spotted:seek(0);
 		self.soundEffects.spotted:play();
 		self.state = "spotted";
 	end
@@ -212,7 +212,7 @@ end
 function Monster_Burglar:panic()
 	self.panicked = true;
 	self.state = "panicked";
-	self.soundEffects.humanAttackYell:rewind();
+	self.soundEffects.humanAttackYell:seek(0);
 	self.soundEffects.humanAttackYell:play();
 end
 
@@ -232,8 +232,8 @@ function Monster_Burglar:followPath(dt, speed)
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" then
 			col.other.active = false;
 
-			self.soundEffects.knifeStab:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.knifeStab:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.knifeStab:play();
 			self.soundEffects.playerDeathYell:play();
 

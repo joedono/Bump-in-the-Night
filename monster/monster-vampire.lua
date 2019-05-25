@@ -155,7 +155,7 @@ function Monster_Vampire:updateSpotted(dt)
 
 	if self.stateTimer <= 0 then
 		self:resetPath();
-		self.soundEffects.monsterVampireLaugh:rewind();
+		self.soundEffects.monsterVampireLaugh:seek(0);
 		self.soundEffects.monsterVampireLaugh:play();
 		self.state = "stalking";
 	end
@@ -187,8 +187,8 @@ function Monster_Vampire:followPath(dt, speed)
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "dead" then
 			col.other.active = false;
 
-			self.soundEffects.monsterBite:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.monsterBite:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.monsterBite:play();
 			self.soundEffects.playerDeathYell:play();
 

@@ -124,8 +124,8 @@ function Monster_Ghost:chasePlayer(dt, speed)
 	for i = 1, len do
 		local col = cols[i];
 		if KILL_PLAYER and self.state == "chasing" and col.other.type == "player" and col.other.active then
-			self.soundEffects.ghostKill:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.ghostKill:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.ghostKill:play();
 			self.soundEffects.playerDeathYell:play();
 
@@ -177,7 +177,7 @@ function Monster_Ghost:startFadeIn()
 	self.state = "fading-in";
 	self.fadeTable.volume = 1;
 	self.soundEffects.ghostApproach:setVolume(1);
-	self.soundEffects.ghostApproach:rewind();
+	self.soundEffects.ghostApproach:seek(0);
 	self.soundEffects.ghostApproach:play();
 
 	local px = self.player.box.x;

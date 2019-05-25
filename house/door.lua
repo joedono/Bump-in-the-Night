@@ -41,7 +41,7 @@ function Door:open(other)
 	self.lightBody:setShadow(false);
 
 	if other.type == "player" then
-		self.soundOpen:rewind();
+		self.soundOpen:seek(0);
 		self.soundOpen:play();
 		self.openedByPlayer = true;
 	end
@@ -59,7 +59,7 @@ function Door:update(dt)
 				self.lightBody:setShadow(true);
 
 				if self.openedByPlayer then
-					self.soundClose:rewind();
+					self.soundClose:seek(0);
 					self.soundClose:play();
 				end
 

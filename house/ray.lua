@@ -69,8 +69,8 @@ function Ray:update(dt)
 			if KILL_PLAYER and col.type == "player" and col.active and self.active then
 				col.active = false;
 
-				self.soundEffects.monsterBite:rewind();
-				self.soundEffects.playerDeathYell:rewind();
+				self.soundEffects.monsterBite:seek(0);
+				self.soundEffects.playerDeathYell:seek(0);
 				self.soundEffects.monsterBite:play();
 				self.soundEffects.playerDeathYell:play();
 

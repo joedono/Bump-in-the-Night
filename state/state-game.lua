@@ -703,7 +703,7 @@ function State_Game:pickupItem(item)
 	table.insert(self.inventory, item);
 	item:pickup();
 
-	self.soundEffects.itemPickup:rewind();
+	self.soundEffects.itemPickup:seek(0);
 	self.soundEffects.itemPickup:play();
 
 	if item.itemType == "foil" then
@@ -753,7 +753,7 @@ function State_Game:useItem()
 		table.insert(self.usedItems, Trap(self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2, self.itemHeldSpriteSheet));
 	elseif selectedItem.itemType == "shotgun" then
 		if selectedItem.loaded then
-			self.soundEffects.gunshot:rewind();
+			self.soundEffects.gunshot:seek(0);
 			self.soundEffects.gunshot:play();
 			self.player:useItem();
 			table.insert(
@@ -776,7 +776,7 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "taser" then
 		if self.taserTimer <= 0 then
 			self.taserTimer = TASER_TIMER;
-			self.soundEffects.taser:rewind();
+			self.soundEffects.taser:seek(0);
 			self.soundEffects.taser:play();
 			self.player:useItem();
 			table.insert(
@@ -812,7 +812,7 @@ function State_Game:useItem()
 			self.selectedItemIndex = 1;
 		end
 	elseif selectedItem.itemType == "bucket" then
-		self.soundEffects.waterSplash:rewind();
+		self.soundEffects.waterSplash:seek(0);
 		self.soundEffects.waterSplash:play();
 		self.player:useItem();
 		table.insert(
@@ -830,7 +830,7 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "cross" then
 		-- Do nothing
 	elseif selectedItem.itemType == "stake" then
-		self.soundEffects.stakeStab:rewind();
+		self.soundEffects.stakeStab:seek(0);
 		self.soundEffects.stakeStab:play();
 		self.player:useItem();
 		table.insert(
@@ -882,7 +882,7 @@ function State_Game:useItem()
 	elseif selectedItem.itemType == "axe" then
 	elseif selectedItem.itemType == "gasoline" then
 	elseif selectedItem.itemType == "lighter" then
-		self.soundEffects.useLighter:rewind();
+		self.soundEffects.useLighter:seek(0);
 		self.soundEffects.useLighter:play();
 		self.player:useItem();
 		table.insert(
@@ -958,9 +958,9 @@ function State_Game:hasPlayerCalledPolice()
 end
 
 function State_Game:freezePlayer()
-	self.soundEffects.playerFreeze:rewind();
+	self.soundEffects.playerFreeze:seek(0);
 	self.soundEffects.playerFreeze:play();
-	self.soundEffects.playerFrozen:rewind();
+	self.soundEffects.playerFrozen:seek(0);
 	self.soundEffects.playerFrozen:play();
 
 	if FREEZE_PLAYER then

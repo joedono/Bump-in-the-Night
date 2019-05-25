@@ -169,7 +169,7 @@ function Monster_Killer:updateSpotted(dt)
 		if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 			self.state = "shooting";
 		else
-			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:seek(0);
 			self.soundEffects.humanAttackYell:play();
 			self.state = "active-chase";
 			self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
@@ -183,7 +183,7 @@ function Monster_Killer:updateShooting(dt)
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
 	else
-		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:seek(0);
 		self.soundEffects.humanAttackYell:play();
 		self.state = "active-chase";
 		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
@@ -246,7 +246,7 @@ function Monster_Killer:updatePanickedSpotted(dt)
 		if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 			self.state = "panicked-shooting";
 		else
-			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:seek(0);
 			self.soundEffects.humanAttackYell:play();
 			self.state = "panicked-pursue";
 			self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
@@ -296,7 +296,7 @@ function Monster_Killer:updatePanickedShooting(dt)
 	if self:canSeePlayer(MONSTER_KILLER_SIGHT_CONE, MONSTER_KILLER_SIGHT_DISTANCE) then
 		self:shootPlayer();
 	else
-		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:seek(0);
 		self.soundEffects.humanAttackYell:play();
 		self.state = "panicked-pursue";
 		self.stateTimer = MONSTER_KILLER_CHASE_TIMER;
@@ -313,7 +313,7 @@ function Monster_Killer:hasSpottedPlayer()
 		self.stateTimer = 0.5;
 		self.state = "panicked-spotted";
 	else
-		self.soundEffects.spotted:rewind();
+		self.soundEffects.spotted:seek(0);
 		self.soundEffects.spotted:play();
 		self.stateTimer = 1;
 		self.state = "spotted";
@@ -322,7 +322,7 @@ end
 
 function Monster_Killer:shootPlayer()
 	if self.reloadTimer <= 0 then
-		self.soundEffects.gunshot:rewind();
+		self.soundEffects.gunshot:seek(0);
 		self.soundEffects.gunshot:play();
 
 		local originX = self.box.x + self.box.w / 2;
@@ -387,7 +387,7 @@ end
 function Monster_Killer:panic()
 	self.panicked = true;
 	self.state = "panicked";
-	self.soundEffects.humanAttackYell:rewind();
+	self.soundEffects.humanAttackYell:seek(0);
 	self.soundEffects.humanAttackYell:play();
 end
 
@@ -407,8 +407,8 @@ function Monster_Killer:followPath(dt, speed)
 		if KILL_PLAYER and col.other.type == "player" and col.other.active then
 			col.other.active = false;
 
-			self.soundEffects.knifeStab:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.knifeStab:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.knifeStab:play();
 			self.soundEffects.playerDeathYell:play();
 

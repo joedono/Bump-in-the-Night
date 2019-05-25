@@ -177,7 +177,7 @@ function Monster_Alien:hasSpottedPlayer()
 		y = self.player.box.y
 	};
 
-	self.soundEffects.spotted:rewind();
+	self.soundEffects.spotted:seek(0);
 	self.soundEffects.spotted:play();
 	self.stateTimer = 0.3;
 	self.state = "spotted";

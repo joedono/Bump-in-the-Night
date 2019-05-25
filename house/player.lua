@@ -200,8 +200,8 @@ function Player:updatePosition(dt)
 
 		if col.other.type == "fire" and KILL_PLAYER then
 			self.active = false;
-			self.soundEffects.monsterBite:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.monsterBite:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.monsterBite:play();
 			self.soundEffects.playerDeathYell:play();
 

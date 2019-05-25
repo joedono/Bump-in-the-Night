@@ -164,7 +164,7 @@ function Monster_Arsonist:updateSpotted(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		self:setFire();
-		self.soundEffects.humanAttackYell:rewind();
+		self.soundEffects.humanAttackYell:seek(0);
 		self.soundEffects.humanAttackYell:play();
 		self.state = "fleeing";
 	end
@@ -200,7 +200,7 @@ function Monster_Arsonist:updateStunned(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self.panicked then
-			self.soundEffects.humanAttackYell:rewind();
+			self.soundEffects.humanAttackYell:seek(0);
 			self.soundEffects.humanAttackYell:play();
 			self.state = "panicked";
 		else
@@ -217,7 +217,7 @@ function Monster_Arsonist:hasSpottedPlayer()
 		};
 		self.state = "panicked";
 	else
-		self.soundEffects.spotted:rewind();
+		self.soundEffects.spotted:seek(0);
 		self.soundEffects.spotted:play();
 		self.state = "spotted";
 	end
@@ -234,7 +234,7 @@ function Monster_Arsonist:panic()
 		self:setFire();
 	end);
 
-	self.soundEffects.humanAttackYell:rewind();
+	self.soundEffects.humanAttackYell:seek(0);
 	self.soundEffects.humanAttackYell:play();
 end
 
@@ -254,8 +254,8 @@ function Monster_Arsonist:followPath(dt, speed)
 		if KILL_PLAYER and col.other.type == "player" and col.other.active and self.state ~= "stunned" and self.panicked then
 			col.other.active = false;
 
-			self.soundEffects.knifeStab:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.knifeStab:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.knifeStab:play();
 			self.soundEffects.playerDeathYell:play();
 

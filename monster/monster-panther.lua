@@ -213,7 +213,7 @@ function Monster_Panther:updateSpotted(dt)
 	if self.stateTimer <= 0 then
 		self:resetPath();
 		if self:canSeePlayer(MONSTER_PANTHER_SIGHT_CONE, MONSTER_PANTHER_SIGHT_DISTANCE) then
-			self.soundEffects.monsterPantherRoar:rewind();
+			self.soundEffects.monsterPantherRoar:seek(0);
 			self.soundEffects.monsterPantherRoar:play();
 			self.state = "active-chase";
 		else
@@ -260,7 +260,7 @@ function Monster_Panther:updatePassiveChase(dt)
 			y = self.player.box.y
 		};
 
-		self.soundEffects.monsterPantherRoar:rewind();
+		self.soundEffects.monsterPantherRoar:seek(0);
 		self.soundEffects.monsterPantherRoar:play();
 		self.state = "active-chase";
 		return;
@@ -362,7 +362,7 @@ function Monster_Panther:hasSpottedPlayer()
 		y = self.player.box.y
 	};
 
-	self.soundEffects.spotted:rewind();
+	self.soundEffects.spotted:seek(0);
 	self.soundEffects.spotted:play();
 
 	self.state = "spotted";
@@ -386,8 +386,8 @@ function Monster_Panther:followPath(dt, speed)
 			self.state ~= "smells-meat" and self.state ~= "eating" and self.state ~= "dead" then
 			col.other.active = false;
 
-			self.soundEffects.monsterBite:rewind();
-			self.soundEffects.playerDeathYell:rewind();
+			self.soundEffects.monsterBite:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
 			self.soundEffects.monsterBite:play();
 			self.soundEffects.playerDeathYell:play();
 
@@ -408,7 +408,7 @@ function Monster_Panther:followPath(dt, speed)
 		end
 
 		if col.other.type == "placed-trap" and (self.state == "idle" or self.state == "walk" or self.state == "smells-meat" or self.state == "eating") then
-			self.soundEffects.trapSpring:rewind();
+			self.soundEffects.trapSpring:seek(0);
 			self.soundEffects.trapSpring:play();
 			self:resetPath();
 			self.state = "trapped";
