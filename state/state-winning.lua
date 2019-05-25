@@ -3,15 +3,15 @@ State_Winning = {};
 function State_Winning:enter(from)
 	self.from = from;
 	self.color = {
-		r = 255,
-		g = 255,
-		b = 255,
+		r = 1,
+		g = 1,
+		b = 1,
 		a = 0
 	};
 
 	Timer.clear();
 	Timer.script(function(wait)
-		Timer.tween(4, self.color, {a = 255}, "in-linear");
+		Timer.tween(4, self.color, {a = 1}, "in-linear");
 		wait(4);
 		self:onDone();
 	end);

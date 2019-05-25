@@ -150,7 +150,7 @@ function State_Scenario_Select:updateSelection(x, y, pressed)
 	self.selection.x = x;
 	self.selection.y = y;
 
-	self.soundSelectionChange:rewind();
+	self.soundSelectionChange:seek(0);
 	self.soundSelectionChange:play();
 end
 
@@ -160,12 +160,12 @@ function State_Scenario_Select:selectScenario()
 	if scenarioDescription == "random" then
 		scenarioDescription = self:chooseRandomLockedScenario();
 	elseif not SCENARIO_COMPLETED[scenarioDescription] then
-		self.soundLocked:rewind();
+		self.soundLocked:seek(0);
 		self.soundLocked:play();
 		return;
 	end
 
-	self.soundSelect:rewind();
+	self.soundSelect:seek(0);
 	self.soundSelect:play();
 	GameState.switch(State_Game, scenarioDescription)
 end
@@ -190,9 +190,9 @@ function State_Scenario_Select:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
 
-		love.graphics.setColor(255, 255, 255);
+		love.graphics.setColor(1, 1, 1);
 		love.graphics.draw(self.background, 0, 0);
-		love.graphics.setColor(255, 0, 0);
+		love.graphics.setColor(1, 0, 0);
 		love.graphics.setFont(self.titleFont);
 		love.graphics.printf("Choose Your Threat", 0, 15, SCREEN_WIDTH, "center");
 
@@ -214,13 +214,13 @@ function State_Scenario_Select:draw()
 		end
 
 		if self.indicatorVisible then
-			love.graphics.setColor(255, 255, 255);
+			love.graphics.setColor(1, 1, 1);
 			local indicatorX, indicatorY = self:getDrawLocation(self.selection.x, self.selection.y);
 			love.graphics.draw(self.indicator, indicatorX, indicatorY);
 		end
 	end);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
 

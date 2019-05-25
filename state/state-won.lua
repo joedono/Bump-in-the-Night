@@ -8,7 +8,7 @@ function State_Won:init()
 end
 
 function State_Won:enter()
-	love.graphics.setBackgroundColor(255, 255, 255);
+	love.graphics.setBackgroundColor(1, 1, 1);
 	self.inputEnabled = false;
 	self.alphas = {
 		titleAlpha = 0,
@@ -19,10 +19,10 @@ function State_Won:enter()
 
 	Timer.clear();
 	Timer.script(function(wait)
-		Timer.tween(4, self.alphas, {titleAlpha = 255}, "in-linear");
+		Timer.tween(4, self.alphas, {titleAlpha = 1}, "in-linear");
 		wait(4);
 		self.inputEnabled = true;
-		Timer.tween(4, self.alphas, {helpAlpha = 255}, "in-linear");
+		Timer.tween(4, self.alphas, {helpAlpha = 1}, "in-linear");
 	end);
 
 	self.music:play();
@@ -64,6 +64,6 @@ function State_Won:draw()
 		love.graphics.printf("Press any button", 0, 600, SCREEN_WIDTH, "center");
 	end);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
