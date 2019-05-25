@@ -122,7 +122,7 @@ function Floor:update(dt)
 end
 
 function Floor:draw(camera)
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 
 	for index, tile in pairs(self.tiles) do
 		self:drawTile(tile, camera);
@@ -137,7 +137,7 @@ function Floor:draw(camera)
 	end
 
 	if DRAW_BOXES then
-		love.graphics.setColor(100, 100, 100);
+		love.graphics.setColor(0.4, 0.4, 0.4);
 		for index, wall in pairs(self.walls) do
 			love.graphics.rectangle("fill", wall.x, wall.y, wall.width, wall.height);
 		end
@@ -147,7 +147,7 @@ function Floor:draw(camera)
 		for index, portal in pairs(self.portals) do
 			if portal.visible then
 				love.graphics.setFont(self.defaultFont);
-				love.graphics.setColor(255, 255, 0);
+				love.graphics.setColor(1, 1, 0);
 				love.graphics.rectangle("fill", portal.x, portal.y, portal.width, portal.height);
 				love.graphics.setColor(0, 0, 0);
 				love.graphics.printf("Stairs", portal.x, portal.y + portal.height / 2 - 8, portal.width, "center");

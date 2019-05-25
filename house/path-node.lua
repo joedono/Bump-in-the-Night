@@ -31,10 +31,10 @@ function PathNode:addConnection(pathNode)
 end
 
 function PathNode:draw()
-	love.graphics.setColor(100, 255, 0);
+	love.graphics.setColor(0.4, 1, 0);
 	love.graphics.rectangle("fill", self.origin.x, self.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	for index, connection in pairs(self.connections) do
 		love.graphics.line(
 			self.origin.x, self.origin.y,

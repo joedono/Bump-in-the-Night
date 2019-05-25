@@ -310,6 +310,6 @@ function Player:moveThroughPortal(portal)
 end
 
 function Player:draw()
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, PLAYER_SCALE, PLAYER_SCALE);
 end

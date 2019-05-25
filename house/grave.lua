@@ -59,7 +59,7 @@ function Grave:setFire()
 end
 
 function Grave:draw()
-  love.graphics.setColor(255, 255, 255);
+  love.graphics.setColor(1, 1, 1);
 
   if self.isBurning then
     love.graphics.draw(self.corpseImage, self.box.x + GRAVE_OFFSET_X, self.box.y + GRAVE_OFFSET_Y);
@@ -73,7 +73,7 @@ function Grave:draw()
   end
 
   if DRAW_BOXES then
-    love.graphics.setColor(255, 0, 0, 150);
+    love.graphics.setColor(1, 0, 0, 0.5);
     love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.w, self.box.h);
   end
 end

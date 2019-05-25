@@ -24,7 +24,7 @@ Ray = Class {
 		self.explodeEffectImage = explodeEffectImage;
 		self.explodeTimer = Timer.new();
 		self.explodeEffect = {
-			alpha = 255,
+			alpha = 1,
 			w = self.explodeEffectImage:getWidth(),
 			h = self.explodeEffectImage:getHeight(),
 			scale = 0.1
@@ -101,7 +101,7 @@ function Ray:draw()
 	end
 
 	if DRAW_BOXES then
-		love.graphics.setColor(135, 0, 255);
+		love.graphics.setColor(0.5, 0, 1);
 
 		local w = self.explodeEffect.w * self.explodeEffect.scale * 3/8;
 		local h = self.explodeEffect.h * self.explodeEffect.scale * 3/8;
@@ -111,7 +111,7 @@ function Ray:draw()
 		love.graphics.rectangle("line", x, y, w, h);
 	end
 
-	love.graphics.setColor(135, 0, 255, self.explodeEffect.alpha);
+	love.graphics.setColor(0.5, 0, 1, self.explodeEffect.alpha);
 	local fax = self.origin.x - (self.explodeEffect.w / 2 * self.explodeEffect.scale);
 	local fay = self.origin.y - (self.explodeEffect.h / 2 * self.explodeEffect.scale);
 

@@ -71,7 +71,7 @@ end
 
 function Door:draw()
 	if not self.isOpen then
-		love.graphics.setColor(128, 64, 0);
+		love.graphics.setColor(0.5, 0.25, 0);
 		love.graphics.rectangle("fill", self.x, self.y, self.w, self.h);
 	end
 end
