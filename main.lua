@@ -6,8 +6,14 @@ Timer = require "lib/hump/timer";
 Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 Inspect = require "lib/inspect";
-Light = require "lib/lightWorld";
 Suit = require "lib/suit";
+
+Shadows = require("shadows")
+LightWorld = require("shadows.LightWorld")
+Light = require("shadows.Light")
+Body = require("shadows.Body")
+PolygonShadow = require("shadows.ShadowShapes.PolygonShadow")
+CircleShadow = require("shadows.ShadowShapes.CircleShadow")
 
 require "lib/general";
 require "lib/pathfinding";
@@ -37,7 +43,7 @@ function love.load()
 	loadGame();
 
 	GameState.registerEvents();
-	GameState.switch(State_Game);
+	GameState.switch(State_Title);
 end
 
 function love.keypressed(key, unicode)
