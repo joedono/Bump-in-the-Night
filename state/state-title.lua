@@ -31,28 +31,30 @@ function State_Title:enter(previous, animate)
 
 	if animate then
 		Timer.script(function(wait)
-			Timer.tween(5, self.alphas, {titleAlpha = 255}, "in-linear");
+			Timer.tween(5, self.alphas, {titleAlpha = 1}, "in-linear");
 			wait(5);
 			self.showMenu = true;
 		end);
 	else
-		self.alphas.titleAlpha = 255;
+		self.alphas.titleAlpha = 1;
 		self.showMenu = true;
 	end
 
-	self.music:play();
+	if PLAY_SOUNDS then
+		self.music:play();
+	end
 end
 
 function State_Title:keypressed(key, unicode)
 	if not self.showMenu then
 		Timer.clear();
-		self.alphas.titleAlpha = 255;
+		self.alphas.titleAlpha = 1;
 		self.showMenu = true;
 		return;
 	end
 
 	if key == KEY_UP or key == KEY_MENU_UP then
-		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:seek(0);
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection - 1;
 		if self.menuSelection < 1 then
@@ -61,7 +63,7 @@ function State_Title:keypressed(key, unicode)
 	end
 
 	if key == KEY_DOWN or key == KEY_MENU_DOWN then
-		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:seek(0);
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection + 1;
 		if self.menuSelection > 3 then
@@ -77,13 +79,13 @@ end
 function State_Title:gamepadpressed(joystick, button)
 	if not self.showMenu then
 		Timer.clear();
-		self.alphas.titleAlpha = 255;
+		self.alphas.titleAlpha = 1;
 		self.showMenu = true;
 		return;
 	end
 
 	if button == GAMEPAD_UP then
-		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:seek(0);
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection - 1;
 		if self.menuSelection < 1 then
@@ -92,7 +94,7 @@ function State_Title:gamepadpressed(joystick, button)
 	end
 
 	if button == GAMEPAD_DOWN then
-		self.soundSelectionChange:rewind();
+		self.soundSelectionChange:seek(0);
 		self.soundSelectionChange:play();
 		self.menuSelection = self.menuSelection + 1;
 		if self.menuSelection > 3 then
@@ -107,7 +109,7 @@ end
 
 function State_Title:makeSelection()
 	if self.menuSelection == 1 then
-		self.soundSelect:rewind();
+		self.soundSelect:seek(0);
 		self.soundSelect:play();
 		GameState.switch(State_Scenario_Select);
 	elseif self.menuSelection == 2 then
@@ -125,36 +127,36 @@ function State_Title:draw()
 	CANVAS:renderTo(function()
 		love.graphics.clear();
 		love.graphics.setFont(self.titleFont);
-		love.graphics.setColor(255, 0, 0, self.alphas.titleAlpha);
+		love.graphics.setColor(1, 0, 0, self.alphas.titleAlpha);
 		love.graphics.printf("Bump in the Night", 0, 200, SCREEN_WIDTH, "center");
-		love.graphics.setColor(255, 255, 255, 255);
+		love.graphics.setColor(1, 1, 1, 1);
 
 		if self.showMenu then
 			love.graphics.setFont(self.menuFont);
 
 			if self.menuSelection == 1 then
-				love.graphics.setColor(100, 0, 0);
+				love.graphics.setColor(0.4, 0, 0);
 			else
-				love.graphics.setColor(255, 255, 255);
+				love.graphics.setColor(1, 1, 1);
 			end
 			love.graphics.printf("Start Game", 0, 550, SCREEN_WIDTH, "center");
 
 			if self.menuSelection == 2 then
-				love.graphics.setColor(100, 0, 0);
+				love.graphics.setColor(0.4, 0, 0);
 			else
-				love.graphics.setColor(255, 255, 255);
+				love.graphics.setColor(1, 1, 1);
 			end
 			love.graphics.printf("Options", 0, 630, SCREEN_WIDTH, "center");
 
 			if self.menuSelection == 3 then
-				love.graphics.setColor(100, 0, 0);
+				love.graphics.setColor(0.4, 0, 0);
 			else
-				love.graphics.setColor(255, 255, 255);
+				love.graphics.setColor(1, 1, 1);
 			end
 			love.graphics.printf("Quit", 0, 710, SCREEN_WIDTH, "center");
 		end
 	end);
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
