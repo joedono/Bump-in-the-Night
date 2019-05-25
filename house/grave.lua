@@ -7,7 +7,7 @@ Grave = Class {
     self.burningFireImage = imageStore.burningFire;
 
     local grid = Anim8.newGrid(32, 32, self.burningFireImage:getWidth(), self.burningFireImage:getHeight());
-	self.burningFireAnimation = Anim8.newAnimation(grid("1-3", 1), 0.1);
+		self.burningFireAnimation = Anim8.newAnimation(grid("1-3", 1), 0.1);
 
     self.box = {
       x = x,
@@ -59,7 +59,7 @@ function Grave:setFire()
 end
 
 function Grave:draw()
-  love.graphics.setColor(1, 1, 1);
+  love.graphics.setColor(255, 255, 255);
 
   if self.isBurning then
     love.graphics.draw(self.corpseImage, self.box.x + GRAVE_OFFSET_X, self.box.y + GRAVE_OFFSET_Y);
@@ -73,7 +73,7 @@ function Grave:draw()
   end
 
   if DRAW_BOXES then
-    love.graphics.setColor(1, 0, 0, 0.5);
+    love.graphics.setColor(255, 0, 0, 150);
     love.graphics.rectangle("fill", self.box.x, self.box.y, self.box.w, self.box.h);
   end
 end

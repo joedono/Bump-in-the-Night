@@ -192,7 +192,7 @@ function Manager_Fire:update(dt)
 end
 
 function Manager_Fire:draw()
-	love.graphics.setColor(1, 1, 1);
+	love.graphics.setColor(255, 255, 255);
 
 	for index, fire in pairs(self.fires) do
 		self.animation:draw(self.image, fire.box.x - 8, fire.box.y - 16, 0, 1.5, 1.5);
