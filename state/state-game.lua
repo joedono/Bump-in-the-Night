@@ -21,6 +21,10 @@ State_Game = {};
 
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
+	LightWorld = Light({
+		ambient = { MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS },
+		shadowBlur = 3.0
+	});
 
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
@@ -92,11 +96,16 @@ end
 
 function State_Game:enter(previous, scenarioId)
 	love.graphics.setBackgroundColor(0, 0, 0);
+	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
+	LightWorld:setScale(CANVAS_SCALE);
 
 	local items = BumpWorld:getItems();
 	for index, item in pairs(items) do
 		BumpWorld:remove(item);
 	end
+
+	LightWorld:clearLights();
+	LightWorld:clearBodies();
 
 	for index, sound in pairs(self.soundEffects) do
 		sound:setVolume(MASTER_VOLUME);
@@ -570,6 +579,7 @@ function State_Game:update(dt)
 	self.player:update(dt);
 	self.monsterManager:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
+	LightWorld:update(dt);
 end
 
 function State_Game:updateSpecialPolice(dt)
@@ -671,6 +681,7 @@ function State_Game:updateCamera(x, y)
 	cameraY = math.floor(cameraY);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
+	LightWorld:setTranslation(-cameraX * CANVAS_SCALE, -cameraY * CANVAS_SCALE);
 end
 
 function State_Game:getPlayerFloor()
@@ -1035,7 +1046,9 @@ function State_Game:draw()
 		end
 
 		if DRAW_LIGHTS then
-			
+			LightWorld:draw(function()
+				self:drawGame();
+			end);
 		else
 			self:drawGame();
 		end
@@ -1053,7 +1066,7 @@ function State_Game:draw()
 		self:drawHUD();
 	end);
 
-	love.graphics.setColor(1, 1, 1);
+	love.graphics.setColor(255, 255, 255);
 	love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
 
@@ -1102,34 +1115,34 @@ function State_Game:drawHUD()
 		item:drawInventory(x, y);
 
 		if item.itemType == "taser" and self.taserTimer > 0 then
-			love.graphics.setColor(1, 1, 1);
+			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("fill", x, y - 10, 60, 6);
 			love.graphics.setColor(0, 0, 0);
 			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (TASER_TIMER - self.taserTimer) / TASER_TIMER, 4);
 		end
 
 		if item.itemType == "book" and self.bookBanishmentTimer < BOOK_BANISHMENT_TIMER then
-			love.graphics.setColor(1, 1, 1);
+			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("fill", x, y - 10, 60, 6);
 			love.graphics.setColor(0, 0, 0);
 			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (BOOK_BANISHMENT_TIMER - self.bookBanishmentTimer) / BOOK_BANISHMENT_TIMER, 4);
 		end
 
 		if item.itemType == "music_box" and self.musicBoxBanishmentTimer < MUSIC_BOX_BANISHMENT_TIMER then
-			love.graphics.setColor(1, 1, 1);
+			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("fill", x, y - 10, 60, 6);
 			love.graphics.setColor(0, 0, 0);
 			love.graphics.rectangle("fill", x + 1, y - 9, 58 * (MUSIC_BOX_BANISHMENT_TIMER - self.musicBoxBanishmentTimer) / MUSIC_BOX_BANISHMENT_TIMER, 4);
 		end
 
 		if self.selectedItemIndex == index then
-			love.graphics.setColor(1, 1, 1);
+			love.graphics.setColor(255, 255, 255);
 			love.graphics.rectangle("line", (index-1) * 100 + 30, y, INVENTORY_ITEM_WIDTH, INVENTORY_ITEM_HEIGHT);
 		end
 	end
 
 	if self.calledPolice then
-		love.graphics.setColor(1, 1, 1);
+		love.graphics.setColor(255, 255, 255);
 		love.graphics.setFont(self.policeTimerFont);
 		love.graphics.print("Police will arrive in " .. string.format("%.2f", self.policeTimer), SCREEN_WIDTH - 350, y + 15, 0, 1, 1);
 	end
