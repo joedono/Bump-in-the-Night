@@ -28,7 +28,7 @@ https://github.com/vrld/SUIT
 https://github.com/kikito/anim8
 https://github.com/kikito/bump.lua
 https://github.com/kikito/inspect.lua
-https://github.com/tanema/light_world.lua
+https://github.com/matiasah/shadows
 
 # Sounds
 http://soundbible.com/1529-Dog-Bite.html
