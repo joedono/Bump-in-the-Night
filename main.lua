@@ -8,12 +8,12 @@ Bump = require "lib/bump";
 Inspect = require "lib/inspect";
 Suit = require "lib/suit";
 
-Shadows = require("shadows")
-LightWorld = require("shadows.LightWorld")
-Light = require("shadows.Light")
-Body = require("shadows.Body")
-PolygonShadow = require("shadows.ShadowShapes.PolygonShadow")
-CircleShadow = require("shadows.ShadowShapes.CircleShadow")
+ShadowsLib = require("shadows")
+LightWorldLib = require("shadows.LightWorld")
+LightLib = require("shadows.Light")
+BodyLib = require("shadows.Body")
+PolygonShadowLib = require("shadows.ShadowShapes.PolygonShadow")
+CircleShadowLib = require("shadows.ShadowShapes.CircleShadow")
 
 require "lib/general";
 require "lib/pathfinding";

@@ -173,7 +173,6 @@ function Manager_Fire:update(dt)
 			numFires = numFires + 1;
 		else
 			BumpWorld:remove(fire);
-			LightWorld:remove(fire.ambientLight);
 		end
 	end
 
