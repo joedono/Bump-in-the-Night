@@ -85,9 +85,9 @@ end
 function light:setDirection(direction)
   if direction ~= self.direction then
     if direction > math.pi * 2 then
-      self.direction = math.mod(direction, math.pi * 2)
+      self.direction = math.fmod(direction, math.pi * 2)
     elseif direction < 0.0 then
-      self.direction = math.pi * 2 - math.mod(math.abs(direction), math.pi * 2)
+      self.direction = math.pi * 2 - math.fmod(math.abs(direction), math.pi * 2)
     else
       self.direction = direction
     end
@@ -98,9 +98,9 @@ end
 function light:setAngle(angle)
   if angle ~= self.angle then
     if angle > math.pi then
-      self.angle = math.mod(angle, math.pi)
+      self.angle = math.fmod(angle, math.pi)
     elseif angle < 0.0 then
-      self.angle = math.pi - math.mod(math.abs(angle), math.pi)
+      self.angle = math.pi - math.fmod(math.abs(angle), math.pi)
     else
       self.angle = angle
     end

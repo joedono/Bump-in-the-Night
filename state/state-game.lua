@@ -21,9 +21,9 @@ State_Game = {};
 
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
-	LightWorld = Light({
+	LightWorld = LightWorld({
 		ambient = { MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS },
-		shadowBlur = 3.0
+		shadowBlur = 0
 	});
 
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
