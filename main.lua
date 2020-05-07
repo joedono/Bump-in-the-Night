@@ -7,7 +7,7 @@ Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 Inspect = require "lib/inspect";
 Suit = require "lib/suit";
-LightWorld = require "lib/lightWorld";
+Light = require "lib/lightWorld";
 
 require "lib/general";
 require "lib/pathfinding";
