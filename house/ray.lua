@@ -7,18 +7,18 @@ but will still make it difficult if the player is affected by the mind-muddling 
 
 Ray = Class {
 	init = function(self, parentManager, centerX, centerY, targetX, targetY, explodeEffectImage)
-		self.parentManager = parentManager;
+    self.parentManager = parentManager;
 		self.soundEffects = parentManager.soundEffects;
 
-		self.origin = {
-			x = centerX,
-			y = centerY,
-		};
+    self.origin = {
+      x = centerX,
+      y = centerY,
+    };
 
-		self.target = {
-			x = targetX,
-			y = targetY
-		};
+    self.target = {
+      x = targetX,
+      y = targetY
+    };
 
 		self.exploding = false;
 		self.explodeEffectImage = explodeEffectImage;
@@ -86,8 +86,8 @@ function Ray:update(dt)
 		dx = dx * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 		dy = dy * MONSTER_ALIEN_RAY_GUN_SPEED * dt;
 
-		self.origin.x = self.origin.x + dx;
-		self.origin.y = self.origin.y + dy;
+	  self.origin.x = self.origin.x + dx;
+	  self.origin.y = self.origin.y + dy;
 
 		if math.dist(self.origin.x, self.origin.y, self.target.x, self.target.y) < MONSTER_ALIEN_RAY_GUN_SPEED * dt then
 			self:explode();

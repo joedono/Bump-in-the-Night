@@ -22,9 +22,9 @@ Door = Class {
 		self.isOpen = false;
 		self.openTimer = 0;
 
-		-- local lightBody = BodyLib:new(LightWorld);
-		-- local shadow = PolygonShadowLib:new(lightBody, self.x, self.y, self.x + self.w, self.y + self.h);
-		-- self.lightBody = lightBody;
+		local lightBody = BodyLib:new(LightWorld);
+		local shadow = PolygonShadowLib:new(lightBody, self.x, self.y, self.x + self.w, self.y + self.h);
+		self.lightBody = lightBody;
 
 		self.soundOpen = soundEffects.doorOpen;
 		self.soundClose = soundEffects.doorClose;
@@ -37,7 +37,7 @@ Door = Class {
 function Door:open(other)
 	self.isOpen = true;
 	self.openTimer = DOOR_OPEN_TIMER;
-	-- self.lightBody:Remove();
+	self.lightBody:Remove();
 
 	if other.type == "player" then
 		self.soundOpen:seek(0);
@@ -55,7 +55,7 @@ function Door:update(dt)
 
 			if len <= 1 then
 				self.isOpen = false;
-				-- LightWorld:AddBody(self.lightBody);
+				LightWorld:AddBody(self.lightBody);
 
 				if self.openedByPlayer then
 					self.soundClose:seek(0);

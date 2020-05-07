@@ -40,11 +40,11 @@ Item = Class {
 		self.heldImage = love.graphics.newImage(heldImageData);
 		self.worldImage = love.graphics.newImage(worldImageData);
 
-		-- local light = Light:new(LightWorld, ITEM_WIDTH * 2/3);
-		-- light:SetColor(1, 1, 1);
-		-- light:SetPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+		local light = Light:new(LightWorld, ITEM_WIDTH * 2/3);
+		light:SetColor(1, 1, 1);
+		light:SetPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
-		-- self.light = light;
+		self.light = light;
 		self.lightColor = { color = 255 };
 		self.lightRepeatTimer = Timer.new();
 		self.lightScriptTimer = Timer.new();
@@ -89,7 +89,7 @@ function Item:update(dt)
 	self.lightScriptTimer:update(dt);
 	self.lightTweenTimer:update(dt);
 
-	-- self.light:SetColor(self.lightColor.color, self.lightColor.color, self.lightColor.color);
+	self.light:SetColor(self.lightColor.color, self.lightColor.color, self.lightColor.color);
 end
 
 function Item:draw()

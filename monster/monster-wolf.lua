@@ -29,14 +29,14 @@ Monster_Wolf = Class {__includes = Monster,
 
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
-		-- self.eyeLights = {
-		-- 	LightWorld:newLight(0, 0, 255, 0, 0, 15),
-		-- 	LightWorld:newLight(0, 0, 255, 0, 0, 15)
-		-- };
+		self.eyeLights = {
+			LightWorld:newLight(0, 0, 255, 0, 0, 15),
+			LightWorld:newLight(0, 0, 255, 0, 0, 15)
+		};
 
-		-- self.sightLight = LightWorld:newLight(0, 0, 150, 150, 150, MONSTER_WOLF_SIGHT_DISTANCE);
-		-- self.sightLight:setDirection(0);
-		-- self.sightLight:setAngle(MONSTER_WOLF_SIGHT_CONE);
+		self.sightLight = LightWorld:newLight(0, 0, 150, 150, 150, MONSTER_WOLF_SIGHT_DISTANCE);
+		self.sightLight:setDirection(0);
+		self.sightLight:setAngle(MONSTER_WOLF_SIGHT_CONE);
 
 		local grid = Anim8.newGrid(32, 32, self.image:getWidth(), self.image:getHeight());
 		local walkDuration = 0.2;
@@ -435,7 +435,7 @@ function Monster_Wolf:followPath(dt, speed)
 			warped = true;
 
 			if self.targetPathNode.multifloor then
-				-- self.targetPathNode.light:setVisible(false);
+				self.targetPathNode.light:setVisible(false);
 			end
 
 			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
@@ -475,33 +475,33 @@ function Monster_Wolf:updateLights(dt)
 
 	if self.state == "dead" then
 		if self.eyeLights ~= nil then
-			-- LightWorld:remove(self.eyeLights[1]);
-			-- LightWorld:remove(self.eyeLights[2]);
-			-- LightWorld:remove(self.sightLight);
+			LightWorld:remove(self.eyeLights[1]);
+			LightWorld:remove(self.eyeLights[2]);
+			LightWorld:remove(self.sightLight);
 
 			self.eyeLights = nil;
 		end
 
 		return;
 	else
-		-- self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
-		-- self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
+		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
 		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
 		if facing < 0 then
 			facing = facing + math.pi * 2;
 		end
 
-		-- self:updateEyeLights(facing, 255);
-		-- self.sightLight:setDirection(facing);
-		-- self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
+		self:updateEyeLights(facing, 255);
+		self.sightLight:setDirection(facing);
+		self.sightLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2 - 10);
 
 		if self.state == "idle" or self.state == "walk" or self.state == "smells-meat" or self.state == "eating" then
-			-- self.sightLight:setColor(150, 150, 150);
+			self.sightLight:setColor(150, 150, 150);
 		elseif self.state == "heard-player" or self.state == "investigating" or self.state == "passive-chase" then
-			-- self.sightLight:setColor(150, 150, 0);
+			self.sightLight:setColor(150, 150, 0);
 		elseif self.state == "spotted" or self.state == "active-chase" or self.state == "trapped" then
-			-- self.sightLight:setColor(150, 0, 0);
+			self.sightLight:setColor(150, 0, 0);
 		end
 	end
 end

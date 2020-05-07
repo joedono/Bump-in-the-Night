@@ -64,14 +64,14 @@ function Floor:addWalls(layer)
 		wall.x = wall.x + self.origin.x;
 		wall.y = wall.y + self.origin.y;
 
-		-- local lightBody = BodyLib:new(LightWorld);
-		-- PolygonShadowLib:new(
-		-- 	lightBody,
-		-- 	wall.x,
-		-- 	wall.y,
-		-- 	wall.width,
-		-- 	wall.height
-		-- );
+		local lightBody = BodyLib:new(LightWorld);
+		PolygonShadowLib:new(
+			lightBody,
+			wall.x,
+			wall.y,
+			wall.width,
+			wall.height
+		);
 		BumpWorld:add(wall, wall.x, wall.y, wall.width, wall.height);
 	end
 end
