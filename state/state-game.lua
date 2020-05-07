@@ -21,6 +21,10 @@ State_Game = {};
 
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
+	LightWorld = Light({
+		ambient = { MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS },
+		shadowBlur = 3.0
+	});
 
 	self.itemWorldSpriteSheet = love.image.newImageData('asset/image/world_inventory.png');
 	self.itemHeldSpriteSheet = love.image.newImageData('asset/image/held_inventory.png');
@@ -92,15 +96,16 @@ end
 
 function State_Game:enter(previous, scenarioId)
 	love.graphics.setBackgroundColor(0, 0, 0);
-
-	LightWorld = LightWorldLib:new();
-	LightWorld:SetColor(MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS);
-	LightWorld:Resize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
+	LightWorld:refreshScreenSize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
+	LightWorld:setScale(CANVAS_SCALE);
 
 	local items = BumpWorld:getItems();
 	for index, item in pairs(items) do
 		BumpWorld:remove(item);
 	end
+
+	LightWorld:clearLights();
+	LightWorld:clearBodies();
 
 	for index, sound in pairs(self.soundEffects) do
 		sound:setVolume(MASTER_VOLUME);
@@ -574,7 +579,7 @@ function State_Game:update(dt)
 	self.player:update(dt);
 	self.monsterManager:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
-	LightWorld:Update(dt);
+	LightWorld:update(dt);
 end
 
 function State_Game:updateSpecialPolice(dt)
@@ -676,7 +681,7 @@ function State_Game:updateCamera(x, y)
 	cameraY = math.floor(cameraY);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
-	LightWorld:SetPosition(-cameraX * CANVAS_SCALE, -cameraY * CANVAS_SCALE);
+	LightWorld:setTranslation(-cameraX * CANVAS_SCALE, -cameraY * CANVAS_SCALE);
 end
 
 function State_Game:getPlayerFloor()
@@ -1040,9 +1045,12 @@ function State_Game:draw()
 			love.graphics.setShader(self.alienShader);
 		end
 
-		self:drawGame();
 		if DRAW_LIGHTS then
-			LightWorld:Draw();
+			LightWorld:draw(function()
+				self:drawGame();
+			end);
+		else
+			self:drawGame();
 		end
 
 		if DRAW_RAINBOW_SHADER and (self.playerMindMuddleEffect or self.playerMindTimer < PLAYER_MIND_MUDDLE_BUILDUP) then

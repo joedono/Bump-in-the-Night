@@ -64,11 +64,9 @@ function Floor:addWalls(layer)
 		wall.x = wall.x + self.origin.x;
 		wall.y = wall.y + self.origin.y;
 
-		local lightBody = BodyLib:new(LightWorld);
-		PolygonShadowLib:new(
-			lightBody,
-			wall.x,
-			wall.y,
+		LightWorld:newRectangle(
+			wall.x + wall.width / 2,
+			wall.y + wall.height / 2,
 			wall.width,
 			wall.height
 		);
