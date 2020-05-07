@@ -46,14 +46,14 @@ Player = Class {
 		self.curAnimation = self.animations["walk-left"];
 		self.useItemAnimationTimer = 0;
 
-		self.flashLight = LightWorld:newLight(0, 0, 255, 255, 255, 400);
-		self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
-		self.flashLight:setAngle(math.pi * 1/3);
-		self.flashLight:setDirection(math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x));
-		self.flashLightVisible = true;
+		-- self.flashLight = LightWorld:newLight(0, 0, 255, 255, 255, 400);
+		-- self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+		-- self.flashLight:setAngle(math.pi * 1/3);
+		-- self.flashLight:setDirection(math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x));
+		-- self.flashLightVisible = true;
 
-		self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 50);
-		self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+		-- self.ambientLight = LightWorld:newLight(0, 0, 50, 50, 50, 50);
+		-- self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 
 		self.soundEffects = soundEffects;
 
@@ -81,7 +81,7 @@ end
 
 function Player:toggleFlashlight()
 	self.flashLightVisible = not self.flashLightVisible;
-	self.flashLight:setVisible(self.flashLightVisible);
+	-- self.flashLight:setVisible(self.flashLightVisible);
 end
 
 function Player:update(dt)
@@ -241,15 +241,15 @@ function Player:updateLights(dt)
 	end
 
 	if (self.flashlightFacing.x ~= 0 or self.flashlightFacing.y ~= 0) and math.dist(0, 0, self.flashlightFacing.x, self.flashlightFacing.y) > GAMEPAD_DEADZONE then
-		local curFacing = self.flashLight.direction;
-		local goalFacing = math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x);
-		local nextFacing = gradualTurn(curFacing, goalFacing, PLAYER_TURN_SPEED, dt);
+		-- local curFacing = self.flashLight.direction;
+		-- local goalFacing = math.angle(0, 0, self.flashlightFacing.y, self.flashlightFacing.x);
+		-- local nextFacing = gradualTurn(curFacing, goalFacing, PLAYER_TURN_SPEED, dt);
 
-		self.flashLight:setDirection(nextFacing);
+		-- self.flashLight:setDirection(nextFacing);
 	end
 
-	self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
-	self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+	-- self.flashLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+	-- self.ambientLight:setPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
 end
 
 function Player:updateAnimation(dt)

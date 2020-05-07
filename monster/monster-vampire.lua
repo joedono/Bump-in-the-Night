@@ -30,13 +30,13 @@ Monster_Vampire = Class {__includes = Monster,
 
 		BumpWorld:add(self, self.box.x, self.box.y, self.box.w, self.box.h);
 
-		self.eyeLights = {
-			LightWorld:newLight(0, 0, 255, 0, 0, 15),
-			LightWorld:newLight(0, 0, 255, 0, 0, 15)
-		};
+		-- self.eyeLights = {
+		-- 	LightWorld:newLight(0, 0, 255, 0, 0, 15),
+		-- 	LightWorld:newLight(0, 0, 255, 0, 0, 15)
+		-- };
 
-		self.eyeLights[1]:setVisible(false);
-		self.eyeLights[2]:setVisible(false);
+		-- self.eyeLights[1]:setVisible(false);
+		-- self.eyeLights[2]:setVisible(false);
 
 		self.freezeAura = love.graphics.newImage("asset/image/noise.png");
 		self.freezeAuraData = {
@@ -214,7 +214,7 @@ function Monster_Vampire:followPath(dt, speed)
 			warped = true;
 
 			if self.targetPathNode.multifloor then
-				self.targetPathNode.light:setVisible(false);
+				-- self.targetPathNode.light:setVisible(false);
 			end
 
 			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
@@ -254,16 +254,16 @@ function Monster_Vampire:updateLights(dt)
 
 	if self.state == "dead" then
 		if self.eyeLights ~= nil then
-			LightWorld:remove(self.eyeLights[1]);
-			LightWorld:remove(self.eyeLights[2]);
+			-- LightWorld:remove(self.eyeLights[1]);
+			-- LightWorld:remove(self.eyeLights[2]);
 
 			self.eyeLights = nil;
 		end
 
 		return;
 	else
-		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
-		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+		-- self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
+		-- self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
 
 		if self.state == "spotted" or self.state == "stalking"
 			or math.dist(self.box.x, self.box.y, self.player.box.x, self.player.box.y) < MONSTER_VAMPIRE_EYES_PLAYER_DISTANCE then
@@ -272,10 +272,10 @@ function Monster_Vampire:updateLights(dt)
 				facing = facing + math.pi * 2;
 			end
 
-			self:updateEyeLights(facing, 255);
+			-- self:updateEyeLights(facing, 255);
 		else
-			self.eyeLights[1]:setVisible(false);
-			self.eyeLights[2]:setVisible(false);
+			-- self.eyeLights[1]:setVisible(false);
+			-- self.eyeLights[2]:setVisible(false);
 		end
 	end
 end

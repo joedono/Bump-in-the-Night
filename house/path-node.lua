@@ -8,13 +8,13 @@ PathNode = Class {
 			x = sourceNode.x + floor.origin.x,
 			y = sourceNode.y + floor.origin.y
 		};
-		self.light = {};
+		-- self.light = {};
 
 		if sourceNode.properties["multifloor"] then
-			local light = Light:new(LightWorld, 80);
-			light:SetColor(0, 0, 0);
-			light:SetPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
-			self.light = light;
+			-- local light = Light:new(LightWorld, 80);
+			-- light:SetColor(0, 0, 0);
+			-- light:SetPosition(self.box.x + self.box.w / 2, self.box.y + self.box.h / 2);
+			-- self.light = light;
 
 			-- TODO Remove this when you find where the path nodes turn red
 			-- local light = LightWorld:newLight(self.origin.x + TILE_SIZE / 2, self.origin.y + TILE_SIZE / 2, 160, 0, 0, 80);

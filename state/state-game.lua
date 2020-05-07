@@ -93,9 +93,9 @@ end
 function State_Game:enter(previous, scenarioId)
 	love.graphics.setBackgroundColor(0, 0, 0);
 
-	LightWorld = LightWorldLib:new();
-	LightWorld:SetColor(MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS);
-	LightWorld:Resize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
+	-- LightWorld = LightWorldLib:new();
+	-- LightWorld:SetColor(MASTER_BRIGHTNESS, MASTER_BRIGHTNESS, MASTER_BRIGHTNESS);
+	-- LightWorld:Resize(SCREEN_WIDTH * CANVAS_SCALE * 2, SCREEN_HEIGHT * CANVAS_SCALE * 2);
 
 	local items = BumpWorld:getItems();
 	for index, item in pairs(items) do
@@ -574,7 +574,7 @@ function State_Game:update(dt)
 	self.player:update(dt);
 	self.monsterManager:update(dt);
 	self:updateCamera(self.player.box.x, self.player.box.y);
-	LightWorld:Update(dt);
+	-- LightWorld:Update(dt);
 end
 
 function State_Game:updateSpecialPolice(dt)
@@ -676,7 +676,7 @@ function State_Game:updateCamera(x, y)
 	cameraY = math.floor(cameraY);
 
 	self.camera:lookAt(cameraX + SCREEN_WIDTH / 2, cameraY + SCREEN_HEIGHT / 2);
-	LightWorld:SetPosition(-cameraX * CANVAS_SCALE, -cameraY * CANVAS_SCALE);
+	-- LightWorld:SetPosition(-cameraX * CANVAS_SCALE, -cameraY * CANVAS_SCALE);
 end
 
 function State_Game:getPlayerFloor()
@@ -1042,7 +1042,7 @@ function State_Game:draw()
 
 		self:drawGame();
 		if DRAW_LIGHTS then
-			LightWorld:Draw();
+			-- LightWorld:Draw();
 		end
 
 		if DRAW_RAINBOW_SHADER and (self.playerMindMuddleEffect or self.playerMindTimer < PLAYER_MIND_MUDDLE_BUILDUP) then

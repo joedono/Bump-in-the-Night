@@ -44,30 +44,30 @@ function Monster:updatePosition(dt)
 end
 
 function Monster:updateEyeLights(facing, value)
-	if facing >= math.pi * 5/4 and facing <= math.pi * 7/4 then
-		-- Up
-		self.eyeLights[1]:setColor(value * 5/8, 0, 0);
-		self.eyeLights[2]:setColor(value * 5/8, 0, 0);
-		self.eyeLights[1]:setVisible(true);
-		self.eyeLights[2]:setVisible(true);
-	else
-		self.eyeLights[1]:setColor(value, 0, 0);
-		self.eyeLights[2]:setColor(value, 0, 0);
+	-- if facing >= math.pi * 5/4 and facing <= math.pi * 7/4 then
+	-- 	-- Up
+	-- 	self.eyeLights[1]:setColor(value * 5/8, 0, 0);
+	-- 	self.eyeLights[2]:setColor(value * 5/8, 0, 0);
+	-- 	self.eyeLights[1]:setVisible(true);
+	-- 	self.eyeLights[2]:setVisible(true);
+	-- else
+	-- 	self.eyeLights[1]:setColor(value, 0, 0);
+	-- 	self.eyeLights[2]:setColor(value, 0, 0);
 
-		if facing >= math.pi * 7/4 or facing <= math.pi * 1/4 then
-			-- Right
-			self.eyeLights[1]:setVisible(false);
-			self.eyeLights[2]:setVisible(true);
-		elseif facing >= math.pi * 1/4 and facing <= math.pi * 3/4 then
-			-- Down
-			self.eyeLights[1]:setVisible(true);
-			self.eyeLights[2]:setVisible(true);
-		elseif facing >= math.pi * 3/4 and facing <= math.pi * 5/4 then
-			-- Left
-			self.eyeLights[1]:setVisible(true);
-			self.eyeLights[2]:setVisible(false);
-		end
-	end
+	-- 	if facing >= math.pi * 7/4 or facing <= math.pi * 1/4 then
+	-- 		-- Right
+	-- 		self.eyeLights[1]:setVisible(false);
+	-- 		self.eyeLights[2]:setVisible(true);
+	-- 	elseif facing >= math.pi * 1/4 and facing <= math.pi * 3/4 then
+	-- 		-- Down
+	-- 		self.eyeLights[1]:setVisible(true);
+	-- 		self.eyeLights[2]:setVisible(true);
+	-- 	elseif facing >= math.pi * 3/4 and facing <= math.pi * 5/4 then
+	-- 		-- Left
+	-- 		self.eyeLights[1]:setVisible(true);
+	-- 		self.eyeLights[2]:setVisible(false);
+	-- 	end
+	-- end
 end
 
 function Monster:updatePathLights(dt)
@@ -80,7 +80,7 @@ function Monster:updatePathLights(dt)
 		if self.path[index] ~= nil then
 			if self.path[index].multifloor then
 				if previousMultifloor then
-					self.path[index].light:setVisible(true);
+					-- self.path[index].light:setVisible(true);
 					previousMultifloor = false;
 				else
 					previousMultifloor = true;
@@ -99,7 +99,7 @@ function Monster:resetPath()
 	if self.path ~= nil then
 		for index, pathNode in pairs(self.path) do
 			if pathNode.multifloor then
-				pathNode.light:setVisible(false);
+				-- pathNode.light:setVisible(false);
 			end
 		end
 	end
