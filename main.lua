@@ -7,13 +7,7 @@ Vector = require "lib/hump/vector";
 Bump = require "lib/bump";
 Inspect = require "lib/inspect";
 Suit = require "lib/suit";
-
-Shadows = require("shadows")
-LightWorld = require("shadows.LightWorld")
-Light = require("shadows.Light")
-Body = require("shadows.Body")
-PolygonShadow = require("shadows.ShadowShapes.PolygonShadow")
-CircleShadow = require("shadows.ShadowShapes.CircleShadow")
+LightWorld = require "lib/lightWorld";
 
 require "lib/general";
 require "lib/pathfinding";
