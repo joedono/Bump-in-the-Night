@@ -8,6 +8,7 @@ require "house/player";
 require "used-items/axe";
 require "used-items/blood-pool";
 require "used-items/bucket-water";
+require "used-items/gasoline";
 require "used-items/lighter";
 require "used-items/meat";
 require "used-items/salt";
@@ -886,6 +887,18 @@ function State_Game:useItem()
 		-- Do nothing
 	elseif selectedItem.itemType == "axe" then
 	elseif selectedItem.itemType == "gasoline" then
+		self.soundEffects.waterSplash:seek(0);
+		self.soundEffects.waterSplash:play();
+		self.player:useItem();
+		table.insert(
+			self.usedItems,
+			Gasoline(
+				self.player.box.x + self.player.box.w / 2, self.player.box.y + self.player.box.h / 2,
+				self.player.facing.x, self.player.facing.y,
+				self.imageStore.waterSplash,
+				self.usedItemAnimations.waterSplash:clone()
+			)
+		);
 	elseif selectedItem.itemType == "lighter" then
 		self.soundEffects.useLighter:seek(0);
 		self.soundEffects.useLighter:play();

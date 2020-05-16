@@ -391,5 +391,29 @@ function Monster_Zombie:setFire()
 end
 
 function Monster_Zombie:draw()
+	if not self.active then
+		return;
+	end
 
+	love.graphics.setColor(255, 255, 255);
+	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
+
+	if DRAW_MONSTER_PATH and self.state ~= "dead" then
+		if self.path ~= nil then
+			love.graphics.setColor(255, 0, 0);
+			for index, path in pairs(self.path) do
+				love.graphics.rectangle("fill", path.origin.x, path.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
+			end
+		end
+	end
+
+	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
+		love.graphics.setColor(255, 255, 255, 150);
+		local facingAngle = math.angle(0, 0, self.facing.y, self.facing.x);
+		love.graphics.arc("fill",
+			self.box.x + self.box.w / 2, self.box.y + self.box.h / 2,
+			MONSTER_ZOMBIE_SIGHT_DISTANCE,
+			facingAngle - MONSTER_ZOMBIE_SIGHT_CONE / 2, facingAngle + MONSTER_ZOMBIE_SIGHT_CONE / 2
+		);
+	end
 end

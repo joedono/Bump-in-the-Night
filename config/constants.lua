@@ -344,7 +344,7 @@ SCENARIO_DESCRIPTION = {
 	["Vampire"] = "Your house has become home to a hungry vampire. He can freeze you with a look or if you get too close. Find some divine protection before driving a stake through his heart.",
 	["Ghost"] = "The spirit of your house has awoken. It can't materialize fully yet, but it can manage short bursts of murderous intent. Dig up and burn its corpse before it consumes your soul.",
 	["Alien"] = "A pair of aliens have come to Planet Earth to capture a specimen for their research. Their ship's anti-gravity field messes with your balance and perception. Fortunately, they can be driven away by a specific musical tune.",
-	["Zombie"] = "",
+	["Zombie"] = "A legion of the undead has risen in your house, hungry for living flesh. Zombies are hard to kill, only fire will do the job, but wet flesh doesn't burn easily.",
 	["Elder God"] = "",
 	["Random"] = ""
 }
