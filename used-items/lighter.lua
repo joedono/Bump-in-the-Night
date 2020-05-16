@@ -46,7 +46,7 @@ function Lighter:update(dt)
 	local actualX, actualY, cols, len = BumpWorld:check(self, self.box.x, self.box.y, lighterCollision);
 
 	for i = 1, len do
-    cols[i].other:setFire(dt);
+    cols[i].other:setFire();
 	end
 
 	-- Only check for one frame, then die

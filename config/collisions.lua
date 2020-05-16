@@ -90,8 +90,12 @@ shovelDigCollision = function(shovel, other)
 	return nil;
 end
 
-lighterCollision = function(shovel, other)
+lighterCollision = function(lighter, other)
 	if other.type == "grave" then
+		return "cross";
+	end
+
+	if other.type == "monster" and other.monsterType == "zombie" then
 		return "cross";
 	end
 

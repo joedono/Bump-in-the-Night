@@ -765,6 +765,10 @@ function State_Game:useItem()
 					self.imageStore.shotgunBlast
 				)
 			);
+
+			if self.scenarioId == "zombie" then
+				self.monsterManager:alertZombies(nil);
+			end
 		end
 	elseif selectedItem.itemType == "shotgun_rounds" then
 		local item = self:playerHasItem("shotgun");
@@ -997,6 +1001,10 @@ function State_Game:buryCorpse()
 
 	local occupiedGrave = graves[love.math.random(#graves)];
 	occupiedGrave.hasCorpse = true;
+end
+
+function State_Game:alertZombies(originator)
+	-- TODO
 end
 
 function State_Game:winGame()

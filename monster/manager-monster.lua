@@ -12,6 +12,7 @@ require "monster/monster-killer";
 require "monster/monster-vampire";
 require "monster/monster-ghost";
 require "monster/monster-alien";
+require "monster/monster-zombie";
 
 Manager_Monster = Class {
 	init = function(self, parentStateGame, pathNodes, floorLimits, player, soundEffects)
@@ -51,6 +52,10 @@ function Manager_Monster:spawnMonsters(scenarioId)
 		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 		table.insert(self.monsters, Monster_Alien(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "zombie" then
+		table.insert(self.monsters, Monster_Zombie(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Zombie(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Zombie(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
+		table.insert(self.monsters, Monster_Zombie(self, self.soundEffects, enemyImage, self.player, MONSTER_SPAWN_FLOOR, MONSTER_SPAWN_X, MONSTER_SPAWN_Y));
 	elseif scenarioId == "elder_god" then
 	end
 end
@@ -189,6 +194,14 @@ end
 
 function Manager_Monster:updateAlienSpecial(dt)
 	self.rayManager:update(dt);
+end
+
+function Manager_Monster:alertZombies(originator)
+	for index, monster in pairs(self.monsters) do
+		if originator == nil or monster ~= originator then
+			monster:hasSpottedPlayer();
+		end
+	end
 end
 
 function Manager_Monster:draw()

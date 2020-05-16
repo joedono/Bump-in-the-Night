@@ -53,7 +53,7 @@ Monster_Zombie = Class {
 
 		self.state = "idle";
 		self.stateTimer = 5;
-		self.burningTimer = MONSTER_ZOMBIE_BURN_TIMER;
+		self.soaked = false;
 		self.monsterType = "zombie";
 		self.type = "monster";
 		self.active = true;
@@ -105,6 +105,7 @@ function Monster_Zombie:updateIdle(dt)
 
 	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
+		self.parentManager:alertZombies(self);
 		return;
 	end
 
@@ -117,6 +118,7 @@ end
 function Monster_Zombie:updateWalk(dt)
 	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
+		self.parentManager:alertZombies(self);
 		return;
 	end
 
@@ -143,6 +145,7 @@ end
 function Monster_Zombie:updateInvestigating(dt)
 	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
+		self.parentManager:alertZombies(self);
 		return;
 	end
 
@@ -229,6 +232,7 @@ function Monster_Zombie:updateStunned(dt)
 
 	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
 		self:hasSpottedPlayer();
+		self.parentManager:alertZombies(self);
 		return;
 	end
 
@@ -247,6 +251,96 @@ function Monster_Zombie:updateBurning(dt)
 	end
 end
 
+function Monster_Zombie:followPath(dt, speed)
+	local warped = false;
+	self.velocity = {
+		x = self.targetPathNode.origin.x - self.box.x,
+		y = self.targetPathNode.origin.y - self.box.y
+	};
+	self.velocity.x, self.velocity.y = math.normalize(self.velocity.x, self.velocity.y);
+	self.speed = speed;
+
+	local actualX, actualY, cols, len = self:updatePosition(dt);
+
+	for i = 1, len do
+		local col = cols[i];
+		if KILL_PLAYER and col.other.type == "player" and col.other.active and
+			self.state ~= "stunned" and self.state ~= "dead" then
+			col.other.active = false;
+
+			self.soundEffects.monsterBite:seek(0);
+			self.soundEffects.playerDeathYell:seek(0);
+			self.soundEffects.monsterBite:play();
+			self.soundEffects.playerDeathYell:play();
+
+			self.parentManager.parentStateGame:loseGame();
+		end
+
+		if col.other.type == "door" then
+			if not col.other.isOpen then
+				col.other:open(self);
+			end
+		end
+
+		if col.other.type == "placed-shotgun-blast"
+			and self.state ~= "stunned" and self.state ~= "burning" and self.state ~= "dead" then
+			self.state = "stunned";
+			self.stateTimer = MONSTER_ZOMBIE_STUN_TIMER;
+			self.parentManager:alertZombies(self);
+		end
+
+		if col.other.type == "placed-gasoline" and self.state == "stunned" then
+			self.soaked = true;
+		end
+	end
+
+	if self.targetPathNode ~= nil then
+		local distanceTraveled = math.dist(0, 0, self.velocity.x * self.speed * dt, self.velocity.y * self.speed * dt);
+		local distanceToPath = math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y);
+
+		if distanceToPath < distanceTraveled or distanceToPath == 0 then
+			-- Reached target node. Go after next node
+			self.box.x = self.targetPathNode.origin.x;
+			self.box.y = self.targetPathNode.origin.y;
+			BumpWorld:update(self, self.box.x, self.box.y);
+			warped = true;
+
+			if self.targetPathNode.multifloor then
+				self.targetPathNode.light:setVisible(false);
+			end
+
+			self.targetPathNodeIndex = self.targetPathNodeIndex + 1;
+			self.targetPathNode = self.path[self.targetPathNodeIndex];
+
+			-- Move to other floor
+			if self.targetPathNode ~= nil and self.curFloor ~= self.targetPathNode.floorIndex then
+				self.box.x = self.targetPathNode.origin.x;
+				self.box.y = self.targetPathNode.origin.y;
+				self.curFloor = self.targetPathNode.floorIndex;
+				BumpWorld:update(self, self.box.x, self.box.y);
+			end
+
+			-- Reached end of path
+			if self.targetPathNode == nil then
+				self:resetPath();
+				self.state = "idle";
+				self.stateTimer = love.math.random(2, 5);
+			end
+		end
+	end
+
+	if not warped then
+		self.box.x = actualX;
+		self.box.y = actualY;
+	end
+
+	if self.targetPathNode ~= nil and self.targetPathNode.isGoal and math.dist(self.box.x, self.box.y, self.targetPathNode.origin.x, self.targetPathNode.origin.y) < 32 then
+		self:resetPath();
+		self.state = "idle";
+		self.stateTimer = love.math.random(2, 5);
+	end
+end
+
 function Monster_Zombie:hasSpottedPlayer()
 	self.target = {
 		x = self.player.box.x,
@@ -261,7 +355,22 @@ function Monster_Zombie:hasSpottedPlayer()
 end
 
 function Monster_Zombie:updateLights(dt)
-	-- TODO
+	self:updatePathLights(dt);
+
+	if self.state == "stunned" or self.state == "dead" then
+		self.eyeLights[1]:setVisible(false);
+		self.eyeLights[2]:setVisible(false);
+	else
+		local facing = math.angle(0, 0, self.facing.y, self.facing.x);
+		if facing < 0 then
+			facing = facing + math.pi * 2;
+		end
+
+		self:updateEyeLights(facing, 255);
+
+		self.eyeLights[1]:setPosition(self.box.x + self.box.w / 4, self.box.y + 10);
+		self.eyeLights[2]:setPosition(self.box.x + self.box.w * 3/4, self.box.y + 10);
+	end
 end
 
 function Monster_Zombie:updateAnimation(dt)
@@ -271,6 +380,13 @@ function Monster_Zombie:updateAnimation(dt)
 		self.curAnimation:update(dt);
 	else
 		self.curAnimation:gotoFrame(1);
+	end
+end
+
+function Monster_Zombie:setFire()
+	if self.soaked then
+		self.state = "burning";
+		self.stateTimer = MONSTER_ZOMBIE_BURN_TIMER;
 	end
 end
 
