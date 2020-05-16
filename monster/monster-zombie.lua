@@ -183,20 +183,66 @@ function Monster_Zombie:updateSpotted(dt)
 end
 
 function Monster_Zombie:updateActiveChase(dt)
+	local seeTarget = false;
+
+	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
+		seeTarget = true;
+		self.target = {
+			x = self.player.box.x,
+			y = self.player.box.y
+		};
+	end
+
+	if seeTarget or self.path == nil then
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	end
+
+	self:followPath(dt, MONSTER_ZOMBIE_WALK_SPEED);
 end
 
 function Monster_Zombie:updatePassiveChase(dt)
+	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
+		self.target = {
+			x = self.player.box.x,
+			y = self.player.box.y
+		};
+
+		self.soundEffects.monsterZombieGroan:seek(0);
+		self.soundEffects.monsterZombieGroan:play();
+		self.state = "active-chase";
+		return;
+	end
+
+	if self.path == nil then
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parentManager.pathNodes);
+		self.targetPathNodeIndex = 1;
+		self.targetPathNode = self.path[self.targetPathNodeIndex];
+	end
+
+	self:followPath(dt, MONSTER_ZOMBIE_WALK_SPEED);
 end
 
 function Monster_Zombie:updateStunned(dt)
+	self:resetVelocity();
+
+	if self:canSeePlayer(MONSTER_ZOMBIE_SIGHT_CONE, MONSTER_ZOMBIE_SIGHT_DISTANCE) then
+		self:hasSpottedPlayer();
+		return;
+	end
+
+	if self.stateTimer <= 0 then
+		self:resetPath();
+		self.state = "walk";
+	end
 end
 
 function Monster_Zombie:updateBurning(dt)
 	self:updateWalk(dt);
 	self.state = "burning";
 
-	self.burningTimer = self.burningTimer - dt;
-	if self.burningTimer <= 0 then
+	if self.stateTimer <= 0 then
 		self.state = "dead";
 	end
 end
