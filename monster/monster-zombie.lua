@@ -155,7 +155,7 @@ function Monster_Zombie:updateInvestigating(dt)
 	};
 
 	if self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parentManager.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.target.x, self.target.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
@@ -197,7 +197,7 @@ function Monster_Zombie:updateActiveChase(dt)
 	end
 
 	if seeTarget or self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.visualTarget.x, self.visualTarget.y, self.parentManager.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.target.x, self.target.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
@@ -219,7 +219,7 @@ function Monster_Zombie:updatePassiveChase(dt)
 	end
 
 	if self.path == nil then
-		self.path = pathfinding.findPath(self.box.x, self.box.y, self.audioTarget.x, self.audioTarget.y, self.parentManager.pathNodes);
+		self.path = pathfinding.findPath(self.box.x, self.box.y, self.target.x, self.target.y, self.parentManager.pathNodes);
 		self.targetPathNodeIndex = 1;
 		self.targetPathNode = self.path[self.targetPathNodeIndex];
 	end
