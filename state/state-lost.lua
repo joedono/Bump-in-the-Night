@@ -17,10 +17,10 @@ function State_Lost:enter()
 
 	Timer.clear();
 	Timer.script(function(wait)
-		Timer.tween(4, self.alphas, {titleAlpha = 1}, "in-linear");
+		Timer.tween(4, self.alphas, { titleAlpha = 1 }, "in-linear");
 		wait(4);
 		self.inputEnabled = true;
-		Timer.tween(4, self.alphas, {helpAlpha = 1}, "in-linear");
+		Timer.tween(4, self.alphas, { helpAlpha = 1 }, "in-linear");
 	end);
 
 	self.music:setVolume(0.4 * MASTER_VOLUME);

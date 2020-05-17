@@ -35,13 +35,13 @@ function State_Splash_Hive:enter()
 
 	Timer.clear();
 	Timer.script(function(wait)
-		Timer.tween(2, self.alphas, {imageAlpha = 1}, "in-linear");
+		Timer.tween(2, self.alphas, { imageAlpha = 1 }, "in-linear");
 		wait(2);
-		Timer.tween(2, self.alphas, {eyeAlpha = 1}, "in-linear");
+		Timer.tween(2, self.alphas, { eyeAlpha = 1 }, "in-linear");
 		wait(2);
-		Timer.tween(2, self.alphas, {wordAlpha = 1}, "in-linear");
+		Timer.tween(2, self.alphas, { wordAlpha = 1 }, "in-linear");
 		wait(5);
-		Timer.tween(1, self.alphas, {imageAlpha = 0, eyeAlpha = 0, wordAlpha = 0}, "in-linear");
+		Timer.tween(1, self.alphas, { imageAlpha = 0, eyeAlpha = 0, wordAlpha = 0 }, "in-linear");
 		wait(1);
 		self:onDone();
 	end);

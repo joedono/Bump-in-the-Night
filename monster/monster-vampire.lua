@@ -49,7 +49,7 @@ Monster_Vampire = Class {__includes = Monster,
 		self.freezeAuraRepeatTimer = Timer.new();
 		self.freezeAuraEffect = {
 			scale = 0,
-			alpha = 255
+			alpha = 1
 		};
 
 		self.freezeAuraRepeatTimer:every(1.5, function()
@@ -58,7 +58,7 @@ Monster_Vampire = Class {__includes = Monster,
 			self.freezeAuraData.y = self.box.y + self.box.h / 2;
 			self.freezeAuraEffect = {
 				scale = 0,
-				alpha = 255
+				alpha = 1
 			};
 
 			self.freezeAuraTimer:tween(1.5, self.freezeAuraEffect, {scale = 4, alpha = 0});
@@ -328,12 +328,12 @@ function Monster_Vampire:draw()
 		return;
 	end
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
 
 	if DRAW_MONSTER_PATH and self.state ~= "dead" then
 		if self.path ~= nil then
-			love.graphics.setColor(255, 0, 0);
+			love.graphics.setColor(1, 0, 0);
 			for index, path in pairs(self.path) do
 				love.graphics.rectangle("fill", path.origin.x, path.origin.y, 32, 32);
 			end
@@ -341,10 +341,10 @@ function Monster_Vampire:draw()
 	end
 
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
-		love.graphics.setColor(255, 255, 255);
+		love.graphics.setColor(1, 1, 1);
 		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_VAMPIRE_FREEZE_DISTANCE);
 
-		love.graphics.setColor(255, 255, 255, 150);
+		love.graphics.setColor(1, 1, 1, 0.5);
 		local facingAngle = math.angle(0, 0, self.facing.y, self.facing.x);
 		love.graphics.arc("fill",
 			self.box.x + self.box.w / 2, self.box.y + self.box.h / 2,
@@ -355,7 +355,7 @@ function Monster_Vampire:draw()
 end
 
 function Monster_Vampire:drawAura()
-	love.graphics.setColor(0, 255, 255, self.freezeAuraEffect.alpha);
+	love.graphics.setColor(0, 1, 1, self.freezeAuraEffect.alpha);
 	local fax = self.freezeAuraData.x - (self.freezeAuraData.w / 2 * self.freezeAuraEffect.scale);
 	local fay = self.freezeAuraData.y - (self.freezeAuraData.h / 2 * self.freezeAuraEffect.scale);
 
@@ -365,7 +365,7 @@ function Monster_Vampire:drawAura()
 		self.freezeAuraEffect.scale, self.freezeAuraEffect.scale);
 
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
-		love.graphics.setColor(0, 255, 255);
+		love.graphics.setColor(0, 1, 1);
 		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_VAMPIRE_FREEZE_DISTANCE);
 	end
 end

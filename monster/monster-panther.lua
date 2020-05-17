@@ -545,7 +545,7 @@ function Monster_Panther:draw()
 
 	if DRAW_MONSTER_PATH and self.state ~= "dead" then
 		if self.path ~= nil then
-			love.graphics.setColor(255, 0, 0);
+			love.graphics.setColor(1, 0, 0);
 			for index, path in pairs(self.path) do
 				love.graphics.rectangle("fill", path.origin.x, path.origin.y, 32, 32);
 			end
@@ -553,10 +553,10 @@ function Monster_Panther:draw()
 	end
 
 	if DRAW_MONSTER_SENSES and self.state ~= "dead" then
-		love.graphics.setColor(255, 255, 255);
+		love.graphics.setColor(1, 1, 1);
 		love.graphics.circle("line", self.box.x + self.box.w / 2, self.box.y + self.box.h / 2, MONSTER_PANTHER_RUN_HEAR_DISTANCE);
 
-		love.graphics.setColor(255, 255, 255, 150);
+		love.graphics.setColor(1, 1, 1, 0.5);
 		local facingAngle = math.angle(0, 0, self.facing.y, self.facing.x);
 		love.graphics.arc("fill",
 			self.box.x + self.box.w / 2, self.box.y + self.box.h / 2,

@@ -188,7 +188,7 @@ function Monster_Ghost:startFadeIn()
 	self.box.y = spawnPathNode.origin.y;
 	BumpWorld:update(self, self.box.x, self.box.y);
 
-	self.fadeTimer:tween(MONSTER_GHOST_FADEIN_TIMER, self.fadeTable, { alpha = 255, eyeLight = 255 }, "linear", function()
+	self.fadeTimer:tween(MONSTER_GHOST_FADEIN_TIMER, self.fadeTable, { alpha = 1, eyeLight = 1 }, "linear", function()
 		self.stateTimer = MONSTER_GHOST_CHASE_TIMER;
 		self.state = "chasing";
 	end);
@@ -212,6 +212,6 @@ function Monster_Ghost:draw()
 		return;
 	end
 
-	love.graphics.setColor(255, 255, 255, self.fadeTable.alpha);
+	love.graphics.setColor(1, 1, 1, self.fadeTable.alpha);
 	self.curAnimation:draw(self.image, self.box.x, self.box.y, 0, MONSTER_SCALE, MONSTER_SCALE);
 end

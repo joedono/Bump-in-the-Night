@@ -367,7 +367,7 @@ function Monster_Burglar:draw()
 
 	if DRAW_MONSTER_PATH and self.state ~= "stunned" then
 		if self.path ~= nil then
-			love.graphics.setColor(255, 0, 0);
+			love.graphics.setColor(1, 0, 0);
 			for index, path in pairs(self.path) do
 				love.graphics.rectangle("fill", path.origin.x, path.origin.y, PATH_NODE_SIZE, PATH_NODE_SIZE);
 			end
@@ -375,7 +375,7 @@ function Monster_Burglar:draw()
 	end
 
 	if DRAW_MONSTER_SENSES and self.state ~= "stunned" then
-		love.graphics.setColor(255, 255, 255, 150);
+		love.graphics.setColor(1, 1, 1, 0.5);
 		local facingAngle = math.angle(0, 0, self.facing.y, self.facing.x);
 		love.graphics.arc("fill",
 			self.box.x + self.box.w / 2, self.box.y + self.box.h / 2,

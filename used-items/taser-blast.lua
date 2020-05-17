@@ -79,7 +79,7 @@ function Taser_Blast:draw()
 		return;
 	end
 
-	love.graphics.setColor(255, 255, 255);
+	love.graphics.setColor(1, 1, 1);
 	love.graphics.draw(
 		self.image,
 		self.box.x + self.box.w / 2,

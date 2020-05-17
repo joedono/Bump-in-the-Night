@@ -31,7 +31,7 @@ function State_Title:enter(previous, animate)
 
 	if animate then
 		Timer.script(function(wait)
-			Timer.tween(5, self.alphas, {titleAlpha = 1}, "in-linear");
+			Timer.tween(5, self.alphas, { titleAlpha = 1 }, "in-linear");
 			wait(5);
 			self.showMenu = true;
 		end);
