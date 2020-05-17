@@ -17,7 +17,7 @@ Burning - Has been shot by the shotgun, then soaked in gasoline, then set on fir
 Dead - Burned. Dead
 ]]
 
-Monster_Zombie = Class {
+Monster_Zombie = Class {__includes = Monster,
 	init = function(self, parentManager, soundEffects, image, player, curFloor, x, y)
 		Monster.init(self, image);
 		self.parentManager = parentManager;
@@ -374,6 +374,7 @@ function Monster_Zombie:updateLights(dt)
 end
 
 function Monster_Zombie:updateAnimation(dt)
+	local curAnimation = self.curFacing;
 	self.curAnimation = self.animations[curAnimation];
 
 	if self.velocity.x ~= 0 or self.velocity.y ~= 0 then

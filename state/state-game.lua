@@ -79,7 +79,7 @@ function State_Game:init()
 		rayGunShoot = love.audio.newSource("asset/sound/ray-gun-shoot.wav", "static"),
 		rayGunExplode = love.audio.newSource("asset/sound/ray-gun-explode.wav", "static"),
 		musicBox = love.audio.newSource("asset/sound/music-box.ogg", "static"),
-		monsterZombieGroan = love.audio.newSource("asset/sound/evil-laugh.wav")
+		monsterZombieGroan = love.audio.newSource("asset/sound/evil-laugh.wav", "static")
 	};
 
 	self.soundEffects.phoneRing:setLooping(true);

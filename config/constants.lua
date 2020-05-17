@@ -2,7 +2,7 @@ SCREEN_WIDTH = 1600;
 SCREEN_HEIGHT = 900;
 SCREEN_WIDTH_WHOLE_HOUSE = 5000;
 SCREEN_HEIGHT_WHOLE_HOUSE = 3800;
-FULLSCREEN = false;
+FULLSCREEN = true;
 
 -- Debug Variables
 DRAW_BOXES = false;
@@ -323,7 +323,7 @@ SCENARIO_SELECTION = {
 };
 
 --SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie", "elder_god"};
-SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien"};
+SCENARIO_ALL = {"wolf", "panther", "burglar", "arsonist", "killer", "vampire", "ghost", "alien", "zombie"};
 SCENARIO_COMPLETED = {
 	["wolf"] = true,
 	["panther"] = true,
@@ -332,7 +332,8 @@ SCENARIO_COMPLETED = {
 	["killer"] = true,
 	["vampire"] = true,
 	["ghost"] = true,
-	["alien"] = true
+	["alien"] = true,
+	["zombie"] = true,
 };
 
 SCENARIO_DESCRIPTION = {
